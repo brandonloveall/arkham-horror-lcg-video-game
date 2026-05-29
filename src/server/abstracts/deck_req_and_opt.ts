@@ -1,12 +1,12 @@
 interface DeckRequirements {
     size: number
     cards: string[]
-    random: [
-        {
-            target: string
-            value: string
-        }
-    ]
+    random: RandomDeckReq[]
+}
+
+interface RandomDeckReq {
+    target: string
+    value: string
 }
 
 interface DeckOption {
