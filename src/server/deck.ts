@@ -1,4 +1,4 @@
-import { Card } from "./card"
+import { Card } from "./abstracts/card"
 
 export abstract class Deck {
     cards: Card[]

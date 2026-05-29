@@ -1,4 +1,4 @@
-import { Deck } from "../abstracts/deck"
+import { Deck } from "./deck"
 
 export class GamePlayer {
     owner: Player

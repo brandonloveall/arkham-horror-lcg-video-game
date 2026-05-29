@@ -1,0 +1,52 @@
+import { DeckOption, DeckRequirements } from "./deck_req_and_opt"
+
+export interface WholePossibleCard {
+    code: string
+    pack_code: string
+    pack_name: string
+    type_code: string
+    type_name: string
+    faction_code: string
+    faction_name: string
+    position: number
+    exceptional: boolean
+    myriad: boolean
+    name: string
+    quantity: number
+    health_per_investigator: boolean
+    is_unique: boolean
+    permanent: boolean
+    double_sided: boolean
+    text: string
+    traits: string[]
+    flavor: string
+    subname: string
+    skill_agility: number
+    skill_combat: number
+    skill_intellect: number
+    skill_willpower: number
+    skill_wildcard: number
+    xp: number
+    deck_limit: number
+    encounter_code: string
+    encounter_name: string
+    encounter_position: number
+    cost: number
+    health: number;
+    sanity: number;
+    deck_requirements: DeckRequirements
+    deck_options: DeckOption[]
+    slot: string
+    stage: number
+    back_name: string
+    back_text: string
+    back_flavor: string
+    clues: number
+    doom: number
+    shroud: number
+    enemy_damage: number
+    enemy_horror: number
+    enemy_fight: number
+    enemy_evade: number
+    victory: number
+}
