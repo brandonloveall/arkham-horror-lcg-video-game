@@ -53,7 +53,7 @@ export class _01501 extends Investigator {
     permanent = false;
     double_sided = true;
     text = "[reaction] After you defeat an enemy: Discover 1 clue at your location. (Limit once per round.)\n[elder_sign] effect: +1 for each clue on your location.";
-    traits = ["Agency", "Detective"];
+    traits = "Agency. Detective.";
     flavor = "Everything by the book: every \"i\" dotted, every \"t\" crossed. It had worked, until now.";
     subname = "The Fed";
 }

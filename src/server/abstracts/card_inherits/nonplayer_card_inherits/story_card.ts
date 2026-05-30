@@ -3,10 +3,8 @@ import { NonplayerCard } from "../nonplayer_card";
 
 
 export abstract class StoryCard extends NonplayerCard implements DoubleSided {
-    stage!: number
-    back_name!: string
-    back_text!: string
-    back_flavor!: string
-
-
+    abstract stage: number
+    abstract back_name: string
+    abstract back_text: string
+    abstract back_flavor: string
 }

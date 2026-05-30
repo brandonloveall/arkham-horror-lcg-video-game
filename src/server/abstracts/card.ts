@@ -13,7 +13,7 @@ export abstract class Card {
     abstract permanent: boolean
     abstract double_sided: boolean
     abstract text: string
-    abstract traits: string[]
+    abstract traits: string
     abstract flavor: string
     abstract subname: string
 

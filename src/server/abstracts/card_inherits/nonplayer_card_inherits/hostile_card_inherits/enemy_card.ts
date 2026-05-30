@@ -1,13 +1,15 @@
 import { Damageable } from "server/abstracts/damageable";
 import { HostileCard } from "../hostile_card";
+import { GamePlayer } from "server/player";
 
 export abstract class EnemyCard extends HostileCard implements Damageable {
-    health!: number
+    abstract health: number
     sanity = undefined
-    enemy_damage!: number
-    enemy_horror!: number
-    enemy_fight!: number
-    enemy_evade!: number
-    victory!: number
+    abstract enemy_damage: number
+    abstract enemy_horror: number
+    abstract enemy_fight: number
+    abstract enemy_evade: number
+    abstract victory: number
 
+    abstract engagedWith: GamePlayer | undefined
 }
