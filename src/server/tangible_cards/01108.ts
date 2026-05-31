@@ -26,8 +26,8 @@ You jump through the doorway, landing on your feet on soft dirt. The door to the
     is_unique = false;
     permanent = false;
     double_sided = true;
-    text = `null`;
-    traits = "null";
+    text = ``;
+    traits = "";
     flavor = `As you leap to investigate, the door to your study vanishes before your eyes, leaving behind only solid wall. You're trapped inside your study until you can find another way out.`;
     subname = "";
 }

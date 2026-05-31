@@ -1,25 +1,25 @@
 
 import { TreacheryCard } from "server/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 
-export class _01163 extends TreacheryCard {
-    encounter_name = "Striking Fear";
+export class _01166 extends TreacheryCard {
+    encounter_name = "Ancient Evils";
     encounter_position = 1;
-    code = "01163";
+    code = "01166";
     pack_name = "Core Set";
     type_name = "Treachery";
     faction_name = "Mythos";
-    position = 163;
+    position = 166;
     exceptional = false;
     myriad = false;
-    name = "Rotting Remains";
+    name = "Ancient Evils";
     quantity = 3;
     health_per_investigator = false;
     is_unique = false;
     permanent = false;
     double_sided = false;
-    text = `<b>Revelation</b> - Test [willpower] (3). For each point you fail by, take 1 horror.`;
-    traits = "Terror.";
-    flavor = `A sickening display of gore causes you to retch. You're glad this wasn't you.`;
+    text = `<b>Revelation</b> - Place 1 doom on the current agenda. This effect can cause the current agenda to advance.`;
+    traits = "Omen.";
+    flavor = `Dark forces stir against you. If you do not act quickly, a sinister plot will be fulfilled.`;
     subname = "";
     restrictions = {};
 }

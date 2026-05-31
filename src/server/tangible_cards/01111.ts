@@ -1,3 +1,4 @@
+
 import { LocationCard } from "server/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
 
 export class _01111 extends LocationCard {
@@ -5,8 +6,8 @@ export class _01111 extends LocationCard {
     clues = 2;
     stage = 0;
     back_name = "";
-    back_text = "";
-    back_flavor = "You've been investigating the strange events occurring in Arkham for several days now. Your deck in covered in newspaper articles, police reports, and witness accounts.";
+    back_text = ``;
+    back_flavor = `You've been investigating the strange events occurring in Arkham for several days now. Your deck in covered in newspaper articles, police reports, and witness accounts.`;
     encounter_name = "The Gathering";
     encounter_position = 8;
     code = "01111";
@@ -24,7 +25,9 @@ export class _01111 extends LocationCard {
     double_sided = true;
     text = "";
     traits = "";
-    flavor = "The door to your study has vanished.";
+    flavor = `The door to your study has vanished.`;
     subname = "";
-    
+
+    symbol = LocationCard.Symbol.YellowCircle;
+    connects_to = []
 }

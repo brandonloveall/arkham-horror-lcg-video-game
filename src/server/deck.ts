@@ -12,10 +12,13 @@ export class Deck {
     }
 
     public shuffle() {
-
+        for (let i = this.cards.size() - 1; i > 0; i--) {
+            const j = math.floor(math.random() * (i + 1));
+            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+        }
     }
 
     public addCard(card: Card) {
-        this.cards.push(card)
+        this.cards.unshift(card)
     }
 }

@@ -1,3 +1,4 @@
+import { Card } from "./abstracts/card"
 import { EnemyCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card"
 import { LocationCard } from "./abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card"
 import { PlayerCard } from "./abstracts/card_inherits/player_card"
@@ -11,7 +12,7 @@ export class GamePlayer {
     owner: Player
     deck: Deck
     investigator: Investigator
-    hand!: PlayerCard[]
+    hand!: Card[]
     slots = {
         hand: [],
         arcane: [],
