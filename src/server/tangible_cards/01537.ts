@@ -1,8 +1,8 @@
 
 import { EventCard } from "server/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 
-export class _01522 extends EventCard {
-    cost = 1;
+export class _01537 extends EventCard {
+    cost = 2;
     skill_agility = 0;
     skill_combat = 0;
     skill_intellect = 2;
@@ -10,23 +10,23 @@ export class _01522 extends EventCard {
     skill_wildcard = 0;
     xp = 0;
     deck_limit = 2;
-    code = "01522";
+    code = "01537";
     pack_name = "Revised Core Set";
     type_name = "Event";
-    faction_name = "Guardian";
-    position = 22;
+    faction_name = "Seeker";
+    position = 37;
     exceptional = false;
     myriad = false;
-    name = "Evidence!";
+    name = "Working a Hunch";
     quantity = 2;
     health_per_investigator = false;
     is_unique = false;
     permanent = false;
     double_sided = false;
-    text = `Fast. Play after you defeat an enemy.
+    text = `Fast. Play only during your turn.
 Discover 1 clue at your location.`;
     traits = "Insight.";
-    flavor = `Just as I suspected!`;
+    flavor = ``;
     subname = "";
     restrictions = {};
 }

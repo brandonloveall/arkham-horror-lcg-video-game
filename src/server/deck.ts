@@ -1,9 +1,9 @@
-import { Card } from "./card"
+import { Card } from "./abstracts/card"
 
-export abstract class Deck {
+export class Deck {
     cards: Card[]
 
-    constructor(owner: Player, cards: Card[]) {
+    constructor(cards: Card[]) {
         this.cards = cards
     }
 

@@ -28,7 +28,7 @@ export class _01506 extends AssetCard {
 Uses (4 ammo).
 [action] Spend 1 ammo: <b>Fight.</b> You get +1 [combat] for this attack (if there are 1 or more clues on your location, you get +3 [combat], instead). This attack deals +1 damage.`;
     traits = "Item. Weapon. Firearm.";
-    flavor = "";
+    flavor = ``;
     subname = "";
     restrictions = {"investigator":{"01001":"01001"}};
 }

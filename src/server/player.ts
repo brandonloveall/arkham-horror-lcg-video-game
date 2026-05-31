@@ -4,7 +4,7 @@ import { PlayerCard } from "./abstracts/card_inherits/player_card"
 import { AssetCard } from "./abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card"
 import { EventCard } from "./abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card"
 import { Investigator } from "./abstracts/card_inherits/player_card_inherits/investigator"
-import { Deck } from "./abstracts/deck"
+import { Deck } from "./deck"
 import { skillCheck } from "./skillcheck"
 
 export class GamePlayer {
