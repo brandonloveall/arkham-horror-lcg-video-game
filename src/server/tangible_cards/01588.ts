@@ -28,4 +28,8 @@ export class _01588 extends EventCard {
     flavor = `You can never be too prepared.`;
     subname = "";
     restrictions = {};
+
+    onPlay(): void {
+        print("not yet implemented")
+    }
 }
