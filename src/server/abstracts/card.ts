@@ -1,4 +1,8 @@
+import { HttpService } from "@rbxts/services"
+
 export abstract class Card {
+    id: string = HttpService.GenerateGUID(false);
+
     abstract code: string
     abstract pack_name: string
     abstract type_name: string
