@@ -29,4 +29,8 @@ Until the end of the round, you may use your [intellect] in place of your [comba
     flavor = ``;
     subname = "";
     restrictions = {};
+
+    onPlay(): void {
+        print("not yet implemented")
+    }
 }

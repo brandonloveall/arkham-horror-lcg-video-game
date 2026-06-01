@@ -29,4 +29,8 @@ Cancel that attack.`;
     flavor = ``;
     subname = "";
     restrictions = {};
+
+    onPlay(): void {
+        print("not yet implemented")
+    }
 }

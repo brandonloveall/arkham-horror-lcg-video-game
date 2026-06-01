@@ -28,4 +28,8 @@ export class _01524 extends EventCard {
     flavor = ``;
     subname = "";
     restrictions = {};
+
+    onPlay(): void {
+        print("not yet implemented")
+    }
 }

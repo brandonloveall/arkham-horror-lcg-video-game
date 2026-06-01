@@ -30,4 +30,8 @@ Non-[[Elite]] enemies cannot move into attached location.
     flavor = ``;
     subname = "";
     restrictions = {};
+
+    onPlay(): void {
+        print("not yet implemented")
+    }
 }

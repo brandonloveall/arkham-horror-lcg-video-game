@@ -29,4 +29,8 @@ Discover 1 clue at your location.`;
     flavor = ``;
     subname = "";
     restrictions = {};
+
+    onPlay(): void {
+        print("not yet implemented")
+    }
 }
