@@ -1,4 +1,5 @@
 import { HttpService } from "@rbxts/services"
+import { CardRegistry } from "shared/card_registry";
 
 export abstract class Card {
     id: string = HttpService.GenerateGUID(false);
@@ -21,5 +22,7 @@ export abstract class Card {
     abstract flavor: string
     abstract subname: string
 
-
+    constructor() {
+        CardRegistry.insert(this)
+    }
 }
