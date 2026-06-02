@@ -9,7 +9,9 @@ interface UpdatePlayerUIPayload {
     damage: number,
     horror: number,
     health: number,
-    sanity: number
+    sanity: number,
+    resources: number,
+    actions: number
 }
 
 export function UpdatePlayerUI_Pub(player: GamePlayer) {
@@ -18,7 +20,9 @@ export function UpdatePlayerUI_Pub(player: GamePlayer) {
         damage: player.damage,
         horror: player.horror,
         health: player.investigator.health,
-        sanity: player.investigator.sanity
+        sanity: player.investigator.sanity,
+        resources: player.resources,
+        actions: player.actions
     } satisfies UpdatePlayerUIPayload)
 }
 
