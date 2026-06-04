@@ -9,5 +9,5 @@ export function PlayCard_Pub(card_id: string) {
 }
 
 export function PlayCard_Sub(callback: (player: Player, card: CostingCard) => void) {
-    PlayCard.OnClientEvent.Connect((plr: Player, card_id: string) => { callback(plr, CardRegistry.get(card_id) as CostingCard) })
+    PlayCard.OnServerEvent.Connect((player: Player, card_id: unknown) => { callback(player, CardRegistry.get(card_id as string) as CostingCard) })
 }
