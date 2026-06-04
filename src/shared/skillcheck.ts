@@ -21,10 +21,10 @@ export function skillCheck(initiator: GamePlayer, against: number, using: string
     Server_SkillCheck_Pub(initiator, using)
 
     do { task.wait() } while(submittedCount !== GameContext.players.size())
-    
+
     let total = 0;
-    for(const plrName in cards) {
-        for(const card of cards[plrName]) {
+    for(const plr of GameContext.players) {
+        for(const card of cards[plr.owner.Name]) {
             total += card[using as keyof PlayerCard] as number;
         }
     }
