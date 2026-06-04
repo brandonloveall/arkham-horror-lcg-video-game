@@ -8,7 +8,10 @@ const SkillCheck = ReplicatedStorage.WaitForChild("TS").WaitForChild("remotes").
 export function Server_SkillCheck_Pub(initiator: GamePlayer, using: string) {
 
     for(const plr of GameContext.players) {
-        SkillCheck.FireClient(plr.owner, initiator, using, plr.hand, plr === initiator ? 999 : 1);
+        const available = plr.hand.map((e) => {
+            if(e instanceof PlayerCard && e[using as keyof PlayerCard]) { return e; }
+        })
+        SkillCheck.FireClient(plr.owner, initiator, using, available, plr === initiator ? 999 : 1);
     }
 }
 
