@@ -1,14 +1,18 @@
 import { ReplicatedStorage } from "@rbxts/services";
+import { GameContext } from "shared/game_context";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 import { GamePlayer } from "shared/objects/player";
 
 const SkillCheck = ReplicatedStorage.WaitForChild("TS").WaitForChild("remotes").WaitForChild("SkillCheck").WaitForChild("SkillCheck") as RemoteEvent
 
 export function Server_SkillCheck_Pub(initiator: GamePlayer, using: string) {
-    SkillCheck.FireAllClients(initiator, using);
+
+    for(const plr of GameContext.players) {
+        SkillCheck.FireClient(plr.owner, initiator, using, plr.hand, plr === initiator ? 999 : 1);
+    }
 }
 
-export function Client_SkillCheck_Sub(callback: (initiator: Player, using: string) => void) {
+export function Client_SkillCheck_Sub(callback: (initiator: GamePlayer, using: string, available: PlayerCard[], limit: number) => void) {
     SkillCheck.OnClientEvent.Connect(callback)
 }
 

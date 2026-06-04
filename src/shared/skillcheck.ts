@@ -26,6 +26,7 @@ export function skillCheck(initiator: GamePlayer, against: number, using: string
     for(const plr of GameContext.players) {
         for(const card of cards[plr.owner.Name]) {
             total += card[using as keyof PlayerCard] as number;
+            plr.discard.addCard(plr.hand.remove(plr.hand.indexOf(card))!)
         }
     }
 

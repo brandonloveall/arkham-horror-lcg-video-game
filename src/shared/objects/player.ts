@@ -8,6 +8,8 @@ import { EventCard } from "./abstracts/card_inherits/player_card_inherits/costin
 import { Investigator } from "./abstracts/card_inherits/player_card_inherits/investigator"
 import { Deck } from "./deck"
 import { skillCheck } from "../skillcheck"
+import { PlayCard_Sub } from "shared/remotes/PlayCard/Interface"
+import { UpdatePlayerUI_Pub } from "shared/remotes/UpdatePlayerUI/Interface"
 
 class EquipmentSlot {
 
@@ -36,90 +38,110 @@ class EquipmentSlot {
 
 export class GamePlayer {
 
+    _hand = new EquipmentSlot(2)
+    _arcane = new EquipmentSlot(2)
+
     owner: Player
     deck: Deck
     investigator: Investigator
     hand: Card[] = []
     equipped: Record<string, EquipmentSlot> = {
-        Hand: new EquipmentSlot(2),
-        Arcane: new EquipmentSlot(2),
+        Hand: this._hand,
+        ["Hand x2"]: this._hand,
+        Arcane: this._arcane,
+        ["Arcane x2"]: this._arcane,
         Body: new EquipmentSlot(1),
         Ally: new EquipmentSlot(1),
         Accessory: new EquipmentSlot(1),
-        None: new EquipmentSlot(0) // the limit doesnt matter here since None takes up 0 slot space by default
+        [""]: new EquipmentSlot(0) // the limit doesnt matter here since None takes up 0 slot space by default
     };
+    discard = new Deck([]);
 
     damage = 0;
     horror = 0;
 
     location!: LocationCard
-    resources!: number
-    clues!: number
-    actions!: number
+    resources = 0;
+    clues = 0;
+    actions = 0;
 
     constructor(owner: Player, deck: Deck, investigator: Investigator) {
         this.owner = owner
         this.deck = deck
         this.investigator = investigator
+
+        PlayCard_Sub(( player, card ) => { if(player === this.owner) { this.play(card) }})
     }
 
     public draw() {
         this.hand.push(this.deck.pull() as PlayerCard)
+        this.update()
     }
 
     public takeResource() {
         this.resources += 1
+        this.update()
     }
 
     public play(card: CostingCard) {
+
         if (this.resources >= card.cost && this.actions > 0) {
             if (card instanceof EventCard) {
-                card.onPlay();
+                card.onPlay(this);
             }
             if (card instanceof AssetCard) {
                 let slot = card.slot
-                // does it fit? if yes, pay the cost. if not, do nothing
+                // does it fit? if yes, insert. if not, fail and return
                 if (!this.equipped[card.slot].insert(card, slot === "Hand x2" || slot === "Arcane x2" ? 2 : slot !== "" ? 1 : 0)) { return; } // 2hand or 2arcane, then hand/arcane/body/accessory, then none
             }
+
+            // if successful, pay cost and remove from hand
             this.resources -= card.cost
             this.actions -= 1
-
-            // if successful, remove from hand
             this.hand.remove(this.hand.indexOf(card));
         }
+        this.update()
     }
 
     public activate(ability: () => void) {
         ability()
+        this.update()
     }
 
     public move(location: LocationCard) {
         if (this.location === location) { return }
         this.location = location
+        this.update()
     }
 
     public investigate(location: LocationCard) {
-        if (skillCheck()) {
+        if (skillCheck(this, location.shroud, "skill_intellect")) {
             location.clues -= 1
             this.clues += 1
         }
+        this.update()
     }
 
     public fight(enemy: EnemyCard) {
-        if (skillCheck()) {
+        if (skillCheck(this, enemy.enemy_fight, "skill_combat")) {
             enemy.health -= 1
         }
+        this.update()
     }
 
     public engage(enemy: EnemyCard) {
-        if (skillCheck()) {
-            enemy.engagedWith = this
-        }
+        enemy.engagedWith = this
+        this.update()
     }
 
     public evade(enemy: EnemyCard) {
-        if (skillCheck()) {
+        if (skillCheck(this, enemy.enemy_evade, "skill_agility")) {
             enemy.engagedWith = undefined
         }
+        this.update()
+    }
+
+    private update() {
+        UpdatePlayerUI_Pub(this)
     }
 }

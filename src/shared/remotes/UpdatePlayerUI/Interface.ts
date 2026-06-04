@@ -11,7 +11,8 @@ interface UpdatePlayerUIPayload {
     health: number,
     sanity: number,
     resources: number,
-    actions: number
+    actions: number,
+    clues: number
 }
 
 export function UpdatePlayerUI_Pub(player: GamePlayer) {
@@ -22,7 +23,8 @@ export function UpdatePlayerUI_Pub(player: GamePlayer) {
         health: player.investigator.health,
         sanity: player.investigator.sanity,
         resources: player.resources,
-        actions: player.actions
+        actions: player.actions,
+        clues: player.clues
     } satisfies UpdatePlayerUIPayload)
 }
 
