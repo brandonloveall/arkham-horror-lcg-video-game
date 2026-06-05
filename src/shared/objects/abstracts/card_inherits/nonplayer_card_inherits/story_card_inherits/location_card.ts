@@ -21,7 +21,9 @@ export abstract class LocationCard extends StoryCard {
 
 export function Place(location: LocationCard, coords: [number, number]) {
         location.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(location.code) as Model;
+        location.model.AddTag("LOCATION")
         location.model.MoveTo(new Vector3(coords[0], coords[1], 0))
         location.model.Parent = Workspace
+        location.model.Name = location.id
         return location;
 }
