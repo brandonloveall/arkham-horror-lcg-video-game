@@ -19,9 +19,8 @@ Client_SkillCheck_Sub((initiator, using, available, limit) => {
     SCS.Enabled = true
 
     chosen_cards = []
-    for(let card of SCS.GetChildren()) {
-        if(!card.IsA("TextButton")) { continue }
-        card.Destroy() 
+    for(let card of Box.GetChildren()) {
+        if(card.IsA("TextButton")) { card.Destroy() }
     }
 
     for(const card of available) {
