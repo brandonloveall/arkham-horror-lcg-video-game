@@ -10,6 +10,8 @@ import { Deck } from "./deck"
 import { skillCheck } from "../skillcheck"
 import { PlayCard_Sub } from "shared/remotes/PlayCard/Interface"
 import { UpdatePlayerUI_Pub } from "shared/remotes/UpdatePlayerUI/Interface"
+import { GameContext } from "shared/game_context"
+import { payClues } from "shared/payClues"
 
 class EquipmentSlot {
 
@@ -137,6 +139,14 @@ export class GamePlayer {
     public evade(enemy: EnemyCard) {
         if (skillCheck(this, enemy.enemy_evade, "skill_agility")) {
             enemy.engagedWith = undefined
+        }
+        this.update()
+    }
+
+
+    public attemptAdvance() {
+        if(GameContext.act.clues !== 0 && payClues()) {
+            print("successful")
         }
         this.update()
     }
