@@ -80,10 +80,7 @@ Engage.MouseButton1Click.Connect(() => {
 })
 
 Investigate.MouseButton1Click.Connect(() => {
-    print("attempted")
-    if (getTarget().HasTag("LOCATION")) {
-        Investigate_Pub(getTarget().Name)
-    }
+    Investigate_Pub()
 })
 
 Move.MouseButton1Click.Connect(() => {

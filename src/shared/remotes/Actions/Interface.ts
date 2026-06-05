@@ -16,6 +16,7 @@ const Fight = actions.WaitForChild("Fight") as RemoteEvent
 const GainResource = actions.WaitForChild("GainResource") as RemoteEvent
 const Investigate = actions.WaitForChild("Investigate") as RemoteEvent
 const Move = actions.WaitForChild("Move") as RemoteEvent
+const AttemptAdvance = actions.WaitForChild("AttemptAdvance") as RemoteEvent
 
 function getPlrObj(plr: Player) {
     return GameContext.players.find((e) => {
@@ -45,8 +46,8 @@ export function GainResource_Pub() {
     GainResource.FireServer()
 }
 
-export function Investigate_Pub(location_id: string) {
-    Investigate.FireServer(location_id)
+export function Investigate_Pub() {
+    Investigate.FireServer()
 }
 
 export function Move_Pub(location_id: string) {
@@ -56,6 +57,9 @@ export function Move_Pub(location_id: string) {
 export function PlayCard_Pub(card_id: string) {
     PlayCard.FireServer(card_id);
 }
+
+export function AttemptAdvance_Pub() {
+    AttemptAdvance.FireServer()}
 
 ///////////////////////////////
 
@@ -81,8 +85,9 @@ export default (() => {
             getPlrObj(plr).takeResource()
         })
 
-        Investigate.OnServerEvent.Connect((plr: Player, location_id: unknown) => {
-            getPlrObj(plr).investigate(CardRegistry.get(location_id as string) as LocationCard)
+        Investigate.OnServerEvent.Connect((plr: Player) => {
+            const plrObj = getPlrObj(plr)
+            plrObj.investigate(plrObj.location)
         })
 
         Move.OnServerEvent.Connect((plr: Player, location_id: unknown) => {
