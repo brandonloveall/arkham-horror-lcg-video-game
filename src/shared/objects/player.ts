@@ -8,7 +8,6 @@ import { EventCard } from "./abstracts/card_inherits/player_card_inherits/costin
 import { Investigator } from "./abstracts/card_inherits/player_card_inherits/investigator"
 import { Deck } from "./deck"
 import { skillCheck } from "../skillcheck"
-import { PlayCard_Sub } from "shared/remotes/PlayCard/Interface"
 import { UpdatePlayerUI_Pub } from "shared/remotes/UpdatePlayerUI/Interface"
 import { GameContext } from "shared/game_context"
 import { payClues } from "shared/payClues"
@@ -71,8 +70,6 @@ export class GamePlayer {
         this.owner = owner
         this.deck = deck
         this.investigator = investigator
-
-        PlayCard_Sub(( player, card ) => { if(player === this.owner) { this.play(card) }})
     }
 
     public draw() {
