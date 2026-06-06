@@ -1,4 +1,4 @@
 import "./PlayerHud/PlayerHud"
-import "./SkillCheckSelection/SkillCheckSelection"
+import "./CardSelection/CardSelection"
 import "./PayClues/PayClues"
 import "./ClickSelection/ClickSelection"

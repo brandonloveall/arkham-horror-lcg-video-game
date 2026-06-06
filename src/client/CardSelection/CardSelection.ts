@@ -1,6 +1,7 @@
 import { Players } from "@rbxts/services";
+import { Card } from "shared/objects/abstracts/card";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
-import { Client_SkillCheck_Pub, Client_SkillCheck_Sub } from "shared/remotes/SkillCheck/Interface";
+import { Client_ChooseCards_Pub, Client_ChooseCards_Sub } from "shared/remotes/ChooseCards/Interface";
 
 const PlayerGui = Players.LocalPlayer.WaitForChild("PlayerGui")
 
@@ -11,26 +12,29 @@ const Box = Frame.WaitForChild("Cards") as ScrollingFrame
 const ConfirmButton = Frame.WaitForChild("Confirm") as TextButton
 const Template = PlayerGui.WaitForChild("GuiElements").WaitForChild("SelectableCard") as TextButton
 
-let chosen_cards: PlayerCard[] = []
+let chosen_cards: Card[] = []
+let _amount: number | undefined;
 
-ConfirmButton.MouseButton1Click.Connect(() => { Client_SkillCheck_Pub(chosen_cards); SCS.Enabled = false })
+ConfirmButton.MouseButton1Click.Connect(() => { Client_ChooseCards_Pub(chosen_cards); SCS.Enabled = false })
 
-Client_SkillCheck_Sub((initiator, using, available, limit) => {
+Client_ChooseCards_Sub((what: Card[], amount?: number) => {
     SCS.Enabled = true
 
     chosen_cards = []
-    for(let card of Box.GetChildren()) {
-        if(card.IsA("TextButton")) { card.Destroy() }
+    _amount = amount;
+    
+    for (let card of Box.GetChildren()) {
+        if (card.IsA("TextButton")) { card.Destroy() }
     }
 
-    for(const card of available) {
+    for (const card of what) {
         const GuiCard = Template.Clone()
         GuiCard.Parent = Box;
         GuiCard.Text = card.name;
         GuiCard.MouseButton1Click.Connect(() => {
-            if(chosen_cards.size() === limit && !chosen_cards.includes(card)) { return; }
+            if (amount !== undefined && chosen_cards.size() === amount && !chosen_cards.includes(card)) { return; }
 
-            if(!chosen_cards.includes(card)) { chosen_cards.push(card); GuiCard.BackgroundColor3 = new Color3(0, 255, 0) }
+            if (!chosen_cards.includes(card)) { chosen_cards.push(card); GuiCard.BackgroundColor3 = new Color3(0, 255, 0) }
             else { chosen_cards.remove(chosen_cards.indexOf(card)); GuiCard.BackgroundColor3 = new Color3(255, 0, 0) }
         })
     }

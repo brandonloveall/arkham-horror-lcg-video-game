@@ -1,14 +1,14 @@
 import { PlayerCard } from "./objects/abstracts/card_inherits/player_card";
 import { GamePlayer } from "./objects/player";
-import { Server_SkillCheck_Pub, Server_SkillCheck_Sub } from "./remotes/SkillCheck/Interface";
+import { Server_ChooseCards_Sub, Server_ChooseCards_Pub } from "./remotes/ChooseCards/Interface";
 import { GameContext } from "./game_context";
 import { Investigator } from "./objects/abstracts/card_inherits/player_card_inherits/investigator";
 
 let cards: Record<string, PlayerCard[]> = {}
 let submittedCount = 0;
 
-Server_SkillCheck_Sub((plr, selectedCards) => {
-    cards[plr.Name] = selectedCards;
+Server_ChooseCards_Sub((plr, selectedCards) => {
+    cards[plr.Name] = selectedCards as PlayerCard[];
     submittedCount++;
 })
 
@@ -18,19 +18,22 @@ export function skillCheck(initiator: GamePlayer, against: number, using: string
     cards = {}
     submittedCount = 0;
 
-    Server_SkillCheck_Pub(initiator, using)
+    for(const plr of GameContext.players) {
+        Server_ChooseCards_Pub(plr, plr.hand.filter((e) => { return (e as PlayerCard)[using as keyof PlayerCard] !== 0 }), plr === initiator ? undefined : 1)
+    }
 
-    do { task.wait() } while(submittedCount !== GameContext.players.size())
+    do { task.wait() } while (submittedCount !== GameContext.players.size())
 
     let total = 0;
-    for(const plr of GameContext.players) {
-        for(const card of cards[plr.owner.Name]) {
+    for (const plr of GameContext.players) {
+        for (const card of cards[plr.owner.Name]) {
             total += card[using as keyof PlayerCard] as number;
-            plr.discard.addCard(plr.hand.remove(plr.hand.indexOf(card))!)
+            plr.discard.addCard(plr.hand.remove(plr.hand.findIndex((e) => { return card.id === e.id }))!)
+            plr.update()
         }
     }
 
     const final = total + (initiator.investigator[using as keyof Investigator] as number)
 
-    return [ final >= against, final - against ]
+    return [final >= against, final - against]
 }
