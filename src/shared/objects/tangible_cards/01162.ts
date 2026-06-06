@@ -1,6 +1,7 @@
 
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { GamePlayer } from "../player";
+import { skillCheck } from "shared/skillcheck";
 
 export class _01162 extends TreacheryCard {
     encounter_name = "Ghouls";
@@ -25,6 +26,9 @@ export class _01162 extends TreacheryCard {
     restrictions = {};
 
     resolve(plrWhoDrew: GamePlayer): void {
-        print("Method not implemented.");
+        const [passed, byHowMuch] = skillCheck(plrWhoDrew, 3, "skill_agility")
+        if(!passed) {
+            plrWhoDrew.damage += math.abs(byHowMuch) // i could just subtract the negative but this way is more clear
+        }
     }
 }

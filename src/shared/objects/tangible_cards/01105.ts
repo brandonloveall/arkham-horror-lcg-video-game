@@ -26,4 +26,8 @@ export class _01105 extends AgendaCard {
     traits = "";
     flavor = `It is late at night. You are holed up in your study, researching the bloody disappearances that have been taking place in the region. A few hours into your research, you hear the sound of strange chanting coming from your parlor, down the hall. At the same time, you hear dirt churning, as if something were digging beneath the floor.`;
     subname = "";
+
+    advance(): void {
+        print("Method not implemented.");
+    }
 }

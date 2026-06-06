@@ -27,6 +27,6 @@ export class _01507 extends TreacheryCard {
     restrictions = { "investigator": { "01001": "01001" } };
 
     resolve(plrWhoDrew: GamePlayer): void {
-        print("Method not implemented.");
+        plrWhoDrew.threat_area.push(this)
     }
 }

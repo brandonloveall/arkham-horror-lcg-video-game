@@ -26,4 +26,8 @@ export class _01106 extends AgendaCard {
     traits = "";
     flavor = `The floor beneath you is giving way, and you see a vast network of tunnels, twisting into the darkness below. Shapes and silhouettes of strange creatures move swiftly through the tunnels, trying to find a way up. You probably don't want to be here when they do...`;
     subname = "";
+
+    advance(): void {
+        print("Method not implemented.");
+    }
 }

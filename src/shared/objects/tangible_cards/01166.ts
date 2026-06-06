@@ -1,6 +1,7 @@
 
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { GamePlayer } from "../player";
+import { GameContext } from "shared/game_context";
 
 export class _01166 extends TreacheryCard {
     encounter_name = "Ancient Evils";
@@ -25,6 +26,8 @@ export class _01166 extends TreacheryCard {
     restrictions = {};
 
     resolve(plrWhoDrew: GamePlayer): void {
-        print("Method not implemented.");
+        if(++GameContext.agenda.current_doom >= GameContext.agenda.doom) {
+            GameContext.agenda.advance()
+        }
     }
 }

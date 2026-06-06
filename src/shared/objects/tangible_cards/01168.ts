@@ -27,6 +27,7 @@ Attached location gets +2 shroud.
     restrictions = {};
 
     resolve(plrWhoDrew: GamePlayer): void {
-        print("Method not implemented.");
+        if(plrWhoDrew.location.attachments.find((e) => { return e.id === this.id })) { return; }
+        plrWhoDrew.location.attachments.push(this)
     }
 }

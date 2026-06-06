@@ -27,6 +27,6 @@ You cannot play assets or events.
     restrictions = {};
 
     resolve(plrWhoDrew: GamePlayer): void {
-        print("Method not implemented.");
+        plrWhoDrew.threat_area.push(this)
     }
 }

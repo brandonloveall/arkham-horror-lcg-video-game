@@ -1,6 +1,7 @@
 import { ReplicatedStorage, Workspace } from "@rbxts/services";
 import { StoryCard } from "../story_card";
 import { GameContext } from "shared/game_context";
+import { Card } from "shared/objects/abstracts/card";
 
 export abstract class LocationCard extends StoryCard {
     abstract shroud: number
@@ -18,6 +19,7 @@ export abstract class LocationCard extends StoryCard {
     abstract connects_to: typeof LocationCard.Symbol[keyof typeof LocationCard.Symbol][];
     abstract symbol: typeof LocationCard.Symbol[keyof typeof LocationCard.Symbol]
     revealed = false;
+    attachments: Card[] = []
 }
 
 export function Place(location: LocationCard, coords: [number, number]) {

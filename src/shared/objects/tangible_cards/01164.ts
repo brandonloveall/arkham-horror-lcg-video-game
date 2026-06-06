@@ -27,6 +27,6 @@ The first time you perform one of the following actions (move, fight, or evade) 
     restrictions = {};
 
     resolve(plrWhoDrew: GamePlayer): void {
-        print("Method not implemented.");
+        plrWhoDrew.threat_area.push(this)
     }
 }

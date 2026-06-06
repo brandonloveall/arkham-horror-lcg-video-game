@@ -28,4 +28,8 @@ export class _01107 extends AgendaCard {
     traits = "";
     flavor = `You hear a crazed howl outside, and suddenly all the creatures turn their attention to that sound. They rush to escape the house, breaking down doors and clawing at everything in their way.`;
     subname = "";
+
+    advance(): void {
+        print("Method not implemented.");
+    }
 }

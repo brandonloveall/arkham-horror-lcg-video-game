@@ -1,6 +1,7 @@
 
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { GamePlayer } from "../player";
+import { skillCheck } from "shared/skillcheck";
 
 export class _01163 extends TreacheryCard {
     encounter_name = "Striking Fear";
@@ -25,6 +26,9 @@ export class _01163 extends TreacheryCard {
     restrictions = {};
 
     resolve(plrWhoDrew: GamePlayer): void {
-        print("Method not implemented.");
+        const [passed, byHowMuch] = skillCheck(plrWhoDrew, 3, "skill_willpower")
+        if(!passed) {
+            plrWhoDrew.horror += math.abs(byHowMuch)
+        }
     }
 }
