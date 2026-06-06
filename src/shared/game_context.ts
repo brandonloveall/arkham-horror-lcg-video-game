@@ -28,7 +28,8 @@ export const GameContext: {
     chaos_bag: ChaosBag,
     encounter_deck: Deck,
     game_map: (LocationCard | undefined)[][],
-    player_with_turn: GamePlayer | undefined
+    player_with_turn: GamePlayer | undefined,
+    encounter_discard: Deck
 } = {
     current_game_state: GameState.NONE,
     players: [],
@@ -48,5 +49,6 @@ export const GameContext: {
         [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
     ],
-    player_with_turn: undefined
+    player_with_turn: undefined,
+    encounter_discard: new Deck([])
 }

@@ -1,5 +1,6 @@
 
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
+import { GamePlayer } from "../player";
 
 export class _01163 extends TreacheryCard {
     encounter_name = "Striking Fear";
@@ -22,4 +23,8 @@ export class _01163 extends TreacheryCard {
     flavor = `A sickening display of gore causes you to retch. You're glad this wasn't you.`;
     subname = "";
     restrictions = {};
+
+    resolve(plrWhoDrew: GamePlayer): void {
+        print("Method not implemented.");
+    }
 }

@@ -21,4 +21,8 @@ export class Deck {
     public addCard(card: Card) {
         this.cards.unshift(card)
     }
+
+    public isEmpty() {
+        return this.cards.size() === 0
+    }
 }

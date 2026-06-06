@@ -1,5 +1,6 @@
 
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
+import { GamePlayer } from "../player";
 
 export class _01507 extends TreacheryCard {
     encounter_name = "";
@@ -24,4 +25,8 @@ export class _01507 extends TreacheryCard {
     flavor = ``;
     subname = "";
     restrictions = { "investigator": { "01001": "01001" } };
+
+    resolve(plrWhoDrew: GamePlayer): void {
+        print("Method not implemented.");
+    }
 }

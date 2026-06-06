@@ -1,5 +1,6 @@
 
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
+import { GamePlayer } from "../player";
 
 export class _01166 extends TreacheryCard {
     encounter_name = "Ancient Evils";
@@ -22,4 +23,8 @@ export class _01166 extends TreacheryCard {
     flavor = `Dark forces stir against you. If you do not act quickly, a sinister plot will be fulfilled.`;
     subname = "";
     restrictions = {};
+
+    resolve(plrWhoDrew: GamePlayer): void {
+        print("Method not implemented.");
+    }
 }

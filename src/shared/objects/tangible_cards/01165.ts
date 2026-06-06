@@ -1,5 +1,6 @@
 
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
+import { GamePlayer } from "../player";
 
 export class _01165 extends TreacheryCard {
     encounter_name = "Striking Fear";
@@ -24,4 +25,8 @@ You cannot play assets or events.
     flavor = ``;
     subname = "";
     restrictions = {};
+
+    resolve(plrWhoDrew: GamePlayer): void {
+        print("Method not implemented.");
+    }
 }
