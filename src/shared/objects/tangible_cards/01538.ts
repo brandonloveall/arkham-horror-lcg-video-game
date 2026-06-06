@@ -1,5 +1,6 @@
 
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
+import { GamePlayer } from "../player";
 
 export class _01538 extends EventCard {
     cost = 0;
@@ -31,7 +32,7 @@ Non-[[Elite]] enemies cannot move into attached location.
     subname = "";
     restrictions = {};
 
-    onPlay(): void {
-        print("not yet implemented")
+    onPlay(whoPlayed: GamePlayer): void {
+        whoPlayed.location.attachments.push(this)
     }
 }

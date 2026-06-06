@@ -1,5 +1,6 @@
 
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
+import { GamePlayer } from "../player";
 
 export class _01537 extends EventCard {
     cost = 2;
@@ -30,7 +31,7 @@ Discover 1 clue at your location.`;
     subname = "";
     restrictions = {};
 
-    onPlay(): void {
-        print("not yet implemented")
+    onPlay(whoPlayed: GamePlayer): void {
+        whoPlayed.location.discoverClue(whoPlayed, 1)
     }
 }

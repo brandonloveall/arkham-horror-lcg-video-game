@@ -34,7 +34,6 @@ import { _01105 } from "../shared/objects/tangible_cards/01105";
 import { _01108 } from "../shared/objects/tangible_cards/01108";
 import { ChaosBag, IconToken } from "../shared/objects/chaos_bag";
 import { NonplayerCard } from "../shared/objects/abstracts/card_inherits/nonplayer_card";
-import { Place } from "../shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
 import { _01159 } from "../shared/objects/tangible_cards/01159";
 import { _01160 } from "../shared/objects/tangible_cards/01160";
 import { _01161 } from "../shared/objects/tangible_cards/01161";
@@ -48,7 +47,7 @@ import { _01168 } from "../shared/objects/tangible_cards/01168";
 import { _01111 } from "../shared/objects/tangible_cards/01111";
 import { GameContext, GameState } from "shared/game_context";
 import { CardRegistry } from "shared/card_registry";
-import { EnemyCard, PlaceEnemy } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 
 let endedTurn = false;
@@ -144,9 +143,7 @@ export function start() {
         player.deck.shuffle();
     }
 
-    let study = Place(new _01111(), [5, 5]);
-
-    GameContext.players[0].location = study;
+    GameContext.players[0].location = (new _01111).place([5,5]);
     task.spawn(investigatorPhase)
 }
 
@@ -166,7 +163,6 @@ function enemyPhase() {
     // TODO: if enemy is a hunter and not engaged, it moves towards closest investigator; randomly if multiple equidistant. if it has prey, only go after prey
 
     for(const card of CardRegistry.getAll()) {
-        print(card.type_name)
         if(card instanceof EnemyCard && card.engagedWith !== undefined && card.is_ready) {
             card.engagedWith.takeDamage(card.enemy_damage, card.enemy_horror)
             card.is_ready = false
@@ -206,7 +202,7 @@ function mythosPhase() {
         let drawnCard = GameContext.encounter_deck.pull()!
         // TODO: if enemy has specific spawn location, spawn it there
         if(drawnCard instanceof EnemyCard) {
-            PlaceEnemy(drawnCard, plr.location)
+            drawnCard.place(plr.location)
             drawnCard.engagedWith = plr
             drawnCard.is_ready = true
             plr.threat_area.push(drawnCard)
