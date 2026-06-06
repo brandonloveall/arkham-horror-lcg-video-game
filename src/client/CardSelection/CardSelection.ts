@@ -1,25 +1,25 @@
 import { Players } from "@rbxts/services";
 import { Card } from "shared/objects/abstracts/card";
-import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 import { Client_ChooseCards_Pub, Client_ChooseCards_Sub } from "shared/remotes/ChooseCards/Interface";
 
 const PlayerGui = Players.LocalPlayer.WaitForChild("PlayerGui")
 
-const SCS = PlayerGui.WaitForChild("SkillCheckSelectionUI") as ScreenGui
+const CardPickingUI = PlayerGui.WaitForChild("CardPickingUI") as ScreenGui
 
-const Frame = PlayerGui.WaitForChild("SkillCheckSelectionUI").WaitForChild("Frame")
+const Frame = PlayerGui.WaitForChild("CardPickingUI").WaitForChild("Frame")
 const Box = Frame.WaitForChild("Cards") as ScrollingFrame
 const ConfirmButton = Frame.WaitForChild("Confirm") as TextButton
 const Template = PlayerGui.WaitForChild("GuiElements").WaitForChild("SelectableCard") as TextButton
+const Message = Frame.WaitForChild("Message") as TextLabel
 
 let chosen_cards: Card[] = []
 let _amount: number | undefined;
 
-ConfirmButton.MouseButton1Click.Connect(() => { Client_ChooseCards_Pub(chosen_cards); SCS.Enabled = false })
+ConfirmButton.MouseButton1Click.Connect(() => { Client_ChooseCards_Pub(chosen_cards); CardPickingUI.Enabled = false })
 
-Client_ChooseCards_Sub((what: Card[], amount?: number) => {
-    SCS.Enabled = true
-
+Client_ChooseCards_Sub((what: Card[], message: string, amount?: number) => {
+    CardPickingUI.Enabled = true
+    Message.Text = message
     chosen_cards = []
     _amount = amount;
     

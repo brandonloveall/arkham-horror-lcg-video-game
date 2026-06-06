@@ -19,7 +19,11 @@ export function skillCheck(initiator: GamePlayer, against: number, using: string
     submittedCount = 0;
 
     for(const plr of GameContext.players) {
-        Server_ChooseCards_Pub(plr, plr.hand.filter((e) => { return (e as PlayerCard)[using as keyof PlayerCard] !== 0 }), plr === initiator ? undefined : 1)
+        Server_ChooseCards_Pub(
+            plr,
+            plr.hand.filter((e) => { return (e as PlayerCard)[using as keyof PlayerCard] !== 0 }),
+            `Skill Check by ${initiator.owner.Name}: ${initiator.investigator[using as keyof Investigator]} against ${against} using ${using}.`,
+            plr === initiator ? undefined : 1)
     }
 
     do { task.wait() } while (submittedCount !== GameContext.players.size())

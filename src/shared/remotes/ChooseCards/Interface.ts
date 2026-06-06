@@ -5,11 +5,11 @@ import { GamePlayer } from "shared/objects/player";
 
 const ChooseCards = ReplicatedStorage.WaitForChild("TS").WaitForChild("remotes").WaitForChild("ChooseCards").WaitForChild("ChooseCards") as RemoteEvent
 
-export function Server_ChooseCards_Pub(who: GamePlayer, what: Card[], amount?: number) {
-    ChooseCards.FireClient(who.owner, what, amount)
+export function Server_ChooseCards_Pub(who: GamePlayer, what: Card[], message: string, amount?: number) {
+    ChooseCards.FireClient(who.owner, what, message, amount)
 }
 
-export function Client_ChooseCards_Sub(callback: (what: Card[], amount?: number) => void) {
+export function Client_ChooseCards_Sub(callback: (what: Card[], message: string, amount?: number) => void) {
     ChooseCards.OnClientEvent.Connect(callback)
 }
 

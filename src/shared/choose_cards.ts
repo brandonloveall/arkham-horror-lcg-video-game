@@ -11,11 +11,11 @@ Server_ChooseCards_Sub((plr, selectedCards) => {
     submittedCount++;
 })
 
-export function chooseCards(who: GamePlayer, what: Card[], amount?: number) {
+export function chooseCards(who: GamePlayer, what: Card[], message: string, amount?: number) {
     cards = {}
     submittedCount = 0;
 
-    Server_ChooseCards_Pub(who, what, amount)
+    Server_ChooseCards_Pub(who, what, message, amount)
 
     do { task.wait() } while (submittedCount !== GameContext.players.size())
 
