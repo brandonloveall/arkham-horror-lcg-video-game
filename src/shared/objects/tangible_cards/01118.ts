@@ -28,5 +28,5 @@ export class _01118 extends EnemyCard {
     traits = "Humanoid. Monster. Ghoul.";
     flavor = `A monstrous creature feeds from the rotting carcass in the attic.`;
     subname = "";
-    restrictions = {};
+
 }

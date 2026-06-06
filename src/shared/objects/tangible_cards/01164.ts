@@ -24,7 +24,7 @@ The first time you perform one of the following actions (move, fight, or evade) 
     traits = "Terror.";
     flavor = ``;
     subname = "";
-    restrictions = {};
+
 
     resolve(plrWhoDrew: GamePlayer): void {
         plrWhoDrew.threat_area.push(this)

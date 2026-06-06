@@ -28,5 +28,5 @@ export class _01160 extends EnemyCard {
     traits = "Humanoid. Monster. Ghoul.";
     flavor = `It was a colossal and nameless blasphemy with glaring red eyes, and it held in bony claws a thing that had been a man, gnawing at the head as a child nibbles at a stick of candy. <cite>H. P. Lovecraft, "Pickman's Model"</cite>`;
     subname = "";
-    restrictions = {};
+
 }

@@ -28,5 +28,5 @@ export class _01532 extends AssetCard {
     traits = "Ally. Miskatonic.";
     flavor = `"There have been problems at the Orne Library, as we both know, given poor Armitage's condition, and the other, unrelated... incident of a few years ago..."`;
     subname = "";
-    restrictions = {};
+
 }

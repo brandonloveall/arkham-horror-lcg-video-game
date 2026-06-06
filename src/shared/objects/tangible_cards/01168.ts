@@ -24,7 +24,6 @@ Attached location gets +2 shroud.
     traits = "Hazard.";
     flavor = ``;
     subname = "";
-    restrictions = {};
 
     resolve(plrWhoDrew: GamePlayer): void {
         if(plrWhoDrew.location.attachments.find((e) => { return e.id === this.id })) { return; }

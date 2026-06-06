@@ -27,5 +27,5 @@ If this test is successful, draw 1 card.`;
     traits = "Innate.";
     flavor = `Stay back! I'll handle this.`;
     subname = "";
-    restrictions = {};
+
 }

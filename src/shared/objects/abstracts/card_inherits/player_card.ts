@@ -1,4 +1,10 @@
+import { GameState, PlayerWithTurn } from "shared/game_context";
 import { Card } from "../card";
+
+interface PlayRestriction {
+    when?: GameState,
+    playerWithTurn?: PlayerWithTurn
+}
 
 export abstract class PlayerCard extends Card {
     abstract skill_agility: number
@@ -9,5 +15,5 @@ export abstract class PlayerCard extends Card {
     abstract xp: number
     abstract deck_limit: number
 
-
+    restriction?: PlayRestriction // if its absent, its the standard "play while your turn is in progress"
 }

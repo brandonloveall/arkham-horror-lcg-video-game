@@ -30,5 +30,5 @@ Uses (4 ammo).
     traits = "Item. Weapon. Firearm.";
     flavor = ``;
     subname = "";
-    restrictions = { "investigator": { "01001": "01001" } };
+    belongs_to = "01501"
 }

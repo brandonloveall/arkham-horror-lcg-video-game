@@ -26,5 +26,5 @@ export class _01525 extends SkillCard {
     traits = "Practiced.";
     flavor = `With a sickening smack, he struck the abomination over and over... until at last, it stopped moving.`;
     subname = "";
-    restrictions = {};
+
 }

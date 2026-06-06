@@ -29,5 +29,5 @@ export class _01517 extends AssetCard {
     traits = "Talent.";
     flavor = ``;
     subname = "";
-    restrictions = {};
+
 }

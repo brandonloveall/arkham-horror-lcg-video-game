@@ -28,5 +28,5 @@ export class _01119 extends EnemyCard {
     traits = "Humanoid. Monster. Ghoul.";
     flavor = `Inside the tunnels beneath the house, a massive beast tears its way out of the ice. It is covered in a think layer of frost, its breath visible in the bitter cold.`;
     subname = "";
-    restrictions = {};
+
 }

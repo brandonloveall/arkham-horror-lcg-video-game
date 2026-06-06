@@ -24,7 +24,7 @@ You cannot play assets or events.
     traits = "Terror.";
     flavor = ``;
     subname = "";
-    restrictions = {};
+
 
     resolve(plrWhoDrew: GamePlayer): void {
         plrWhoDrew.threat_area.push(this)

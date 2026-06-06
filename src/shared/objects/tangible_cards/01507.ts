@@ -24,7 +24,7 @@ export class _01507 extends TreacheryCard {
     traits = "Task.";
     flavor = ``;
     subname = "";
-    restrictions = { "investigator": { "01001": "01001" } };
+    belongs_to = "01501"
 
     resolve(plrWhoDrew: GamePlayer): void {
         plrWhoDrew.threat_area.push(this)

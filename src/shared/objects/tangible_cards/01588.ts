@@ -28,7 +28,7 @@ export class _01588 extends EventCard {
     traits = "Supply.";
     flavor = `You can never be too prepared.`;
     subname = "";
-    restrictions = {};
+
 
     onPlay(whoPlayed: GamePlayer) {
         whoPlayed.resources += 3;

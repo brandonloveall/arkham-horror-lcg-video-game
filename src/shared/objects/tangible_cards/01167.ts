@@ -24,7 +24,6 @@ export class _01167 extends TreacheryCard {
     traits = "Hazard.";
     flavor = `The supernatural cold threatens to freeze your soul.`;
     subname = "";
-    restrictions = {};
 
     resolve(plrWhoDrew: GamePlayer): void {
         const [passed] = skillCheck(plrWhoDrew, 4, "skill_willpower")

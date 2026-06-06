@@ -23,11 +23,11 @@ export class _01163 extends TreacheryCard {
     traits = "Terror.";
     flavor = `A sickening display of gore causes you to retch. You're glad this wasn't you.`;
     subname = "";
-    restrictions = {};
+
 
     resolve(plrWhoDrew: GamePlayer): void {
         const [passed, byHowMuch] = skillCheck(plrWhoDrew, 3, "skill_willpower")
-        if(!passed) {
+        if (!passed) {
             plrWhoDrew.takeDamage(0, math.abs(byHowMuch))
         }
     }

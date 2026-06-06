@@ -1,4 +1,5 @@
 
+import { PlayerWithTurn } from "shared/game_context";
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 
 export class _01536 extends EventCard {
@@ -28,7 +29,9 @@ Until the end of the round, you may use your [intellect] in place of your [comba
     traits = "Insight.";
     flavor = ``;
     subname = "";
-    restrictions = {};
+    restriction = {
+        playerWithTurn: PlayerWithTurn.Self
+    }
 
     onPlay(): void {
         print("not yet implemented")

@@ -28,5 +28,5 @@ export class _01521 extends AssetCard {
     traits = "Ally. Creature.";
     flavor = `Fiercely loyal, these trained canines make for perfect companions.`;
     subname = "";
-    restrictions = {};
+
 }

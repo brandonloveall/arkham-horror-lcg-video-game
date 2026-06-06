@@ -29,5 +29,5 @@ You get +1 [intellect] while investigating.`;
     traits = "Item. Tool.";
     flavor = `A lens into a world unseen can reveal things you wish it hadn't.`;
     subname = "";
-    restrictions = {};
+
 }

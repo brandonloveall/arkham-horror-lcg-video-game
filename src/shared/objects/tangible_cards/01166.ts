@@ -23,10 +23,10 @@ export class _01166 extends TreacheryCard {
     traits = "Omen.";
     flavor = `Dark forces stir against you. If you do not act quickly, a sinister plot will be fulfilled.`;
     subname = "";
-    restrictions = {};
+
 
     resolve(plrWhoDrew: GamePlayer): void {
-        if(++GameContext.agenda.current_doom >= GameContext.agenda.doom) {
+        if (++GameContext.agenda.current_doom >= GameContext.agenda.doom) {
             GameContext.agenda.advance()
         }
     }

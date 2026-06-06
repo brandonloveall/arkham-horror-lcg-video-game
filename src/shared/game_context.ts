@@ -13,6 +13,14 @@ export enum GameState {
     PlayerTurn_Began,
     PlayerTurn_InProgress,
     Playerturn_Ended,
+
+    EnemyDefeated,
+    EnemyAttacks
+}
+
+export enum PlayerWithTurn {
+    Self,
+    Other
 }
 
 let dudAgenda = new _01105();

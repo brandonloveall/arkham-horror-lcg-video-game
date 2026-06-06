@@ -27,5 +27,5 @@ If this test is successful, draw 1 card.`;
     traits = "Innate.";
     flavor = `Too easy.`;
     subname = "";
-    restrictions = {};
+
 }

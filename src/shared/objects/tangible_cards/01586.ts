@@ -29,5 +29,5 @@ export class _01586 extends AssetCard {
     traits = "Item. Weapon. Melee.";
     flavor = ``;
     subname = "";
-    restrictions = {};
+
 }

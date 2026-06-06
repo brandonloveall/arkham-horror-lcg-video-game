@@ -29,5 +29,5 @@ export class _01533 extends AssetCard {
     traits = "Ally. Miskatonic.";
     flavor = `"While I truly believe that this nightmare is just a singular abomination, I must admit that I am exhilarated by the possibility that this is but one specimen of a new genus!"`;
     subname = "Professor of Entomology";
-    restrictions = {};
+
 }

@@ -30,5 +30,5 @@ export class _01117 extends AssetCard {
     traits = "Ally.";
     flavor = ``;
     subname = "The Zealot";
-    restrictions = {};
+
 }

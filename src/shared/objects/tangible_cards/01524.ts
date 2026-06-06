@@ -27,7 +27,7 @@ export class _01524 extends EventCard {
     traits = "Tactic.";
     flavor = ``;
     subname = "";
-    restrictions = {};
+
 
     onPlay(): void {
         print("not yet implemented")

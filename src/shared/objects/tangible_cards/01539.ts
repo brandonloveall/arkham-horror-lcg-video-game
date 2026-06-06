@@ -26,5 +26,5 @@ export class _01539 extends SkillCard {
     traits = "Practiced.";
     flavor = `I knew I had seen this symbol before. I must warn the others before it is too late!`;
     subname = "";
-    restrictions = {};
+
 }

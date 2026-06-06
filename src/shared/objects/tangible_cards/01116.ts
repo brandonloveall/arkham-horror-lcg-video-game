@@ -29,5 +29,4 @@ Hunter. Retaliate.`;
     traits = "Humanoid. Monster. Ghoul. Elite.";
     flavor = `A figure in red robes wearing a bone mask. It gibbers and snarls before leaping to attack.`;
     subname = "";
-    restrictions = {};
 }

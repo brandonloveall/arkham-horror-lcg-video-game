@@ -30,5 +30,5 @@ Hunter.
     traits = "Humanoid. Cultist. Silver Twilight.";
     flavor = `You'll never forget the day you learned the true secret of the Silver Twilight Lodge's inner circle. The truth is too terrible for the Lodge to let you live.`;
     subname = "";
-    restrictions = {};
+
 }

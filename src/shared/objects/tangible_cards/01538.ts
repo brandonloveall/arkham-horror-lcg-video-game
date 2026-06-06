@@ -30,7 +30,7 @@ Non-[[Elite]] enemies cannot move into attached location.
     traits = "Insight. Tactic.";
     flavor = ``;
     subname = "";
-    restrictions = {};
+
 
     onPlay(whoPlayed: GamePlayer): void {
         whoPlayed.location.attachments.push(this)

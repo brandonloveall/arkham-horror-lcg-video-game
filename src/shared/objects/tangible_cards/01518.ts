@@ -29,5 +29,5 @@ export class _01518 extends AssetCard {
     traits = "Ally. Police.";
     flavor = ``;
     subname = "";
-    restrictions = {};
+
 }

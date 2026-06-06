@@ -1,6 +1,7 @@
 
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 import { GamePlayer } from "../player";
+import { PlayerWithTurn } from "shared/game_context";
 
 export class _01537 extends EventCard {
     cost = 2;
@@ -29,7 +30,9 @@ Discover 1 clue at your location.`;
     traits = "Insight.";
     flavor = ``;
     subname = "";
-    restrictions = {};
+    restriction = {
+        playerWithTurn: PlayerWithTurn.Self
+    }
 
     onPlay(whoPlayed: GamePlayer): void {
         whoPlayed.location.discoverClue(whoPlayed, 1)

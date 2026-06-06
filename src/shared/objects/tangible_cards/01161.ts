@@ -28,5 +28,5 @@ export class _01161 extends EnemyCard {
     traits = "Humanoid. Monster. Ghoul.";
     flavor = `The sight of the thing raised the question: Do we eat to live, or do we live to eat?`;
     subname = "";
-    restrictions = {};
+
 }

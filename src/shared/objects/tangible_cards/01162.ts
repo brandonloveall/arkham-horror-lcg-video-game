@@ -23,11 +23,10 @@ export class _01162 extends TreacheryCard {
     traits = "Hazard.";
     flavor = `Decaying hands rise up from below and grasp and claw at your ankles.`;
     subname = "";
-    restrictions = {};
 
     resolve(plrWhoDrew: GamePlayer): void {
         const [passed, byHowMuch] = skillCheck(plrWhoDrew, 3, "skill_agility")
-        if(!passed) {
+        if (!passed) {
             plrWhoDrew.takeDamage(math.abs(byHowMuch), 0)
         }
     }

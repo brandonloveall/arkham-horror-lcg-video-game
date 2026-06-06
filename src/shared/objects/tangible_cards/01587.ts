@@ -29,5 +29,5 @@ export class _01587 extends AssetCard {
     traits = "Item. Tool.";
     flavor = ``;
     subname = "";
-    restrictions = {};
+
 }
