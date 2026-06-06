@@ -1,5 +1,6 @@
 import { ReplicatedStorage, Workspace } from "@rbxts/services";
 import { StoryCard } from "../story_card";
+import { GameContext } from "shared/game_context";
 
 export abstract class LocationCard extends StoryCard {
     abstract shroud: number
@@ -23,6 +24,7 @@ export function Place(location: LocationCard, coords: [number, number]) {
         location.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(location.code) as Model;
         location.model.AddTag("LOCATION")
         location.model.MoveTo(new Vector3(coords[0], coords[1], 0))
+        GameContext.game_map[coords[0]][coords[1]] = location;
         location.model.Parent = Workspace
         location.model.Name = location.id
         return location;
