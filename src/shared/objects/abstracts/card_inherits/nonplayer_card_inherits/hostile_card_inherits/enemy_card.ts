@@ -23,10 +23,10 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
 }
 
 export function PlaceEnemy(enemy: EnemyCard, location: LocationCard) {
-        enemy.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(enemy.code) as Model;
-        enemy.model.AddTag("ENEMY")
-        enemy.model.MoveTo(location.model.WorldPivot.Position.add(new Vector3(0, 16, 0)))
+        enemy.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(enemy.code).Clone() as Model;
         enemy.model.Parent = Workspace
+        enemy.model.AddTag("ENEMY")
+        enemy.model.PivotTo(new CFrame(location.model.WorldPivot.Position.add(new Vector3(0, 16, 0))))
         enemy.model.Name = enemy.id
         return enemy;
 }

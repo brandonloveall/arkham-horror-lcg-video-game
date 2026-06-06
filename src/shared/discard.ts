@@ -8,7 +8,7 @@ let finished = false;
 
 Server_ChooseCards_Sub((plr: Player, cards: Card[]) => { finished = true; chosenCards = cards as PlayerCard[] })
 
-export function discard(who: GamePlayer, whats: PlayerCard[], amount?: number) {
+export function discard(who: GamePlayer, whats: PlayerCard[], amount: number) {
     finished = false
     Server_ChooseCards_Pub(who, whats, "Discard an asset", amount)
     do { task.wait() } while (!finished)
@@ -16,4 +16,6 @@ export function discard(who: GamePlayer, whats: PlayerCard[], amount?: number) {
     for(const card of chosenCards) {
         who.discard(card.id)
     }
+
+    return chosenCards.size() === amount
 }

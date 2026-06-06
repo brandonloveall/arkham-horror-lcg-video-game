@@ -28,7 +28,7 @@ export class _01163 extends TreacheryCard {
     resolve(plrWhoDrew: GamePlayer): void {
         const [passed, byHowMuch] = skillCheck(plrWhoDrew, 3, "skill_willpower")
         if(!passed) {
-            plrWhoDrew.horror += math.abs(byHowMuch)
+            plrWhoDrew.takeDamage(0, math.abs(byHowMuch))
         }
     }
 }

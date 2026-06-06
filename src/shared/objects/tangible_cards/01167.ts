@@ -29,7 +29,10 @@ export class _01167 extends TreacheryCard {
     resolve(plrWhoDrew: GamePlayer): void {
         const [passed] = skillCheck(plrWhoDrew, 4, "skill_willpower")
         if(!passed) {
-            discard(plrWhoDrew, plrWhoDrew.getAllEquipment(), 1)
+            const couldDiscard = discard(plrWhoDrew, plrWhoDrew.getAllEquipment(), 1)
+            if(!couldDiscard) {
+                plrWhoDrew.takeDamage(2, 0)
+            }
         }
     }
 }

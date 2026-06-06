@@ -35,7 +35,7 @@ class EquipmentSlot {
     }
 
     public remove(card: AssetCard) {
-        if(card.slot === "") { return; }
+        if (card.slot === "") { return; }
         this.current_total -= ["Hand x2", "Arcane x2"].includes(this.items.remove(this.items.indexOf(card))!.slot) ? 2 : 1
     }
 }
@@ -78,11 +78,11 @@ export class GamePlayer {
     }
 
     public getAllEquipment() {
-        return [ ...this.equipped["Hand"].get(), ...this.equipped["Arcane"].get(), ...this.equipped[""].get(), ...this.equipped["Body"].get(), ...this.equipped["Accessory"].get(), ...this.equipped["Ally"].get()]
+        return [...this.equipped["Hand"].get(), ...this.equipped["Arcane"].get(), ...this.equipped[""].get(), ...this.equipped["Body"].get(), ...this.equipped["Accessory"].get(), ...this.equipped["Ally"].get()]
     }
 
     public draw() {
-        if(this.deck.isEmpty()) {
+        if (this.deck.isEmpty()) {
             this.deck, this.discardDeck = this.discardDeck, this.deck
             this.horror++
             this.deck.shuffle()
@@ -161,7 +161,7 @@ export class GamePlayer {
 
 
     public attemptAdvance() {
-        if(GameContext.act.clues !== 0 && payClues()) {
+        if (GameContext.act.clues !== 0 && payClues()) {
             print("successful")
         }
         this.update()
@@ -176,8 +176,15 @@ export class GamePlayer {
             if (card.id === id) { this.discardDeck.addCard(this.hand.remove(this.hand.indexOf(card))!) }
         }
         for (const card of this.getAllEquipment()) {
-            if(card.id === id) { this.equipped[card.slot].remove(card) }
+            if (card.id === id) { this.equipped[card.slot].remove(card) }
         }
+        this.update()
+    }
+
+    public takeDamage(damage: number, horror: number) {
+        this.damage += damage
+        this.horror += horror
+        if(this.damage >= this.investigator.health || this.horror >= this.investigator.sanity) { print("oops u died") /** temporary **/  }
         this.update()
     }
 }
