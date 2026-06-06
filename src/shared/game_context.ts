@@ -27,7 +27,8 @@ export const GameContext: {
     act: ActCard,
     chaos_bag: ChaosBag,
     encounter_deck: Deck,
-    game_map: (LocationCard | undefined)[][]
+    game_map: (LocationCard | undefined)[][],
+    player_with_turn: GamePlayer | undefined
 } = {
     current_game_state: GameState.NONE,
     players: [],
@@ -36,15 +37,16 @@ export const GameContext: {
     chaos_bag: dudBag,
     encounter_deck: dudDeck,
     game_map: [ // Hard coded to be a 10x10 grid. Array.from not available in Luau, so have to hard code it
-    [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
-    [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
-    [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
-    [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
-    [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
-    [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
-    [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
-    [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
-    [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
-    [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
-]
+        [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
+    ],
+    player_with_turn: undefined
 }

@@ -1,6 +1,6 @@
 import { Players } from "@rbxts/services"
 import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card"
-import { Draw_Pub, Engage_Pub, Evade_Pub, Fight_Pub, GainResource_Pub, Investigate_Pub, Move_Pub } from "shared/remotes/Actions/Interface"
+import { Draw_Pub, EndTurn_Pub, Engage_Pub, Evade_Pub, Fight_Pub, GainResource_Pub, Investigate_Pub, Move_Pub } from "shared/remotes/Actions/Interface"
 import { PlayCard_Pub } from "shared/remotes/Actions/Interface"
 import { UpdatePlayerUI_Sub } from "shared/remotes/UpdatePlayerUI/Interface"
 import { getTarget } from "client/ClickSelection/ClickSelection"
@@ -25,6 +25,7 @@ const Evade = ActionList.WaitForChild("Evade") as TextButton
 const Engage = ActionList.WaitForChild("Engage") as TextButton
 const Investigate = ActionList.WaitForChild("Investigate") as TextButton
 const Move = ActionList.WaitForChild("Move") as TextButton
+const EndTurn = ActionList.WaitForChild("EndTurn") as TextButton
 
 const CardTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("CardTemplate") as TextButton
 
@@ -52,9 +53,7 @@ UpdatePlayerUI_Sub((payload) => {
     }
 })
 
-Draw.MouseButton1Click.Connect(() => {
-    Draw_Pub()
-})
+Draw.MouseButton1Click.Connect(Draw_Pub)
 
 Fight.MouseButton1Click.Connect(() => {
     if (getTarget().HasTag("ENEMY")) {
@@ -62,9 +61,7 @@ Fight.MouseButton1Click.Connect(() => {
     }
 })
 
-GainResource.MouseButton1Click.Connect(() => {
-    GainResource_Pub()
-})
+GainResource.MouseButton1Click.Connect(GainResource_Pub)
 
 Evade.MouseButton1Click.Connect(() => {
     if (getTarget().HasTag("ENEMY")) {
@@ -79,13 +76,13 @@ Engage.MouseButton1Click.Connect(() => {
 
 })
 
-Investigate.MouseButton1Click.Connect(() => {
-    Investigate_Pub()
-})
+Investigate.MouseButton1Click.Connect(Investigate_Pub)
 
 Move.MouseButton1Click.Connect(() => {
     if(getTarget().HasTag("LOCATION")) {
         Move_Pub(getTarget().Name)
     }
 })
+
+EndTurn.MouseButton1Click.Connect(EndTurn_Pub)
 
