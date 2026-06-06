@@ -14,7 +14,7 @@ Server_SkillCheck_Sub((plr, selectedCards) => {
 
 // TODO: limit to 1 for allies and those only in the same location
 
-export function skillCheck(initiator: GamePlayer, against: number, using: string) {
+export function skillCheck(initiator: GamePlayer, against: number, using: string): [passed: boolean, byHowMuch: number] {
     cards = {}
     submittedCount = 0;
 
@@ -30,5 +30,7 @@ export function skillCheck(initiator: GamePlayer, against: number, using: string
         }
     }
 
-    return total + (initiator.investigator[using as keyof Investigator] as number) >= against
+    const final = total + (initiator.investigator[using as keyof Investigator] as number)
+
+    return [ final >= against, final - against ]
 }

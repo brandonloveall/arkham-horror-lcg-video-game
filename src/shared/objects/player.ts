@@ -66,6 +66,8 @@ export class GamePlayer {
     clues = 0;
     actions = 0;
 
+    threat_area: Card[] = []
+
     constructor(owner: Player, deck: Deck, investigator: Investigator) {
         this.owner = owner
         this.deck = deck
@@ -114,7 +116,8 @@ export class GamePlayer {
     }
 
     public investigate(location: LocationCard) {
-        if (skillCheck(this, location.shroud, "skill_intellect")) {
+        const [passed] = skillCheck(this, location.shroud, "skill_intellect")
+        if (passed) {
             location.clues -= 1
             this.clues += 1
         }
@@ -122,7 +125,8 @@ export class GamePlayer {
     }
 
     public fight(enemy: EnemyCard) {
-        if (skillCheck(this, enemy.enemy_fight, "skill_combat")) {
+        const [passed] = skillCheck(this, enemy.enemy_fight, "skill_combat")
+        if (passed) {
             enemy.health -= 1
         }
         this.update()
@@ -130,12 +134,15 @@ export class GamePlayer {
 
     public engage(enemy: EnemyCard) {
         enemy.engagedWith = this
+        this.threat_area.push(enemy)
         this.update()
     }
 
     public evade(enemy: EnemyCard) {
-        if (skillCheck(this, enemy.enemy_evade, "skill_agility")) {
+        const [passed] = skillCheck(this, enemy.enemy_evade, "skill_agility")
+        if (passed) {
             enemy.engagedWith = undefined
+            this.threat_area.remove(this.threat_area.indexOf(enemy))
         }
         this.update()
     }

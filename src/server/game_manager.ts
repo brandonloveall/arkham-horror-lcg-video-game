@@ -1,4 +1,4 @@
-import { Players, ReplicatedStorage } from "@rbxts/services";
+import { Players, PolicyService, ReplicatedStorage } from "@rbxts/services";
 import { GamePlayer } from "../shared/objects/player";
 import { Deck } from "../shared/objects/deck";
 import { _01501 } from "../shared/objects/tangible_cards/01501";
@@ -184,10 +184,10 @@ function upkeepPhase() {
     for(const card of CardRegistry.getAll()) {
         if("is_ready" in card) {
             card.is_ready = true;
-            if(card instanceof EnemyCard) {
+            if(card instanceof EnemyCard && card.engagedWith === undefined) {
                 for(const plr of GameContext.players) {
                     // TODO: if its a hunter with prey, only go to that one
-                    if(plr.location === card.location) { card.engagedWith = plr; break }
+                    if(plr.location === card.location) { card.engagedWith = plr; plr.threat_area.push(card); break }
                 }
             }
         }
@@ -209,12 +209,11 @@ function mythosPhase() {
             PlaceEnemy(drawnCard, plr.location)
             drawnCard.engagedWith = plr
             drawnCard.is_ready = true
+            plr.threat_area.push(drawnCard)
         }
         else if(drawnCard instanceof TreacheryCard) {
             drawnCard.resolve(plr)
         }
-
-        GameContext.encounter_discard.addCard(drawnCard)
     }
     task.spawn(investigatorPhase)
 }
