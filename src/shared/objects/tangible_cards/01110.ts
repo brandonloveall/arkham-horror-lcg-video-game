@@ -1,7 +1,7 @@
 
 import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
 import { _01116 } from "./01116";
-import { GameState, WhatHappened } from "shared/game_context";
+import { WhatHappened } from "shared/game_context";
 
 export class _01110 extends ActCard {
     clues = 0;
