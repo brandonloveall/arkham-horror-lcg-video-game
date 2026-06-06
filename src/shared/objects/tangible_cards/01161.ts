@@ -14,7 +14,6 @@ export class _01161 extends EnemyCard {
     encounter_position = 4;
     code = "01161";
     pack_name = "Core Set";
-    type_name = "Enemy";
     faction_name = "Mythos";
     position = 161;
     exceptional = false;

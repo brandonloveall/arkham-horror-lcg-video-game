@@ -14,7 +14,6 @@ export class _01602 extends EnemyCard {
     encounter_position = 0;
     code = "01602";
     pack_name = "Revised Core Set";
-    type_name = "Enemy";
     faction_name = "Neutral";
     position = 102;
     exceptional = false;
