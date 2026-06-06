@@ -13,9 +13,11 @@ export enum GameState {
     PlayerTurn_Began,
     PlayerTurn_InProgress,
     Playerturn_Ended,
+}
 
+export enum WhatHappened {
+    EnemyAttacked,
     EnemyDefeated,
-    EnemyAttacks
 }
 
 export enum PlayerWithTurn {

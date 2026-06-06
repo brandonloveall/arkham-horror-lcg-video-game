@@ -1,5 +1,15 @@
 import { HttpService } from "@rbxts/services"
 import { CardRegistry } from "shared/card_registry";
+import { WhatHappened } from "shared/game_context";
+
+// TODO: make this a lot bigger to incorporate more reactions
+
+export interface reaction {
+    reaction: () => void,
+    optional: boolean
+}
+
+export type reactions = Partial<Record<WhatHappened, reaction>>
 
 export abstract class Card {
     id: string = HttpService.GenerateGUID(false);
@@ -23,6 +33,8 @@ export abstract class Card {
     abstract subname: string
 
     belongs_to: string = "" // for signature cards. if its blank, its fair game
+
+    reactions?: reactions
 
     constructor() {
         CardRegistry.insert(this)

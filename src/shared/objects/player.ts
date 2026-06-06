@@ -163,6 +163,7 @@ export class GamePlayer {
     public attemptAdvance() {
         if (GameContext.act.clues !== 0 && payClues()) {
             print("successful")
+            GameContext.act.advance()
         }
         this.update()
     }

@@ -1,5 +1,7 @@
 
+import { GameContext } from "shared/game_context";
 import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
+import { _01109 } from "./01109";
 
 export class _01108 extends ActCard {
     clues = 2;
@@ -30,4 +32,8 @@ You jump through the doorway, landing on your feet on soft dirt. The door to the
     traits = "";
     flavor = `As you leap to investigate, the door to your study vanishes before your eyes, leaving behind only solid wall. You're trapped inside your study until you can find another way out.`;
     subname = "";
+
+    advance() {
+        GameContext.act = new _01109();
+    }
 }

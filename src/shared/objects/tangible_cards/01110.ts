@@ -1,5 +1,7 @@
 
 import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
+import { _01116 } from "./01116";
+import { GameState, WhatHappened } from "shared/game_context";
 
 export class _01110 extends ActCard {
     clues = 0;
@@ -29,4 +31,16 @@ export class _01110 extends ActCard {
     traits = "";
     flavor = `A woman with a torch stands in your parlor, a glimmer of hatred in her eyes. "What have you done to my barrier?" she screams, furious. Before you can enter, a ghastly wail sounds behind you, and a creature wearing robes and a deer skull mask tears through the wall, advancing toward you.`;
     subname = "";
+
+    reactions = {
+        [WhatHappened.EnemyDefeated]: {
+            reaction: () => this.advance(),
+            optional: false
+        }
+    }
+
+    advance() {
+        // TODO: implement the "givechoice" function for this
+        print("nice job")
+    }
 }
