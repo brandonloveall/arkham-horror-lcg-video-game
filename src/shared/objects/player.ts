@@ -11,6 +11,7 @@ import { skillCheck } from "../skillcheck"
 import { UpdatePlayerUI_Pub } from "shared/remotes/UpdatePlayerUI/Interface"
 import { GameContext } from "shared/game_context"
 import { payClues } from "shared/payClues"
+import { CardRegistry } from "shared/card_registry"
 
 class EquipmentSlot {
 
@@ -25,6 +26,7 @@ class EquipmentSlot {
     public insert(card: AssetCard, cost: number): boolean {
         if (cost + this.current_total > this.limit) { return false; }
         this.items.push(card);
+        this.current_total += cost
         return true;
     }
 
@@ -33,7 +35,8 @@ class EquipmentSlot {
     }
 
     public remove(card: AssetCard) {
-        this.items.remove(this.items.indexOf(card));
+        if(card.slot === "") { return; }
+        this.current_total -= ["Hand x2", "Arcane x2"].includes(this.items.remove(this.items.indexOf(card))!.slot) ? 2 : 1
     }
 }
 
@@ -56,7 +59,7 @@ export class GamePlayer {
         Accessory: new EquipmentSlot(1),
         [""]: new EquipmentSlot(0) // the limit doesnt matter here since None takes up 0 slot space by default
     };
-    discard = new Deck([]);
+    discardDeck = new Deck([]);
 
     damage = 0;
     horror = 0;
@@ -72,6 +75,10 @@ export class GamePlayer {
         this.owner = owner
         this.deck = deck
         this.investigator = investigator
+    }
+
+    public getAllEquipment() {
+        return [ ...this.equipped["Hand"].get(), ...this.equipped["Arcane"].get(), ...this.equipped[""].get(), ...this.equipped["Body"].get(), ...this.equipped["Accessory"].get(), ...this.equipped["Ally"].get()]
     }
 
     public draw() {
@@ -157,5 +164,15 @@ export class GamePlayer {
 
     public update() {
         UpdatePlayerUI_Pub(this)
+    }
+
+    public discard(id: string) {
+        for (const card of this.hand) {
+            if (card.id === id) { this.discardDeck.addCard(this.hand.remove(this.hand.indexOf(card))!) }
+        }
+        for (const card of this.getAllEquipment()) {
+            if(card.id === id) { this.equipped[card.slot].remove(card) }
+        }
+        this.update()
     }
 }
