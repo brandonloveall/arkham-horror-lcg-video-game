@@ -13,6 +13,7 @@ import { GameContext, WhatHappened } from "shared/game_context"
 import { payClues } from "shared/payClues"
 import { CardRegistry } from "shared/card_registry"
 import { performReactions } from "shared/performReactions"
+import { TreacheryCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card"
 
 class EquipmentSlot {
 
@@ -82,20 +83,34 @@ export class GamePlayer {
         return [...this.equipped["Hand"].get(), ...this.equipped["Arcane"].get(), ...this.equipped[""].get(), ...this.equipped["Body"].get(), ...this.equipped["Accessory"].get(), ...this.equipped["Ally"].get()]
     }
 
-    public draw() {
+    public draw(free?: boolean) {
         performReactions(WhatHappened.PlayerDrewCard, this)
         if (this.deck.isEmpty()) {
             this.deck, this.discardDeck = this.discardDeck, this.deck
             this.horror++
             this.deck.shuffle()
         }
-        this.hand.push(this.deck.pull() as PlayerCard)
+
+        const card = this.deck.pull()
+        if(card instanceof EnemyCard) {
+            card.place(this.location)
+            card.engagedWith = this
+            this.threat_area.push(card)
+        }
+        if(card instanceof TreacheryCard) {
+            card.resolve(this)
+        }
+        if(card instanceof AssetCard || card instanceof EventCard) {
+            this.hand.push(this.deck.pull() as PlayerCard)
+        }
+        if(!free) { this.actions -= 1 }
         this.update()
     }
 
     public takeResource() {
         performReactions(WhatHappened.PlayerTookResource, this)
         this.resources += 1
+        this.actions -= 1
         this.update()
     }
 
@@ -122,6 +137,7 @@ export class GamePlayer {
     public activate(ability: () => void) {
         performReactions(WhatHappened.PlayerActivatedAbility, this)
         ability()
+        this.actions -= 1
         this.update()
     }
 
@@ -129,6 +145,7 @@ export class GamePlayer {
         if (this.location === location) { return }
         performReactions(WhatHappened.PlayerMoved, this, location)
         this.location = location
+        this.actions -= 1
         this.update()
     }
 
@@ -139,6 +156,7 @@ export class GamePlayer {
             location.clues -= 1
             this.clues += 1
         }
+        this.actions -= 1
         this.update()
     }
 
@@ -146,8 +164,9 @@ export class GamePlayer {
         performReactions(WhatHappened.PlayerFought, this, enemy)
         const [passed] = skillCheck(this, enemy.enemy_fight, "skill_combat")
         if (passed) {
-            enemy.health -= 1
+            enemy.takeDamage(1)
         }
+        this.actions -= 1
         this.update()
     }
 
@@ -156,6 +175,7 @@ export class GamePlayer {
         performReactions(WhatHappened.PlayerEngagedEnemy, this, enemy)
         enemy.engagedWith = this
         this.threat_area.push(enemy)
+        this.actions -= 1
         this.update()
     }
 
@@ -166,13 +186,13 @@ export class GamePlayer {
             enemy.engagedWith = undefined
             this.threat_area.remove(this.threat_area.indexOf(enemy))
         }
+        this.actions -= 1
         this.update()
     }
 
 
     public attemptAdvance() {
         if (GameContext.act!.clues !== 0 && payClues()) {
-            print("successful")
             GameContext.act!.advance()
         }
         this.update()

@@ -4,7 +4,7 @@ import { GamePlayer } from "shared/objects/player";
 import { LocationCard } from "../story_card_inherits/location_card";
 import { ReplicatedStorage, Workspace } from "@rbxts/services";
 import { Readies } from "shared/objects/abstracts/readies";
-import { WhatHappened } from "shared/game_context";
+import { GameContext, WhatHappened } from "shared/game_context";
 
 export abstract class EnemyCard extends HostileCard implements Damageable, Readies {
     abstract health: number
@@ -24,7 +24,7 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
 
     reactions = {
         [WhatHappened.PlayerMoved]: {
-            reaction: (plr: GamePlayer, to: LocationCard) => { if (this.engagedWith === plr && this.is_ready) { this.attackOfOpportunity(plr); this.location === to } },
+            reaction: (plr: GamePlayer, to: LocationCard) => { this.attackOfOpportunity(plr); this.location === to },
             optional: false
         },
         [WhatHappened.PlayerDrewCard]: {
@@ -60,5 +60,14 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
 
     attackOfOpportunity(who: GamePlayer) {
         if (this.engagedWith === who && this.is_ready) { who.takeDamage(this.enemy_damage, this.enemy_horror) }
+    }
+
+    takeDamage(damage: number) {
+        this.health -= damage
+        if(this.health <= 0) {
+            this.model.Destroy()
+            if(this.engagedWith !== undefined) { this.engagedWith.threat_area.remove(this.engagedWith.threat_area.indexOf(this)); this.engagedWith === undefined }
+            GameContext.encounter_discard.addCard(this)
+        }
     }
 }
