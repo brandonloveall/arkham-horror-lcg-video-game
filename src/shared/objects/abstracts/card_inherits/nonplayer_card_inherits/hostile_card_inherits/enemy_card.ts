@@ -22,7 +22,7 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
     type_name = "Enemy"
 
     place(location: LocationCard) {
-        this.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(enemy.code).Clone() as Model;
+        this.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model;
         this.model.Parent = Workspace
         this.model.AddTag("ENEMY")
         this.model.PivotTo(new CFrame(location.model.WorldPivot.Position.add(new Vector3(0, 16, 0))))
