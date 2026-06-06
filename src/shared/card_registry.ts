@@ -16,7 +16,7 @@ class _CardRegistry {
     }
 
     public getAll() {
-        return this.registry;
+        return [...this.registry].map(([k, v]) => {return v;})
     }
 }
 

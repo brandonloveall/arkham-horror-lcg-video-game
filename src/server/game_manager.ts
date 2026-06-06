@@ -166,10 +166,10 @@ function enemyPhase() {
     // TODO: if enemy is a hunter and not engaged, it moves towards closest investigator; randomly if multiple equidistant. if it has prey, only go after prey
 
     for(const card of CardRegistry.getAll()) {
+        print(card.type_name)
         if(card instanceof EnemyCard && card.engagedWith !== undefined && card.is_ready) {
             card.engagedWith.takeDamage(card.enemy_damage, card.enemy_horror)
             card.is_ready = false
-            card.engagedWith.update()
         }
     }
     task.spawn(upkeepPhase)
