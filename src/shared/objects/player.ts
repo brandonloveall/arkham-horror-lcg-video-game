@@ -148,7 +148,7 @@ export class GamePlayer {
         this.update()
     }
 
-    private update() {
+    public update() {
         UpdatePlayerUI_Pub(this)
     }
 }

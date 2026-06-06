@@ -14,6 +14,10 @@ class _CardRegistry {
     public remove(card: Card) {
         this.registry.delete(card.id)
     }
+
+    public getAll() {
+        return this.registry;
+    }
 }
 
 export const CardRegistry = new _CardRegistry();
