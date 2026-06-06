@@ -10,7 +10,7 @@ Server_PayClues_Sub((plr, paid) => {
 })
 
 export function payClues() { 
-    const required = GameContext.act.clues;
+    const required = GameContext.act!.clues;
 
     payments = {};
     finished = 0;

@@ -26,8 +26,8 @@ export class _01166 extends TreacheryCard {
 
 
     resolve(plrWhoDrew: GamePlayer): void {
-        if (++GameContext.agenda.current_doom >= GameContext.agenda.doom) {
-            GameContext.agenda.advance()
+        if (++GameContext.agenda!.current_doom >= GameContext.agenda!.doom) {
+            GameContext.agenda!.advance()
         }
     }
 }

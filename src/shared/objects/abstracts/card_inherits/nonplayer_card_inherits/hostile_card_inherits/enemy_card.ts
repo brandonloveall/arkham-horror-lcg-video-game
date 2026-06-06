@@ -4,6 +4,7 @@ import { GamePlayer } from "shared/objects/player";
 import { LocationCard } from "../story_card_inherits/location_card";
 import { ReplicatedStorage, Workspace } from "@rbxts/services";
 import { Readies } from "shared/objects/abstracts/readies";
+import { WhatHappened } from "shared/game_context";
 
 export abstract class EnemyCard extends HostileCard implements Damageable, Readies {
     abstract health: number
@@ -21,6 +22,33 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
     model!: Model
     type_name = "Enemy"
 
+    reactions = {
+        [WhatHappened.PlayerMoved]: {
+            reaction: (plr: GamePlayer, to: LocationCard) => { if (this.engagedWith === plr && this.is_ready) { this.attackOfOpportunity(plr); this.location === to } },
+            optional: false
+        },
+        [WhatHappened.PlayerDrewCard]: {
+            reaction: (plr: GamePlayer) => { this.attackOfOpportunity(plr) },
+            optional: false
+        },
+        [WhatHappened.PlayerTookResource]: {
+            reaction: (plr: GamePlayer) => { this.attackOfOpportunity(plr) },
+            optional: false
+        },
+        [WhatHappened.PlayerActivatedAbility]: {
+            reaction: (plr: GamePlayer) => { this.attackOfOpportunity(plr) },
+            optional: false
+        },
+        [WhatHappened.PlayerInvestigated]: {
+            reaction: (plr: GamePlayer, location: LocationCard) => { this.attackOfOpportunity(plr) },
+            optional: false
+        },
+        [WhatHappened.PlayerPlayedCard]: {
+            reaction: (plr: GamePlayer) => { this.attackOfOpportunity(plr) },
+            optional: false
+        }
+    }
+
     place(location: LocationCard) {
         this.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model;
         this.model.Parent = Workspace
@@ -28,5 +56,9 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
         this.model.PivotTo(new CFrame(location.model.WorldPivot.Position.add(new Vector3(0, 16, 0))))
         this.model.Name = this.id
         return this;
+    }
+
+    attackOfOpportunity(who: GamePlayer) {
+        if (this.engagedWith === who && this.is_ready) { who.takeDamage(this.enemy_damage, this.enemy_horror) }
     }
 }

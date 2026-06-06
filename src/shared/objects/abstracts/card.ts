@@ -5,7 +5,7 @@ import { WhatHappened } from "shared/game_context";
 // TODO: make this a lot bigger to incorporate more reactions
 
 export interface reaction {
-    reaction: () => void,
+    reaction: (...params: any) => void,
     optional: boolean
 }
 

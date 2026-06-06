@@ -9,9 +9,10 @@ import { Investigator } from "./abstracts/card_inherits/player_card_inherits/inv
 import { Deck } from "./deck"
 import { skillCheck } from "../skillcheck"
 import { UpdatePlayerUI_Pub } from "shared/remotes/UpdatePlayerUI/Interface"
-import { GameContext } from "shared/game_context"
+import { GameContext, WhatHappened } from "shared/game_context"
 import { payClues } from "shared/payClues"
 import { CardRegistry } from "shared/card_registry"
+import { performReactions } from "shared/performReactions"
 
 class EquipmentSlot {
 
@@ -82,6 +83,7 @@ export class GamePlayer {
     }
 
     public draw() {
+        performReactions(WhatHappened.PlayerDrewCard, this)
         if (this.deck.isEmpty()) {
             this.deck, this.discardDeck = this.discardDeck, this.deck
             this.horror++
@@ -92,12 +94,13 @@ export class GamePlayer {
     }
 
     public takeResource() {
+        performReactions(WhatHappened.PlayerTookResource, this)
         this.resources += 1
         this.update()
     }
 
     public play(card: CostingCard) {
-
+        performReactions(WhatHappened.PlayerPlayedCard, this)
         if (this.resources >= card.cost && this.actions > 0) {
             if (card instanceof EventCard) {
                 card.onPlay(this);
@@ -117,17 +120,20 @@ export class GamePlayer {
     }
 
     public activate(ability: () => void) {
+        performReactions(WhatHappened.PlayerActivatedAbility, this)
         ability()
         this.update()
     }
 
     public move(location: LocationCard) {
         if (this.location === location) { return }
+        performReactions(WhatHappened.PlayerMoved, this, location)
         this.location = location
         this.update()
     }
 
     public investigate(location: LocationCard) {
+        performReactions(WhatHappened.PlayerInvestigated, this, location)
         const [passed] = skillCheck(this, location.shroud, "skill_intellect")
         if (passed) {
             location.clues -= 1
@@ -137,6 +143,7 @@ export class GamePlayer {
     }
 
     public fight(enemy: EnemyCard) {
+        performReactions(WhatHappened.PlayerFought, this, enemy)
         const [passed] = skillCheck(this, enemy.enemy_fight, "skill_combat")
         if (passed) {
             enemy.health -= 1
@@ -145,12 +152,15 @@ export class GamePlayer {
     }
 
     public engage(enemy: EnemyCard) {
+        if(enemy.engagedWith === this) { return; }
+        performReactions(WhatHappened.PlayerEngagedEnemy, this, enemy)
         enemy.engagedWith = this
         this.threat_area.push(enemy)
         this.update()
     }
 
     public evade(enemy: EnemyCard) {
+        performReactions(WhatHappened.PlayerEvadedEnemy, this, enemy)
         const [passed] = skillCheck(this, enemy.enemy_evade, "skill_agility")
         if (passed) {
             enemy.engagedWith = undefined
@@ -161,9 +171,9 @@ export class GamePlayer {
 
 
     public attemptAdvance() {
-        if (GameContext.act.clues !== 0 && payClues()) {
+        if (GameContext.act!.clues !== 0 && payClues()) {
             print("successful")
-            GameContext.act.advance()
+            GameContext.act!.advance()
         }
         this.update()
     }

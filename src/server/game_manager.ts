@@ -194,12 +194,12 @@ function upkeepPhase() {
 
 function mythosPhase() {
     for(const plr of GameContext.players) {
-        if(GameContext.encounter_deck.isEmpty()) {
+        if(GameContext.encounter_deck!.isEmpty()) {
             GameContext.encounter_deck, GameContext.encounter_discard = GameContext.encounter_discard, GameContext.encounter_deck
-            GameContext.encounter_deck.shuffle()
+            GameContext.encounter_deck!.shuffle()
         }
 
-        let drawnCard = GameContext.encounter_deck.pull()!
+        let drawnCard = GameContext.encounter_deck!.pull()!
         // TODO: if enemy has specific spawn location, spawn it there
         if(drawnCard instanceof EnemyCard) {
             drawnCard.place(plr.location)
