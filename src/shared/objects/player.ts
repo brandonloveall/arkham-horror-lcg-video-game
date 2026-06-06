@@ -82,6 +82,11 @@ export class GamePlayer {
     }
 
     public draw() {
+        if(this.deck.isEmpty()) {
+            this.deck, this.discardDeck = this.discardDeck, this.deck
+            this.horror++
+            this.deck.shuffle()
+        }
         this.hand.push(this.deck.pull() as PlayerCard)
         this.update()
     }
