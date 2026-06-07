@@ -50,7 +50,7 @@ export class GamePlayer {
     owner: Player
     deck: Deck
     investigator: Investigator
-    hand: Card[] = []
+    hand: PlayerCard[] = []
     equipped: Record<string, EquipmentSlot> = {
         Hand: this._hand,
         ["Hand x2"]: this._hand,

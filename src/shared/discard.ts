@@ -10,12 +10,10 @@ Server_ChooseCards_Sub((plr: Player, cards: Card[]) => { finished = true; chosen
 
 export function discard(who: GamePlayer, whats: PlayerCard[], amount: number) {
     finished = false
-    Server_ChooseCards_Pub(who, whats, "Discard an asset", amount)
+    Server_ChooseCards_Pub(who, whats, `Discard ${amount} cards`, amount)
     do { task.wait() } while (!finished)
 
     for(const card of chosenCards) {
         who.discard(card.id)
     }
-
-    return chosenCards.size() === amount
 }

@@ -15,14 +15,18 @@ const Message = Frame.WaitForChild("Message") as TextLabel
 let chosen_cards: Card[] = []
 let _amount: number | undefined;
 
-ConfirmButton.MouseButton1Click.Connect(() => { Client_ChooseCards_Pub(chosen_cards); CardPickingUI.Enabled = false })
+ConfirmButton.MouseButton1Click.Connect(() => {
+    if (_amount !== undefined && chosen_cards.size() === _amount) { return; }
+    Client_ChooseCards_Pub(chosen_cards)
+    CardPickingUI.Enabled = false
+})
 
 Client_ChooseCards_Sub((what: Card[], message: string, amount?: number) => {
     CardPickingUI.Enabled = true
     Message.Text = message
     chosen_cards = []
     _amount = amount;
-    
+
     for (let card of Box.GetChildren()) {
         if (card.IsA("TextButton")) { card.Destroy() }
     }

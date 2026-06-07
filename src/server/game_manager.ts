@@ -1,4 +1,4 @@
-import { Players, PolicyService, ReplicatedStorage } from "@rbxts/services";
+import { Players, ReplicatedStorage } from "@rbxts/services";
 import { GamePlayer } from "../shared/objects/player";
 import { Deck } from "../shared/objects/deck";
 import { _01501 } from "../shared/objects/tangible_cards/01501";
@@ -49,6 +49,8 @@ import { GameContext, GameState } from "shared/game_context";
 import { CardRegistry } from "shared/card_registry";
 import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
+import { discard } from "shared/discard";
+import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 
 let endedTurn = false;
 (ReplicatedStorage.WaitForChild("TS").WaitForChild("remotes").WaitForChild("Actions").WaitForChild("EndTurn") as RemoteEvent).OnServerEvent.Connect(() => endedTurn = true)
@@ -137,7 +139,7 @@ export function start() {
                 player.deck.addCard(card);
                 i--;
             } else {
-                player.hand.push(card);
+                player.hand.push(card as PlayerCard);
             }
         }
         player.deck.shuffle();
@@ -175,6 +177,7 @@ function upkeepPhase() {
     for(const plr of GameContext.players) {
         plr.resources++;
         plr.draw();
+        if(plr.hand.size() > 8) { discard(plr, plr.hand, plr.hand.size() - 8) }
     }
 
     for(const card of CardRegistry.getAll()) {
