@@ -1,6 +1,6 @@
 import { Players } from "@rbxts/services"
 import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card"
-import { Draw_Pub, EndTurn_Pub, Engage_Pub, Evade_Pub, Fight_Pub, GainResource_Pub, Investigate_Pub, Move_Pub } from "shared/remotes/Actions/Interface"
+import { ActivateAbility_Pub, Draw_Pub, EndTurn_Pub, Engage_Pub, Evade_Pub, Fight_Pub, GainResource_Pub, Investigate_Pub, Move_Pub } from "shared/remotes/Actions/Interface"
 import { PlayCard_Pub } from "shared/remotes/Actions/Interface"
 import { UpdatePlayerUI_Sub } from "shared/remotes/UpdatePlayerUI/Interface"
 import { getTarget } from "client/ClickSelection/ClickSelection"
@@ -27,9 +27,14 @@ const Investigate = ActionList.WaitForChild("Investigate") as TextButton
 const Move = ActionList.WaitForChild("Move") as TextButton
 const EndTurn = ActionList.WaitForChild("EndTurn") as TextButton
 
+const Assets = PlayerHud.WaitForChild("Assets") as Frame
+const AssetDropdown = Assets.WaitForChild("Folder").WaitForChild("Dropdown") as TextButton
+
 const CardTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("CardTemplate") as TextButton
+const AssetTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("AssetTemplate") as TextButton
 
 let currentHandCards: TextButton[] = []
+let currentAssets: TextButton[] = []
 
 UpdatePlayerUI_Sub((payload) => {
     HealthHud.Text = `${payload.damage}/${payload.health}`
@@ -50,6 +55,17 @@ UpdatePlayerUI_Sub((payload) => {
             NewCard.MouseButton1Click.Connect(() => PlayCard_Pub(card.id))
         }
         currentHandCards.push(NewCard)
+    }
+
+    for(const asset of currentAssets) {
+        asset.Destroy()
+    }
+
+    for(const asset of payload.assets) {
+        const NewAsset = AssetTemplate.Clone()
+        NewAsset.Text = asset.name
+        NewAsset.Parent = Assets
+        NewAsset.MouseButton1Click.Connect(() => ActivateAbility_Pub(asset.id))
     }
 })
 
@@ -86,3 +102,6 @@ Move.MouseButton1Click.Connect(() => {
 
 EndTurn.MouseButton1Click.Connect(EndTurn_Pub)
 
+let assetMenuShown = false
+
+AssetDropdown.MouseButton1Click.Connect(() => { Assets.Position = new UDim2(0, assetMenuShown ? -200 : 0, 0, 0); assetMenuShown = !assetMenuShown })

@@ -134,7 +134,7 @@ export class GamePlayer {
         this.update()
     }
 
-    public activate(ability: () => void) {
+    public activateAbility(ability: () => void) {
         performReactions(WhatHappened.PlayerActivatedAbility, this)
         ability()
         this.actions -= 1

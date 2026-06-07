@@ -5,6 +5,7 @@ import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card
 import { LocationCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
 import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card";
 import { RunService } from "@rbxts/services";
+import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 
 const actions = ReplicatedStorage.WaitForChild("TS").WaitForChild("remotes").WaitForChild("Actions")
 
@@ -17,6 +18,7 @@ const GainResource = actions.WaitForChild("GainResource") as RemoteEvent
 const Investigate = actions.WaitForChild("Investigate") as RemoteEvent
 const Move = actions.WaitForChild("Move") as RemoteEvent
 const EndTurn = actions.WaitForChild("EndTurn") as RemoteEvent
+const ActivateAbility = actions.WaitForChild("ActivateAbility") as RemoteEvent
 
 function getPlrObj(plr: Player) {
     return GameContext.players.find((e) => {
@@ -62,6 +64,10 @@ export function EndTurn_Pub() {
     EndTurn.FireServer();
 }
 
+export function ActivateAbility_Pub(card_id: string) {
+    ActivateAbility.FireServer(card_id)
+}
+
 ///////////////////////////////
 
 export default (() => {
@@ -97,6 +103,10 @@ export default (() => {
 
         PlayCard.OnServerEvent.Connect((plr: Player, card_id: unknown) => {
             getPlrObj(plr).play(CardRegistry.get(card_id as string) as CostingCard)
+        })
+
+        ActivateAbility.OnServerEvent.Connect((plr: Player, card_id: unknown) => {
+            getPlrObj(plr).activateAbility(() => (CardRegistry.get(card_id as string) as AssetCard).ability())
         })
     }
 })()
