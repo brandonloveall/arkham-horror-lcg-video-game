@@ -14,6 +14,7 @@ import { payClues } from "shared/payClues"
 import { CardRegistry } from "shared/card_registry"
 import { performReactions } from "shared/performReactions"
 import { TreacheryCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card"
+import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface"
 
 class EquipmentSlot {
 
@@ -148,9 +149,12 @@ export class GamePlayer {
         this.actions -= 1
         this.update()
         this.investigator.move(location)
+        PlaySound_Pub("Move")
     }
 
     public investigate(location: LocationCard) {
+        if(this.actions === 0) { return; }
+        PlaySound_Pub("Investigate")
         performReactions(WhatHappened.PlayerInvestigated, this, location)
         const [passed] = skillCheck(this, location.shroud, "skill_intellect")
         if (passed) {

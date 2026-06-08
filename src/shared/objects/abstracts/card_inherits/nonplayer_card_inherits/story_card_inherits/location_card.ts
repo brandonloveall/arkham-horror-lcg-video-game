@@ -4,6 +4,7 @@ import { GameContext } from "shared/game_context";
 import { Card } from "shared/objects/abstracts/card";
 import { GamePlayer } from "shared/objects/player";
 import { CardRegistry } from "shared/card_registry";
+import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
 
 export abstract class LocationCard extends StoryCard {
     abstract shroud: number
@@ -26,7 +27,7 @@ export abstract class LocationCard extends StoryCard {
     attachments: Card[] = []
 
     discoverClue(who: GamePlayer, amount: number) {
-        if (this.clues >= amount) { this.clues -= amount; who.clues += amount }
+        if (this.clues >= amount) { this.clues -= amount; who.clues += amount; PlaySound_Pub("CluesFound") }
     }
 
     place(coords: [number, number]) {

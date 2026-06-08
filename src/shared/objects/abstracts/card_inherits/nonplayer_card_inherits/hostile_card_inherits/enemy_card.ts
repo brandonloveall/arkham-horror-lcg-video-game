@@ -26,7 +26,12 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
 
     reactions = {
         [WhatHappened.PlayerMoved]: {
-            reaction: (plr: GamePlayer, to: LocationCard) => { this.attackOfOpportunity(plr); if(this.inPlay) { this.move(to) } },
+            reaction: (plr: GamePlayer, ...args: unknown[]) => {
+                this.attackOfOpportunity(plr)
+                if(this.inPlay) {
+                    this.move(args[0] as LocationCard)
+                }
+            },
             optional: false
         },
         [WhatHappened.PlayerDrewCard]: {
