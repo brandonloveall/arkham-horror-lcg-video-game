@@ -73,22 +73,25 @@ UpdatePlayerUI_Sub((payload) => {
 Draw.MouseButton1Click.Connect(Draw_Pub)
 
 Fight.MouseButton1Click.Connect(() => {
-    if (getTarget().HasTag("ENEMY")) {
-        Fight_Pub(getTarget().Name)
+    const target = getTarget()
+    if (target && target.HasTag("ENEMY")) {
+        Fight_Pub(target.Name)
     }
 })
 
 GainResource.MouseButton1Click.Connect(GainResource_Pub)
 
 Evade.MouseButton1Click.Connect(() => {
-    if (getTarget().HasTag("ENEMY")) {
-        Evade_Pub(getTarget().Name)
+    const target = getTarget()
+    if (target && target.HasTag("ENEMY")) {
+        Evade_Pub(target.Name)
     }
 })
 
 Engage.MouseButton1Click.Connect(() => {
-    if (getTarget().HasTag("ENEMY")) {
-        Engage_Pub(getTarget().Name)
+    const target = getTarget()
+    if (target && target.HasTag("ENEMY")) {
+        Engage_Pub(target.Name)
     }
 
 })
@@ -96,8 +99,9 @@ Engage.MouseButton1Click.Connect(() => {
 Investigate.MouseButton1Click.Connect(Investigate_Pub)
 
 Move.MouseButton1Click.Connect(() => {
-    if(getTarget().HasTag("LOCATION")) {
-        Move_Pub(getTarget().Name)
+    const target = getTarget()
+    if(target && target.HasTag("LOCATION")) {
+        Move_Pub(target.Name)
     }
 })
 

@@ -5,6 +5,8 @@ import { LocationCard } from "../story_card_inherits/location_card";
 import { ReplicatedStorage, Workspace } from "@rbxts/services";
 import { Readies } from "shared/objects/abstracts/readies";
 import { GameContext, WhatHappened } from "shared/game_context";
+// eslint-disable-next-line
+import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
 
 export abstract class EnemyCard extends HostileCard implements Damageable, Readies {
     abstract health: number
@@ -24,7 +26,7 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
 
     reactions = {
         [WhatHappened.PlayerMoved]: {
-            reaction: (plr: GamePlayer, to: LocationCard) => { this.attackOfOpportunity(plr); this.move },
+            reaction: (plr: GamePlayer, to: LocationCard) => { this.attackOfOpportunity(plr); if(this.inPlay) { this.move(to) } },
             optional: false
         },
         [WhatHappened.PlayerDrewCard]: {
@@ -56,20 +58,35 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
         this.model.AddTag("ENEMY")
         this.model.PivotTo(new CFrame(location.model.WorldPivot.Position.add(new Vector3(0, 16, 0))))
         this.model.Name = this.id
+
+        const highlight: Highlight = new Instance("Highlight")
+        highlight.Parent = this.model
+        highlight.FillTransparency = 0.6
+        highlight.FillColor = new Color3(0.5,0.5,0.5)
+        highlight.Enabled = false
+
         return this;
     }
 
     attackOfOpportunity(who: GamePlayer) {
-        if (this.engagedWith === who && this.is_ready && this.inPlay) { who.takeDamage(this.enemy_damage, this.enemy_horror) }
+        if (this.engagedWith === who && this.is_ready && this.inPlay) { this.attack(who) }
+    }
+
+    attack(plr: GamePlayer) {
+        plr.takeDamage(this.enemy_damage, this.enemy_horror)
+        PlaySound_Pub("Enemy_Attack")
     }
 
     takeDamage(damage: number) {
         this.health -= damage
-        if(this.health <= 0) {
+        if (this.health <= 0) {
             this.model.Destroy()
-            if(this.engagedWith !== undefined) { this.engagedWith.threat_area.remove(this.engagedWith.threat_area.indexOf(this)); this.engagedWith === undefined }
+            if (this.engagedWith !== undefined) { this.engagedWith.threat_area.remove(this.engagedWith.threat_area.indexOf(this)); this.engagedWith === undefined }
             GameContext.encounter_discard.addCard(this)
             this.inPlay = false
+            PlaySound_Pub("Enemy_Defeated")
+        } else {
+            PlaySound_Pub("Enemy_Hurt")
         }
     }
 

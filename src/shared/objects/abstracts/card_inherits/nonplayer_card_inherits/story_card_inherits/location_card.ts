@@ -38,6 +38,13 @@ export abstract class LocationCard extends StoryCard {
         this.model.PivotTo(new CFrame(new Vector3(this.xCoord * 16, 0, this.yCoord * 16)))
         GameContext.game_map[this.xCoord][this.yCoord] = this;
         this.model.Name = this.id
+
+        const highlight: Highlight = new Instance("Highlight")
+        highlight.Parent = this.model
+        highlight.FillTransparency = 0.6
+        highlight.FillColor = new Color3(0.5,0.5,0.5)
+        highlight.Enabled = false
+
         return this;
     }
 

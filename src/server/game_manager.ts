@@ -169,7 +169,7 @@ function enemyPhase() {
 
     for(const card of CardRegistry.getAll()) {
         if(card instanceof EnemyCard && card.engagedWith !== undefined && card.is_ready) {
-            card.engagedWith.takeDamage(card.enemy_damage, card.enemy_horror)
+            card.attack(card.engagedWith)
             card.is_ready = false
         }
     }

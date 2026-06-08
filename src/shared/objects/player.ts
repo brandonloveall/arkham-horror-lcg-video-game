@@ -142,7 +142,7 @@ export class GamePlayer {
     }
 
     public move(location: LocationCard) {
-        if (this.location === location) { print(this.location.name); print(location.name); return }
+        if (this.location === location) { return }
         performReactions(WhatHappened.PlayerMoved, this, location)
         this.location = location
         this.actions -= 1
