@@ -24,7 +24,7 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
 
     reactions = {
         [WhatHappened.PlayerMoved]: {
-            reaction: (plr: GamePlayer, to: LocationCard) => { this.attackOfOpportunity(plr); this.location === to },
+            reaction: (plr: GamePlayer, to: LocationCard) => { this.attackOfOpportunity(plr); this.move },
             optional: false
         },
         [WhatHappened.PlayerDrewCard]: {
@@ -71,5 +71,10 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
             GameContext.encounter_discard.addCard(this)
             this.inPlay = false
         }
+    }
+
+    move(location: LocationCard) {
+        this.model.PivotTo(new CFrame(location.model.WorldPivot.Position.add(new Vector3(0, 16, 0))))
+        this.location = location
     }
 }

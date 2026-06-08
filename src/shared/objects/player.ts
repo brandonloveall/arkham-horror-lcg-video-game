@@ -84,7 +84,7 @@ export class GamePlayer {
     }
 
     public draw(free?: boolean) {
-        performReactions(WhatHappened.PlayerDrewCard, this)
+        if(!free) { performReactions(WhatHappened.PlayerDrewCard, this); this.actions -= 1  }
         if (this.deck.isEmpty()) {
             this.deck, this.discardDeck = this.discardDeck, this.deck
             this.horror++
@@ -95,6 +95,7 @@ export class GamePlayer {
         if(card instanceof EnemyCard) {
             card.place(this.location)
             card.engagedWith = this
+            card.inPlay = true
             this.threat_area.push(card)
         }
         if(card instanceof TreacheryCard) {
@@ -103,7 +104,6 @@ export class GamePlayer {
         if(card instanceof AssetCard || card instanceof EventCard) {
             this.hand.push(this.deck.pull() as PlayerCard)
         }
-        if(!free) { this.actions -= 1 }
         this.update()
     }
 
@@ -142,11 +142,12 @@ export class GamePlayer {
     }
 
     public move(location: LocationCard) {
-        if (this.location === location) { return }
+        if (this.location === location) { print(this.location.name); print(location.name); return }
         performReactions(WhatHappened.PlayerMoved, this, location)
         this.location = location
         this.actions -= 1
         this.update()
+        this.investigator.move(location)
     }
 
     public investigate(location: LocationCard) {

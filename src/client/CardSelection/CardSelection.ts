@@ -16,7 +16,7 @@ let chosen_cards: Card[] = []
 let _amount: number | undefined;
 
 ConfirmButton.MouseButton1Click.Connect(() => {
-    if (_amount !== undefined && chosen_cards.size() === _amount) { return; }
+    if (_amount !== undefined && chosen_cards.size() !== _amount) { return; }
     Client_ChooseCards_Pub(chosen_cards)
     CardPickingUI.Enabled = false
 })
@@ -36,7 +36,7 @@ Client_ChooseCards_Sub((what: Card[], message: string, amount?: number) => {
         GuiCard.Parent = Box;
         GuiCard.Text = card.name;
         GuiCard.MouseButton1Click.Connect(() => {
-            if (amount !== undefined && chosen_cards.size() === amount && !chosen_cards.includes(card)) { return; }
+            if (_amount !== undefined && chosen_cards.size() === _amount && !chosen_cards.includes(card)) { return; }
 
             if (!chosen_cards.includes(card)) { chosen_cards.push(card); GuiCard.BackgroundColor3 = new Color3(0, 255, 0) }
             else { chosen_cards.remove(chosen_cards.indexOf(card)); GuiCard.BackgroundColor3 = new Color3(255, 0, 0) }

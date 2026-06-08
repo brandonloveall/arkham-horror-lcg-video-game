@@ -22,7 +22,7 @@ export function skillCheck(initiator: GamePlayer, against: number, using: string
         Server_ChooseCards_Pub(
             plr,
             plr.hand.filter((e) => { return (e)[using as keyof PlayerCard] !== 0 }),
-            `Skill Check by ${initiator.owner.Name}: ${initiator.investigator[using as keyof Investigator]} against ${against} using ${using}.`,
+            `Skill Check by ${initiator.owner.Name}: ${initiator.investigator.getSkill(using)} against ${against} using ${using}.`,
             plr === initiator ? undefined : 1)
     }
 

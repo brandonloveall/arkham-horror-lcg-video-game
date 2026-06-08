@@ -145,7 +145,10 @@ export function start() {
         player.deck.shuffle();
     }
 
-    GameContext.players[0].location = (new _01111).place([5, 5]);
+    for(const plr of GameContext.players) {
+        plr.location = (new _01111()).place([5, 5])
+        plr.investigator.place(GameContext.game_map[5][5]!)
+    }
     task.spawn(investigatorPhase)
 }
 
@@ -176,7 +179,7 @@ function enemyPhase() {
 function upkeepPhase() {
     for(const plr of GameContext.players) {
         plr.resources++;
-        plr.draw();
+        plr.draw(true);
         if(plr.hand.size() > 8) { discard(plr, plr.hand, plr.hand.size() - 8) }
     }
 

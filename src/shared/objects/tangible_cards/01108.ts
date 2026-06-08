@@ -51,10 +51,11 @@ You jump through the doorway, landing on your feet on soft dirt. The door to the
         new _01112().place([5, 5])
         new _01113().place([5, 4])
         new _01114().place([5, 6])
-        new _01115().place([4, 4])
+        new _01115().place([6, 5])
 
         for(const plr of GameContext.players) {
-            plr.location = GameContext.game_map[5][4]!
+            plr.location = GameContext.game_map[5][5]!
+            plr.investigator.move(GameContext.game_map[5][5]!)
         }
 
         GameContext.act = new _01109();
