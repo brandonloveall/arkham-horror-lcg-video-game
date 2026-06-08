@@ -50,6 +50,7 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
     }
 
     place(location: LocationCard) {
+        this.inPlay = true
         this.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model;
         this.model.Parent = Workspace
         this.model.AddTag("ENEMY")
@@ -59,7 +60,7 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
     }
 
     attackOfOpportunity(who: GamePlayer) {
-        if (this.engagedWith === who && this.is_ready) { who.takeDamage(this.enemy_damage, this.enemy_horror) }
+        if (this.engagedWith === who && this.is_ready && this.inPlay) { who.takeDamage(this.enemy_damage, this.enemy_horror) }
     }
 
     takeDamage(damage: number) {
@@ -68,6 +69,7 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
             this.model.Destroy()
             if(this.engagedWith !== undefined) { this.engagedWith.threat_area.remove(this.engagedWith.threat_area.indexOf(this)); this.engagedWith === undefined }
             GameContext.encounter_discard.addCard(this)
+            this.inPlay = false
         }
     }
 }

@@ -21,7 +21,6 @@ export function payClues() {
 
     do { task.wait() } while (finished !== GameContext.players.size())
 
-
     for (const plr of GameContext.players) {
         total += payments[plr.owner.Name];
     }

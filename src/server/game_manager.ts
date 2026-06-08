@@ -145,7 +145,7 @@ export function start() {
         player.deck.shuffle();
     }
 
-    GameContext.players[0].location = (new _01111).place([5,5]);
+    GameContext.players[0].location = (new _01111).place([5, 5]);
     task.spawn(investigatorPhase)
 }
 
@@ -203,6 +203,7 @@ function mythosPhase() {
         }
 
         let drawnCard = GameContext.encounter_deck!.pull()!
+        drawnCard.inPlay = true;
         // TODO: if enemy has specific spawn location, spawn it there
         if(drawnCard instanceof EnemyCard) {
             drawnCard.place(plr.location)

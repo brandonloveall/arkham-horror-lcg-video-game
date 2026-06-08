@@ -35,6 +35,7 @@ export abstract class Card {
     belongs_to: string = "" // for signature cards. if its blank, its fair game
 
     reactions?: reactions
+    inPlay = false
 
     constructor() {
         CardRegistry.insert(this)

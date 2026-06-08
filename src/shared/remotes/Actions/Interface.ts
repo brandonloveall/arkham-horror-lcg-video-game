@@ -19,6 +19,7 @@ const Investigate = actions.WaitForChild("Investigate") as RemoteEvent
 const Move = actions.WaitForChild("Move") as RemoteEvent
 const EndTurn = actions.WaitForChild("EndTurn") as RemoteEvent
 const ActivateAbility = actions.WaitForChild("ActivateAbility") as RemoteEvent
+const AdvanceAct = actions.WaitForChild("AdvanceAct") as RemoteEvent
 
 function getPlrObj(plr: Player) {
     return GameContext.players.find((e) => {
@@ -68,6 +69,10 @@ export function ActivateAbility_Pub(card_id: string) {
     ActivateAbility.FireServer(card_id)
 }
 
+export function AdvanceAct_Pub() {
+    AdvanceAct.FireServer()
+}
+
 ///////////////////////////////
 
 export default (() => {
@@ -107,6 +112,10 @@ export default (() => {
 
         ActivateAbility.OnServerEvent.Connect((plr: Player, card_id: unknown) => {
             getPlrObj(plr).activateAbility(() => (CardRegistry.get(card_id as string) as AssetCard).ability())
+        })
+
+        AdvanceAct.OnServerEvent.Connect((plr: Player) => {
+            getPlrObj(plr).attemptAdvance()
         })
     }
 })()

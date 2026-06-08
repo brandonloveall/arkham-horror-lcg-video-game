@@ -2,6 +2,12 @@
 import { GameContext } from "shared/game_context";
 import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
 import { _01109 } from "./01109";
+import { CardRegistry } from "shared/card_registry";
+import { _01112 } from "./01112";
+import { _01113 } from "./01113";
+import { _01114 } from "./01114";
+import { _01115 } from "./01115";
+import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 
 export class _01108 extends ActCard {
     clues = 2;
@@ -34,6 +40,23 @@ You jump through the doorway, landing on your feet on soft dirt. The door to the
     subname = "";
 
     advance() {
+        for(const enemy of CardRegistry.getAll()) {
+            if(enemy instanceof EnemyCard && enemy.location === GameContext.game_map[5][5]) {
+                enemy.takeDamage(999)
+            }
+        }
+
+        GameContext.game_map[5][5]!.remove()
+
+        new _01112().place([5, 5])
+        new _01113().place([5, 4])
+        new _01114().place([5, 6])
+        new _01115().place([4, 4])
+
+        for(const plr of GameContext.players) {
+            plr.location = GameContext.game_map[5][4]!
+        }
+
         GameContext.act = new _01109();
     }
 }

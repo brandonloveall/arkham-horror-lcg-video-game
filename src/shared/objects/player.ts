@@ -153,8 +153,7 @@ export class GamePlayer {
         performReactions(WhatHappened.PlayerInvestigated, this, location)
         const [passed] = skillCheck(this, location.shroud, "skill_intellect")
         if (passed) {
-            location.clues -= 1
-            this.clues += 1
+            location.discoverClue(this, 1)
         }
         this.actions -= 1
         this.update()

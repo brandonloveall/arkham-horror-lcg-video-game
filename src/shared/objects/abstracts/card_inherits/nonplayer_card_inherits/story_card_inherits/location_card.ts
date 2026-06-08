@@ -3,11 +3,14 @@ import { StoryCard } from "../story_card";
 import { GameContext } from "shared/game_context";
 import { Card } from "shared/objects/abstracts/card";
 import { GamePlayer } from "shared/objects/player";
+import { CardRegistry } from "shared/card_registry";
 
 export abstract class LocationCard extends StoryCard {
     abstract shroud: number
     abstract clues: number
     model!: Model;
+    xCoord = 0
+    yCoord = 0
 
     protected static readonly Symbol = {
         RedSquare: 1,
@@ -27,12 +30,20 @@ export abstract class LocationCard extends StoryCard {
     }
 
     place(coords: [number, number]) {
+        this.xCoord = coords[0]
+        this.yCoord = coords[1]
         this.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model;
         this.model.Parent = Workspace
         this.model.AddTag("LOCATION")
-        this.model.PivotTo(new CFrame(new Vector3(coords[0] * 16, 0, coords[1] * 16)))
-        GameContext.game_map[coords[0]][coords[1]] = this;
+        this.model.PivotTo(new CFrame(new Vector3(this.xCoord * 16, 0, this.yCoord * 16)))
+        GameContext.game_map[this.xCoord][this.yCoord] = this;
         this.model.Name = this.id
         return this;
+    }
+
+    remove() {
+        CardRegistry.remove(this)
+        if(GameContext.game_map[this.xCoord][this.yCoord] === this) { GameContext.game_map[this.xCoord][this.yCoord] = undefined }
+        this.model.Destroy()
     }
 }
