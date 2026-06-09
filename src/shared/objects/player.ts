@@ -143,7 +143,7 @@ export class GamePlayer {
     }
 
     public move(location: LocationCard) {
-        if (this.location === location) { return }
+        if (this.location === location || !this.location.connects_to.includes(location.symbol)) { return }
         performReactions(WhatHappened.PlayerMoved, this, location)
         this.location = location
         this.actions -= 1
