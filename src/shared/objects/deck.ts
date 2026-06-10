@@ -25,4 +25,8 @@ export class Deck {
     public isEmpty() {
         return this.cards.size() === 0
     }
+
+    public size() {
+        return this.cards.size()
+    }
 }

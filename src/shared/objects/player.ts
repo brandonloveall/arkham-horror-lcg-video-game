@@ -11,7 +11,6 @@ import { skillCheck } from "../skillcheck"
 import { UpdatePlayerUI_Pub } from "shared/remotes/UpdatePlayerUI/Interface"
 import { GameContext, WhatHappened } from "shared/game_context"
 import { payClues } from "shared/payClues"
-import { CardRegistry } from "shared/card_registry"
 import { performReactions } from "shared/performReactions"
 import { TreacheryCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card"
 import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface"
@@ -95,6 +94,7 @@ export class GamePlayer {
         const card = this.deck.pull()
         if(card instanceof EnemyCard) {
             card.place(this.location)
+            card.is_ready = true
             card.engagedWith = this
             card.inPlay = true
             this.threat_area.push(card)
@@ -103,7 +103,7 @@ export class GamePlayer {
             card.resolve(this)
         }
         if(card instanceof AssetCard || card instanceof EventCard) {
-            this.hand.push(this.deck.pull() as PlayerCard)
+            this.hand.push(card)
         }
         this.update()
     }
