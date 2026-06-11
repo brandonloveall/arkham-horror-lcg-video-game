@@ -23,6 +23,8 @@ export class ChaosBag {
 }
 
 export enum IconToken {
+    _,
+    __,
     skull,
     cultist,
     tablet,

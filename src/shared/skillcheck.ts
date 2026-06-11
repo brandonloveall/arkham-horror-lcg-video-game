@@ -3,6 +3,7 @@ import { GamePlayer } from "./objects/player";
 import { Server_ChooseCards_Sub, Server_ChooseCards_Pub } from "./remotes/ChooseCards/Interface";
 import { GameContext } from "./game_context";
 import { Investigator } from "./objects/abstracts/card_inherits/player_card_inherits/investigator";
+import { SkillCheckAnimation_Pub } from "./remotes/SkillCheckAnimation/Interface";
 
 let cards: Record<string, PlayerCard[]> = {}
 let submittedCount = 0;
@@ -38,7 +39,18 @@ export function skillCheck(initiator: GamePlayer, against: number, using: string
         }
     }
 
-    const final = total + (initiator.investigator[using as keyof Investigator] as number)
+    let pulledToken = GameContext.chaos_bag!.pull()
+    let finalToken = 0
+
+    if(pulledToken > 1) { // if its an IconToken
+        finalToken = GameContext.scenario_card!.resolve(pulledToken)
+    }
+
+    const final = total + (initiator.investigator[using as keyof Investigator] as number) + finalToken
+
+    SkillCheckAnimation_Pub(initiator.investigator[using as keyof Investigator] as number, total, pulledToken, finalToken)
+    
+    wait(5)
     GameContext.lock = false
     return [final >= against, final - against]
 }

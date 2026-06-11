@@ -1,6 +1,7 @@
 import { ActCard } from "./objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
 import { AgendaCard } from "./objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/agenda_card";
 import { LocationCard } from "./objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
+import { ScenarioCard } from "./objects/abstracts/card_inherits/scenario_card";
 import { ChaosBag } from "./objects/chaos_bag";
 import { Deck } from "./objects/deck";
 import { GamePlayer } from "./objects/player";
@@ -43,7 +44,8 @@ export const GameContext: {
     game_map: (LocationCard | undefined)[][],
     player_with_turn: GamePlayer | undefined,
     encounter_discard: Deck,
-    lock: boolean
+    lock: boolean,
+    scenario_card: ScenarioCard | undefined,
 } = {
     current_game_state: GameState.NONE,
     players: [],
@@ -65,5 +67,6 @@ export const GameContext: {
     ],
     player_with_turn: undefined,
     encounter_discard: new Deck([]),
-    lock: false
+    lock: false,
+    scenario_card: undefined
 }
