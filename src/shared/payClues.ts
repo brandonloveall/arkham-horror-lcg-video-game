@@ -9,7 +9,8 @@ Server_PayClues_Sub((plr, paid) => {
     finished++
 })
 
-export function payClues() { 
+export function payClues() {
+    GameContext.lock = true
     const required = GameContext.act!.clues;
 
     payments = {};
@@ -31,5 +32,6 @@ export function payClues() {
         plr.clues -= payments[plr.owner.Name];
     }
 
+    GameContext.lock = false
     return true;
 }

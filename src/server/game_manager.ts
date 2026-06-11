@@ -53,7 +53,7 @@ import { discard } from "shared/discard";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 
 let endedTurn = false;
-(ReplicatedStorage.WaitForChild("TS").WaitForChild("remotes").WaitForChild("Actions").WaitForChild("EndTurn") as RemoteEvent).OnServerEvent.Connect(() => endedTurn = true)
+(ReplicatedStorage.WaitForChild("TS").WaitForChild("remotes").WaitForChild("Actions").WaitForChild("EndTurn") as RemoteEvent).OnServerEvent.Connect(() => { if(GameContext.lock){ return; } endedTurn = true })
 
 
 // TODO: take in an input to start a campaign. currently this is hard coded to be Night of the Zealot

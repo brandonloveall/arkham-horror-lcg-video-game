@@ -1,3 +1,4 @@
+import { GameContext } from "./game_context";
 import { Card } from "./objects/abstracts/card";
 import { PlayerCard } from "./objects/abstracts/card_inherits/player_card";
 import { GamePlayer } from "./objects/player";
@@ -9,6 +10,7 @@ let finished = false;
 Server_ChooseCards_Sub((plr: Player, cards: Card[]) => { finished = true; chosenCards = cards as PlayerCard[] })
 
 export function discard(who: GamePlayer, whats: PlayerCard[], amount: number) {
+    GameContext.lock = true
     finished = false
     Server_ChooseCards_Pub(who, whats, `Discard ${amount} cards`, amount)
     do { task.wait() } while (!finished)
@@ -16,4 +18,5 @@ export function discard(who: GamePlayer, whats: PlayerCard[], amount: number) {
     for(const card of chosenCards) {
         who.discard(card.id)
     }
+    GameContext.lock = false
 }
