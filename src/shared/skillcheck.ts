@@ -1,9 +1,10 @@
 import { PlayerCard } from "./objects/abstracts/card_inherits/player_card";
 import { GamePlayer } from "./objects/player";
 import { Server_ChooseCards_Sub, Server_ChooseCards_Pub } from "./remotes/ChooseCards/Interface";
-import { GameContext } from "./game_context";
+import { GameContext, WhatHappened } from "./game_context";
 import { Investigator } from "./objects/abstracts/card_inherits/player_card_inherits/investigator";
 import { SkillCheckAnimation_Pub } from "./remotes/SkillCheckAnimation/Interface";
+import { performReactions } from "./performReactions";
 
 let cards: Record<string, PlayerCard[]> = {}
 let submittedCount = 0;
@@ -17,6 +18,7 @@ Server_ChooseCards_Sub((plr, selectedCards) => {
 
 export function skillCheck(initiator: GamePlayer, against: number, using: string): [passed: boolean, byHowMuch: number] {
     GameContext.lock = true
+    performReactions(WhatHappened.SKILL_CHECK_START, initiator)
     cards = {}
     submittedCount = 0;
 
@@ -50,7 +52,7 @@ export function skillCheck(initiator: GamePlayer, against: number, using: string
 
     SkillCheckAnimation_Pub(initiator.investigator[using as keyof Investigator] as number, total, pulledToken, finalToken)
     
-    wait(5)
     GameContext.lock = false
+    performReactions(WhatHappened.SKILL_CHECK_ENDED, initiator)
     return [final >= against, final - against]
 }

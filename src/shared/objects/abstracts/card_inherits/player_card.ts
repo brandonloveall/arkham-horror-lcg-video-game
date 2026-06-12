@@ -1,8 +1,7 @@
-import { GameState, PlayerWithTurn, WhatHappened } from "shared/game_context";
+import { PlayerWithTurn, WhatHappened } from "shared/game_context";
 import { Card } from "../card";
 
 interface PlayRestriction {
-    when?: GameState,
     whatHappened?: WhatHappened
     playerWithTurn?: PlayerWithTurn
 }

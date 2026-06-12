@@ -1,5 +1,5 @@
 
-import { GameState, WhatHappened } from "shared/game_context";
+import { WhatHappened } from "shared/game_context";
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 
 export class _01523 extends EventCard {

@@ -118,7 +118,7 @@ export class GamePlayer {
     }
 
     public play(card: CostingCard) {
-        if(GameContext.lock) { return; }
+        if(GameContext.lock || !card.playable) { return; }
         performReactions(WhatHappened.PLAYER_PLAYED_CARD, this)
         if (this.resources >= card.cost && this.actions > 0) {
             if (card instanceof EventCard) {
@@ -138,11 +138,9 @@ export class GamePlayer {
         this.update()
     }
 
-    public activateAbility(ability: () => void) {
-        if(GameContext.lock) { return; }
+    public activateAbility(ability: (plr: GamePlayer) => boolean) {
         performReactions(WhatHappened.PLAYER_ACTIVATED_ABILITY, this)
-        ability()
-        this.actions -= 1
+        if(!ability(this)) { this.actions -= 1 }
         this.update()
     }
 

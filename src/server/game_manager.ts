@@ -45,12 +45,13 @@ import { _01166 } from "../shared/objects/tangible_cards/01166";
 import { _01167 } from "../shared/objects/tangible_cards/01167";
 import { _01168 } from "../shared/objects/tangible_cards/01168";
 import { _01111 } from "../shared/objects/tangible_cards/01111";
-import { GameContext, GameState } from "shared/game_context";
+import { GameContext, WhatHappened } from "shared/game_context";
 import { CardRegistry } from "shared/card_registry";
 import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { discard } from "shared/discard";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
+import { performReactions } from "shared/performReactions";
 
 let endedTurn = false;
 (ReplicatedStorage.WaitForChild("TS").WaitForChild("remotes").WaitForChild("Actions").WaitForChild("EndTurn") as RemoteEvent).OnServerEvent.Connect(() => { if(GameContext.lock){ return; } endedTurn = true })
@@ -154,12 +155,13 @@ export function start() {
 
 function investigatorPhase() {
     for(const plr of GameContext.players) {
+        performReactions(WhatHappened.PLAYER_TURN_BEGAN, plr)
         endedTurn = false
-        GameContext.current_game_state = GameState.PlayerTurn_InProgress
         GameContext.player_with_turn = plr;
         plr.actions = 3
         plr.update()
         do { task.wait() } while(!endedTurn)
+        performReactions(WhatHappened.PLAYER_TURN_BEGAN, plr)
     }
     task.spawn(enemyPhase)
 }

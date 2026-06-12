@@ -6,6 +6,7 @@ import { LocationCard } from "shared/objects/abstracts/card_inherits/nonplayer_c
 import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card";
 import { RunService } from "@rbxts/services";
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
+import { GamePlayer } from "shared/objects/player";
 
 const actions = ReplicatedStorage.WaitForChild("TS").WaitForChild("remotes").WaitForChild("Actions")
 
@@ -111,7 +112,9 @@ export default (() => {
         })
 
         ActivateAbility.OnServerEvent.Connect((plr: Player, card_id: unknown) => {
-            getPlrObj(plr).activateAbility(() => (CardRegistry.get(card_id as string) as AssetCard).ability(getPlrObj(plr)))
+            const card = CardRegistry.get(card_id as string) as AssetCard
+            if(!card.usable) { return; }
+            getPlrObj(plr).activateAbility((gameplr: GamePlayer) => card.ability(gameplr))
         })
 
         AdvanceAct.OnServerEvent.Connect((plr: Player) => {

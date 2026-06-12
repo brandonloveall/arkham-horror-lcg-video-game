@@ -78,5 +78,6 @@ export class _01517 extends AssetCard {
                 }
             },
         ])
+        return true;
     }
 }

@@ -6,5 +6,5 @@ export abstract class AssetCard extends CostingCard {
 
     usable = false;
 
-    ability(plr: GamePlayer) {  }
+    ability(plr: GamePlayer): boolean { return false; }
 }

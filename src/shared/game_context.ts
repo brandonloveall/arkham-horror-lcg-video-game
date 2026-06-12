@@ -6,14 +6,6 @@ import { ChaosBag } from "./objects/chaos_bag";
 import { Deck } from "./objects/deck";
 import { GamePlayer } from "./objects/player";
 
-export enum GameState {
-    NONE,
-
-    PlayerTurn_Began,
-    PlayerTurn_InProgress,
-    Playerturn_Ended,
-}
-
 export enum WhatHappened {
     ENEMY_ATTACKED,
     ENEMY_DEFEATED,
@@ -40,7 +32,6 @@ export enum PlayerWithTurn {
 }
 
 export const GameContext: {
-    current_game_state: GameState,
     players: GamePlayer[],
     agenda?: AgendaCard,
     act?: ActCard,
@@ -52,7 +43,6 @@ export const GameContext: {
     lock: boolean,
     scenario_card: ScenarioCard | undefined,
 } = {
-    current_game_state: GameState.NONE,
     players: [],
     agenda: undefined,
     act: undefined,
