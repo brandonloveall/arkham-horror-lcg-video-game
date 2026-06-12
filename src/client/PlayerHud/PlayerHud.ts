@@ -92,8 +92,8 @@ UpdatePlayerUI_Sub((payload) => {
         currentHandCards.push(NewCard)
     }
 
-    for(const asset of currentAssets) {
-        asset.Destroy()
+    for(const asset of Assets.GetChildren()) {
+        if(asset.IsA("TextButton")) { asset.Destroy() }
     }
 
     for(const asset of payload.assets) {
