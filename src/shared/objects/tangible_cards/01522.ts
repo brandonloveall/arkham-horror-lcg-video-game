@@ -31,7 +31,7 @@ Discover 1 clue at your location.`;
     subname = "";
     
     restriction = {
-        whatHappened: WhatHappened.EnemyDefeated,
+        whatHappened: WhatHappened.ENEMY_DEFEATED,
         playerWithTurn: PlayerWithTurn.Self
     };
 

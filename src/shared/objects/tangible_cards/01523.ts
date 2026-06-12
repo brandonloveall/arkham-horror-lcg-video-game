@@ -30,7 +30,7 @@ Cancel that attack.`;
     flavor = ``;
     subname = "";
     restriction = {
-        whatHappened: WhatHappened.EnemyAttacked
+        whatHappened: WhatHappened.ENEMY_ATTACKED
     }
 
     onPlay(): void {

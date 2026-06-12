@@ -111,7 +111,7 @@ export default (() => {
         })
 
         ActivateAbility.OnServerEvent.Connect((plr: Player, card_id: unknown) => {
-            getPlrObj(plr).activateAbility(() => (CardRegistry.get(card_id as string) as AssetCard).ability())
+            getPlrObj(plr).activateAbility(() => (CardRegistry.get(card_id as string) as AssetCard).ability(getPlrObj(plr)))
         })
 
         AdvanceAct.OnServerEvent.Connect((plr: Player) => {

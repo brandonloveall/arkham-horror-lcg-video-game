@@ -15,18 +15,23 @@ export enum GameState {
 }
 
 export enum WhatHappened {
-    EnemyAttacked,
-    EnemyDefeated,
+    ENEMY_ATTACKED,
+    ENEMY_DEFEATED,
 
-    PlayerMoved,
-    PlayerDrewCard,
-    PlayerTookResource,
-    PlayerActivatedAbility,
-    PlayerInvestigated,
-    PlayerPlayedCard,
-    PlayerFought,
-    PlayerEngagedEnemy,
-    PlayerEvadedEnemy,
+    PLAYER_MOVED,
+    PLAYER_DREW_CARD,
+    PLAYER_TOOK_RESOURCE,
+    PLAYER_ACTIVATED_ABILITY,
+    PLAYER_INVESTIGATED,
+    PLAYER_PLAYED_CARD,
+    PLAYER_FOUGHT,
+    PLAYER_ENGAGED_ENEMY,
+    PLAYER_EVADED_ENEMY,
+
+    SKILL_CHECK_START,
+    SKILL_CHECK_ENDED,
+    PLAYER_TURN_BEGAN,
+    PLAYER_TURN_ENDED
 }
 
 export enum PlayerWithTurn {

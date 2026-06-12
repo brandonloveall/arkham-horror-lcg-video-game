@@ -33,7 +33,7 @@ export class _01110 extends ActCard {
     subname = "";
 
     reactions = {
-        [WhatHappened.EnemyDefeated]: {
+        [WhatHappened.ENEMY_DEFEATED]: {
             reaction: () => this.advance(),
             optional: false
         }

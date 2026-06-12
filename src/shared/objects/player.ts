@@ -85,7 +85,7 @@ export class GamePlayer {
 
     public draw(free?: boolean) {
         if(GameContext.lock) { return; }
-        if(!free) { performReactions(WhatHappened.PlayerDrewCard, this); this.actions -= 1  }
+        if(!free) { performReactions(WhatHappened.PLAYER_DREW_CARD, this); this.actions -= 1  }
         if (this.deck.isEmpty()) {
             this.deck, this.discardDeck = this.discardDeck, this.deck
             this.horror++
@@ -111,7 +111,7 @@ export class GamePlayer {
 
     public takeResource() {
         if(GameContext.lock) { return; }
-        performReactions(WhatHappened.PlayerTookResource, this)
+        performReactions(WhatHappened.PLAYER_TOOK_RESOURCE, this)
         this.resources += 1
         this.actions -= 1
         this.update()
@@ -119,7 +119,7 @@ export class GamePlayer {
 
     public play(card: CostingCard) {
         if(GameContext.lock) { return; }
-        performReactions(WhatHappened.PlayerPlayedCard, this)
+        performReactions(WhatHappened.PLAYER_PLAYED_CARD, this)
         if (this.resources >= card.cost && this.actions > 0) {
             if (card instanceof EventCard) {
                 card.onPlay(this);
@@ -140,7 +140,7 @@ export class GamePlayer {
 
     public activateAbility(ability: () => void) {
         if(GameContext.lock) { return; }
-        performReactions(WhatHappened.PlayerActivatedAbility, this)
+        performReactions(WhatHappened.PLAYER_ACTIVATED_ABILITY, this)
         ability()
         this.actions -= 1
         this.update()
@@ -149,7 +149,7 @@ export class GamePlayer {
     public move(location: LocationCard) {
         if(GameContext.lock) { return; }
         if (this.location === location || !this.location.connects_to.includes(location.symbol)) { return }
-        performReactions(WhatHappened.PlayerMoved, this, location)
+        performReactions(WhatHappened.PLAYER_MOVED, this, location)
         this.location = location
         this.actions -= 1
         this.update()
@@ -161,7 +161,7 @@ export class GamePlayer {
         if(GameContext.lock) { return; }
         if(this.actions === 0) { return; }
         PlaySound_Pub("Investigate")
-        performReactions(WhatHappened.PlayerInvestigated, this, location)
+        performReactions(WhatHappened.PLAYER_INVESTIGATED, this, location)
         const [passed] = skillCheck(this, location.shroud, "skill_intellect")
         if (passed) {
             location.discoverClue(this, 1)
@@ -172,7 +172,7 @@ export class GamePlayer {
 
     public fight(enemy: EnemyCard) {
         if(GameContext.lock) { return; }
-        performReactions(WhatHappened.PlayerFought, this, enemy)
+        performReactions(WhatHappened.PLAYER_FOUGHT, this, enemy)
         const [passed] = skillCheck(this, enemy.enemy_fight, "skill_combat")
         if (passed) {
             enemy.takeDamage(1)
@@ -184,7 +184,7 @@ export class GamePlayer {
     public engage(enemy: EnemyCard) {
         if(GameContext.lock) { return; }
         if(enemy.engagedWith === this) { return; }
-        performReactions(WhatHappened.PlayerEngagedEnemy, this, enemy)
+        performReactions(WhatHappened.PLAYER_ENGAGED_ENEMY, this, enemy)
         enemy.engagedWith = this
         this.threat_area.push(enemy)
         this.actions -= 1
@@ -193,7 +193,7 @@ export class GamePlayer {
 
     public evade(enemy: EnemyCard) {
         if(GameContext.lock) { return; }
-        performReactions(WhatHappened.PlayerEvadedEnemy, this, enemy)
+        performReactions(WhatHappened.PLAYER_EVADED_ENEMY, this, enemy)
         const [passed] = skillCheck(this, enemy.enemy_evade, "skill_agility")
         if (passed) {
             enemy.engagedWith = undefined

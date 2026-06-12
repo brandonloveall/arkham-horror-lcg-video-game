@@ -1,5 +1,10 @@
 
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
+import { GamePlayer } from "../player";
+import { GameContext, WhatHappened } from "shared/game_context";
+import { basicPlay } from "shared/basicPlay";
+import { reactions } from "shared/objects/abstracts/card";
+import { giveChoice } from "shared/giveChoice";
 
 export class _01517 extends AssetCard {
     slot = "";
@@ -30,4 +35,48 @@ export class _01517 extends AssetCard {
     flavor = ``;
     subname = "";
 
+    added_willpower = 0;
+    added_combat = 0;
+
+    reactions: reactions = {
+        ...basicPlay(this),
+        [WhatHappened.SKILL_CHECK_START]: {
+            reaction: (initiator: GamePlayer) => {
+                this.usable = true;
+                this.added_willpower = 0;
+                this.added_combat = 0;
+            },
+            optional: false
+        },
+        [WhatHappened.SKILL_CHECK_ENDED]: {
+            reaction: (initiator: GamePlayer) => {
+                this.usable = false;
+                initiator.investigator.skill_willpower -= this.added_willpower;
+                initiator.investigator.skill_combat -= this.added_combat
+            },
+            optional: false
+        },
+    }
+
+    ability(plr: GamePlayer) {
+        giveChoice(plr, [
+            {
+                text: "-1 resource, +1 willpower",
+                outcome: () => {
+                    if(plr.resources < 1) { return; }
+                    plr.resources--;
+                    plr.investigator.skill_willpower++;
+                    this.added_willpower++;
+                }
+            },
+            {
+                text: "-1 resource, +1 combat",
+                outcome: () => {
+                    if(plr.resources < 1) { return; }
+                    plr.resources--;
+                    plr.investigator.skill_combat++
+                }
+            },
+        ])
+    }
 }

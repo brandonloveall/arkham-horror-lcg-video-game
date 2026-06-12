@@ -16,6 +16,8 @@ export abstract class PlayerCard extends Card {
     abstract xp: number
     abstract deck_limit: number
 
+    playable = false;
+
     restriction?: PlayRestriction // if its absent, its the standard "play while your turn is in progress"
 
     public getSkill(skill: string) {

@@ -25,7 +25,7 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
     type_name = "Enemy"
 
     reactions = {
-        [WhatHappened.PlayerMoved]: {
+        [WhatHappened.PLAYER_MOVED]: {
             reaction: (plr: GamePlayer, ...args: unknown[]) => {
                 this.attackOfOpportunity(plr)
                 if(this.inPlay) {
@@ -34,23 +34,23 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
             },
             optional: false
         },
-        [WhatHappened.PlayerDrewCard]: {
+        [WhatHappened.PLAYER_DREW_CARD]: {
             reaction: (plr: GamePlayer) => { this.attackOfOpportunity(plr) },
             optional: false
         },
-        [WhatHappened.PlayerTookResource]: {
+        [WhatHappened.PLAYER_TOOK_RESOURCE]: {
             reaction: (plr: GamePlayer) => { this.attackOfOpportunity(plr) },
             optional: false
         },
-        [WhatHappened.PlayerActivatedAbility]: {
+        [WhatHappened.PLAYER_ACTIVATED_ABILITY]: {
             reaction: (plr: GamePlayer) => { this.attackOfOpportunity(plr) },
             optional: false
         },
-        [WhatHappened.PlayerInvestigated]: {
+        [WhatHappened.PLAYER_INVESTIGATED]: {
             reaction: (plr: GamePlayer, location: LocationCard) => { this.attackOfOpportunity(plr) },
             optional: false
         },
-        [WhatHappened.PlayerPlayedCard]: {
+        [WhatHappened.PLAYER_PLAYED_CARD]: {
             reaction: (plr: GamePlayer) => { this.attackOfOpportunity(plr) },
             optional: false
         }
