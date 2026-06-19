@@ -16,8 +16,11 @@ Server_ChooseCards_Sub((plr, selectedCards) => {
 
 // TODO: limit to 1 for allies and those only in the same location
 
-export function skillCheck(initiator: GamePlayer, against: number, using: string): [passed: boolean, byHowMuch: number] {
+export function skillCheck(skillCheckObj: {initiator: GamePlayer, against: number, using: string, bonus?: number}): [passed: boolean, byHowMuch: number] {
     GameContext.lock = true
+
+    const { initiator, against, using, bonus = 0 } = skillCheckObj
+
     performReactions(WhatHappened.SKILL_CHECK_START, initiator)
     cards = {}
     submittedCount = 0;
@@ -48,7 +51,7 @@ export function skillCheck(initiator: GamePlayer, against: number, using: string
         finalToken = GameContext.scenario_card!.resolve(pulledToken)
     }
 
-    const final = total + (initiator.investigator[using as keyof Investigator] as number) + finalToken
+    const final = total + (initiator.investigator[using as keyof Investigator] as number) + finalToken + bonus
 
     SkillCheckAnimation_Pub(initiator.investigator[using as keyof Investigator] as number, total, pulledToken, finalToken)
     

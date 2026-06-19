@@ -1,5 +1,8 @@
 
+import { standardPlayRules } from "shared/standardPlayRules";
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
+import { reaction, reactions } from "../abstracts/card";
+import { GamePlayer } from "../player";
 
 export class _01506 extends AssetCard {
     slot = "Hand";
@@ -31,4 +34,24 @@ Uses (4 ammo).
     flavor = ``;
     subname = "";
     belongs_to = "01501"
+
+    uses = 4;
+
+    reactions: reactions = {
+        ...standardPlayRules(this)
+    }
+
+    ability(plr: GamePlayer) {
+        if(this.uses === 0) { return true; }
+
+        this.uses--;
+        plr.fight({
+            enemy: plr.selectedObject ,
+            skill: "skill_combat",
+            bonusStat: plr.location.clues >= 1 ? 3 : 1,
+            bonusDmg: 1
+        })
+
+        return false;
+    }
 }

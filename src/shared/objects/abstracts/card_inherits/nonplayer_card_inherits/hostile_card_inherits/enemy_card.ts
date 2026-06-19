@@ -42,10 +42,6 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
             reaction: (plr: GamePlayer) => { this.attackOfOpportunity(plr) },
             optional: false
         },
-        [WhatHappened.PLAYER_ACTIVATED_ABILITY]: {
-            reaction: (plr: GamePlayer) => { this.attackOfOpportunity(plr) },
-            optional: false
-        },
         [WhatHappened.PLAYER_INVESTIGATED]: {
             reaction: (plr: GamePlayer, location: LocationCard) => { this.attackOfOpportunity(plr) },
             optional: false

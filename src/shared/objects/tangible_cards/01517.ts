@@ -1,8 +1,8 @@
 
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { GamePlayer } from "../player";
-import { GameContext, WhatHappened } from "shared/game_context";
-import { basicPlay } from "shared/basicPlay";
+import { WhatHappened } from "shared/game_context";
+import { standardPlayRules } from "shared/standardPlayRules";
 import { reactions } from "shared/objects/abstracts/card";
 import { giveChoice } from "shared/giveChoice";
 
@@ -39,7 +39,7 @@ export class _01517 extends AssetCard {
     added_combat = 0;
 
     reactions: reactions = {
-        ...basicPlay(this),
+        ...standardPlayRules(this),
         [WhatHappened.SKILL_CHECK_START]: {
             reaction: (initiator: GamePlayer) => {
                 this.usable = true;

@@ -91,7 +91,10 @@ export default (() => {
         })
 
         Fight.OnServerEvent.Connect((plr: Player, enemy_id: unknown) => {
-            getPlrObj(plr).fight(CardRegistry.get(enemy_id as string) as EnemyCard)
+            getPlrObj(plr).fight({
+                enemy: CardRegistry.get(enemy_id as string) as EnemyCard,
+                skill: "skill_combat"
+            })
         })
 
         GainResource.OnServerEvent.Connect((plr: Player) => {

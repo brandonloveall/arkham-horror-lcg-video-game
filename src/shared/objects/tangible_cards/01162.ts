@@ -25,7 +25,7 @@ export class _01162 extends TreacheryCard {
     subname = "";
 
     resolve(plrWhoDrew: GamePlayer): void {
-        const [passed, byHowMuch] = skillCheck(plrWhoDrew, 3, "skill_agility")
+        const [passed, byHowMuch] = skillCheck({ initiator: plrWhoDrew, against: 3, using: "skill_agility" })
         if (!passed) {
             plrWhoDrew.takeDamage(math.abs(byHowMuch), 0)
         }
