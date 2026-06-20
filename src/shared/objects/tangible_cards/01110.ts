@@ -1,7 +1,9 @@
 
 import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
 import { _01116 } from "./01116";
-import { WhatHappened } from "shared/game_context";
+import { GameContext, WhatHappened } from "shared/game_context";
+import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { giveChoice } from "shared/giveChoice";
 
 export class _01110 extends ActCard {
     clues = 0;
@@ -34,13 +36,23 @@ export class _01110 extends ActCard {
 
     reactions = {
         [WhatHappened.ENEMY_DEFEATED]: {
-            reaction: () => this.advance(),
+            reaction: (enemy: EnemyCard) => { if (enemy.code === "01116") { this.advance() } },
             optional: false
         }
     }
 
     advance() {
-        // TODO: implement the "givechoice" function for this
-        print("nice job")
+        giveChoice(GameContext.players[0],
+            [
+                {
+                    text: "It was never much of a home. Burn it down!",
+                    outcome: () => { GameContext.resolutions[1]!() }
+                },
+                {
+                    text: "This hell-pit is my home! No way we are burning it!",
+                    outcome: () => { GameContext.resolutions[2]!() }
+                }
+            ]
+        )
     }
 }

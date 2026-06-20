@@ -42,6 +42,7 @@ export const GameContext: {
     encounter_discard: Deck,
     lock: boolean,
     scenario_card: ScenarioCard | undefined,
+    resolutions: ((() => void) | undefined)[] // resolutions are 1-indexed to match the naming scheme (R1, R2, etc), so use the setResolutions func
 } = {
     players: [],
     agenda: undefined,
@@ -63,5 +64,10 @@ export const GameContext: {
     player_with_turn: undefined,
     encounter_discard: new Deck([]),
     lock: false,
-    scenario_card: undefined
+    scenario_card: undefined,
+    resolutions: [undefined]
+}
+
+export function setResolutions(resolutions: (() => void)[]) {
+    GameContext.resolutions = [undefined, ...resolutions]
 }
