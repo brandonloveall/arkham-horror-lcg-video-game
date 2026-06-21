@@ -52,6 +52,7 @@ import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_
 import { discard } from "shared/discard";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 import { performReactions } from "shared/performReactions";
+import { _01104 } from "shared/objects/tangible_cards/01104";
 
 let endedTurn = false;
 (ReplicatedStorage.WaitForChild("TS").WaitForChild("remotes").WaitForChild("Actions").WaitForChild("EndTurn") as RemoteEvent).OnServerEvent.Connect(() => { if(GameContext.lock){ return; } endedTurn = true })
@@ -128,6 +129,7 @@ export function start() {
         new _01168(),
         new _01168()
     ]);
+    GameContext.scenario_card = new _01104();
 
     GameContext.encounter_deck.shuffle();
 
