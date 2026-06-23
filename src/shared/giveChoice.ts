@@ -10,9 +10,12 @@ export type Choice = {
 let finished = false;
 let _choiceIndex = 0
 
+
 Server_GiveChoice_Sub((plr, choiceIndex) => { finished = true; choiceIndex = _choiceIndex })
 
+
 export function giveChoice(who: GamePlayer, choices: Choice[]) {
+    if(choices.size() === 0) { return; }
     GameContext.lock = true
     finished = false
     Server_GiveChoice_Pub(who, choices)

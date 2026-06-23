@@ -1,5 +1,5 @@
 import { start } from "./game_manager";
-import "../shared/remotes/Actions/Interface"
+import "./route_actions"
 
 wait(3)
 

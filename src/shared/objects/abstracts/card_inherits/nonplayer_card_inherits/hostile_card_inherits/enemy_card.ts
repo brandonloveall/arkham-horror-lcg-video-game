@@ -59,6 +59,7 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
         this.model.AddTag("ENEMY")
         this.model.PivotTo(new CFrame(location.model.WorldPivot.Position.add(new Vector3(0, 16, 0))))
         this.model.Name = this.id
+        this.location = location
 
         const highlight: Highlight = new Instance("Highlight")
         highlight.Parent = this.model

@@ -3,7 +3,6 @@ import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_
 import { ActivateAbility_Pub, AdvanceAct_Pub, Draw_Pub, EndTurn_Pub, Engage_Pub, Evade_Pub, Fight_Pub, GainResource_Pub, Investigate_Pub, Move_Pub } from "shared/remotes/Actions/Interface"
 import { PlayCard_Pub } from "shared/remotes/Actions/Interface"
 import { UpdatePlayerUI_Sub } from "shared/remotes/UpdatePlayerUI/Interface"
-import { getTarget } from "client/ClickSelection/ClickSelection"
 
 const PlayerGui = Players.LocalPlayer.WaitForChild("PlayerGui")
 
@@ -35,7 +34,6 @@ const CardTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("CardTem
 const AssetTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("AssetTemplate") as TextButton
 
 let currentHandCards: Frame[] = []
-let currentAssets: TextButton[] = []
 
 UpdatePlayerUI_Sub((payload) => {
     HealthHud.Text = `${payload.health - payload.damage}`
@@ -107,36 +105,23 @@ UpdatePlayerUI_Sub((payload) => {
 (DeckSize.Parent!.WaitForChild("ImageButton") as ImageButton).MouseButton1Click.Connect(Draw_Pub)
 
 Fight.MouseButton1Click.Connect(() => {
-    const target = getTarget()
-    if (target && target.HasTag("ENEMY")) {
-        Fight_Pub(target.Name)
-    }
+    Fight_Pub()
 })
 
 GainResource.MouseButton1Click.Connect(GainResource_Pub)
 
 Evade.MouseButton1Click.Connect(() => {
-    const target = getTarget()
-    if (target && target.HasTag("ENEMY")) {
-        Evade_Pub(target.Name)
-    }
+    Evade_Pub()
 })
 
 Engage.MouseButton1Click.Connect(() => {
-    const target = getTarget()
-    if (target && target.HasTag("ENEMY")) {
-        Engage_Pub(target.Name)
-    }
-
+    Engage_Pub()
 })
 
 Investigate.MouseButton1Click.Connect(Investigate_Pub)
 
 Move.MouseButton1Click.Connect(() => {
-    const target = getTarget()
-    if(target && target.HasTag("LOCATION")) {
-        Move_Pub(target.Name)
-    }
+    Move_Pub()
 })
 
 AdvanceAct.MouseButton1Click.Connect(AdvanceAct_Pub)

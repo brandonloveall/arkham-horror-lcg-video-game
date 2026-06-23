@@ -1,12 +1,4 @@
 import { ReplicatedStorage } from "@rbxts/services";
-import { CardRegistry } from "shared/card_registry";
-import { GameContext } from "shared/game_context";
-import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
-import { LocationCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
-import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card";
-import { RunService } from "@rbxts/services";
-import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
-import { GamePlayer } from "shared/objects/player";
 
 const actions = ReplicatedStorage.WaitForChild("TS").WaitForChild("remotes").WaitForChild("Actions")
 
@@ -22,28 +14,22 @@ const EndTurn = actions.WaitForChild("EndTurn") as RemoteEvent
 const ActivateAbility = actions.WaitForChild("ActivateAbility") as RemoteEvent
 const AdvanceAct = actions.WaitForChild("AdvanceAct") as RemoteEvent
 
-function getPlrObj(plr: Player) {
-    return GameContext.players.find((e) => {
-        return e.owner === plr
-    })!
-}
-
 ///////////////////////////////
 
 export function Draw_Pub() {
     Draw.FireServer()
 }
 
-export function Engage_Pub(enemy_id: string) {
-    Engage.FireServer(enemy_id)
+export function Engage_Pub() {
+    Engage.FireServer()
 }
 
-export function Evade_Pub(enemy_id: string) {
-    Evade.FireServer(enemy_id)
+export function Evade_Pub() {
+    Evade.FireServer()
 }
 
-export function Fight_Pub(enemy_id: string) {
-    Fight.FireServer(enemy_id)
+export function Fight_Pub() {
+    Fight.FireServer()
 }
 
 export function GainResource_Pub() {
@@ -54,8 +40,8 @@ export function Investigate_Pub() {
     Investigate.FireServer()
 }
 
-export function Move_Pub(location_id: string) {
-    Move.FireServer(location_id)
+export function Move_Pub() {
+    Move.FireServer()
 }
 
 export function PlayCard_Pub(card_id: string) {
@@ -76,52 +62,48 @@ export function AdvanceAct_Pub() {
 
 ///////////////////////////////
 
-export default (() => {
-    if (RunService.IsServer()) {
-        Draw.OnServerEvent.Connect((plr: Player) => {
-            getPlrObj(plr).draw()
-        })
+export function Draw_Sub(callback: (plr: Player) => void) {
+    Draw.OnServerEvent.Connect(callback)
+}
 
-        Engage.OnServerEvent.Connect((plr: Player, enemy_id: unknown) => {
-            getPlrObj(plr).engage(CardRegistry.get(enemy_id as string) as EnemyCard)
-        })
+export function Engage_Sub(callback: (plr: Player) => void) {
+    Engage.OnServerEvent.Connect(callback)
+}
 
-        Evade.OnServerEvent.Connect((plr: Player, enemy_id: unknown) => {
-            getPlrObj(plr).evade(CardRegistry.get(enemy_id as string) as EnemyCard)
-        })
+export function Evade_Sub(callback: (plr: Player) => void) {
+    Evade.OnServerEvent.Connect(callback)
+}
 
-        Fight.OnServerEvent.Connect((plr: Player, enemy_id: unknown) => {
-            getPlrObj(plr).fight({
-                enemy: CardRegistry.get(enemy_id as string) as EnemyCard,
-                skill: "skill_combat"
-            })
-        })
+export function Fight_Sub(callback: (plr: Player) => void) {
+    Fight.OnServerEvent.Connect(callback)
+}
 
-        GainResource.OnServerEvent.Connect((plr: Player) => {
-            getPlrObj(plr).takeResource()
-        })
+export function GainResource_Sub(callback: (plr: Player) => void) {
+    GainResource.OnServerEvent.Connect(callback)
+}
 
-        Investigate.OnServerEvent.Connect((plr: Player) => {
-            const plrObj = getPlrObj(plr)
-            plrObj.investigate(plrObj.location)
-        })
+export function Investigate_Sub(callback: (plr: Player) => void) {
+    Investigate.OnServerEvent.Connect(callback)
+}
 
-        Move.OnServerEvent.Connect((plr: Player, location_id: unknown) => {
-            getPlrObj(plr).move(CardRegistry.get(location_id as string) as LocationCard)
-        })
+export function Move_Sub(callback: (plr: Player) => void) {
+    Move.OnServerEvent.Connect(callback)
+}
 
-        PlayCard.OnServerEvent.Connect((plr: Player, card_id: unknown) => {
-            getPlrObj(plr).play(CardRegistry.get(card_id as string) as CostingCard)
-        })
+export function PlayCard_Sub(callback: (plr: Player, card_id: unknown) => void) {
+    PlayCard.OnServerEvent.Connect(callback)
+}
 
-        ActivateAbility.OnServerEvent.Connect((plr: Player, card_id: unknown) => {
-            const card = CardRegistry.get(card_id as string) as AssetCard
-            if(!card.usable) { return; }
-            getPlrObj(plr).activateAbility((gameplr: GamePlayer) => card.ability(gameplr))
-        })
+export function EndTurn_Sub(callback: (plr: Player) => void) {
+    EndTurn.OnServerEvent.Connect(callback)
+}
 
-        AdvanceAct.OnServerEvent.Connect((plr: Player) => {
-            getPlrObj(plr).attemptAdvance()
-        })
-    }
-})()
+export function ActivateAbility_Sub(callback: (plr: Player, card_id: unknown) => void) {
+    ActivateAbility.OnServerEvent.Connect(callback)
+}
+
+export function AdvanceAct_Sub(callback: (plr: Player) => void) {
+    AdvanceAct.OnServerEvent.Connect(callback)
+}
+
+///////////////////////////////
