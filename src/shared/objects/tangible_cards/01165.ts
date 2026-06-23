@@ -1,6 +1,9 @@
 
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { GamePlayer } from "../player";
+import { reactions } from "../abstracts/card";
+import { GameContext, WhatHappened } from "shared/game_context";
+import { getOwner } from "shared/findOwner";
 
 export class _01165 extends TreacheryCard {
     encounter_name = "Striking Fear";
@@ -25,6 +28,12 @@ You cannot play assets or events.
     flavor = ``;
     subname = "";
 
+    reactions: reactions = {
+        [WhatHappened.ROUND_ENDED]: {
+            reaction: () => { GameContext.encounter_discard.addCard(this); getOwner(this)!.threat_area.remove(getOwner(this)!.threat_area.indexOf(this)) },
+            optional: false
+        }
+    }
 
     resolve(plrWhoDrew: GamePlayer): void {
         plrWhoDrew.threat_area.push(this)

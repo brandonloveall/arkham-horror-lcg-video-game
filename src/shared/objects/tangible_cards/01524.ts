@@ -1,5 +1,11 @@
 
+import { giveChoice } from "shared/giveChoice";
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
+import { GamePlayer } from "../player";
+import { CardRegistry } from "shared/card_registry";
+import { LocationCard } from "../abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
+import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { Investigator } from "../abstracts/card_inherits/player_card_inherits/investigator";
 
 export class _01524 extends EventCard {
     cost = 5;
@@ -29,7 +35,15 @@ export class _01524 extends EventCard {
     subname = "";
 
 
-    onPlay(): void {
-        print("not yet implemented")
+    onPlay(plr: GamePlayer): void {
+        const locations = CardRegistry.getAll().filter((e) => e instanceof LocationCard).filter((e) => e === plr.location || plr.location.connects_to.includes(e.symbol))
+        giveChoice(plr, locations.map((location) => {
+            return {
+                text: `Throw dynamite at ${location.name}`,
+                outcome: () => {
+                    CardRegistry.getAll().filter((enemy) => enemy instanceof EnemyCard && enemy.location === location).forEach((enemy) => (enemy as EnemyCard).takeDamage(3))
+                }
+            }
+        }))
     }
 }

@@ -1,5 +1,8 @@
 
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
+import { GamePlayer } from "../player";
+import { CardRegistry } from "shared/card_registry";
+import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 
 export class _01520 extends AssetCard {
     slot = "Hand";
@@ -29,4 +32,25 @@ export class _01520 extends AssetCard {
     flavor = `Cuts through vines, underbrush, and tentacles equally well.`;
     subname = "";
 
+    ability(plr: GamePlayer) {
+        let engagedWith = 0;
+        let isEngagedWithTarget = false;
+
+        for(const card of CardRegistry.getAll()) {
+            if(card instanceof EnemyCard) {
+                if(card.engagedWith === plr) {
+                    engagedWith++;
+                    if(card === plr.selectedObject) { isEngagedWithTarget = true; }
+                }
+            }
+        }
+
+        plr.fight({
+            enemy: plr.selectedObject as EnemyCard,
+            skill: "skill_combat",
+            bonusStat: 1,
+            bonusDmg: engagedWith === 1 && isEngagedWithTarget ? 1 : 0
+        })
+        return false;
+    }
 }

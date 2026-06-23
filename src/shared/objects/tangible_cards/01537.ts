@@ -2,6 +2,8 @@
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 import { GamePlayer } from "../player";
 import { PlayerWithTurn } from "shared/game_context";
+import { reactions } from "../abstracts/card";
+import { standardEventCard } from "shared/standardPlayRules";
 
 export class _01537 extends EventCard {
     cost = 2;
@@ -32,6 +34,10 @@ Discover 1 clue at your location.`;
     subname = "";
     restriction = {
         playerWithTurn: PlayerWithTurn.Self
+    }
+
+    reactions: reactions = {
+        ...standardEventCard(this)
     }
 
     onPlay(whoPlayed: GamePlayer): void {

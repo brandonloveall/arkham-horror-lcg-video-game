@@ -1,6 +1,10 @@
 
-import { PlayerWithTurn, WhatHappened } from "shared/game_context";
+import { WhatHappened } from "shared/game_context";
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
+import { GamePlayer } from "../player";
+import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { reactions } from "../abstracts/card";
+import { getOwner } from "shared/findOwner";
 
 export class _01522 extends EventCard {
     cost = 1;
@@ -29,13 +33,8 @@ Discover 1 clue at your location.`;
     traits = "Insight.";
     flavor = `Just as I suspected!`;
     subname = "";
-    
-    restriction = {
-        whatHappened: WhatHappened.ENEMY_DEFEATED,
-        playerWithTurn: PlayerWithTurn.Self
-    };
 
-    onPlay(): void {
-        print("not yet implemented")
+    onPlay(plr: GamePlayer): void {
+        plr.location.discoverClue(plr, 1)
     }
 }

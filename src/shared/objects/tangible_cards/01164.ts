@@ -1,6 +1,9 @@
 
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { GamePlayer } from "../player";
+import { GameContext, WhatHappened } from "shared/game_context";
+import { skillCheck } from "shared/skillcheck";
+import { reactions } from "../abstracts/card";
 
 export class _01164 extends TreacheryCard {
     encounter_name = "Striking Fear";
@@ -25,6 +28,23 @@ The first time you perform one of the following actions (move, fight, or evade) 
     flavor = ``;
     subname = "";
 
+    reactions: reactions = {
+        [WhatHappened.PLAYER_TURN_ENDED]: {
+            reaction: (plr: GamePlayer) => {
+                if(!plr.threat_area.includes(this)) { return; }
+                const [passed, byHowMuch] = skillCheck({
+                    initiator: plr, 
+                    against: 3,
+                    using: "skill_willpower"
+                })
+                if(passed) {
+                    GameContext.encounter_discard.addCard(this)
+                    plr.threat_area.remove(plr.threat_area.indexOf(this))
+                }
+            },
+            optional: false
+        },
+    }
 
     resolve(plrWhoDrew: GamePlayer): void {
         plrWhoDrew.threat_area.push(this)

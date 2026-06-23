@@ -1,8 +1,9 @@
 
-import { standardPlayRules } from "shared/standardPlayRules";
+import { standardAssetCard } from "shared/standardPlayRules";
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
-import { reaction, reactions } from "../abstracts/card";
+import { reactions } from "../abstracts/card";
 import { GamePlayer } from "../player";
+import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 
 export class _01506 extends AssetCard {
     slot = "Hand";
@@ -38,7 +39,7 @@ Uses (4 ammo).
     uses = 4;
 
     reactions: reactions = {
-        ...standardPlayRules(this)
+        ...standardAssetCard(this)
     }
 
     ability(plr: GamePlayer) {
@@ -46,7 +47,7 @@ Uses (4 ammo).
 
         this.uses--;
         plr.fight({
-            enemy: plr.selectedObject ,
+            enemy: plr.selectedObject as EnemyCard,
             skill: "skill_combat",
             bonusStat: plr.location.clues >= 1 ? 3 : 1,
             bonusDmg: 1

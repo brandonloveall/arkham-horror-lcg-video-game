@@ -1,6 +1,8 @@
 
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 import { GamePlayer } from "../player";
+import { reactions } from "../abstracts/card";
+import { standardEventCard } from "shared/standardPlayRules";
 
 export class _01588 extends EventCard {
     cost = 0;
@@ -28,6 +30,10 @@ export class _01588 extends EventCard {
     traits = "Supply.";
     flavor = `You can never be too prepared.`;
     subname = "";
+
+    reactions: reactions = {
+        ...standardEventCard(this)
+    }
 
 
     onPlay(whoPlayed: GamePlayer) {

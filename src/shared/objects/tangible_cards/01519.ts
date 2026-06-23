@@ -1,5 +1,10 @@
 
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
+import { standardAssetCard } from "shared/standardPlayRules";
+import { reactions } from "../abstracts/card";
+import { GamePlayer } from "../player";
+import { giveChoice } from "shared/giveChoice";
+import { GameContext } from "shared/game_context";
 
 export class _01519 extends AssetCard {
     slot = "";
@@ -30,4 +35,30 @@ export class _01519 extends AssetCard {
     flavor = ``;
     subname = "";
 
+    reactions: reactions = {
+        ...standardAssetCard(this)
+    }
+    
+    uses = 3;
+
+    ability(plr: GamePlayer) {
+        this.uses--;
+        giveChoice(plr, GameContext.players.filter(otherPlr => otherPlr.location === plr.location).map(otherPlr => {
+            return {
+                text: `Heal ${otherPlr.owner.Name}`,
+                outcome: () => giveChoice(otherPlr, [
+                    {
+                        text: "Heal 1 horror",
+                        outcome: () => { otherPlr.heal(0, 1) }
+                    },
+                    {
+                        text: "Heal 1 damage",
+                        outcome: () => { otherPlr.heal(1, 0) }
+                    },
+                ])
+            }
+        }))
+        if(this.uses === 0) { plr.discard(this.id) }
+        return false;
+    }
 }

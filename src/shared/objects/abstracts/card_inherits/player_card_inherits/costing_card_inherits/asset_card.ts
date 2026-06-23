@@ -6,5 +6,8 @@ export abstract class AssetCard extends CostingCard {
 
     usable = false;
 
+    /**
+     * @returns true if free, false if cost action
+     */
     ability(plr: GamePlayer): boolean { return false; }
 }

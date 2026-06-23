@@ -73,7 +73,7 @@ export class GamePlayer {
 
     threat_area: Card[] = []
 
-    selectedObject: any
+    selectedObject!: LocationCard | EnemyCard
 
     constructor(owner: Player, deck: Deck, investigator: Investigator) {
         this.owner = owner
@@ -228,7 +228,7 @@ export class GamePlayer {
             if (card.id === id) { this.discardDeck.addCard(this.hand.remove(this.hand.indexOf(card))!) }
         }
         for (const card of this.getAllEquipment()) {
-            if (card.id === id) { this.equipped[card.slot].remove(card) }
+            if (card.id === id) { this.equipped[card.slot].remove(card); this.discardDeck.addCard(card) }
         }
         this.update()
     }
@@ -238,5 +238,10 @@ export class GamePlayer {
         this.horror += horror
         if (this.damage >= this.investigator.health || this.horror >= this.investigator.sanity) { print("oops u died") /** temporary **/ }
         this.update()
+    }
+
+    public heal(health: number, sanity: number) {
+        this.damage = this.damage - health < 0 ? 0 : this.damage - health;
+        this.horror = this.horror - sanity < 0 ? 0 : this.horror - sanity;
     }
 }

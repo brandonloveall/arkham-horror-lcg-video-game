@@ -1,5 +1,7 @@
 
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
+import { GamePlayer } from "../player";
+import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 
 export class _01516 extends AssetCard {
     slot = "Hand";
@@ -29,4 +31,18 @@ export class _01516 extends AssetCard {
     traits = "Item. Weapon. Firearm.";
     flavor = ``;
     subname = "";
+
+    uses = 4;
+
+    ability(plr: GamePlayer) {
+        if(this.uses === 0) { return true; }
+        this.uses--;
+        plr.fight({
+            enemy: plr.selectedObject as EnemyCard,
+            skill: "skill_combat",
+            bonusStat: 1,
+            bonusDmg: 1
+        })
+        return false;
+    }
 }

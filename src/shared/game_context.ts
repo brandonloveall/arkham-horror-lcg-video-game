@@ -23,7 +23,10 @@ export enum WhatHappened {
     SKILL_CHECK_START,
     SKILL_CHECK_ENDED,
     PLAYER_TURN_BEGAN,
-    PLAYER_TURN_ENDED
+    PLAYER_TURN_ENDED,
+
+    ROUND_ENDED,
+    ASSET_DAMAGED
 }
 
 export enum PlayerWithTurn {
