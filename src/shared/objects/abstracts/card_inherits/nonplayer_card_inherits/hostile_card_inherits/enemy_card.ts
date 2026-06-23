@@ -61,12 +61,6 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
         this.model.Name = this.id
         this.location = location
 
-        const highlight: Highlight = new Instance("Highlight")
-        highlight.Parent = this.model
-        highlight.FillTransparency = 0.6
-        highlight.FillColor = new Color3(0.5,0.5,0.5)
-        highlight.Enabled = false
-
         return this;
     }
 

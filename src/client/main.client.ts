@@ -1,7 +1,6 @@
 import "./PlayerHud/PlayerHud"
 import "./CardSelection/CardSelection"
 import "./PayClues/PayClues"
-import "./ClickSelection/ClickSelection"
 import "./PlaySound/PlaySound"
 import "./SkillCheckAnimation/SkillCheckAnimation"
 import "./GiveChoice/GiveChoice"
