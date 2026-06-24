@@ -85,8 +85,9 @@ export class GamePlayer {
         return [...this.equipped["Hand"].get(), ...this.equipped["Arcane"].get(), ...this.equipped[""].get(), ...this.equipped["Body"].get(), ...this.equipped["Accessory"].get(), ...this.equipped["Ally"].get()]
     }
 
-    public draw(free?: boolean) {
-        if (!free) { performReactions(WhatHappened.PLAYER_DREW_CARD, this); this.actions -= 1 }
+    public draw() {
+        if(this.actions === 0) { return; }
+        performReactions(WhatHappened.PLAYER_DREW_CARD, this);
         if (this.deck.isEmpty()) {
             this.deck, this.discardDeck = this.discardDeck, this.deck
             this.horror++
@@ -107,47 +108,48 @@ export class GamePlayer {
         if (card instanceof AssetCard || card instanceof EventCard) {
             this.hand.push(card)
         }
+        this.actions--;
         this.update()
     }
 
     public takeResource() {
+        if(this.actions === 0) { return; }
         performReactions(WhatHappened.PLAYER_TOOK_RESOURCE, this)
         this.resources += 1
-        this.actions -= 1
+        this.actions--
         this.update()
     }
 
     public play(card: CostingCard) {
-        if (!card.playable) { return; }
-        performReactions(WhatHappened.PLAYER_PLAYED_CARD, this)
-        if (this.resources >= card.cost && this.actions > 0) {
-            if (card instanceof EventCard) {
-                card.onPlay(this);
-            }
-            if (card instanceof AssetCard) {
-                let slot = card.slot
-                // does it fit? if yes, insert. if not, fail and return
-                if (!this.equipped[card.slot].insert(card, slot === "Hand x2" || slot === "Arcane x2" ? 2 : slot !== "" ? 1 : 0)) { return; } // 2hand or 2arcane, then hand/arcane/body/accessory, then none
-            }
-
-            // if successful, pay cost and remove from hand
-            this.resources -= card.cost
-            this.actions -= 1
-            this.hand.remove(this.hand.indexOf(card));
+        if(this.actions === 0) { return; }
+        performReactions(WhatHappened.PLAYER_PLAYED_CARD, this, card)
+        if (this.resources < card.cost || this.actions === 0) { return; }
+        if (card instanceof EventCard) {
+            card.onPlay(this);
         }
+        if (card instanceof AssetCard) {
+            let slot = card.slot
+            // does it fit? if yes, insert. if not, fail and return
+            if (!this.equipped[card.slot].insert(card, slot === "Hand x2" || slot === "Arcane x2" ? 2 : slot !== "" ? 1 : 0)) { return; } // 2hand or 2arcane, then hand/arcane/body/accessory, then none
+        }
+
+        // if successful, pay cost and remove from hand
+        this.resources -= card.cost
+        this.actions--
+        this.hand.remove(this.hand.indexOf(card));
         this.update()
     }
 
     public activateAbility(ability: (plr: GamePlayer) => boolean) {
-        if (!ability(this)) { this.actions -= 1 }
+        if (!ability(this)) { this.actions-- }
         this.update()
     }
 
     public move(location: LocationCard) {
-        if (this.location === location || !this.location.connects_to.includes(location.symbol)) { return }
+        if (this.location === location || !this.location.connects_to.includes(location.symbol) || this.actions === 0) { return }
         performReactions(WhatHappened.PLAYER_MOVED, this, location)
         this.location = location
-        this.actions -= 1
+        this.actions--
         this.update()
         this.investigator.move(location)
         PlaySound_Pub("Move")
@@ -161,7 +163,7 @@ export class GamePlayer {
         if (passed) {
             location.discoverClue(this, 1)
         }
-        this.actions -= 1
+        this.actions--
         this.update()
     }
 
@@ -171,6 +173,7 @@ export class GamePlayer {
         bonusStat?: number,
         bonusDmg?: number
     }) {
+        if(this.actions === 0) { return; }
         const { enemy, skill, bonusStat = 0, bonusDmg = 0 } = fightObj
 
         performReactions(WhatHappened.PLAYER_FOUGHT, this, enemy)
@@ -178,27 +181,27 @@ export class GamePlayer {
         if (passed) {
             enemy.takeDamage(1 + bonusDmg)
         }
-        this.actions -= 1
+        this.actions--
         this.update()
     }
 
     public engage(enemy: EnemyCard) {
-        if (enemy.engagedWith === this) { return; }
+        if (enemy.engagedWith === this || this.actions === 0) { return; }
         performReactions(WhatHappened.PLAYER_ENGAGED_ENEMY, this, enemy)
         enemy.engagedWith = this
         this.threat_area.push(enemy)
-        this.actions -= 1
+        this.actions--
         this.update()
     }
 
     public evade(enemy: EnemyCard) {
+        if(this.actions === 0) { return; }
         performReactions(WhatHappened.PLAYER_EVADED_ENEMY, this, enemy)
         const [passed] = skillCheck({ initiator: this, against: enemy.enemy_evade, using: "skill_agility" })
         if (passed) {
             enemy.engagedWith = undefined
             this.threat_area.remove(this.threat_area.indexOf(enemy))
         }
-        this.actions -= 1
         this.update()
     }
 

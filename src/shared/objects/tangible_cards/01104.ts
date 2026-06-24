@@ -28,7 +28,7 @@ export class _01104 extends ScenarioCard {
         if(token === IconToken.skull) {
             let total = 0;
             for(const card of CardRegistry.getAll()) {
-                if(card instanceof EnemyCard && card.traits.match("Ghoul") && card.location === puller.location) { 
+                if(card instanceof EnemyCard && card.traits.find("Ghoul")[0] !== undefined && card.location === puller.location) { 
                     total--;
                 }
             }

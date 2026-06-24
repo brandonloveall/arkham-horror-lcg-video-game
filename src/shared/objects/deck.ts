@@ -29,4 +29,8 @@ export class Deck {
     public size() {
         return this.cards.size()
     }
+
+    public pullSpecific(card: Card) {
+        return this.cards.remove(this.cards.indexOf(card))
+    }
 }

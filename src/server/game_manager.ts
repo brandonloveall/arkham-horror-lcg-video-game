@@ -184,7 +184,8 @@ function enemyPhase() {
 function upkeepPhase() {
     for(const plr of GameContext.players) {
         plr.resources++;
-        plr.draw(true);
+        if(plr.deck.size() === 0) { plr.deck, plr.discardDeck = plr.discardDeck, plr.deck; plr.deck.shuffle() }
+        plr.hand.push(plr.deck.pull() as PlayerCard);
         if(plr.hand.size() > 8) { discard(plr, plr.hand, plr.hand.size() - 8) }
     }
 

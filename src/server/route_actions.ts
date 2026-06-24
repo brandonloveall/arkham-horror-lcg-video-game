@@ -86,7 +86,6 @@ PlayCard_Sub((plr: Player, card_id: unknown) => {
 
 ActivateAbility_Sub((plr, card_id) => {
     const card = CardRegistry.get(card_id as string) as AssetCard
-    if (!card.usable) { return; }
     getPlrObj(plr).activateAbility((gameplr: GamePlayer) => card.ability(gameplr))
 })
 

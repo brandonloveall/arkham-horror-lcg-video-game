@@ -2,7 +2,6 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { GamePlayer } from "../player";
 import { WhatHappened } from "shared/game_context";
-import { standardAssetCard } from "shared/standardPlayRules";
 import { reactions } from "shared/objects/abstracts/card";
 import { giveChoice } from "shared/giveChoice";
 

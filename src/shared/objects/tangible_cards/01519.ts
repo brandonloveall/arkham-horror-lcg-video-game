@@ -1,6 +1,5 @@
 
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
-import { standardAssetCard } from "shared/standardPlayRules";
 import { reactions } from "../abstracts/card";
 import { GamePlayer } from "../player";
 import { giveChoice } from "shared/giveChoice";
@@ -34,10 +33,6 @@ export class _01519 extends AssetCard {
     traits = "Talent. Science.";
     flavor = ``;
     subname = "";
-
-    reactions: reactions = {
-        ...standardAssetCard(this)
-    }
     
     uses = 3;
 

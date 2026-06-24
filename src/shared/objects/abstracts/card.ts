@@ -6,7 +6,8 @@ import { WhatHappened } from "shared/game_context";
 
 export interface reaction {
     reaction: (...params: any[]) => void,
-    optional: boolean
+    optional: boolean,
+    canUseReaction?: (...params: any[]) => boolean
 }
 
 export type reactions = Partial<Record<WhatHappened, reaction>>

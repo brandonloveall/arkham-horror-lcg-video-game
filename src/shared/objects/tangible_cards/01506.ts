@@ -1,5 +1,3 @@
-
-import { standardAssetCard } from "shared/standardPlayRules";
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { reactions } from "../abstracts/card";
 import { GamePlayer } from "../player";
@@ -37,10 +35,6 @@ Uses (4 ammo).
     belongs_to = "01501"
 
     uses = 4;
-
-    reactions: reactions = {
-        ...standardAssetCard(this)
-    }
 
     ability(plr: GamePlayer) {
         if(this.uses === 0) { return true; }
