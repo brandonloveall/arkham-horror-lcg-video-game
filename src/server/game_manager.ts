@@ -149,7 +149,7 @@ export function start() {
         player.deck.shuffle();
     }
 
-    for(const plr of GameContext.players) {
+    for (const plr of GameContext.players) {
         plr.location = (new _01111()).place([5, 5])
         plr.investigator.place(GameContext.game_map[5][5]!)
     }
@@ -157,13 +157,13 @@ export function start() {
 }
 
 function investigatorPhase() {
-    for(const plr of GameContext.players) {
+    for (const plr of GameContext.players) {
         performReactions(WhatHappened.PLAYER_TURN_BEGAN, plr)
         endedTurn = false
         GameContext.player_with_turn = plr;
         plr.actions = 3
         plr.update()
-        do { task.wait() } while(!endedTurn)
+        do { task.wait() } while (!endedTurn)
         performReactions(WhatHappened.PLAYER_TURN_BEGAN, plr)
     }
     task.spawn(enemyPhase)
@@ -172,8 +172,8 @@ function investigatorPhase() {
 function enemyPhase() {
     // TODO: if enemy is a hunter and not engaged, it moves towards closest investigator; randomly if multiple equidistant. if it has prey, only go after prey
 
-    for(const card of CardRegistry.getAll()) {
-        if(card instanceof EnemyCard && card.engagedWith !== undefined && card.is_ready) {
+    for (const card of CardRegistry.getAll()) {
+        if (card instanceof EnemyCard && card.engagedWith !== undefined && card.is_ready) {
             card.attack(card.engagedWith)
             card.is_ready = false
         }
@@ -182,20 +182,32 @@ function enemyPhase() {
 }
 
 function upkeepPhase() {
-    for(const plr of GameContext.players) {
+    for (const plr of GameContext.players) {
         plr.resources++;
-        if(plr.deck.size() === 0) { plr.deck, plr.discardDeck = plr.discardDeck, plr.deck; plr.deck.shuffle() }
-        plr.hand.push(plr.deck.pull() as PlayerCard);
-        if(plr.hand.size() > 8) { discard(plr, plr.hand, plr.hand.size() - 8) }
+        if (plr.deck.size() === 0) { plr.deck, plr.discardDeck = plr.discardDeck, plr.deck; plr.deck.shuffle() }
+        const card = plr.deck.pull()
+
+        if (card instanceof EnemyCard) {
+            card.place(plr.location)
+            card.engagedWith = plr
+            card.is_ready = true
+            plr.threat_area.push(card)
+        }
+        else if (card instanceof TreacheryCard) {
+            card.resolve(plr)
+        } else {
+            plr.hand.push(plr.deck.pull() as PlayerCard);
+            if (plr.hand.size() > 8) { discard(plr, plr.hand, plr.hand.size() - 8) }
+        }
     }
 
-    for(const card of CardRegistry.getAll()) {
-        if("is_ready" in card) {
+    for (const card of CardRegistry.getAll()) {
+        if ("is_ready" in card) {
             card.is_ready = true;
-            if(card instanceof EnemyCard && card.engagedWith === undefined) {
-                for(const plr of GameContext.players) {
+            if (card instanceof EnemyCard && card.engagedWith === undefined) {
+                for (const plr of GameContext.players) {
                     // TODO: if its a hunter with prey, only go to that one
-                    if(plr.location === card.location) { card.engagedWith = plr; plr.threat_area.push(card); break }
+                    if (plr.location === card.location) { card.engagedWith = plr; plr.threat_area.push(card); break }
                 }
             }
         }
@@ -205,8 +217,8 @@ function upkeepPhase() {
 }
 
 function mythosPhase() {
-    for(const plr of GameContext.players) {
-        if(GameContext.encounter_deck!.isEmpty()) {
+    for (const plr of GameContext.players) {
+        if (GameContext.encounter_deck!.isEmpty()) {
             GameContext.encounter_deck, GameContext.encounter_discard = GameContext.encounter_discard, GameContext.encounter_deck
             GameContext.encounter_deck!.shuffle()
         }
@@ -214,13 +226,13 @@ function mythosPhase() {
         let drawnCard = GameContext.encounter_deck!.pull()!
         drawnCard.inPlay = true;
         // TODO: if enemy has specific spawn location, spawn it there
-        if(drawnCard instanceof EnemyCard) {
+        if (drawnCard instanceof EnemyCard) {
             drawnCard.place(plr.location)
             drawnCard.engagedWith = plr
             drawnCard.is_ready = true
             plr.threat_area.push(drawnCard)
         }
-        else if(drawnCard instanceof TreacheryCard) {
+        else if (drawnCard instanceof TreacheryCard) {
             drawnCard.resolve(plr)
         }
     }

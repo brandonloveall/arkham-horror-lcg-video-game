@@ -10,9 +10,9 @@ const PlayerHud = PlayerGui.WaitForChild("PlayerHud")
 
 const HealthHud = PlayerHud.WaitForChild("Health").WaitForChild("TextLabel") as TextLabel
 const SanityHud = PlayerHud.WaitForChild("Sanity").WaitForChild("TextLabel") as TextLabel
-const ActionsHud = PlayerHud.WaitForChild("Actions") as TextLabel
+const ActionsHud = PlayerHud.WaitForChild("ActionDiamonds") as Frame
 const ResourcesHud = PlayerHud.WaitForChild("Resources").WaitForChild("TextLabel") as TextLabel
-const CluesHud = PlayerHud.WaitForChild("Clues") as TextLabel
+const CluesHud = PlayerHud.WaitForChild("Clues").WaitForChild("Clues") as TextLabel
 const Hand = PlayerHud.WaitForChild("Hand") as Frame
 const DeckSize = PlayerHud.WaitForChild("Deck").WaitForChild("amount") as TextLabel
 
@@ -38,10 +38,16 @@ let currentHandCards: Frame[] = []
 UpdatePlayerUI_Sub((payload) => {
     HealthHud.Text = `${payload.health - payload.damage}`
     SanityHud.Text = `${payload.sanity - payload.horror}`
-    ActionsHud.Text = `${payload.actions}`
     ResourcesHud.Text = `${payload.resources}`
     CluesHud.Text = `${payload.clues}`
     DeckSize.Text = `${payload.deckSize}`
+    
+    for(let i = 1; i <= payload.actions; i++) {
+        (ActionsHud.WaitForChild(i) as ImageLabel).ImageTransparency = 0
+    }
+    for(let i = payload.actions + 1; i <= ActionsHud.GetChildren().size() - 1; i++) {
+        (ActionsHud.WaitForChild(i) as ImageLabel).ImageTransparency = 0.7
+    }
 
     for (const card of currentHandCards) {
         card.Destroy()
