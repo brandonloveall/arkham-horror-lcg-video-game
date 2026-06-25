@@ -86,7 +86,7 @@ export class GamePlayer {
     }
 
     public draw() {
-        if(this.actions === 0) { return; }
+        if (this.actions === 0) { return; }
         performReactions(WhatHappened.PLAYER_DREW_CARD, this);
         if (this.deck.isEmpty()) {
             this.deck, this.discardDeck = this.discardDeck, this.deck
@@ -113,7 +113,7 @@ export class GamePlayer {
     }
 
     public takeResource() {
-        if(this.actions === 0) { return; }
+        if (this.actions === 0) { return; }
         performReactions(WhatHappened.PLAYER_TOOK_RESOURCE, this)
         this.resources += 1
         this.actions--
@@ -121,9 +121,15 @@ export class GamePlayer {
     }
 
     public play(card: CostingCard) {
-        if(this.actions === 0) { return; }
-        performReactions(WhatHappened.PLAYER_PLAYED_CARD, this, card)
-        if (this.resources < card.cost || this.actions === 0) { return; }
+        if (card.fast) {
+            if (!card.canPlayFast(this)) { return; }
+
+        } else {
+            if (this.actions === 0 || this.resources < card.cost) { return; }
+            performReactions(WhatHappened.PLAYER_PLAYED_CARD, this, card)
+            this.resources -= card.cost
+            this.actions--
+        }
         if (card instanceof EventCard) {
             card.onPlay(this);
         }
@@ -134,8 +140,6 @@ export class GamePlayer {
         }
 
         // if successful, pay cost and remove from hand
-        this.resources -= card.cost
-        this.actions--
         this.hand.remove(this.hand.indexOf(card));
         this.update()
     }
@@ -173,7 +177,7 @@ export class GamePlayer {
         bonusStat?: number,
         bonusDmg?: number
     }) {
-        if(this.actions === 0) { return; }
+        if (this.actions === 0) { return; }
         const { enemy, skill, bonusStat = 0, bonusDmg = 0 } = fightObj
 
         performReactions(WhatHappened.PLAYER_FOUGHT, this, enemy)
@@ -195,7 +199,7 @@ export class GamePlayer {
     }
 
     public evade(enemy: EnemyCard) {
-        if(this.actions === 0) { return; }
+        if (this.actions === 0) { return; }
         performReactions(WhatHappened.PLAYER_EVADED_ENEMY, this, enemy)
         const [passed] = skillCheck({ initiator: this, against: enemy.enemy_evade, using: "skill_agility" })
         if (passed) {

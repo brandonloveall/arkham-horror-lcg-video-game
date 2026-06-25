@@ -1,6 +1,7 @@
 
-import { PlayerWithTurn } from "shared/game_context";
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
+import { GamePlayer } from "../player";
+import { GameContext } from "shared/game_context";
 
 export class _01536 extends EventCard {
     cost = 1;
@@ -29,8 +30,10 @@ Until the end of the round, you may use your [intellect] in place of your [comba
     traits = "Insight.";
     flavor = ``;
     subname = "";
-    restriction = {
-        playerWithTurn: PlayerWithTurn.Self
+
+    fast = true;
+    canPlayFast(plr: GamePlayer) {
+        return plr === GameContext.player_with_turn
     }
 
     onPlay(): void {

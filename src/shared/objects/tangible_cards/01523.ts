@@ -1,6 +1,7 @@
 
-import { WhatHappened } from "shared/game_context";
+import { GameContext, WhatHappened } from "shared/game_context";
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
+import { GamePlayer } from "../player";
 
 export class _01523 extends EventCard {
     cost = 1;
@@ -29,8 +30,10 @@ Cancel that attack.`;
     traits = "Tactic.";
     flavor = ``;
     subname = "";
-    restriction = {
-        whatHappened: WhatHappened.ENEMY_ATTACKED
+
+    fast = true;
+    canPlayFast(plr: GamePlayer) {
+        return GameContext.most_recent_happening.who!.location === plr.location && GameContext.most_recent_happening.happening === WhatHappened.ENEMY_ATTACKED
     }
 
     onPlay(): void {

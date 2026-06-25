@@ -1,7 +1,7 @@
 
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 import { GamePlayer } from "../player";
-import { PlayerWithTurn } from "shared/game_context";
+import { GameContext, PlayerWithTurn } from "shared/game_context";
 import { reactions } from "../abstracts/card";
 
 export class _01537 extends EventCard {
@@ -31,10 +31,11 @@ Discover 1 clue at your location.`;
     traits = "Insight.";
     flavor = ``;
     subname = "";
-    restriction = {
-        playerWithTurn: PlayerWithTurn.Self
-    }
 
+    fast = true;
+    canPlayFast(plr: GamePlayer) {
+        return GameContext.player_with_turn === plr
+    }
 
     onPlay(whoPlayed: GamePlayer): void {
         whoPlayed.location.discoverClue(whoPlayed, 1)

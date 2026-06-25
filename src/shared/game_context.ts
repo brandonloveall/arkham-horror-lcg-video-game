@@ -7,6 +7,8 @@ import { Deck } from "./objects/deck";
 import { GamePlayer } from "./objects/player";
 
 export enum WhatHappened {
+    NONE,
+
     ENEMY_ATTACKED,
     ENEMY_DEFEATED,
 
@@ -45,7 +47,11 @@ export const GameContext: {
     encounter_discard: Deck,
     lock: boolean,
     scenario_card: ScenarioCard | undefined,
-    resolutions: ((() => void) | undefined)[] // resolutions are 1-indexed to match the naming scheme (R1, R2, etc), so use the setResolutions func
+    resolutions: ((() => void) | undefined)[], // resolutions are 1-indexed to match the naming scheme (R1, R2, etc), so use the setResolutions func,
+    most_recent_happening: {
+        happening: WhatHappened,
+        who: GamePlayer | undefined
+    }
 } = {
     players: [],
     agenda: undefined,
@@ -68,7 +74,11 @@ export const GameContext: {
     encounter_discard: new Deck([]),
     lock: false,
     scenario_card: undefined,
-    resolutions: [undefined]
+    resolutions: [undefined],
+    most_recent_happening: {
+        happening: WhatHappened.NONE,
+        who: undefined
+    }
 }
 
 export function setResolutions(resolutions: (() => void)[]) {
