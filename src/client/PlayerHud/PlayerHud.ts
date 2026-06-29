@@ -6,15 +6,23 @@ import { UpdatePlayerUI_Sub } from "shared/remotes/UpdatePlayerUI/Interface"
 
 const PlayerGui = Players.LocalPlayer.WaitForChild("PlayerGui")
 
-const PlayerHud = PlayerGui.WaitForChild("PlayerHud")
+const PlayerHud = PlayerGui.WaitForChild("PlayerHud") as ScreenGui
+const InvestigatorMenu = PlayerGui.WaitForChild("InvestigatorMenu") as ScreenGui
 
-const HealthHud = PlayerHud.WaitForChild("Health").WaitForChild("TextLabel") as TextLabel
-const SanityHud = PlayerHud.WaitForChild("Sanity").WaitForChild("TextLabel") as TextLabel
 const ActionsHud = PlayerHud.WaitForChild("ActionDiamonds") as Frame
 const ResourcesHud = PlayerHud.WaitForChild("Resources").WaitForChild("TextLabel") as TextLabel
 const CluesHud = PlayerHud.WaitForChild("Clues").WaitForChild("Clues") as TextLabel
 const Hand = PlayerHud.WaitForChild("Hand") as Frame
 const DeckSize = PlayerHud.WaitForChild("Deck").WaitForChild("amount") as TextLabel
+
+const Stats = InvestigatorMenu.WaitForChild("Frame").WaitForChild("miscAndStats").WaitForChild("stats") as TextLabel
+const Agility = Stats.WaitForChild("Agility").WaitForChild("TextLabel") as TextLabel
+const Combat = Stats.WaitForChild("Combat").WaitForChild("TextLabel") as TextLabel
+const Willpower = Stats.WaitForChild("Willpower").WaitForChild("TextLabel") as TextLabel
+const Intellect = Stats.WaitForChild("Intellect").WaitForChild("TextLabel") as TextLabel
+
+const HealthHud = Stats.Parent!.WaitForChild("healthAndSanity").WaitForChild("Health").WaitForChild("TextLabel") as TextLabel
+const SanityHud = Stats.Parent!.WaitForChild("healthAndSanity").WaitForChild("Sanity").WaitForChild("TextLabel") as TextLabel
 
 const ActionList = PlayerHud.WaitForChild("ActionButtons")
 
@@ -28,7 +36,8 @@ const EndTurn = ActionList.WaitForChild("EndTurn") as TextButton
 const AdvanceAct = ActionList.WaitForChild("AdvanceAct") as TextButton
 
 const Assets = PlayerHud.WaitForChild("Assets") as Frame
-const AssetDropdown = Assets.WaitForChild("Folder").WaitForChild("Dropdown") as TextButton
+const MenuOpenButton = Assets.WaitForChild("Folder").WaitForChild("Dropdown") as TextButton
+const MenuCloseButton = InvestigatorMenu.WaitForChild("Frame").WaitForChild("Folder").WaitForChild("TextButton") as TextButton
 
 const CardTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("CardTemplate") as Frame
 const AssetTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("AssetTemplate") as TextButton
@@ -41,6 +50,11 @@ UpdatePlayerUI_Sub((payload) => {
     ResourcesHud.Text = `${payload.resources}`
     CluesHud.Text = `${payload.clues}`
     DeckSize.Text = `${payload.deckSize}`
+
+    Agility.Text = `${payload.agility}`
+    Combat.Text = `${payload.combat}`,
+    Intellect.Text = `${payload.intellect}`,
+    Willpower.Text = `${payload.willpower}`
     
     for(let i = 1; i <= payload.actions; i++) {
         (ActionsHud.WaitForChild(i) as ImageLabel).ImageTransparency = 0
@@ -136,4 +150,5 @@ EndTurn.MouseButton1Click.Connect(EndTurn_Pub)
 
 let assetMenuShown = false
 
-AssetDropdown.MouseButton1Click.Connect(() => { Assets.Position = new UDim2(0, assetMenuShown ? -200 : 0, 0, 0); assetMenuShown = !assetMenuShown })
+MenuOpenButton.MouseButton1Click.Connect(() => { PlayerHud.Enabled = false; InvestigatorMenu.Enabled = true })
+MenuCloseButton.MouseButton1Click.Connect(() => { PlayerHud.Enabled = true; InvestigatorMenu.Enabled = false })

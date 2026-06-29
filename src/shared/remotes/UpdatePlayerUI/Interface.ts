@@ -15,7 +15,11 @@ interface UpdatePlayerUIPayload {
     actions: number,
     clues: number,
     assets: AssetCard[],
-    deckSize: number
+    deckSize: number,
+    agility: number,
+    combat: number,
+    willpower: number,
+    intellect: number
 }
 
 export function UpdatePlayerUI_Pub(player: GamePlayer) {
@@ -29,7 +33,12 @@ export function UpdatePlayerUI_Pub(player: GamePlayer) {
         actions: player.actions,
         clues: player.clues,
         assets: player.getAllEquipment(),
-        deckSize: player.deck.size()
+        deckSize: player.deck.size(),
+
+        agility: player.investigator.skill_agility,
+        combat: player.investigator.skill_combat,
+        intellect: player.investigator.skill_intellect,
+        willpower: player.investigator.skill_willpower
     } satisfies UpdatePlayerUIPayload)
 }
 
