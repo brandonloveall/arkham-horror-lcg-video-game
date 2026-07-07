@@ -26,7 +26,7 @@ export function payClues() {
         total += payments[plr.owner.Name];
     }
 
-    if (total < required) { return false; }
+    if (total < required) { GameContext.lock = false; return false; }
 
     for (const plr of GameContext.players) {
         plr.clues -= payments[plr.owner.Name];

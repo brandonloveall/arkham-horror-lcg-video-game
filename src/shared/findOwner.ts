@@ -10,7 +10,7 @@ export function getOwner(card: Card) {
     for(const plr of GameContext.players) {
         if(plr.hand.indexOf(card as PlayerCard)
         || plr.threat_area.indexOf(card as TreacheryCard)
-        || plr.getAllEquipment().indexOf(card as AssetCard)
+        || plr.getAllEquipment().includes(card as AssetCard)
         ) { return plr; }
     }
 }

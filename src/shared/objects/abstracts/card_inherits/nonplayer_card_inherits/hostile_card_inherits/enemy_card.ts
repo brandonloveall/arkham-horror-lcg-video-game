@@ -77,7 +77,7 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
         this.health -= damage
         if (this.health <= 0) {
             this.model.Destroy()
-            if (this.engagedWith !== undefined) { this.engagedWith.threat_area.remove(this.engagedWith.threat_area.indexOf(this)); this.engagedWith === undefined }
+            if (this.engagedWith !== undefined) { this.engagedWith.threat_area.remove(this.engagedWith.threat_area.indexOf(this)); this.engagedWith = undefined }
             GameContext.encounter_discard.addCard(this)
             this.inPlay = false
             PlaySound_Pub("Enemy_Defeated")

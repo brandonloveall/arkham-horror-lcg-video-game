@@ -6,7 +6,7 @@ export class ChaosBag {
     }
 
     public pull() {
-        return this.tokens[math.round(math.random() * this.tokens.size())];
+        return this.tokens[math.floor(math.random() * this.tokens.size())];
     }
 
     public removeSpecific(token: number | IconToken) {
@@ -14,7 +14,7 @@ export class ChaosBag {
     }
 
     public removeRandom() {
-        this.tokens.remove(math.round(math.random() * this.tokens.size()));
+        this.tokens.remove(math.floor(math.random() * this.tokens.size()));
     }
 
     public add(token: number | IconToken) {

@@ -34,7 +34,7 @@ export function skillCheck(skillCheckObj: { initiator: GamePlayer, against: numb
     for (const plr of GameContext.players) {
         Server_ChooseCards_Pub(
             plr,
-            plr.hand.filter((e) => { return (e)[using as keyof PlayerCard] !== 0 }),
+            plr.hand.filter((e) => { return e.getSkill(using) !== 0 }),
             `Skill Check by ${initiator.owner.Name}: ${initiator.investigator.getSkill(using)} against ${against} using ${using}.`,
             plr === initiator ? undefined : 1)
     }
@@ -44,7 +44,7 @@ export function skillCheck(skillCheckObj: { initiator: GamePlayer, against: numb
     let total = 0;
     for (const plr of GameContext.players) {
         for (const card of cards[plr.owner.Name]) {
-            total += card[using as keyof PlayerCard] as number;
+            total += card.getSkill(using);
             plr.discard(card.id)
             plr.update()
         }
@@ -66,9 +66,9 @@ export function skillCheck(skillCheckObj: { initiator: GamePlayer, against: numb
         }
     }
 
-    const final = total + (initiator.investigator[using as keyof Investigator] as number) + finalToken + bonus
+    const final = total + (initiator.investigator.getSkill(using)) + finalToken + bonus
 
-    SkillCheckAnimation_Pub(initiator.investigator[using as keyof Investigator] as number, total, pulledToken, finalToken)
+    SkillCheckAnimation_Pub(initiator.investigator.getSkill(using), total, pulledToken, finalToken)
 
     GameContext.lock = false
     performReactions(WhatHappened.SKILL_CHECK_ENDED, initiator)

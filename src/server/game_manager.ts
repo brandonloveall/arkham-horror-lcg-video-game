@@ -56,7 +56,7 @@ import { _01104 } from "shared/objects/tangible_cards/01104";
 import { EndTurn_Sub } from "shared/remotes/Actions/Interface";
 
 let endedTurn = false;
-EndTurn_Sub((plr) => { endedTurn = true; })
+EndTurn_Sub((plr) => { if(plr !== GameContext.player_with_turn!.owner) { return; }  endedTurn = true; })
 
 
 // TODO: take in an input to start a campaign. currently this is hard coded to be Night of the Zealot
@@ -164,7 +164,7 @@ function investigatorPhase() {
         plr.actions = 3
         plr.update()
         do { task.wait() } while (!endedTurn)
-        performReactions(WhatHappened.PLAYER_TURN_BEGAN, plr)
+        performReactions(WhatHappened.PLAYER_TURN_ENDED, plr)
     }
     task.spawn(enemyPhase)
 }
@@ -196,7 +196,7 @@ function upkeepPhase() {
         else if (card instanceof TreacheryCard) {
             card.resolve(plr)
         } else {
-            plr.hand.push(plr.deck.pull() as PlayerCard);
+            plr.hand.push(card as PlayerCard);
             if (plr.hand.size() > 8) { discard(plr, plr.hand, plr.hand.size() - 8) }
         }
     }

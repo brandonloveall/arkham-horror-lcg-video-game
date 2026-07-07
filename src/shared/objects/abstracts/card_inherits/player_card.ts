@@ -21,6 +21,8 @@ export abstract class PlayerCard extends Card {
                 return this.skill_willpower
             case "skill_wildcard":
                 return this.skill_wildcard
+            default:
+                return 0;
         }
     }
 }

@@ -11,7 +11,7 @@ let finished = false;
 let _choiceIndex = 0
 
 
-Server_GiveChoice_Sub((plr, choiceIndex) => { finished = true; choiceIndex = _choiceIndex })
+Server_GiveChoice_Sub((plr, choiceIndex) => { finished = true; _choiceIndex = choiceIndex as number })
 
 
 export function giveChoice(who: GamePlayer, choices: Choice[]) {

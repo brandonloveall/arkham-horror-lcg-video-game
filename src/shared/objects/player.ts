@@ -123,13 +123,12 @@ export class GamePlayer {
     public play(card: CostingCard) {
         if (card.fast) {
             if (!card.canPlayFast(this)) { return; }
-
         } else {
             if (this.actions === 0 || this.resources < card.cost) { return; }
             performReactions(WhatHappened.PLAYER_PLAYED_CARD, this, card)
-            this.resources -= card.cost
             this.actions--
         }
+        this.resources -= card.cost
         if (card instanceof EventCard) {
             card.onPlay(this);
         }
@@ -144,6 +143,7 @@ export class GamePlayer {
         this.update()
     }
 
+    // TODO: fix
     public activateAbility(ability: (plr: GamePlayer) => boolean) {
         if (!ability(this)) { this.actions-- }
         this.update()
@@ -206,6 +206,7 @@ export class GamePlayer {
             enemy.engagedWith = undefined
             this.threat_area.remove(this.threat_area.indexOf(enemy))
         }
+        this.actions--;
         this.update()
     }
 
@@ -223,10 +224,10 @@ export class GamePlayer {
 
     public discard(id: string) {
         for (const card of this.hand) {
-            if (card.id === id) { this.discardDeck.addCard(this.hand.remove(this.hand.indexOf(card))!) }
+            if (card.id === id) { this.discardDeck.addCard(this.hand.remove(this.hand.indexOf(card))!); return; }
         }
         for (const card of this.getAllEquipment()) {
-            if (card.id === id) { this.equipped[card.slot].remove(card); this.discardDeck.addCard(card) }
+            if (card.id === id) { this.equipped[card.slot].remove(card); this.discardDeck.addCard(card); return; }
         }
         this.update()
     }
@@ -241,5 +242,6 @@ export class GamePlayer {
     public heal(health: number, sanity: number) {
         this.damage = this.damage - health < 0 ? 0 : this.damage - health;
         this.horror = this.horror - sanity < 0 ? 0 : this.horror - sanity;
+        this.update()
     }
 }
