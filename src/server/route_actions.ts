@@ -89,7 +89,7 @@ PlayCard_Sub((plr: Player, card_id: unknown) => {
 
 ActivateAbility_Sub((plr, card_id) => {
     const card = CardRegistry.get(card_id as string) as AssetCard
-    getPlrObj(plr).activateAbility((gameplr: GamePlayer) => card.ability(gameplr))
+    getPlrObj(plr).activateAbility((gameplr: GamePlayer) => card.ability(gameplr), card.text.find("[action]") === undefined)
 })
 
 AdvanceAct_Sub((plr) => {

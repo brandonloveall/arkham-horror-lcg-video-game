@@ -144,8 +144,12 @@ export class GamePlayer {
     }
 
     // TODO: fix
-    public activateAbility(ability: (plr: GamePlayer) => boolean) {
-        if (!ability(this)) { this.actions-- }
+    public activateAbility(ability: (plr: GamePlayer) => void, isFree: boolean) {
+        if(!isFree) {
+            performReactions(WhatHappened.PLAYER_ACTIVATED_ABILITY, this)
+            this.actions--;
+        }
+        ability(this)
         this.update()
     }
 

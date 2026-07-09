@@ -51,6 +51,5 @@ export class _01520 extends AssetCard {
             bonusStat: 1,
             bonusDmg: engagedWith === 1 && isEngagedWithTarget ? 1 : 0
         })
-        return false;
     }
 }

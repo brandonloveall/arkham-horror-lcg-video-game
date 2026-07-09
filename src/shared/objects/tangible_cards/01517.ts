@@ -57,11 +57,11 @@ export class _01517 extends AssetCard {
     }
 
     ability(plr: GamePlayer) {
+        if(plr.resources < 1) { return; }
         giveChoice(plr, [
             {
                 text: "-1 resource, +1 willpower",
                 outcome: () => {
-                    if(plr.resources < 1) { return; }
                     plr.resources--;
                     plr.investigator.skill_willpower++;
                     this.added_willpower++;
@@ -70,12 +70,10 @@ export class _01517 extends AssetCard {
             {
                 text: "-1 resource, +1 combat",
                 outcome: () => {
-                    if(plr.resources < 1) { return; }
                     plr.resources--;
                     plr.investigator.skill_combat++
                 }
             },
         ])
-        return true;
     }
 }

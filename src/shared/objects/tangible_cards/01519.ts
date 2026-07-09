@@ -54,6 +54,5 @@ export class _01519 extends AssetCard {
             }
         }))
         if(this.uses === 0) { plr.discard(this.id) }
-        return false;
     }
 }

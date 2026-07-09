@@ -37,7 +37,7 @@ Uses (4 ammo).
     uses = 4;
 
     ability(plr: GamePlayer) {
-        if(this.uses === 0) { return true; }
+        if(this.uses === 0) { return; }
 
         this.uses--;
         plr.fight({
@@ -46,7 +46,5 @@ Uses (4 ammo).
             bonusStat: plr.location.clues >= 1 ? 3 : 1,
             bonusDmg: 1
         })
-
-        return false;
     }
 }

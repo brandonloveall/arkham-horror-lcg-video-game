@@ -35,7 +35,7 @@ export class _01516 extends AssetCard {
     uses = 4;
 
     ability(plr: GamePlayer) {
-        if(this.uses === 0) { return true; }
+        if(this.uses === 0) { return; }
         this.uses--;
         plr.fight({
             enemy: plr.selectedObject as EnemyCard,
@@ -43,6 +43,5 @@ export class _01516 extends AssetCard {
             bonusStat: 1,
             bonusDmg: 1
         })
-        return false;
     }
 }
