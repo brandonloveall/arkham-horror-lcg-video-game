@@ -64,6 +64,8 @@ EndTurn_Sub((plr) => { if(plr !== GameContext.player_with_turn!.owner) { return;
 // TODO: take in an input to start a campaign. currently this is hard coded to be Night of the Zealot
 export function start(startingScenario: new () => ScenarioCard, chaosTokens: (number | IconToken)[]) {
     GameContext.scenario_card = new startingScenario()
+    GameContext.scenario_card.setup()
+
     GameContext.chaos_bag = new ChaosBag(chaosTokens)
     GameContext.players = [
         new GamePlayer(

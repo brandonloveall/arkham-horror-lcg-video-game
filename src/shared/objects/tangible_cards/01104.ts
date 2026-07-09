@@ -79,7 +79,7 @@ export class _01104 extends ScenarioCard {
     setup() {
         GameContext.act = new _01108()
         GameContext.agenda = new _01105()
-        new Deck([
+        GameContext.encounter_deck = new Deck([
             _01159,
             _01159,
             _01159,

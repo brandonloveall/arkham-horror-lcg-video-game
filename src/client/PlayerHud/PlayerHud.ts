@@ -21,6 +21,15 @@ const Combat = Stats.WaitForChild("Combat").WaitForChild("TextLabel") as TextLab
 const Willpower = Stats.WaitForChild("Willpower").WaitForChild("TextLabel") as TextLabel
 const Intellect = Stats.WaitForChild("Intellect").WaitForChild("TextLabel") as TextLabel
 
+const Slots = InvestigatorMenu.WaitForChild("Frame").WaitForChild("slots")
+const Hand1 = Slots.WaitForChild("Hand1")
+const Hand2 = Slots.WaitForChild("Hand2")
+const Arcane1 = Slots.WaitForChild("Arcane1")
+const Arcane2 = Slots.WaitForChild("Arcane2")
+const Body = Slots.WaitForChild("Body")
+const Ally = Slots.WaitForChild("Ally")
+const Accessory = Slots.WaitForChild("Accessory")
+
 const HealthHud = Stats.Parent!.WaitForChild("healthAndSanity").WaitForChild("Health").WaitForChild("TextLabel") as TextLabel
 const SanityHud = Stats.Parent!.WaitForChild("healthAndSanity").WaitForChild("Sanity").WaitForChild("TextLabel") as TextLabel
 
@@ -35,14 +44,14 @@ const Move = ActionList.WaitForChild("Move") as TextButton
 const EndTurn = ActionList.WaitForChild("EndTurn") as TextButton
 const AdvanceAct = ActionList.WaitForChild("AdvanceAct") as TextButton
 
-const Assets = PlayerHud.WaitForChild("Assets") as Frame
-const MenuOpenButton = Assets.WaitForChild("Folder").WaitForChild("Dropdown") as TextButton
+const MenuOpenButton = PlayerHud.WaitForChild("Assets").WaitForChild("Folder").WaitForChild("Dropdown") as TextButton
 const MenuCloseButton = InvestigatorMenu.WaitForChild("Frame").WaitForChild("Folder").WaitForChild("TextButton") as TextButton
 
 const CardTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("CardTemplate") as Frame
 const AssetTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("AssetTemplate") as TextButton
 
 let currentHandCards: Frame[] = []
+let currentAssets: TextButton[] = []
 
 UpdatePlayerUI_Sub((payload) => {
     HealthHud.Text = `${payload.health - payload.damage}`
@@ -53,13 +62,13 @@ UpdatePlayerUI_Sub((payload) => {
 
     Agility.Text = `${payload.agility}`
     Combat.Text = `${payload.combat}`,
-    Intellect.Text = `${payload.intellect}`,
-    Willpower.Text = `${payload.willpower}`
-    
-    for(let i = 1; i <= payload.actions; i++) {
+        Intellect.Text = `${payload.intellect}`,
+        Willpower.Text = `${payload.willpower}`
+
+    for (let i = 1; i <= payload.actions; i++) {
         (ActionsHud.WaitForChild(i) as ImageLabel).ImageTransparency = 0
     }
-    for(let i = payload.actions + 1; i <= ActionsHud.GetChildren().size() - 1; i++) {
+    for (let i = payload.actions + 1; i <= ActionsHud.GetChildren().size() - 1; i++) {
         (ActionsHud.WaitForChild(i) as ImageLabel).ImageTransparency = 0.7
     }
 
@@ -78,13 +87,13 @@ UpdatePlayerUI_Sub((payload) => {
 
         Name.Text = card.name
         Description.Text = card.text
-        if(card.type_name === "Asset" || card.type_name === "Event") {
+        if (card.type_name === "Asset" || card.type_name === "Event") {
             const costingCard = (card as CostingCard)
             Cost.Text = "" + costingCard.cost
             const skills = ["skill_agility", "skill_willpower", "skill_intellect", "skill_combat", "skill_wildcard"]
             const icons = ["rbxassetid://18623015454", "rbxassetid://18615903524", "rbxassetid://18615764098", "rbxassetid://18622919447", "rbxassetid://18623020407"]
-            for(let i = 0; i < skills.size(); i++) {
-                for(let _ = 0; _ < (costingCard[skills[i] as keyof CostingCard] as number); _++) {
+            for (let i = 0; i < skills.size(); i++) {
+                for (let _ = 0; _ < (costingCard[skills[i] as keyof CostingCard] as number); _++) {
                     const Icon = PlayerGui.WaitForChild("GuiElements").WaitForChild("skill").Clone() as ImageLabel
                     Icon.Parent = Skills
                     Icon.Image = icons[i]
@@ -94,13 +103,13 @@ UpdatePlayerUI_Sub((payload) => {
         }
 
         const colors = {
-            Neutral: new Color3(0.83,0.79,0.71),
-            Seeker: new Color3(0.69,0.52,0.15),
-            Survivor: new Color3(0.61,0.05,0.05),
-            Mystic: new Color3(0.38,0.22,0.53),
-            Guardian: new Color3(0.09,0.15,0.46),
-            Rogue: new Color3(0.05,0.35,0.06)
-        } 
+            Neutral: new Color3(0.83, 0.79, 0.71),
+            Seeker: new Color3(0.69, 0.52, 0.15),
+            Survivor: new Color3(0.61, 0.05, 0.05),
+            Mystic: new Color3(0.38, 0.22, 0.53),
+            Guardian: new Color3(0.09, 0.15, 0.46),
+            Rogue: new Color3(0.05, 0.35, 0.06)
+        }
 
         Name.BackgroundColor3 = colors[card.faction_name as keyof typeof colors]
 
@@ -110,15 +119,29 @@ UpdatePlayerUI_Sub((payload) => {
         currentHandCards.push(NewCard)
     }
 
-    for(const asset of Assets.GetChildren()) {
-        if(asset.IsA("TextButton")) { asset.Destroy() }
+    for (const asset of currentAssets) {
+        asset.Destroy()
     }
 
-    for(const asset of payload.assets) {
+    for (const asset of payload.assets) {
         const NewAsset = AssetTemplate.Clone()
         NewAsset.Text = asset.name
-        NewAsset.Parent = Assets
+        NewAsset.Parent = (() => {
+            switch (asset.slot) {
+                case "Hand":
+                    return Hand1.GetChildren().size() > 0 ? Hand2 : Hand1;
+                case "Arcane":
+                    return Arcane1.GetChildren().size() > 0 ? Arcane2 : Arcane1;
+                case "Ally": 
+                    return Ally
+                case "Body":
+                    return Body
+                case "Accessory":
+                    return Accessory
+            }
+        })()
         NewAsset.MouseButton1Click.Connect(() => ActivateAbility_Pub(asset.id))
+        currentAssets.push(NewAsset)
     }
 });
 
