@@ -2,7 +2,7 @@ A fanmade, unofficial video game port of the card game *Arkham Horror: The Card 
 
 [Play on Roblox](https://www.roblox.com/games/15393831445/Bloxburg-Horror)
 
-# This project in no way intends to infringe on copyright and does not make money off the property of Fantasy Flight Games. This game was created solely as a passion project and is completely non-commercial and closed to the public.
+# This project in no way intends to infringe on copyright and does not make money off the property of Fantasy Flight Games. This project is completely non-commercial and closed to the public.
 
 With that being said...
 
