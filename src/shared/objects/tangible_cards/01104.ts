@@ -1,9 +1,23 @@
 import { CardRegistry } from "shared/card_registry";
 import { ScenarioCard } from "../abstracts/card_inherits/scenario_card";
-import { IconToken } from "../chaos_bag";
+import { ChaosBag, IconToken } from "../chaos_bag";
 import { GamePlayer } from "../player";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { ResolveObj } from "shared/skillcheck";
+import { GameContext } from "shared/game_context";
+import { _01108 } from "./01108";
+import { _01105 } from "./01105";
+import { Deck } from "../deck";
+import { _01159 } from "./01159";
+import { _01160 } from "./01160";
+import { _01161 } from "./01161";
+import { _01162 } from "./01162";
+import { _01163 } from "./01163";
+import { _01164 } from "./01164";
+import { _01165 } from "./01165";
+import { _01166 } from "./01166";
+import { _01167 } from "./01167";
+import { _01168 } from "./01168";
 
 export class _01104 extends ScenarioCard {
     code = "01104";
@@ -23,25 +37,73 @@ export class _01104 extends ScenarioCard {
     traits = "";
     flavor = "";
     subname = "";
-    
+
+
+    /**
+     * FUTURE REFERENCE:
+     * curl https://arkhamdb.com/api/public/cards/<expansion>?encounter=1 | jq '.[] | range(.quantity) as $i | select((.encounter_name == <encounter names>) and (.type_code == "enemy" or .type_code == "treachery") and .name != <excluded cards>) .code'
+     */
+
+
+    startingAct = "01108"
+    startingAgenda = "01105"
+    startingMap = [
+        {
+            x: 5,
+            y: 5,
+            card: "01111"
+        }
+    ]
+
     resolve(token: IconToken, puller: GamePlayer, resolveObj: ResolveObj) {
-        if(token === IconToken.skull) {
+        if (token === IconToken.skull) {
             let total = 0;
-            for(const card of CardRegistry.getAll()) {
-                if(card instanceof EnemyCard && card.traits.find("Ghoul")[0] !== undefined && card.location === puller.location) { 
+            for (const card of CardRegistry.getAll()) {
+                if (card instanceof EnemyCard && card.traits.find("Ghoul")[0] !== undefined && card.location === puller.location) {
                     total--;
                 }
             }
             return total;
         }
-        if(token === IconToken.cultist) {
+        if (token === IconToken.cultist) {
             resolveObj.onFail.push(() => puller.takeDamage(0, 1))
             return -1;
         }
-        if(token === IconToken.tablet) {
+        if (token === IconToken.tablet) {
             resolveObj.onFail.push(() => puller.takeDamage(1, 0))
             return -2;
         }
         return 0; // should never hit
     };
+
+    setup() {
+        GameContext.act = new _01108()
+        GameContext.agenda = new _01105()
+        new Deck([
+            _01159,
+            _01159,
+            _01159,
+            _01160,
+            _01160,
+            _01160,
+            _01161,
+            _01162,
+            _01162,
+            _01162,
+            _01163,
+            _01163,
+            _01163,
+            _01164,
+            _01164,
+            _01165,
+            _01165,
+            _01166,
+            _01166,
+            _01166,
+            _01167,
+            _01167,
+            _01168,
+            _01168
+        ]);
+    }
 }

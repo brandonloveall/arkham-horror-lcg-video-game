@@ -1,10 +1,12 @@
 import { Card } from "./abstracts/card"
 
 export class Deck {
-    cards: Card[]
+    cards: Card[] = []
 
-    constructor(cards: Card[]) {
-        this.cards = cards
+    constructor(cards: (new () => Card)[]) {
+        for(const card of cards) {
+            this.cards.push(new card())
+        }
     }
 
     public pull() {

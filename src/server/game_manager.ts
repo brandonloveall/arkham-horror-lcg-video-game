@@ -1,6 +1,7 @@
 import { Players, ReplicatedStorage } from "@rbxts/services";
 import { GamePlayer } from "../shared/objects/player";
 import { Deck } from "../shared/objects/deck";
+
 import { _01501 } from "../shared/objects/tangible_cards/01501";
 import { _01506 } from "../shared/objects/tangible_cards/01506";
 import { _01507 } from "../shared/objects/tangible_cards/01507";
@@ -32,7 +33,6 @@ import { _01592 } from "../shared/objects/tangible_cards/01592";
 import { _01602 } from "../shared/objects/tangible_cards/01602";
 import { _01105 } from "../shared/objects/tangible_cards/01105";
 import { _01108 } from "../shared/objects/tangible_cards/01108";
-import { ChaosBag, IconToken } from "../shared/objects/chaos_bag";
 import { NonplayerCard } from "../shared/objects/abstracts/card_inherits/nonplayer_card";
 import { _01159 } from "../shared/objects/tangible_cards/01159";
 import { _01160 } from "../shared/objects/tangible_cards/01160";
@@ -54,85 +54,59 @@ import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 import { performReactions } from "shared/performReactions";
 import { _01104 } from "shared/objects/tangible_cards/01104";
 import { EndTurn_Sub } from "shared/remotes/Actions/Interface";
+import { ScenarioCard } from "shared/objects/abstracts/card_inherits/scenario_card";
+import { ChaosBag, IconToken } from "shared/objects/chaos_bag";
 
 let endedTurn = false;
 EndTurn_Sub((plr) => { if(plr !== GameContext.player_with_turn!.owner) { return; }  endedTurn = true; })
 
 
 // TODO: take in an input to start a campaign. currently this is hard coded to be Night of the Zealot
-export function start() {
+export function start(startingScenario: new () => ScenarioCard, chaosTokens: (number | IconToken)[]) {
+    GameContext.scenario_card = new startingScenario()
+    GameContext.chaos_bag = new ChaosBag(chaosTokens)
     GameContext.players = [
         new GamePlayer(
             Players.GetPlayers()[0],
             new Deck([
-                new _01506(),
-                new _01516(),
-                new _01517(),
-                new _01518(),
-                new _01519(),
-                new _01520(),
-                new _01521(),
-                new _01530(),
-                new _01531(),
-                new _01532(),
-                new _01533(),
-                new _01534(),
-                new _01535(),
-                new _01586(),
-                new _01586(),
-                new _01587(),
-                new _01587(),
-                new _01522(),
-                new _01523(),
-                new _01524(),
-                new _01536(),
-                new _01537(),
-                new _01538(),
-                new _01588(),
-                new _01588(),
-                new _01525(),
-                new _01539(),
-                new _01589(),
-                new _01589(),
-                new _01592(),
-                new _01592(),
-                new _01507(),
-                new _01602(),
+                _01506,
+                _01516,
+                _01517,
+                _01518,
+                _01519,
+                _01520,
+                _01521,
+                _01530,
+                _01531,
+                _01532,
+                _01533,
+                _01534,
+                _01535,
+                _01586,
+                _01586,
+                _01587,
+                _01587,
+                _01522,
+                _01523,
+                _01524,
+                _01536,
+                _01537,
+                _01538,
+                _01588,
+                _01588,
+                _01525,
+                _01539,
+                _01589,
+                _01589,
+                _01592,
+                _01592,
+                _01507,
+                _01602,
             ]),
             new _01501())
     ];
-    GameContext.agenda = new _01105()
-    GameContext.act = new _01108();
-    GameContext.chaos_bag = new ChaosBag([1, 0, 0, -1, -1, -1, -2, -2, -3, -4, IconToken.skull, IconToken.skull, IconToken.cultist, IconToken.tablet, IconToken.auto_fail, IconToken.elder_sign]);
-    GameContext.encounter_deck = new Deck([
-        new _01159(),
-        new _01159(),
-        new _01159(),
-        new _01160(),
-        new _01160(),
-        new _01160(),
-        new _01161(),
-        new _01162(),
-        new _01162(),
-        new _01162(),
-        new _01163(),
-        new _01163(),
-        new _01163(),
-        new _01164(),
-        new _01164(),
-        new _01165(),
-        new _01165(),
-        new _01166(),
-        new _01166(),
-        new _01166(),
-        new _01167(),
-        new _01167(),
-        new _01168(),
-        new _01168()
-    ]);
-    GameContext.scenario_card = new _01104();
 
-    GameContext.encounter_deck.shuffle();
+    GameContext.encounter_deck!.shuffle();
 
     for (const player of GameContext.players) {
         player.deck.shuffle();
