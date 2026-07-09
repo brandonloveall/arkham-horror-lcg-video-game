@@ -1,5 +1,6 @@
 
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
+import { GamePlayer } from "../player";
 
 export class _01587 extends AssetCard {
     slot = "Hand";
@@ -30,4 +31,16 @@ export class _01587 extends AssetCard {
     flavor = ``;
     subname = "";
 
+    uses = 3;
+
+    ability(plr: GamePlayer) {
+        if(this.uses === 0) { return true; }
+        this.uses--;
+        plr.investigate({
+            location: plr.location,
+            skill: "skill_intellect",
+            shroudModifier: -2
+        })
+        return true;
+    }
 }

@@ -159,11 +159,19 @@ export class GamePlayer {
         PlaySound_Pub("Move")
     }
 
-    public investigate(location: LocationCard) {
+    public investigate(investigateObj: {
+        location: LocationCard,
+        skill: string,
+        bonusStat?: number,
+        shroudModifier?: number
+    }) {
         if (this.actions === 0) { return; }
+
+        const { location, skill, bonusStat, shroudModifier } = investigateObj
+
         PlaySound_Pub("Investigate")
         performReactions(WhatHappened.PLAYER_INVESTIGATED, this, location)
-        const [passed] = skillCheck({ initiator: this, against: location.shroud, using: "skill_intellect" })
+        const [passed] = skillCheck({ initiator: this, against: location.shroud + (shroudModifier !== undefined ? shroudModifier : 0), using: skill, bonus: bonusStat })
         if (passed) {
             location.discoverClue(this, 1)
         }
