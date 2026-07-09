@@ -6,6 +6,7 @@ import { CardRegistry } from "shared/card_registry";
 import { LocationCard } from "../abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { Investigator } from "../abstracts/card_inherits/player_card_inherits/investigator";
+import { GameContext } from "shared/game_context";
 
 export class _01524 extends EventCard {
     cost = 5;
@@ -41,7 +42,8 @@ export class _01524 extends EventCard {
             return {
                 text: `Throw dynamite at ${location.name}`,
                 outcome: () => {
-                    CardRegistry.getAll().filter((enemy) => enemy instanceof EnemyCard && enemy.location === location).forEach((enemy) => (enemy as EnemyCard).takeDamage(3))
+                    CardRegistry.getAll().filter((enemy) => enemy instanceof EnemyCard && enemy.location === location).forEach((enemy) => (enemy as EnemyCard).takeDamage(3));
+                    GameContext.players.filter(otherPlr => otherPlr.location === plr.location).forEach(plr => plr.takeDamage(3, 0))
                 }
             }
         }))
