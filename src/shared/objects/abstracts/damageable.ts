@@ -1,4 +1,4 @@
 export interface Damageable {
-    health: number | undefined
-    sanity: number | undefined
+	health: number | undefined;
+	sanity: number | undefined;
 }

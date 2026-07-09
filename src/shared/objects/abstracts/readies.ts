@@ -1,3 +1,3 @@
 export interface Readies {
-    is_ready: boolean
+	is_ready: boolean;
 }

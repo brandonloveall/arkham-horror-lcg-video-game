@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "rbxtsc",
-    "watch": "rbxtsc -w"
+    "watch": "rbxtsc -w",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -14,13 +15,13 @@
   "devDependencies": {
     "@rbxts/compiler-types": "^3.0.0-types.0",
     "@rbxts/types": "^1.0.924",
-    "@typescript-eslint/eslint-plugin": "^8.60.0",
-    "@typescript-eslint/parser": "^8.60.0",
-    "eslint": "^10.4.0",
+    "@typescript-eslint/eslint-plugin": "^8.63.0",
+    "@typescript-eslint/parser": "^8.63.0",
+    "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-roblox-ts": "^1.4.0",
-    "prettier": "^3.8.3",
+    "prettier": "^3.9.5",
     "roblox-ts": "^3.0.0",
     "roblox-ts-extensions": "^1.8.1",
     "typescript": "^5.9.3"

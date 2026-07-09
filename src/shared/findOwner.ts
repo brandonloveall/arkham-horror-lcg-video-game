@@ -7,10 +7,13 @@ import { PlayerCard } from "./objects/abstracts/card_inherits/player_card";
 import { AssetCard } from "./objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 
 export function getOwner(card: Card) {
-    for(const plr of GameContext.players) {
-        if(plr.hand.indexOf(card as PlayerCard)
-        || plr.threat_area.indexOf(card as TreacheryCard)
-        || plr.getAllEquipment().includes(card as AssetCard)
-        ) { return plr; }
-    }
+	for (const plr of GameContext.players) {
+		if (
+			plr.hand.indexOf(card as PlayerCard) !== -1 ||
+			plr.threat_area.indexOf(card as TreacheryCard) !== -1 ||
+			plr.getAllEquipment().includes(card as AssetCard)
+		) {
+			return plr;
+		}
+	}
 }

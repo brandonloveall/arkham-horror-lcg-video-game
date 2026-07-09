@@ -6,27 +6,27 @@ import { ReplicatedStorage, Workspace } from "@rbxts/services";
 import { GamePlayer } from "shared/objects/player";
 
 export abstract class Investigator extends PlayerCard implements Damageable {
-    abstract health: number;
-    abstract sanity: number;
+	abstract health: number;
+	abstract sanity: number;
 
-    abstract deck_requirements: DeckRequirements
-    abstract deck_options: DeckOption[]
-    model!: Model
+	abstract deck_requirements: DeckRequirements;
+	abstract deck_options: DeckOption[];
+	model!: Model;
 
-    public place(location: LocationCard) {
-        this.inPlay = true
-        this.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model;
-        this.model.Parent = Workspace
-        this.model.AddTag("INVESTIGATOR")
-        this.model.PivotTo(new CFrame(location.model.WorldPivot.Position.add(new Vector3(0, 16, 0))))
-        this.model.Name = this.id
+	public place(location: LocationCard) {
+		this.inPlay = true;
+		this.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model;
+		this.model.Parent = Workspace;
+		this.model.AddTag("INVESTIGATOR");
+		this.model.PivotTo(new CFrame(location.model.WorldPivot.Position.add(new Vector3(0, 16, 0))));
+		this.model.Name = this.id;
 
-        return this;
-    }
+		return this;
+	}
 
-    public move(location: LocationCard) {
-        this.model.PivotTo(new CFrame(location.model.WorldPivot.Position.add(new Vector3(0, 16, 0))))
-    }
+	public move(location: LocationCard) {
+		this.model.PivotTo(new CFrame(location.model.WorldPivot.Position.add(new Vector3(0, 16, 0))));
+	}
 
-    abstract resolveElderToken(initiator: GamePlayer): number
+	abstract resolveElderToken(initiator: GamePlayer): number;
 }

@@ -1,38 +1,38 @@
-import { Card } from "./abstracts/card"
+import { Card } from "./abstracts/card";
 
 export class Deck {
-    cards: Card[] = []
+	cards: Card[] = [];
 
-    constructor(cards: (new () => Card)[]) {
-        for(const card of cards) {
-            this.cards.push(new card())
-        }
-    }
+	constructor(cards: (new () => Card)[]) {
+		for (const card of cards) {
+			this.cards.push(new card());
+		}
+	}
 
-    public pull() {
-        return this.cards.pop()
-    }
+	public pull() {
+		return this.cards.pop();
+	}
 
-    public shuffle() {
-        for (let i = this.cards.size() - 1; i > 0; i--) {
-            const j = math.floor(math.random() * (i + 1));
-            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
-        }
-    }
+	public shuffle() {
+		for (let i = this.cards.size() - 1; i > 0; i--) {
+			const j = math.floor(math.random() * (i + 1));
+			[this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+		}
+	}
 
-    public addCard(card: Card) {
-        this.cards.unshift(card)
-    }
+	public addCard(card: Card) {
+		this.cards.unshift(card);
+	}
 
-    public isEmpty() {
-        return this.cards.size() === 0
-    }
+	public isEmpty() {
+		return this.cards.size() === 0;
+	}
 
-    public size() {
-        return this.cards.size()
-    }
+	public size() {
+		return this.cards.size();
+	}
 
-    public pullSpecific(card: Card) {
-        return this.cards.remove(this.cards.indexOf(card))
-    }
+	public pullSpecific(card: Card) {
+		return this.cards.remove(this.cards.indexOf(card));
+	}
 }

@@ -1,23 +1,25 @@
 import { Card } from "shared/objects/abstracts/card";
 
 class _CardRegistry {
-    private registry: Map<string, Card> = new Map<string, Card>();
+	private registry: Map<string, Card> = new Map<string, Card>();
 
-    public get(key: string): Card {
-        return this.registry.get(key)!;
-    }
+	public get(key: string): Card {
+		return this.registry.get(key)!;
+	}
 
-    public insert(card: Card) {
-        this.registry.set(card.id, card)
-    }
+	public insert(card: Card) {
+		this.registry.set(card.id, card);
+	}
 
-    public remove(card: Card) {
-        this.registry.delete(card.id)
-    }
+	public remove(card: Card) {
+		this.registry.delete(card.id);
+	}
 
-    public getAll() {
-        return [...this.registry].map(([k, v]) => {return v;})
-    }
+	public getAll() {
+		return [...this.registry].map(([k, v]) => {
+			return v;
+		});
+	}
 }
 
 export const CardRegistry = new _CardRegistry();

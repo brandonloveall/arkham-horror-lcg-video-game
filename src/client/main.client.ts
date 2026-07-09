@@ -1,7 +1,7 @@
-import "./PlayerHud/PlayerHud"
-import "./CardSelection/CardSelection"
-import "./PayClues/PayClues"
-import "./PlaySound/PlaySound"
-import "./SkillCheckAnimation/SkillCheckAnimation"
-import "./GiveChoice/GiveChoice"
-import "./camera"
+import "./PlayerHud/PlayerHud";
+import "./CardSelection/CardSelection";
+import "./PayClues/PayClues";
+import "./PlaySound/PlaySound";
+import "./SkillCheckAnimation/SkillCheckAnimation";
+import "./GiveChoice/GiveChoice";
+import "./camera";
