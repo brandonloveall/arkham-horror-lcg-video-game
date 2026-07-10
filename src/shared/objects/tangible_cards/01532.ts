@@ -35,14 +35,15 @@ export class _01532 extends AssetCard {
 
 	reactions: reactions = {
 		[WhatHappened.PLAYER_PLAYED_CARD]: {
-			reaction: (_plr: unknown, _card: unknown) => {
+			reaction: (_plr: unknown) => {
 				const plr = _plr as GamePlayer;
 				const tomes: Card[] = plr.deck.cards.filter((tome) => tome.traits.find("Tome")[0] !== undefined);
 				giveChoice(
 					plr,
+					"Take a tome:",
 					tomes.map((t) => {
 						return {
-							text: `Take ${t.name}`,
+							text: t.name,
 							outcome: () => {
 								plr.hand.push(plr.deck.pullSpecific(t) as PlayerCard);
 								plr.update();

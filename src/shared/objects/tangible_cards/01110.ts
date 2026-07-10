@@ -1,5 +1,4 @@
 import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
-import { _01116 } from "./01116";
 import { GameContext, WhatHappened } from "shared/game_context";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { giveChoice } from "shared/giveChoice";
@@ -47,7 +46,7 @@ export class _01110 extends ActCard {
 	};
 
 	advance() {
-		giveChoice(GameContext.players[0], [
+		giveChoice(GameContext.players[0], "Choose a resolution:", [
 			{
 				text: "It was never much of a home. Burn it down!",
 				outcome: () => {

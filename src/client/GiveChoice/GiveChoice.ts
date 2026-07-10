@@ -5,16 +5,19 @@ const PlayerGui = Players.LocalPlayer.WaitForChild("PlayerGui");
 
 const GiveChoice = PlayerGui.WaitForChild("GiveChoice") as ScreenGui;
 const frame = GiveChoice.WaitForChild("Frame") as Frame;
+const Title = frame.WaitForChild("title") as TextLabel;
 
 const template = PlayerGui.WaitForChild("GuiElements").WaitForChild("ChoiceButton") as TextButton;
 
-Client_GiveChoice_Sub((choices) => {
+Client_GiveChoice_Sub((title, choices) => {
 	GiveChoice.Enabled = true;
 	for (const oldChoice of frame.GetChildren()) {
 		if (oldChoice.IsA("TextButton")) {
 			oldChoice.Destroy();
 		}
 	}
+
+	Title.Text = title;
 
 	for (let i = 0; i < choices.size(); i++) {
 		const newChoice = template.Clone();

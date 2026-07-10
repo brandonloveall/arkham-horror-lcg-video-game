@@ -206,9 +206,10 @@ export class GamePlayer {
 
 		PlaySound_Pub("Investigate");
 		performReactions(WhatHappened.PLAYER_INVESTIGATED, this, location);
+		const finalShroud = location.shroud + (shroudModifier !== undefined ? shroudModifier : 0);
 		const [passed] = skillCheck({
 			initiator: this,
-			against: location.shroud + (shroudModifier !== undefined ? shroudModifier : 0),
+			against: finalShroud < 0 ? 0 : finalShroud,
 			using: skill,
 			bonus: bonusStat,
 		});

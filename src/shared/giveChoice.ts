@@ -15,13 +15,13 @@ Server_GiveChoice_Sub((plr, choiceIndex) => {
 	_choiceIndex = choiceIndex as number;
 });
 
-export function giveChoice(who: GamePlayer, choices: Choice[]) {
+export function giveChoice(who: GamePlayer, title: string, choices: Choice[]) {
 	if (choices.size() === 0) {
 		return;
 	}
 	GameContext.lock = true;
 	finished = false;
-	Server_GiveChoice_Pub(who, choices);
+	Server_GiveChoice_Pub(who, title, choices);
 
 	do {
 		task.wait();

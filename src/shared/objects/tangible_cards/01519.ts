@@ -38,21 +38,22 @@ export class _01519 extends AssetCard {
 		this.uses--;
 		giveChoice(
 			plr,
+			"Who to heal?",
 			GameContext.players
 				.filter((otherPlr) => otherPlr.location === plr.location)
 				.map((otherPlr) => {
 					return {
 						text: `Heal ${otherPlr.owner.Name}`,
 						outcome: () =>
-							giveChoice(otherPlr, [
+							giveChoice(otherPlr, "Heal:", [
 								{
-									text: "Heal 1 horror",
+									text: "1 horror",
 									outcome: () => {
 										otherPlr.heal(0, 1);
 									},
 								},
 								{
-									text: "Heal 1 damage",
+									text: "1 damage",
 									outcome: () => {
 										otherPlr.heal(1, 0);
 									},

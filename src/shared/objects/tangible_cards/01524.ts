@@ -4,7 +4,6 @@ import { GamePlayer } from "../player";
 import { CardRegistry } from "shared/card_registry";
 import { LocationCard } from "../abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
-import { Investigator } from "../abstracts/card_inherits/player_card_inherits/investigator";
 import { GameContext } from "shared/game_context";
 
 export class _01524 extends EventCard {
@@ -40,9 +39,10 @@ export class _01524 extends EventCard {
 			.filter((e) => e === plr.location || plr.location.connects_to.includes(e.symbol));
 		giveChoice(
 			plr,
+			"Throw dynamite at: ",
 			locations.map((location) => {
 				return {
-					text: `Throw dynamite at ${location.name}`,
+					text: location.name,
 					outcome: () => {
 						CardRegistry.getAll()
 							.filter((enemy) => enemy instanceof EnemyCard && enemy.location === location)

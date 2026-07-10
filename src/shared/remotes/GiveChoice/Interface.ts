@@ -7,11 +7,11 @@ const GiveChoice = ReplicatedStorage.WaitForChild("TS")
 	.WaitForChild("GiveChoice")
 	.WaitForChild("GiveChoice") as RemoteEvent;
 
-export function Server_GiveChoice_Pub(who: GamePlayer, choices: Choice[]) {
-	GiveChoice.FireClient(who.owner, choices);
+export function Server_GiveChoice_Pub(who: GamePlayer, title: string, choices: Choice[]) {
+	GiveChoice.FireClient(who.owner, title, choices);
 }
 
-export function Client_GiveChoice_Sub(callback: (choices: Choice[]) => void) {
+export function Client_GiveChoice_Sub(callback: (title: string, choices: Choice[]) => void) {
 	GiveChoice.OnClientEvent.Connect(callback);
 }
 

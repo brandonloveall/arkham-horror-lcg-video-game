@@ -38,7 +38,7 @@ export class _01517 extends AssetCard {
 
 	reactions: reactions = {
 		[WhatHappened.SKILL_CHECK_START]: {
-			reaction: (_initiator: unknown) => {
+			reaction: () => {
 				this.usable = true;
 				this.added_willpower = 0;
 				this.added_combat = 0;
@@ -60,9 +60,9 @@ export class _01517 extends AssetCard {
 		if (plr.resources < 1) {
 			return;
 		}
-		giveChoice(plr, [
+		giveChoice(plr, "-1 resource for:", [
 			{
-				text: "-1 resource, +1 willpower",
+				text: "+1 willpower",
 				outcome: () => {
 					plr.resources--;
 					plr.investigator.skill_willpower++;
@@ -70,7 +70,7 @@ export class _01517 extends AssetCard {
 				},
 			},
 			{
-				text: "-1 resource, +1 combat",
+				text: "+1 combat",
 				outcome: () => {
 					plr.resources--;
 					plr.investigator.skill_combat++;

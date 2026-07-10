@@ -19,13 +19,13 @@ export function performReactions(whatHappened: WhatHappened, plr: GamePlayer, ..
 				if (!card.reactions![whatHappened]!.canUseReaction!(plr, ...args)) {
 					continue;
 				}
-				giveChoice(plr, [
+				giveChoice(plr, `Use ${card.name}'s reaction?`, [
 					{
-						text: `Use ${card.name}'s reaction`,
+						text: `Yes`,
 						outcome: () => card.reactions![whatHappened]!.reaction(plr, ...args),
 					},
 					{
-						text: `Do not use ${card.name}'s reaction`,
+						text: `No`,
 						outcome: () => {},
 					},
 				]);

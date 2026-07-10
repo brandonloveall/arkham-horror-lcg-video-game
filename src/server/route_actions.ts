@@ -37,9 +37,10 @@ Engage_Sub((plr) => {
 
 	giveChoice(
 		plrObj,
+		"Engage:",
 		enemies.map((e) => {
 			return {
-				text: `Engage ${e.name}`,
+				text: e.name,
 				outcome: () => getPlrObj(plr).engage(e as EnemyCard),
 			};
 		}),
@@ -52,9 +53,10 @@ Evade_Sub((plr) => {
 
 	giveChoice(
 		plrObj,
+		"Evade:",
 		enemies.map((e) => {
 			return {
-				text: `Evade ${e.name}`,
+				text: e.name,
 				outcome: () => plrObj.evade(e as EnemyCard),
 			};
 		}),
@@ -67,9 +69,10 @@ Fight_Sub((plr) => {
 
 	giveChoice(
 		plrObj,
+		"Fight:",
 		enemies.map((e) => {
 			return {
-				text: `Fight ${e.name}`,
+				text: e.name,
 				outcome: () =>
 					plrObj.fight({
 						enemy: e as EnemyCard,
@@ -100,9 +103,10 @@ Move_Sub((plr) => {
 
 	giveChoice(
 		plrObj,
+		"Move to:",
 		locations.map((l) => {
 			return {
-				text: `Move to ${l.name}`,
+				text: l.name,
 				outcome: () => plrObj.move(l as LocationCard),
 			};
 		}),
