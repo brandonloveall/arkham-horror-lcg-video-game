@@ -7,6 +7,7 @@ import { _01113 } from "./01113";
 import { _01114 } from "./01114";
 import { _01115 } from "./01115";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { _01111 } from "./01111";
 
 export class _01108 extends ActCard {
 	clues = 2;
@@ -40,7 +41,7 @@ You jump through the doorway, landing on your feet on soft dirt. The door to the
 
 	advance() {
 		for (const enemy of CardRegistry.getAll()) {
-			if (enemy instanceof EnemyCard && enemy.location === GameContext.game_map[5][5]) {
+			if (enemy instanceof EnemyCard && enemy.location instanceof _01111) {
 				enemy.takeDamage(999);
 			}
 		}
