@@ -40,9 +40,45 @@ export abstract class LocationCard extends StoryCard {
 		this.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model;
 		this.model.Parent = Workspace;
 		this.model.AddTag("LOCATION");
-		this.model.PivotTo(new CFrame(new Vector3(this.xCoord * 16, 0, this.yCoord * 16)));
+		this.model.PivotTo(new CFrame(new Vector3(this.xCoord * 32 - 80, 0, this.yCoord * 32 - 80)));
 		GameContext.game_map[this.xCoord][this.yCoord] = this;
 		this.model.Name = this.id;
+
+		for (const _ of GameContext.game_map) {
+			for (const location of _) {
+				if (location !== undefined && this.connects_to.includes(location.symbol)) {
+					if (location.connects_to.includes(this.symbol)) {
+						const biArrow = ReplicatedStorage.WaitForChild("Models")
+							.WaitForChild("twoway")
+							.Clone() as UnionOperation;
+						biArrow.Position = this.model
+							.GetPivot()
+							.Position.add(location.model.GetPivot().Position)
+							.div(2);
+						biArrow.CFrame = CFrame.lookAt(
+							biArrow.CFrame.Position,
+							location.model.GetPivot().Position,
+							new Vector3(0, 0, 1),
+						);
+						biArrow.Parent = Workspace;
+					} else {
+						const singleArrow = ReplicatedStorage.WaitForChild("Models")
+							.WaitForChild("oneway")
+							.Clone() as UnionOperation;
+						singleArrow.Position = this.model
+							.GetPivot()
+							.Position.add(location.model.GetPivot().Position)
+							.div(2);
+						singleArrow.CFrame = CFrame.lookAt(
+							singleArrow.CFrame.Position,
+							location.model.GetPivot().Position,
+							new Vector3(0, 0, 1),
+						).mul(CFrame.fromEulerAngles(math.rad(90), 0, 0));
+						singleArrow.Parent = Workspace;
+					}
+				}
+			}
+		}
 
 		return this;
 	}

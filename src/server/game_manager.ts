@@ -117,8 +117,10 @@ export function start(startingScenario: new () => ScenarioCard, chaosTokens: (nu
 		player.deck.shuffle();
 	}
 
+	new _01111().place([5, 5]);
+
 	for (const plr of GameContext.players) {
-		plr.location = new _01111().place([5, 5]);
+		plr.location = GameContext.game_map[5][5]!;
 		plr.investigator.place(GameContext.game_map[5][5]!);
 	}
 	task.spawn(investigatorPhase);
@@ -157,7 +159,7 @@ function upkeepPhase() {
 		if (plr.deck.size() === 0) {
 			const temp = plr.deck;
 			plr.deck = plr.discardDeck;
-			plr.discardDeck = plr.deck;
+			plr.discardDeck = temp;
 			plr.deck.shuffle();
 		}
 		const card = plr.deck.pull();

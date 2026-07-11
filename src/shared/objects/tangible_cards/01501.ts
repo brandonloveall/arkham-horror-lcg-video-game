@@ -61,7 +61,7 @@ export class _01501 extends Investigator {
 	reactions: reactions = {
 		[WhatHappened.ENEMY_DEFEATED]: {
 			reaction: (_fighter: unknown) => {
-				const fighter = _fighter as GamePlayer
+				const fighter = _fighter as GamePlayer;
 				if (fighter.investigator === this) {
 					fighter.location.discoverClue(fighter, 1);
 				}

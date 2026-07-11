@@ -39,9 +39,9 @@ export class _01117 extends AssetCard {
 	reactions: reactions = {
 		[WhatHappened.PLAYER_MOVED]: {
 			reaction: (_mover: unknown, _oldLocation: unknown, _newLocation: unknown) => {
-				const mover = _mover as GamePlayer
-				const oldLocation = _oldLocation as LocationCard
-				const newLocation = _newLocation as LocationCard
+				const mover = _mover as GamePlayer;
+				const oldLocation = _oldLocation as LocationCard;
+				const newLocation = _newLocation as LocationCard;
 				if (mover !== this.controller) {
 					if (oldLocation === this.controller.location) {
 						mover.investigator.skill_combat--;
