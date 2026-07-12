@@ -5,3 +5,4 @@ import "./PlaySound/PlaySound";
 import "./SkillCheckAnimation/SkillCheckAnimation";
 import "./GiveChoice/GiveChoice";
 import "./camera";
+import "./MainMenu/ChooseCampaign";
