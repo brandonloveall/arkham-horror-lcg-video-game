@@ -209,7 +209,7 @@ export class GamePlayer {
 		const finalShroud = location.shroud + (shroudModifier !== undefined ? shroudModifier : 0);
 		const [passed] = skillCheck({
 			initiator: this,
-			against: finalShroud < 0 ? 0 : finalShroud,
+			against: math.clamp(finalShroud, 0, math.huge),
 			using: skill,
 			bonus: bonusStat,
 		});
@@ -298,8 +298,8 @@ export class GamePlayer {
 	}
 
 	public heal(health: number, sanity: number) {
-		this.damage = this.damage - health < 0 ? 0 : this.damage - health;
-		this.horror = this.horror - sanity < 0 ? 0 : this.horror - sanity;
+		this.damage = math.clamp(this.damage - health, 0, this.investigator.health);
+		this.horror = math.clamp(this.horror - sanity, 0, this.investigator.sanity);
 		this.update();
 	}
 }

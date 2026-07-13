@@ -1,4 +1,5 @@
 import { Players } from "@rbxts/services";
+import { IconToken } from "shared/objects/chaos_bag";
 import { StartCampaign_Pub } from "shared/remotes/StartCampaign/Interface";
 
 const PLRGUI = Players.LocalPlayer.WaitForChild("PlayerGui");
@@ -7,10 +8,10 @@ interface Campaign {
 	identifier: string;
 	icon: string;
 	difficulties: {
-		easy: string[];
-		standard: string[];
-		hard: string[];
-		expert: string[];
+		easy: (number | IconToken)[];
+		standard: (number | IconToken)[];
+		hard: (number | IconToken)[];
+		expert: (number | IconToken)[];
 	};
 }
 
@@ -20,79 +21,79 @@ const campaignList: Campaign[] = [
 		icon: "blah",
 		difficulties: {
 			easy: [
-				"+1",
-				"+1",
-				"0",
-				"0",
-				"0",
-				"-1",
-				"-1",
-				"-1",
-				"-2",
-				"-2",
-				"skull",
-				"skull",
-				"cultist",
-				"tablet",
-				"auto_fail",
-				"elder_sign",
+				1,
+				1,
+				0,
+				0,
+				0,
+				-1,
+				-1,
+				-1,
+				-2,
+				-2,
+				IconToken.skull,
+				IconToken.skull,
+				IconToken.cultist,
+				IconToken.tablet,
+				IconToken.auto_fail,
+				IconToken.elder_sign,
 			],
 			standard: [
-				"+1",
-				"0",
-				"0",
-				"-1",
-				"-1",
-				"-1",
-				"-2",
-				"-2",
-				"-3",
-				"-4",
-				"skull",
-				"skull",
-				"cultist",
-				"tablet",
-				"auto_fail",
-				"elder_sign",
+				1,
+				0,
+				0,
+				-1,
+				-1,
+				-1,
+				-2,
+				-2,
+				-3,
+				-4,
+				IconToken.skull,
+				IconToken.skull,
+				IconToken.cultist,
+				IconToken.tablet,
+				IconToken.auto_fail,
+				IconToken.elder_sign,
 			],
 			hard: [
-				"0",
-				"0",
-				"0",
-				"-1",
-				"-1",
-				"-2",
-				"-2",
-				"-3",
-				"-3",
-				"-4",
-				"-5",
-				"skull",
-				"skull",
-				"cultist",
-				"tablet",
-				"auto_fail",
-				"elder_sign",
+				0,
+				0,
+				0,
+				-1,
+				-1,
+				-2,
+				-2,
+				-3,
+				-3,
+				-4,
+				-5,
+				IconToken.skull,
+				IconToken.skull,
+				IconToken.cultist,
+				IconToken.tablet,
+				IconToken.auto_fail,
+				IconToken.elder_sign,
 			],
 			expert: [
-				"0",
-				"-1",
-				"-1",
-				"-2",
-				"-2",
-				"-3",
-				"-3",
-				"-4",
-				"-4",
-				"-5",
-				"-6",
-				"-8",
-				"skull",
-				"skull",
-				"cultist",
-				"tablet",
-				"auto_fail",
-				"elder_sign",
+				0,
+				-1,
+				-1,
+				-2,
+				-2,
+				-3,
+				-3,
+				-4,
+				-4,
+				-5,
+				-6,
+				-8,
+				IconToken.skull,
+				IconToken.skull,
+				IconToken.cultist,
+				IconToken.tablet,
+				IconToken.auto_fail,
+				IconToken.elder_sign,
 			],
 		},
 	},
@@ -122,6 +123,7 @@ let currentIndex = 0;
 let currentCampaignFrame: Frame = new Instance("Frame");
 
 function buildCampaign(campaignObj: Campaign) {
+	const PlayerHud = Players.LocalPlayer.WaitForChild("PlayerGui").WaitForChild("PlayerHud") as ScreenGui;
 	currentCampaignFrame.Destroy();
 	const template = PLRGUI.WaitForChild("GuiElements").WaitForChild("campaign").Clone() as Frame;
 
@@ -136,16 +138,24 @@ function buildCampaign(campaignObj: Campaign) {
 
 	// 1 easy 2 standard 3 hard 4 expert
 	easy.MouseButton1Click.Connect(() => {
-		StartCampaign_Pub(campaignObj.identifier, 1);
+		StartCampaign_Pub(campaignObj.identifier, campaignObj.difficulties.easy);
+		MainMenu.Enabled = false;
+		PlayerHud.Enabled = true;
 	});
 	standard.MouseButton1Click.Connect(() => {
-		StartCampaign_Pub(campaignObj.identifier, 2);
+		StartCampaign_Pub(campaignObj.identifier, campaignObj.difficulties.standard);
+		MainMenu.Enabled = false;
+		PlayerHud.Enabled = true;
 	});
 	hard.MouseButton1Click.Connect(() => {
-		StartCampaign_Pub(campaignObj.identifier, 3);
+		StartCampaign_Pub(campaignObj.identifier, campaignObj.difficulties.hard);
+		MainMenu.Enabled = false;
+		PlayerHud.Enabled = true;
 	});
 	expert.MouseButton1Click.Connect(() => {
-		StartCampaign_Pub(campaignObj.identifier, 4);
+		StartCampaign_Pub(campaignObj.identifier, campaignObj.difficulties.expert);
+		MainMenu.Enabled = false;
+		PlayerHud.Enabled = true;
 	});
 	template.Parent = campaigns;
 	currentCampaignFrame = template;
