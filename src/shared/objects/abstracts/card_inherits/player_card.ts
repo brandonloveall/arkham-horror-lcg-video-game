@@ -7,7 +7,6 @@ export abstract class PlayerCard extends Card {
 	abstract skill_willpower: number;
 	abstract skill_wildcard: number;
 	abstract xp: number;
-	abstract deck_limit: number;
 
 	public getSkill(skill: string) {
 		switch (skill) {

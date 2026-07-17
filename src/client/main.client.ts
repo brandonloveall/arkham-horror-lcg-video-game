@@ -6,3 +6,4 @@ import "./SkillCheckAnimation/SkillCheckAnimation";
 import "./GiveChoice/GiveChoice";
 import "./camera";
 import "./MainMenu/ChooseCampaign";
+import "./MainMenu/ManageDecks";

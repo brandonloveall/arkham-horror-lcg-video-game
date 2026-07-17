@@ -12,23 +12,6 @@ export interface reaction {
 
 export type reactions = Partial<Record<WhatHappened, reaction>>;
 
-/**
- * Builds a `reaction` entry while letting you write the handler with real,
- * typed parameters. The unknown[] cast the interface demands happens here once,
- * so implementations never need in-body casts.
- */
-export function makeReaction<A extends unknown[]>(
-	optional: boolean,
-	fn: (...args: A) => void,
-	canUseReaction?: (...args: A) => boolean,
-): reaction {
-	return {
-		reaction: fn as (...params: unknown[]) => void,
-		optional,
-		canUseReaction: canUseReaction as ((...params: unknown[]) => boolean) | undefined,
-	};
-}
-
 export abstract class Card {
 	id: string = HttpService.GenerateGUID(false);
 
