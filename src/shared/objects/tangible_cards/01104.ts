@@ -19,6 +19,7 @@ import { _01166 } from "./01166";
 import { _01167 } from "./01167";
 import { _01168 } from "./01168";
 import { CardType, Faction } from "shared/card_database_types";
+import { _01111 } from "./01111";
 
 export class _01104 extends ScenarioCard {
 	code = "01104";
@@ -43,16 +44,6 @@ export class _01104 extends ScenarioCard {
 	 * FUTURE REFERENCE:
 	 * curl https://arkhamdb.com/api/public/cards/<expansion>?encounter=1 | jq '.[] | range(.quantity) as $i | select((.encounter_name == <encounter names>) and (.type_code == "enemy" or .type_code == "treachery") and .name != <excluded cards>) .code'
 	 */
-
-	startingAct = "01108";
-	startingAgenda = "01105";
-	startingMap = [
-		{
-			x: 5,
-			y: 5,
-			card: "01111",
-		},
-	];
 
 	resolve(token: IconToken, puller: GamePlayer, resolveObj: ResolveObj) {
 		if (token === IconToken.skull) {
@@ -108,6 +99,12 @@ export class _01104 extends ScenarioCard {
 			_01168,
 			_01168,
 		]);
+
+		new _01111().place([5, 5]);
+		for (const plr of GameContext.players) {
+			plr.location = GameContext.game_map[5][5]!;
+			plr.investigator.place(GameContext.game_map[5][5]!);
+		}
 	}
 }
 

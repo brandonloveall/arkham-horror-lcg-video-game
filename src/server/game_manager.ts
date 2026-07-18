@@ -2,37 +2,7 @@ import { Players } from "@rbxts/services";
 import { GamePlayer } from "../shared/objects/player";
 import { Deck } from "../shared/objects/deck";
 
-import { _01501 } from "../shared/objects/tangible_cards/01501";
-import { _01506 } from "../shared/objects/tangible_cards/01506";
-import { _01507 } from "../shared/objects/tangible_cards/01507";
-import { _01516 } from "../shared/objects/tangible_cards/01516";
-import { _01517 } from "../shared/objects/tangible_cards/01517";
-import { _01518 } from "../shared/objects/tangible_cards/01518";
-import { _01519 } from "../shared/objects/tangible_cards/01519";
-import { _01520 } from "../shared/objects/tangible_cards/01520";
-import { _01521 } from "../shared/objects/tangible_cards/01521";
-import { _01522 } from "../shared/objects/tangible_cards/01522";
-import { _01523 } from "../shared/objects/tangible_cards/01523";
-import { _01524 } from "../shared/objects/tangible_cards/01524";
-import { _01525 } from "../shared/objects/tangible_cards/01525";
-import { _01530 } from "../shared/objects/tangible_cards/01530";
-import { _01531 } from "../shared/objects/tangible_cards/01531";
-import { _01532 } from "../shared/objects/tangible_cards/01532";
-import { _01533 } from "../shared/objects/tangible_cards/01533";
-import { _01534 } from "../shared/objects/tangible_cards/01534";
-import { _01535 } from "../shared/objects/tangible_cards/01535";
-import { _01536 } from "../shared/objects/tangible_cards/01536";
-import { _01537 } from "../shared/objects/tangible_cards/01537";
-import { _01538 } from "../shared/objects/tangible_cards/01538";
-import { _01539 } from "../shared/objects/tangible_cards/01539";
-import { _01586 } from "../shared/objects/tangible_cards/01586";
-import { _01587 } from "../shared/objects/tangible_cards/01587";
-import { _01588 } from "../shared/objects/tangible_cards/01588";
-import { _01589 } from "../shared/objects/tangible_cards/01589";
-import { _01592 } from "../shared/objects/tangible_cards/01592";
-import { _01602 } from "../shared/objects/tangible_cards/01602";
 import { NonplayerCard } from "../shared/objects/abstracts/card_inherits/nonplayer_card";
-import { _01111 } from "../shared/objects/tangible_cards/01111";
 import { GameContext, WhatHappened } from "shared/game_context";
 import { CardRegistry } from "shared/card_registry";
 import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
@@ -43,6 +13,7 @@ import { performReactions } from "shared/performReactions";
 import { EndTurn_Sub } from "shared/remotes/Actions/Interface";
 import { ScenarioCard } from "shared/objects/abstracts/card_inherits/scenario_card";
 import { ChaosBag, IconToken } from "shared/objects/chaos_bag";
+import { getPlrsSelectedDeck } from "./deck_handler";
 
 let endedTurn = false;
 EndTurn_Sub((plr) => {
@@ -52,54 +23,18 @@ EndTurn_Sub((plr) => {
 	endedTurn = true;
 });
 
-// TODO: take in an input to start a campaign. currently this is hard coded to be Night of the Zealot
 export function start(startingScenario: new () => ScenarioCard, chaosTokens: (number | IconToken)[]) {
 	GameContext.scenario_card = new startingScenario();
-	GameContext.scenario_card.setup();
+	GameContext.players = [];
 
 	GameContext.chaos_bag = new ChaosBag(chaosTokens);
-	GameContext.players = [
-		new GamePlayer(
-			Players.GetPlayers()[0],
-			new Deck([
-				_01506,
-				_01516,
-				_01517,
-				_01518,
-				_01519,
-				_01520,
-				_01521,
-				_01530,
-				_01531,
-				_01532,
-				_01533,
-				_01534,
-				_01535,
-				_01586,
-				_01586,
-				_01587,
-				_01587,
-				_01522,
-				_01523,
-				_01524,
-				_01536,
-				_01537,
-				_01538,
-				_01588,
-				_01588,
-				_01525,
-				_01539,
-				_01589,
-				_01589,
-				_01592,
-				_01592,
-				_01507,
-				_01602,
-			]),
-			new _01501(),
-		),
-	];
 
+	for (const plr of Players.GetPlayers()) {
+		const [deck, investigator] = getPlrsSelectedDeck(Players.GetPlayers()[0])!;
+		GameContext.players.push(new GamePlayer(plr, new Deck(deck), new investigator()));
+	}
+
+	GameContext.scenario_card.setup();
 	GameContext.encounter_deck!.shuffle();
 
 	for (const player of GameContext.players) {
@@ -117,12 +52,6 @@ export function start(startingScenario: new () => ScenarioCard, chaosTokens: (nu
 		player.deck.shuffle();
 	}
 
-	new _01111().place([5, 5]);
-
-	for (const plr of GameContext.players) {
-		plr.location = GameContext.game_map[5][5]!;
-		plr.investigator.place(GameContext.game_map[5][5]!);
-	}
 	task.spawn(investigatorPhase);
 }
 
