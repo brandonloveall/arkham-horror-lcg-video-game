@@ -1,5 +1,6 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { GamePlayer } from "../player";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01587 extends AssetCard {
 	slot = "Hand";
@@ -13,8 +14,7 @@ export class _01587 extends AssetCard {
 	deck_limit = 2;
 	code = "01587";
 	pack_name = "Revised Core Set";
-	type_name = "Asset";
-	faction_name = "Neutral";
+	faction_name = Faction.Neutral;
 	position = 87;
 	exceptional = false;
 	myriad = false;
@@ -44,3 +44,10 @@ export class _01587 extends AssetCard {
 		});
 	}
 }
+
+export default {
+	code: "01587",
+	faction_name: Faction.Neutral,
+	type_name: CardType.Asset,
+	constructor: _01587,
+};

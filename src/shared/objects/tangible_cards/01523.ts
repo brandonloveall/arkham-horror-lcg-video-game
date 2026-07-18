@@ -1,6 +1,7 @@
 import { GameContext, WhatHappened } from "shared/game_context";
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 import { GamePlayer } from "../player";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01523 extends EventCard {
 	cost = 1;
@@ -13,8 +14,7 @@ export class _01523 extends EventCard {
 	deck_limit = 2;
 	code = "01523";
 	pack_name = "Revised Core Set";
-	type_name = "Event";
-	faction_name = "Guardian";
+	faction_name = Faction.Guardian;
 	position = 23;
 	exceptional = false;
 	myriad = false;
@@ -42,3 +42,10 @@ Cancel that attack.`;
 		print("not yet implemented");
 	}
 }
+
+export default {
+	code: "01523",
+	faction_name: Faction.Guardian,
+	type_name: CardType.Event,
+	constructor: _01523,
+};

@@ -8,6 +8,7 @@ import { _01114 } from "./01114";
 import { _01115 } from "./01115";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { _01111 } from "./01111";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01108 extends ActCard {
 	clues = 2;
@@ -23,8 +24,7 @@ You jump through the doorway, landing on your feet on soft dirt. The door to the
 	encounter_position = 5;
 	code = "01108";
 	pack_name = "Core Set";
-	type_name = "Act";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 108;
 	exceptional = false;
 	myriad = false;
@@ -61,3 +61,10 @@ You jump through the doorway, landing on your feet on soft dirt. The door to the
 		GameContext.act = new _01109();
 	}
 }
+
+export default {
+	code: "01108",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Act,
+	constructor: _01108,
+};

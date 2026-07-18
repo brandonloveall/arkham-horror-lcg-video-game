@@ -1,6 +1,7 @@
 import { GameContext } from "shared/game_context";
 import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
 import { _01110 } from "./01110";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01109 extends ActCard {
 	clues = 3;
@@ -14,8 +15,7 @@ Spawn the set-aside Ghoul Priest in the Hallway.`;
 	encounter_position = 6;
 	code = "01109";
 	pack_name = "Core Set";
-	type_name = "Act";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 109;
 	exceptional = false;
 	myriad = false;
@@ -38,3 +38,10 @@ Spawn the set-aside Ghoul Priest in the Hallway.`;
 		GameContext.act = new _01110();
 	}
 }
+
+export default {
+	code: "01109",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Act,
+	constructor: _01109,
+};

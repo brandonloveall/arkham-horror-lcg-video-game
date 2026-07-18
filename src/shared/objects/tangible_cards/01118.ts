@@ -1,5 +1,6 @@
 import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { GamePlayer } from "shared/objects/player";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01118 extends EnemyCard {
 	health = 4;
@@ -13,7 +14,7 @@ export class _01118 extends EnemyCard {
 	encounter_position = 15;
 	code = "01118";
 	pack_name = "Core Set";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 118;
 	exceptional = false;
 	myriad = false;
@@ -28,3 +29,10 @@ export class _01118 extends EnemyCard {
 	flavor = `A monstrous creature feeds from the rotting carcass in the attic.`;
 	subname = "";
 }
+
+export default {
+	code: "01118",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Enemy,
+	constructor: _01118,
+};

@@ -1,13 +1,13 @@
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { GamePlayer } from "../player";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01507 extends TreacheryCard {
 	encounter_name = "";
 	encounter_position = 0;
 	code = "01507";
 	pack_name = "Revised Core Set";
-	type_name = "Treachery";
-	faction_name = "Neutral";
+	faction_name = Faction.Neutral;
 	position = 7;
 	exceptional = false;
 	myriad = false;
@@ -29,3 +29,10 @@ export class _01507 extends TreacheryCard {
 		plrWhoDrew.threat_area.push(this);
 	}
 }
+
+export default {
+	code: "01507",
+	faction_name: Faction.Neutral,
+	type_name: CardType.Treachery,
+	constructor: _01507,
+};

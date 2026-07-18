@@ -1,4 +1,5 @@
 import { LocationCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01115 extends LocationCard {
 	shroud = 2;
@@ -11,8 +12,7 @@ export class _01115 extends LocationCard {
 	encounter_position = 12;
 	code = "01115";
 	pack_name = "Core Set";
-	type_name = "Location";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 115;
 	exceptional = false;
 	myriad = false;
@@ -31,3 +31,10 @@ While Lita Chantler is not controlled by a player, she gains: "[action]: <b>Parl
 	symbol = LocationCard.Symbol.GreenDiamond;
 	connects_to = [LocationCard.Symbol.RedSquare];
 }
+
+export default {
+	code: "01115",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Location,
+	constructor: _01115,
+};

@@ -1,14 +1,14 @@
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { GamePlayer } from "../player";
 import { GameContext } from "shared/game_context";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01166 extends TreacheryCard {
 	encounter_name = "Ancient Evils";
 	encounter_position = 1;
 	code = "01166";
 	pack_name = "Core Set";
-	type_name = "Treachery";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 166;
 	exceptional = false;
 	myriad = false;
@@ -29,3 +29,10 @@ export class _01166 extends TreacheryCard {
 		}
 	}
 }
+
+export default {
+	code: "01166",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Treachery,
+	constructor: _01166,
+};

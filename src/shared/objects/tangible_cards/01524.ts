@@ -5,6 +5,7 @@ import { CardRegistry } from "shared/card_registry";
 import { LocationCard } from "../abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { GameContext } from "shared/game_context";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01524 extends EventCard {
 	cost = 5;
@@ -17,8 +18,7 @@ export class _01524 extends EventCard {
 	deck_limit = 2;
 	code = "01524";
 	pack_name = "Revised Core Set";
-	type_name = "Event";
-	faction_name = "Guardian";
+	faction_name = Faction.Guardian;
 	position = 24;
 	exceptional = false;
 	myriad = false;
@@ -56,3 +56,10 @@ export class _01524 extends EventCard {
 		);
 	}
 }
+
+export default {
+	code: "01524",
+	faction_name: Faction.Guardian,
+	type_name: CardType.Event,
+	constructor: _01524,
+};

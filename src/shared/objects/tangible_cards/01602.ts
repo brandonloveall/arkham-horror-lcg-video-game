@@ -1,5 +1,6 @@
 import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { GamePlayer } from "shared/objects/player";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01602 extends EnemyCard {
 	health = 3;
@@ -13,7 +14,7 @@ export class _01602 extends EnemyCard {
 	encounter_position = 0;
 	code = "01602";
 	pack_name = "Revised Core Set";
-	faction_name = "Neutral";
+	faction_name = Faction.Neutral;
 	position = 102;
 	exceptional = false;
 	myriad = false;
@@ -30,3 +31,10 @@ Hunter.
 	flavor = `You'll never forget the day you learned the true secret of the Silver Twilight Lodge's inner circle. The truth is too terrible for the Lodge to let you live.`;
 	subname = "";
 }
+
+export default {
+	code: "01602",
+	faction_name: Faction.Neutral,
+	type_name: CardType.Enemy,
+	constructor: _01602,
+};

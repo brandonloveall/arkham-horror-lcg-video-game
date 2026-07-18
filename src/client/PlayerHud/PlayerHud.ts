@@ -1,4 +1,5 @@
 import { Players } from "@rbxts/services";
+import { CardType, Faction } from "shared/card_database_types";
 import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card";
 import {
 	ActivateAbility_Pub,
@@ -104,7 +105,7 @@ UpdatePlayerUI_Sub((payload) => {
 
 		Name.Text = card.name;
 		Description.Text = card.text;
-		if (card.type_name === "Asset" || card.type_name === "Event") {
+		if (card.type_name === CardType.Asset || card.type_name === CardType.Event) {
 			const costingCard = card as CostingCard;
 			Cost.Text = "" + costingCard.cost;
 			const skills = ["skill_agility", "skill_willpower", "skill_intellect", "skill_combat", "skill_wildcard"];
@@ -126,19 +127,18 @@ UpdatePlayerUI_Sub((payload) => {
 		}
 
 		const colors = {
-			Neutral: new Color3(0.83, 0.79, 0.71),
-			Seeker: new Color3(0.69, 0.52, 0.15),
-			Survivor: new Color3(0.61, 0.05, 0.05),
-			Mystic: new Color3(0.38, 0.22, 0.53),
-			Guardian: new Color3(0.09, 0.15, 0.46),
-			Rogue: new Color3(0.05, 0.35, 0.06),
+			[Faction.Neutral]: new Color3(0.83, 0.79, 0.71),
+			[Faction.Seeker]: new Color3(0.69, 0.52, 0.15),
+			[Faction.Survivor]: new Color3(0.61, 0.05, 0.05),
+			[Faction.Mystic]: new Color3(0.38, 0.22, 0.53),
+			[Faction.Guardian]: new Color3(0.09, 0.15, 0.46),
+			[Faction.Rogue]: new Color3(0.05, 0.35, 0.06),
 		};
 
 		Name.BackgroundColor3 = colors[card.faction_name as keyof typeof colors];
 
 		NewCard.Parent = Hand;
-		if ((card as CostingCard).cost !== undefined) {
-		}
+		if ((card as CostingCard).cost !== undefined) { /* empty */ }
 		currentHandCards.push(NewCard);
 	}
 

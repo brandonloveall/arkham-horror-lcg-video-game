@@ -1,5 +1,6 @@
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 import { GamePlayer } from "../player";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01588 extends EventCard {
 	cost = 0;
@@ -12,8 +13,7 @@ export class _01588 extends EventCard {
 	deck_limit = 2;
 	code = "01588";
 	pack_name = "Revised Core Set";
-	type_name = "Event";
-	faction_name = "Neutral";
+	faction_name = Faction.Neutral;
 	position = 88;
 	exceptional = false;
 	myriad = false;
@@ -32,3 +32,10 @@ export class _01588 extends EventCard {
 		whoPlayed.resources += 3;
 	}
 }
+
+export default {
+	code: "01588",
+	faction_name: Faction.Neutral,
+	type_name: CardType.Event,
+	constructor: _01588,
+};

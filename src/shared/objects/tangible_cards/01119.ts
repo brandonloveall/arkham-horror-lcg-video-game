@@ -1,5 +1,6 @@
 import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { GamePlayer } from "shared/objects/player";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01119 extends EnemyCard {
 	health = 4;
@@ -13,7 +14,7 @@ export class _01119 extends EnemyCard {
 	encounter_position = 16;
 	code = "01119";
 	pack_name = "Core Set";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 119;
 	exceptional = false;
 	myriad = false;
@@ -28,3 +29,10 @@ export class _01119 extends EnemyCard {
 	flavor = `Inside the tunnels beneath the house, a massive beast tears its way out of the ice. It is covered in a think layer of frost, its breath visible in the bitter cold.`;
 	subname = "";
 }
+
+export default {
+	code: "01119",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Enemy,
+	constructor: _01119,
+};

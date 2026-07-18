@@ -1,4 +1,5 @@
 import { HttpService } from "@rbxts/services";
+import { CardType, Faction } from "shared/card_database_types";
 import { CardRegistry } from "shared/card_registry";
 import { WhatHappened } from "shared/game_context";
 
@@ -17,8 +18,8 @@ export abstract class Card {
 
 	abstract code: string;
 	abstract pack_name: string;
-	abstract type_name: string;
-	abstract faction_name: string;
+	abstract type_name: CardType;
+	abstract faction_name: Faction;
 	abstract position: number;
 	abstract exceptional: boolean;
 	abstract myriad: boolean;

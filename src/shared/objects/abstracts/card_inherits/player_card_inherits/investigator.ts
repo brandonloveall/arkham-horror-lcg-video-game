@@ -4,6 +4,7 @@ import { DeckOption, DeckRequirements } from "shared/objects/abstracts/deck_req_
 import { LocationCard } from "../nonplayer_card_inherits/story_card_inherits/location_card";
 import { ReplicatedStorage, Workspace } from "@rbxts/services";
 import { GamePlayer } from "shared/objects/player";
+import { CardType } from "shared/card_database_types";
 
 export abstract class Investigator extends PlayerCard implements Damageable {
 	abstract health: number;
@@ -12,6 +13,7 @@ export abstract class Investigator extends PlayerCard implements Damageable {
 	abstract deck_requirements: DeckRequirements;
 	abstract deck_options: DeckOption[];
 	model!: Model;
+	type_name = CardType.Investigator;
 
 	public place(location: LocationCard) {
 		this.inPlay = true;

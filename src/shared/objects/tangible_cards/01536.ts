@@ -1,6 +1,7 @@
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 import { GamePlayer } from "../player";
 import { GameContext } from "shared/game_context";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01536 extends EventCard {
 	cost = 1;
@@ -13,8 +14,7 @@ export class _01536 extends EventCard {
 	deck_limit = 2;
 	code = "01536";
 	pack_name = "Revised Core Set";
-	type_name = "Event";
-	faction_name = "Seeker";
+	faction_name = Faction.Seeker;
 	position = 36;
 	exceptional = false;
 	myriad = false;
@@ -39,3 +39,10 @@ Until the end of the round, you may use your [intellect] in place of your [comba
 		print("not yet implemented");
 	}
 }
+
+export default {
+	code: "01536",
+	faction_name: Faction.Seeker,
+	type_name: CardType.Event,
+	constructor: _01536,
+};

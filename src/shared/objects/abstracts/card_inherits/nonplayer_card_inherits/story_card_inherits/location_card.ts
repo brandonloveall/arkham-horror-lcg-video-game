@@ -5,6 +5,7 @@ import { Card } from "shared/objects/abstracts/card";
 import { GamePlayer } from "shared/objects/player";
 import { CardRegistry } from "shared/card_registry";
 import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
+import { CardType } from "shared/card_database_types";
 
 export abstract class LocationCard extends StoryCard {
 	abstract shroud: number;
@@ -12,6 +13,7 @@ export abstract class LocationCard extends StoryCard {
 	model!: Model;
 	xCoord = 0;
 	yCoord = 0;
+	type_name = CardType.Location;
 
 	protected static readonly Symbol = {
 		RedSquare: 1,

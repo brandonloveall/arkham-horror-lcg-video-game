@@ -2,6 +2,7 @@ import { Investigator } from "shared/objects/abstracts/card_inherits/player_card
 import { GamePlayer } from "../player";
 import { WhatHappened } from "shared/game_context";
 import { reactions } from "../abstracts/card";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01501 extends Investigator {
 	health = 9;
@@ -41,8 +42,7 @@ export class _01501 extends Investigator {
 	deck_limit = 1;
 	code = "01501";
 	pack_name = "Revised Core Set";
-	type_name = "Investigator";
-	faction_name = "Guardian";
+	faction_name = Faction.Guardian;
 	position = 1;
 	exceptional = false;
 	myriad = false;
@@ -74,3 +74,10 @@ export class _01501 extends Investigator {
 		return initiator.location.clues;
 	}
 }
+
+export default {
+	code: "01501",
+	faction_name: Faction.Guardian,
+	type_name: CardType.Investigator,
+	constructor: _01501,
+};

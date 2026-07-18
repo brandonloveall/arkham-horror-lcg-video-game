@@ -1,15 +1,14 @@
-import { Damageable } from "shared/objects/abstracts/damageable";
 import { reactions } from "shared/objects/abstracts/card";
 import { HostileCard } from "../hostile_card";
 import { GamePlayer } from "shared/objects/player";
 import { LocationCard } from "../story_card_inherits/location_card";
 import { ReplicatedStorage, Workspace } from "@rbxts/services";
-import { Readies } from "shared/objects/abstracts/readies";
 import { GameContext, WhatHappened } from "shared/game_context";
 // eslint-disable-next-line
 import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
+import { CardType } from "shared/card_database_types";
 
-export abstract class EnemyCard extends HostileCard implements Damageable, Readies {
+export abstract class EnemyCard extends HostileCard {
 	abstract health: number;
 	sanity = undefined;
 	abstract enemy_damage: number;
@@ -23,7 +22,7 @@ export abstract class EnemyCard extends HostileCard implements Damageable, Readi
 	is_ready = false;
 	location!: LocationCard;
 	model!: Model;
-	type_name = "Enemy";
+	type_name = CardType.Enemy;
 
 	reactions: reactions = {
 		[WhatHappened.PLAYER_MOVED]: {

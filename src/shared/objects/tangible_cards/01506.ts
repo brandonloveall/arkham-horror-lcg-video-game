@@ -1,6 +1,7 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { GamePlayer } from "../player";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01506 extends AssetCard {
 	slot = "Hand";
@@ -14,8 +15,7 @@ export class _01506 extends AssetCard {
 	deck_limit = 1;
 	code = "01506";
 	pack_name = "Revised Core Set";
-	type_name = "Asset";
-	faction_name = "Neutral";
+	faction_name = Faction.Neutral;
 	position = 6;
 	exceptional = false;
 	myriad = false;
@@ -49,3 +49,10 @@ Uses (4 ammo).
 		});
 	}
 }
+
+export default {
+	code: "01506",
+	faction_name: Faction.Neutral,
+	type_name: CardType.Asset,
+	constructor: _01506,
+};

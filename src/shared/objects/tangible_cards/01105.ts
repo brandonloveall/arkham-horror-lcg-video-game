@@ -1,4 +1,5 @@
 import { AgendaCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/agenda_card";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01105 extends AgendaCard {
 	doom = 3;
@@ -10,8 +11,7 @@ export class _01105 extends AgendaCard {
 	encounter_position = 2;
 	code = "01105";
 	pack_name = "Core Set";
-	type_name = "Agenda";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 105;
 	exceptional = false;
 	myriad = false;
@@ -30,3 +30,10 @@ export class _01105 extends AgendaCard {
 		print("Method not implemented.");
 	}
 }
+
+export default {
+	code: "01105",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Agenda,
+	constructor: _01105,
+};

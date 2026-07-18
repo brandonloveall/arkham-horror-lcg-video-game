@@ -1,6 +1,7 @@
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 import { GamePlayer } from "../player";
 import { GameContext } from "shared/game_context";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01537 extends EventCard {
 	cost = 2;
@@ -13,8 +14,7 @@ export class _01537 extends EventCard {
 	deck_limit = 2;
 	code = "01537";
 	pack_name = "Revised Core Set";
-	type_name = "Event";
-	faction_name = "Seeker";
+	faction_name = Faction.Seeker;
 	position = 37;
 	exceptional = false;
 	myriad = false;
@@ -39,3 +39,10 @@ Discover 1 clue at your location.`;
 		whoPlayed.location.discoverClue(whoPlayed, 1);
 	}
 }
+
+export default {
+	code: "01537",
+	faction_name: Faction.Seeker,
+	type_name: CardType.Event,
+	constructor: _01537,
+};

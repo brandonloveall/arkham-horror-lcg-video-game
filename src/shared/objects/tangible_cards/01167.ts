@@ -2,14 +2,14 @@ import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_
 import { GamePlayer } from "../player";
 import { skillCheck } from "shared/skillcheck";
 import { discard } from "shared/discard";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01167 extends TreacheryCard {
 	encounter_name = "Chilling Cold";
 	encounter_position = 1;
 	code = "01167";
 	pack_name = "Core Set";
-	type_name = "Treachery";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 167;
 	exceptional = false;
 	myriad = false;
@@ -35,3 +35,10 @@ export class _01167 extends TreacheryCard {
 		}
 	}
 }
+
+export default {
+	code: "01167",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Treachery,
+	constructor: _01167,
+};

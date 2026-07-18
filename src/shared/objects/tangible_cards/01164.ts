@@ -3,14 +3,14 @@ import { GamePlayer } from "../player";
 import { GameContext, WhatHappened } from "shared/game_context";
 import { skillCheck } from "shared/skillcheck";
 import { reactions } from "../abstracts/card";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01164 extends TreacheryCard {
 	encounter_name = "Striking Fear";
 	encounter_position = 4;
 	code = "01164";
 	pack_name = "Core Set";
-	type_name = "Treachery";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 164;
 	exceptional = false;
 	myriad = false;
@@ -52,3 +52,10 @@ The first time you perform one of the following actions (move, fight, or evade) 
 		plrWhoDrew.threat_area.push(this);
 	}
 }
+
+export default {
+	code: "01164",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Treachery,
+	constructor: _01164,
+};

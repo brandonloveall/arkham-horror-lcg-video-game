@@ -3,6 +3,7 @@ import { GameContext, WhatHappened } from "shared/game_context";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { giveChoice } from "shared/giveChoice";
 import { reactions } from "../abstracts/card";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01110 extends ActCard {
 	clues = 0;
@@ -17,8 +18,7 @@ export class _01110 extends ActCard {
 	encounter_position = 7;
 	code = "01110";
 	pack_name = "Core Set";
-	type_name = "Act";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 110;
 	exceptional = false;
 	myriad = false;
@@ -62,3 +62,10 @@ export class _01110 extends ActCard {
 		]);
 	}
 }
+
+export default {
+	code: "01110",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Act,
+	constructor: _01110,
+};

@@ -2,6 +2,7 @@ import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_in
 import { GamePlayer } from "../player";
 import { CardRegistry } from "shared/card_registry";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01520 extends AssetCard {
 	slot = "Hand";
@@ -15,8 +16,7 @@ export class _01520 extends AssetCard {
 	deck_limit = 2;
 	code = "01520";
 	pack_name = "Revised Core Set";
-	type_name = "Asset";
-	faction_name = "Guardian";
+	faction_name = Faction.Guardian;
 	position = 20;
 	exceptional = false;
 	myriad = false;
@@ -54,3 +54,10 @@ export class _01520 extends AssetCard {
 		});
 	}
 }
+
+export default {
+	code: "01520",
+	faction_name: Faction.Guardian,
+	type_name: CardType.Asset,
+	constructor: _01520,
+};

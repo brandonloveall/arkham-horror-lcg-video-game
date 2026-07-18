@@ -1,5 +1,6 @@
 import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { GamePlayer } from "shared/objects/player";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01160 extends EnemyCard {
 	health = 2;
@@ -13,7 +14,7 @@ export class _01160 extends EnemyCard {
 	encounter_position = 1;
 	code = "01160";
 	pack_name = "Core Set";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 160;
 	exceptional = false;
 	myriad = false;
@@ -28,3 +29,10 @@ export class _01160 extends EnemyCard {
 	flavor = `It was a colossal and nameless blasphemy with glaring red eyes, and it held in bony claws a thing that had been a man, gnawing at the head as a child nibbles at a stick of candy. <cite>H. P. Lovecraft, "Pickman's Model"</cite>`;
 	subname = "";
 }
+
+export default {
+	code: "01160",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Enemy,
+	constructor: _01160,
+};

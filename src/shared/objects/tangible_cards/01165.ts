@@ -3,14 +3,14 @@ import { GamePlayer } from "../player";
 import { reactions } from "../abstracts/card";
 import { GameContext, WhatHappened } from "shared/game_context";
 import { getOwner } from "shared/findOwner";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01165 extends TreacheryCard {
 	encounter_name = "Striking Fear";
 	encounter_position = 6;
 	code = "01165";
 	pack_name = "Core Set";
-	type_name = "Treachery";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 165;
 	exceptional = false;
 	myriad = false;
@@ -41,3 +41,10 @@ You cannot play assets or events.
 		plrWhoDrew.threat_area.push(this);
 	}
 }
+
+export default {
+	code: "01165",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Treachery,
+	constructor: _01165,
+};

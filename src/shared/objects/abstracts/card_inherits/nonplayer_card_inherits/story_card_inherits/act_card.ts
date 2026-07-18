@@ -1,3 +1,4 @@
+import { CardType } from "shared/card_database_types";
 import { StoryCard } from "../story_card";
 
 export interface ActRestriction {
@@ -10,4 +11,6 @@ export abstract class ActCard extends StoryCard {
 	abstract advance(): void;
 
 	restriction?: ActRestriction;
+
+	type_name = CardType.Act
 }

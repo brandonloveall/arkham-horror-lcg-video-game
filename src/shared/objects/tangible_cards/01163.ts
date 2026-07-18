@@ -1,14 +1,14 @@
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { GamePlayer } from "../player";
 import { skillCheck } from "shared/skillcheck";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01163 extends TreacheryCard {
 	encounter_name = "Striking Fear";
 	encounter_position = 1;
 	code = "01163";
 	pack_name = "Core Set";
-	type_name = "Treachery";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 163;
 	exceptional = false;
 	myriad = false;
@@ -30,3 +30,10 @@ export class _01163 extends TreacheryCard {
 		}
 	}
 }
+
+export default {
+	code: "01163",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Treachery,
+	constructor: _01163,
+};

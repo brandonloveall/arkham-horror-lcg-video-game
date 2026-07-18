@@ -1,3 +1,4 @@
+import { CardType } from "shared/card_database_types";
 import { StoryCard } from "../story_card";
 
 export abstract class AgendaCard extends StoryCard {
@@ -5,4 +6,6 @@ export abstract class AgendaCard extends StoryCard {
 	current_doom = 0;
 
 	abstract advance(): void;
+
+	type_name = CardType.Agenda;
 }

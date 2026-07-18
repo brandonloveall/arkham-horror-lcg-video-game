@@ -1,6 +1,7 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { reactions } from "../abstracts/card";
 import { WhatHappened } from "shared/game_context";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01521 extends AssetCard {
 	slot = "Ally";
@@ -14,8 +15,7 @@ export class _01521 extends AssetCard {
 	deck_limit = 2;
 	code = "01521";
 	pack_name = "Revised Core Set";
-	type_name = "Asset";
-	faction_name = "Guardian";
+	faction_name = Faction.Guardian;
 	position = 21;
 	exceptional = false;
 	myriad = false;
@@ -39,3 +39,10 @@ export class _01521 extends AssetCard {
 		},
 	};
 }
+
+export default {
+	code: "01521",
+	faction_name: Faction.Guardian,
+	type_name: CardType.Asset,
+	constructor: _01521,
+};

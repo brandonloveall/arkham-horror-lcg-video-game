@@ -2,6 +2,7 @@ import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_in
 import { GamePlayer } from "../player";
 import { giveChoice } from "shared/giveChoice";
 import { GameContext } from "shared/game_context";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01519 extends AssetCard {
 	slot = "";
@@ -15,8 +16,7 @@ export class _01519 extends AssetCard {
 	deck_limit = 2;
 	code = "01519";
 	pack_name = "Revised Core Set";
-	type_name = "Asset";
-	faction_name = "Guardian";
+	faction_name = Faction.Guardian;
 	position = 19;
 	exceptional = false;
 	myriad = false;
@@ -67,3 +67,10 @@ export class _01519 extends AssetCard {
 		}
 	}
 }
+
+export default {
+	code: "01519",
+	faction_name: Faction.Guardian,
+	type_name: CardType.Asset,
+	constructor: _01519,
+};

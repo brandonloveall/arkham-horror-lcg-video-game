@@ -4,6 +4,7 @@ import { WhatHappened } from "shared/game_context";
 import { GamePlayer } from "../player";
 import { PlayerCard } from "../abstracts/card_inherits/player_card";
 import { giveChoice } from "shared/giveChoice";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01532 extends AssetCard {
 	slot = "Ally";
@@ -17,8 +18,7 @@ export class _01532 extends AssetCard {
 	deck_limit = 2;
 	code = "01532";
 	pack_name = "Revised Core Set";
-	type_name = "Asset";
-	faction_name = "Seeker";
+	faction_name = Faction.Seeker;
 	position = 32;
 	exceptional = false;
 	myriad = false;
@@ -60,3 +60,10 @@ export class _01532 extends AssetCard {
 		},
 	};
 }
+
+export default {
+	code: "01532",
+	faction_name: Faction.Seeker,
+	type_name: CardType.Asset,
+	constructor: _01532,
+};

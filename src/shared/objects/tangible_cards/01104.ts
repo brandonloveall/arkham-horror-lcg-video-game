@@ -18,12 +18,12 @@ import { _01165 } from "./01165";
 import { _01166 } from "./01166";
 import { _01167 } from "./01167";
 import { _01168 } from "./01168";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01104 extends ScenarioCard {
 	code = "01104";
 	pack_name = "Core Set";
-	type_name = "Scenario";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 104;
 	exceptional = false;
 	myriad = false;
@@ -110,3 +110,10 @@ export class _01104 extends ScenarioCard {
 		]);
 	}
 }
+
+export default {
+	code: "01104",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Scenario,
+	constructor: _01104,
+};

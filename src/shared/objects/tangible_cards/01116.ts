@@ -1,5 +1,6 @@
 import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { GamePlayer } from "shared/objects/player";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01116 extends EnemyCard {
 	health = 5;
@@ -13,7 +14,7 @@ export class _01116 extends EnemyCard {
 	encounter_position = 13;
 	code = "01116";
 	pack_name = "Core Set";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 116;
 	exceptional = false;
 	myriad = false;
@@ -29,3 +30,10 @@ Hunter. Retaliate.`;
 	flavor = `A figure in red robes wearing a bone mask. It gibbers and snarls before leaping to attack.`;
 	subname = "";
 }
+
+export default {
+	code: "01116",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Enemy,
+	constructor: _01116,
+};

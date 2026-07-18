@@ -3,6 +3,7 @@ import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_in
 import { reactions } from "../abstracts/card";
 import { GamePlayer } from "../player";
 import { LocationCard } from "../abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01117 extends AssetCard {
 	slot = "Ally";
@@ -16,8 +17,7 @@ export class _01117 extends AssetCard {
 	deck_limit = 1;
 	code = "01117";
 	pack_name = "Core Set";
-	type_name = "Asset";
-	faction_name = "Neutral";
+	faction_name = Faction.Neutral;
 	position = 117;
 	exceptional = false;
 	myriad = false;
@@ -64,3 +64,10 @@ export class _01117 extends AssetCard {
 		},
 	};
 }
+
+export default {
+	code: "01117",
+	faction_name: Faction.Neutral,
+	type_name: CardType.Asset,
+	constructor: _01117,
+};

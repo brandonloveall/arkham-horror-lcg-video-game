@@ -1,4 +1,5 @@
 import { LocationCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
+import { CardType, Faction } from "shared/card_database_types";
 
 export class _01112 extends LocationCard {
 	shroud = 1;
@@ -11,8 +12,7 @@ export class _01112 extends LocationCard {
 	encounter_position = 9;
 	code = "01112";
 	pack_name = "Core Set";
-	type_name = "Location";
-	faction_name = "Mythos";
+	faction_name = Faction.Mythos;
 	position = 112;
 	exceptional = false;
 	myriad = false;
@@ -30,3 +30,10 @@ export class _01112 extends LocationCard {
 	symbol = LocationCard.Symbol.RedSquare;
 	connects_to = [LocationCard.Symbol.BlueTriangle, LocationCard.Symbol.BrownCross, LocationCard.Symbol.GreenDiamond];
 }
+
+export default {
+	code: "01112",
+	faction_name: Faction.Mythos,
+	type_name: CardType.Location,
+	constructor: _01112,
+};
