@@ -27,7 +27,7 @@ export class _01519 extends AssetCard {
 	permanent = false;
 	double_sided = false;
 	text = `Uses (3 supplies). If First Aid has no supplies, discard it.
-[action] Spend 1 supply: Heal 1 damage or horror from an investigator at your location.`;
+➡️ Spend 1 supply: Heal 1 damage or horror from an investigator at your location.`;
 	traits = "Talent. Science.";
 	flavor = ``;
 	subname = "";

@@ -19,7 +19,7 @@ export class _01167 extends TreacheryCard {
 	is_unique = false;
 	permanent = false;
 	double_sided = false;
-	text = `<b>Revelation</b> - Test [willpower] (4). If you fail, choose and discard 1 asset you control (if you cannot, take 2 damage instead).`;
+	text = `<b>Revelation</b> - Test 🗣️ (4). If you fail, choose and discard 1 asset you control (if you cannot, take 2 damage instead).`;
 	traits = "Hazard.";
 	flavor = `The supernatural cold threatens to freeze your soul.`;
 	subname = "";

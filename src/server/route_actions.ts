@@ -121,7 +121,7 @@ ActivateAbility_Sub((plr, card_id) => {
 	const card = CardRegistry.get(card_id as string) as AssetCard;
 	getPlrObj(plr).activateAbility(
 		(gameplr: GamePlayer) => card.ability(gameplr),
-		card.text.find("[action]") === undefined,
+		card.text.find("➡️") === undefined,
 	);
 });
 

@@ -26,7 +26,7 @@ export class _01516 extends AssetCard {
 	permanent = false;
 	double_sided = false;
 	text = `Uses (4 ammo).
-[action] Spend 1 ammo: <b>Fight.</b> You get +1 [combat] for this attack. This attack deals +1 damage.`;
+➡️ Spend 1 ammo: <b>Fight.</b> You get +1 👊 for this attack. This attack deals +1 damage.`;
 	traits = "Item. Weapon. Firearm.";
 	flavor = ``;
 	subname = "";

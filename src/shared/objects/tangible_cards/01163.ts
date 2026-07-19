@@ -18,7 +18,7 @@ export class _01163 extends TreacheryCard {
 	is_unique = false;
 	permanent = false;
 	double_sided = false;
-	text = `<b>Revelation</b> - Test [willpower] (3). For each point you fail by, take 1 horror.`;
+	text = `<b>Revelation</b> - Test 🗣️ (3). For each point you fail by, take 1 horror.`;
 	traits = "Terror.";
 	flavor = `A sickening display of gore causes you to retch. You're glad this wasn't you.`;
 	subname = "";

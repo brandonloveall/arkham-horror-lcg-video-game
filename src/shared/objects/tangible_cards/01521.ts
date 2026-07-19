@@ -25,7 +25,7 @@ export class _01521 extends AssetCard {
 	is_unique = false;
 	permanent = false;
 	double_sided = false;
-	text = `[reaction] When an enemy attack deals damage to Guard Dog: Deal 1 damage to the attacking enemy.`;
+	text = `🔄 When an enemy attack deals damage to Guard Dog: Deal 1 damage to the attacking enemy.`;
 	traits = "Ally. Creature.";
 	flavor = `Fiercely loyal, these trained canines make for perfect companions.`;
 	subname = "";

@@ -22,7 +22,7 @@ export class _01164 extends TreacheryCard {
 	double_sided = false;
 	text = `<b>Revelation</b> - Put Frozen in Fear into play in your threat area.
 The first time you perform one of the following actions (move, fight, or evade) each round, it costs 1 additional action.
-<b>Forced</b> - At the end of your turn: Test [willpower] (3). If you succeed, discard Frozen in Fear.`;
+<b>Forced</b> - At the end of your turn: Test 🗣️ (3). If you succeed, discard Frozen in Fear.`;
 	traits = "Terror.";
 	flavor = ``;
 	subname = "";

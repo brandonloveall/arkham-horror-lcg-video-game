@@ -23,8 +23,8 @@ export class _01586 extends AssetCard {
 	is_unique = false;
 	permanent = false;
 	double_sided = false;
-	text = `[action]: <b>Fight.</b> You get +1 [combat] for this attack.
-[action] Discard Knife: <b>Fight.</b> You get +2 [combat] for this attack. This attack deals +1 damage.`;
+	text = `➡️: <b>Fight.</b> You get +1 👊 for this attack.
+➡️ Discard Knife: <b>Fight.</b> You get +2 👊 for this attack. This attack deals +1 damage.`;
 	traits = "Item. Weapon. Melee.";
 	flavor = ``;
 	subname = "";

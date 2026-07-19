@@ -23,7 +23,7 @@ export class _01531 extends AssetCard {
 	is_unique = false;
 	permanent = false;
 	double_sided = false;
-	text = `[action] Exhaust Old Book of Lore: Choose an investigator at your location. That investigator searches the top 3 cards of his or her deck for a card, draws it, and shuffles the remaining cards into his or her deck.`;
+	text = `➡️ Exhaust Old Book of Lore: Choose an investigator at your location. That investigator searches the top 3 cards of his or her deck for a card, draws it, and shuffles the remaining cards into his or her deck.`;
 	traits = "Item. Tome.";
 	flavor = ``;
 	subname = "";

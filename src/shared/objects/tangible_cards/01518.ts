@@ -23,8 +23,8 @@ export class _01518 extends AssetCard {
 	is_unique = false;
 	permanent = false;
 	double_sided = false;
-	text = `You get +1 [combat].
-[fast] Discard Beat Cop: Deal 1 damage to an enemy at your location.`;
+	text = `You get +1 👊.
+🗲 Discard Beat Cop: Deal 1 damage to an enemy at your location.`;
 	traits = "Ally. Police.";
 	flavor = ``;
 	subname = "";

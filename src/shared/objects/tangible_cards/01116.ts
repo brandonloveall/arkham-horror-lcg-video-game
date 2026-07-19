@@ -24,7 +24,7 @@ export class _01116 extends EnemyCard {
 	is_unique = false;
 	permanent = false;
 	double_sided = false;
-	text = `<b>Prey</b> - Highest [combat].
+	text = `<b>Prey</b> - Highest 👊.
 Hunter. Retaliate.`;
 	traits = "Humanoid. Monster. Ghoul. Elite.";
 	flavor = `A figure in red robes wearing a bone mask. It gibbers and snarls before leaping to attack.`;

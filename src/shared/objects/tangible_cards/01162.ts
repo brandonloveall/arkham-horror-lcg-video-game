@@ -18,7 +18,7 @@ export class _01162 extends TreacheryCard {
 	is_unique = false;
 	permanent = false;
 	double_sided = false;
-	text = `<b>Revelation</b> - Test [agility] (3). For each point you fail by, take 1 damage.`;
+	text = `<b>Revelation</b> - Test 👟 (3). For each point you fail by, take 1 damage.`;
 	traits = "Hazard.";
 	flavor = `Decaying hands rise up from below and grasp and claw at your ankles.`;
 	subname = "";

@@ -23,8 +23,8 @@ export class _01533 extends AssetCard {
 	is_unique = true;
 	permanent = false;
 	double_sided = false;
-	text = `You get +1 [intellect].
-[reaction] After you successfully investigate: Gain 1 resource.`;
+	text = `You get +1 📖.
+🔄 After you successfully investigate: Gain 1 resource.`;
 	traits = "Ally. Miskatonic.";
 	flavor = `"While I truly believe that this nightmare is just a singular abomination, I must admit that I am exhilarated by the possibility that this is but one specimen of a new genus!"`;
 	subname = "Professor of Entomology";

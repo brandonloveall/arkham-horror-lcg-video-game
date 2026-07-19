@@ -22,8 +22,8 @@ export class _01115 extends LocationCard {
 	is_unique = false;
 	permanent = false;
 	double_sided = true;
-	text = `[action] <b>Resign.</b> "This is too much for me!" You run out the front door, fleeing in panic.
-While Lita Chantler is not controlled by a player, she gains: "[action]: <b>Parley.</b> Test [intellect] (4). If you succeed, take control of Lita Chantler."`;
+	text = `➡️ <b>Resign.</b> "This is too much for me!" You run out the front door, fleeing in panic.
+While Lita Chantler is not controlled by a player, she gains: "➡️: <b>Parley.</b> Test 📖 (4). If you succeed, take control of Lita Chantler."`;
 	traits = "";
 	flavor = ``;
 	subname = "";

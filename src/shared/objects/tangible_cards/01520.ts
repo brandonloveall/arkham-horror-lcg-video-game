@@ -26,7 +26,7 @@ export class _01520 extends AssetCard {
 	is_unique = false;
 	permanent = false;
 	double_sided = false;
-	text = `[action]: <b>Fight.</b> You get +1 [combat] for this attack. If the attacked enemy is the only enemy engaged with you, this attack deals +1 damage.`;
+	text = `➡️: <b>Fight.</b> You get +1 👊 for this attack. If the attacked enemy is the only enemy engaged with you, this attack deals +1 damage.`;
 	traits = "Item. Weapon. Melee.";
 	flavor = `Cuts through vines, underbrush, and tentacles equally well.`;
 	subname = "";

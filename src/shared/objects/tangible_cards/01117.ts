@@ -28,8 +28,8 @@ export class _01117 extends AssetCard {
 	permanent = false;
 	double_sided = false;
 	text = `While you control Lita Chantler, she gains:
-"Each investigator at your location gets +1 [combat].
-[reaction] When an investigator at your location successfully attacks a [[Monster]] enemy: That investigator deals +1 damage."`;
+"Each investigator at your location gets +1 👊.
+🔄 When an investigator at your location successfully attacks a [[Monster]] enemy: That investigator deals +1 damage."`;
 	traits = "Ally.";
 	flavor = ``;
 	subname = "The Zealot";

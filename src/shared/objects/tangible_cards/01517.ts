@@ -27,8 +27,8 @@ export class _01517 extends AssetCard {
 	is_unique = false;
 	permanent = false;
 	double_sided = false;
-	text = `[fast] Spend 1 resource: You get +1 [willpower] for this skill test.
-[fast] Spend 1 resource: You get +1 [combat] for this skill test.`;
+	text = `🗲 Spend 1 resource: You get +1 🗣️ for this skill test.
+🗲 Spend 1 resource: You get +1 👊 for this skill test.`;
 	traits = "Talent.";
 	flavor = ``;
 	subname = "";

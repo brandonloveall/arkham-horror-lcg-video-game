@@ -25,7 +25,7 @@ export class _01536 extends EventCard {
 	permanent = false;
 	double_sided = false;
 	text = `Fast. Play only during your turn.
-Until the end of the round, you may use your [intellect] in place of your [combat] and [agility].`;
+Until the end of the round, you may use your 📖 in place of your 👊 and 👟.`;
 	traits = "Insight.";
 	flavor = ``;
 	subname = "";

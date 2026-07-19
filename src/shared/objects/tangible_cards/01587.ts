@@ -25,7 +25,7 @@ export class _01587 extends AssetCard {
 	permanent = false;
 	double_sided = false;
 	text = `Uses (3 supplies).
-[action] Spend 1 supply: <b>Investigate.</b> Your location gets -2 shroud for this investigation.`;
+➡️ Spend 1 supply: <b>Investigate.</b> Your location gets -2 shroud for this investigation.`;
 	traits = "Item. Tool.";
 	flavor = ``;
 	subname = "";
