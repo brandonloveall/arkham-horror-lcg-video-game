@@ -1,6 +1,6 @@
 A fanmade, unofficial video game port of the card game *Arkham Horror: The Card Game* by Fantasy Flight Games, built solely as a passion project.
 
-[Play on Roblox](https://www.roblox.com/games/15393831445/Arkham-Horror-LCG)
+[Play on Roblox](https://www.roblox.com/games/15393831445)
 
 # This project in no way intends to infringe on copyright and does not make money off the property of Fantasy Flight Games. This project is completely non-commercial and closed to the public.
 
