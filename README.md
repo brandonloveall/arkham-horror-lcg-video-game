@@ -1,6 +1,6 @@
 A fanmade, unofficial video game port of the card game *Arkham Horror: The Card Game* by Fantasy Flight Games, built solely as a passion project.
 
-[Play on Roblox](https://www.roblox.com/games/15393831445/Bloxburg-Horror)
+[Play on Roblox](https://www.roblox.com/games/15393831445/Arkham-Horror-LCG)
 
 # This project in no way intends to infringe on copyright and does not make money off the property of Fantasy Flight Games. This project is completely non-commercial and closed to the public.
 
@@ -8,7 +8,7 @@ With that being said...
 
 ---
 
-# Welcome to Bloxburg Horror!
+# Welcome to Arkham Horror!
 
 You and up to three other investigators build your decks and work together to solve the ancient mysteries of the world, battling cultists, monsters, and elder gods along the way.
 
