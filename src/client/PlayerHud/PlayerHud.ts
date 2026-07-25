@@ -68,8 +68,8 @@ const MenuCloseButton = InvestigatorMenu.WaitForChild("Frame")
 const CardTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("CardTemplate") as Frame;
 const AssetTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("AssetTemplate") as TextButton;
 
-const currentHandCards: Frame[] = [];
-const currentAssets: TextButton[] = [];
+let currentHandCards: Frame[] = [];
+let currentAssets: TextButton[] = [];
 
 UpdatePlayerUI_Sub((payload) => {
 	HealthHud.Text = `${payload.health - payload.damage}`;
@@ -89,12 +89,10 @@ UpdatePlayerUI_Sub((payload) => {
 	for (let i = payload.actions + 1; i <= ActionsHud.GetChildren().size() - 1; i++) {
 		(ActionsHud.WaitForChild(i) as ImageLabel).ImageTransparency = 0.7;
 	}
-
-	for (const card of currentHandCards) {
-		card.Destroy();
-	}
-
 	for (const card of payload.hand) {
+		if (currentHandCards.find((e) => e.Name === card.id)) {
+			continue;
+		}
 		const NewCard = CardTemplate.Clone();
 
 		const CardButton = NewCard.WaitForChild("TextButton") as TextButton;
@@ -105,9 +103,15 @@ UpdatePlayerUI_Sub((payload) => {
 
 		Name.Text = card.name;
 		Description.Text = card.text;
-		if (card.type_name === CardType.Asset || card.type_name === CardType.Event) {
+		if ([CardType.Asset, CardType.Event, CardType.Skill].includes(card.type_name)) {
 			const costingCard = card as CostingCard;
-			Cost.Text = "" + costingCard.cost;
+			if (card.type_name === CardType.Skill) {
+				Cost.Destroy();
+				Name.Size = new UDim2(1, 0, 0.1, 0);
+				Name.Position = new UDim2(0, 0, 0, 0);
+			} else {
+				Cost.Text = tostring(costingCard.cost);
+			}
 			const skills = ["skill_agility", "skill_willpower", "skill_intellect", "skill_combat", "skill_wildcard"];
 			const icons = [
 				"rbxassetid://18623015454",
@@ -123,7 +127,9 @@ UpdatePlayerUI_Sub((payload) => {
 					Icon.Image = icons[i];
 				}
 			}
-			CardButton.MouseButton1Click.Connect(() => PlayCard_Pub(card.id));
+			if ([CardType.Asset, CardType.Event].includes(card.type_name)) {
+				CardButton.MouseButton1Click.Connect(() => PlayCard_Pub(card.id));
+			}
 		}
 
 		const colors = {
@@ -138,15 +144,22 @@ UpdatePlayerUI_Sub((payload) => {
 		Name.BackgroundColor3 = colors[card.faction_name as keyof typeof colors];
 
 		NewCard.Parent = Hand;
-		if ((card as CostingCard).cost !== undefined) { /* empty */ }
+		NewCard.Name = card.id;
 		currentHandCards.push(NewCard);
 	}
 
-	for (const asset of currentAssets) {
-		asset.Destroy();
+	for (const card of currentHandCards) {
+		if (!payload.hand.find((e) => e.id === card.Name)) {
+			card.Destroy();
+		}
 	}
+	currentHandCards = currentHandCards.filter((e) => e.Parent !== undefined);
 
 	for (const asset of payload.assets) {
+		if (currentAssets.find((e) => e.Name === asset.id)) {
+			continue;
+		}
+
 		const NewAsset = AssetTemplate.Clone();
 		NewAsset.Text = asset.name;
 		NewAsset.Parent = (() => {
@@ -164,8 +177,16 @@ UpdatePlayerUI_Sub((payload) => {
 			}
 		})();
 		NewAsset.MouseButton1Click.Connect(() => ActivateAbility_Pub(asset.id));
+		NewAsset.Name = asset.id;
 		currentAssets.push(NewAsset);
 	}
+
+	for (const asset of currentAssets) {
+		if (!payload.assets.find((e) => e.id === asset.Name)) {
+			asset.Destroy();
+		}
+	}
+	currentAssets = currentAssets.filter((e) => e.Parent !== undefined);
 });
 
 (DeckSize.Parent!.WaitForChild("ImageButton") as ImageButton).MouseButton1Click.Connect(Draw_Pub);
