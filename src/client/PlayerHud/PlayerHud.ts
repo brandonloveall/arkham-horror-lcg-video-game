@@ -1,4 +1,4 @@
-import { Players } from "@rbxts/services";
+import { Players, TweenService } from "@rbxts/services";
 import { CardType, Faction } from "shared/card_database_types";
 import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card";
 import {
@@ -143,14 +143,34 @@ UpdatePlayerUI_Sub((payload) => {
 
 		Name.BackgroundColor3 = colors[card.faction_name as keyof typeof colors];
 
-		NewCard.Parent = Hand;
-		NewCard.Name = card.id;
-		currentHandCards.push(NewCard);
+		const holder = new Instance("Frame");
+		holder.Size = new UDim2(0, 147, 0, 0);
+		holder.Parent = Hand;
+		holder.Name = card.id;
+
+		NewCard.Position = new UDim2(0, 0, 0, 232);
+		NewCard.Parent = holder;
+
+		TweenService.Create(NewCard, new TweenInfo(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+			["Position"]: new UDim2(0, 0, 0, 0),
+		}).Play();
+
+		currentHandCards.push(holder);
 	}
 
 	for (const card of currentHandCards) {
 		if (!payload.hand.find((e) => e.id === card.Name)) {
-			card.Destroy();
+			task.spawn(() => {
+				TweenService.Create(
+					card.WaitForChild("CardTemplate") as Frame,
+					new TweenInfo(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
+					{
+						["Position"]: new UDim2(0, 0, 0, 232),
+					},
+				).Play();
+				task.wait(0.7);
+				card.Destroy();
+			});
 		}
 	}
 	currentHandCards = currentHandCards.filter((e) => e.Parent !== undefined);
