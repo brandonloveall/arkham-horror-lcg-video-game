@@ -7,3 +7,4 @@ import "./GiveChoice/GiveChoice";
 import "./camera";
 import "./MainMenu/ChooseCampaign";
 import "./MainMenu/ManageDecks";
+import "./MainMenu/Animation";

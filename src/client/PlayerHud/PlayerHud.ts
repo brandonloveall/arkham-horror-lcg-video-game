@@ -152,7 +152,7 @@ UpdatePlayerUI_Sub((payload) => {
 		NewCard.Parent = holder;
 
 		TweenService.Create(NewCard, new TweenInfo(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
-			["Position"]: new UDim2(0, 0, 0, 0),
+			Position: new UDim2(0, 0, 0, 0),
 		}).Play();
 
 		currentHandCards.push(holder);
@@ -165,7 +165,7 @@ UpdatePlayerUI_Sub((payload) => {
 					card.WaitForChild("CardTemplate") as Frame,
 					new TweenInfo(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
 					{
-						["Position"]: new UDim2(0, 0, 0, 232),
+						Position: new UDim2(0, 0, 0, 232),
 					},
 				).Play();
 				task.wait(0.7);
