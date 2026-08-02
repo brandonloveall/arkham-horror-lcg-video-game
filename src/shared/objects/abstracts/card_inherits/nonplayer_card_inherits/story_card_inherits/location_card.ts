@@ -1,4 +1,4 @@
-import { ReplicatedStorage, Workspace } from "@rbxts/services";
+import { ReplicatedStorage, TweenService, Workspace } from "@rbxts/services";
 import { StoryCard } from "../story_card";
 import { GameContext } from "shared/game_context";
 import { Card } from "shared/objects/abstracts/card";
@@ -37,12 +37,42 @@ export abstract class LocationCard extends StoryCard {
 	}
 
 	place(coords: [number, number]) {
+		const bubble = ReplicatedStorage.WaitForChild("Models").WaitForChild("reuse").WaitForChild("bubble") as Part;
+
 		this.xCoord = coords[0];
 		this.yCoord = coords[1];
 		this.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model;
 		this.model.Parent = Workspace;
 		this.model.AddTag("LOCATION");
-		this.model.PivotTo(new CFrame(new Vector3(this.xCoord * 32 - 80, 0, this.yCoord * 32 - 80)));
+
+		this.model.PivotTo(new CFrame(new Vector3(this.xCoord * 32 - 80, -16, this.yCoord * 32 - 80)));
+
+		for (const part of this.model.GetChildren() as Part[]) {
+			TweenService.Create(part, new TweenInfo(2.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {
+				Position: new Vector3(this.xCoord * 32 - 80, 0, this.yCoord * 32 - 80),
+			}).Play();
+		}
+
+		PlaySound_Pub("LocationBubbles");
+
+		for (let i = 0; i < 50; i++) {
+			task.spawn(() => {
+				const x = math.random(this.xCoord * 32 - 88, this.xCoord * 32 - 88 + 16);
+				const y = math.random(this.yCoord * 32 - 88, this.yCoord * 32 - 88 + 16);
+
+				const bub = bubble.Clone();
+				bub.Position = new Vector3(x, -3, y);
+				bub.Parent = Workspace;
+				TweenService.Create(bub, new TweenInfo(1.5, Enum.EasingStyle.Linear), {
+					Position: new Vector3(x, 16, y),
+					Transparency: 1,
+				}).Play();
+				task.wait(1.5);
+				bub.Destroy();
+			});
+			task.wait(2.5 / 50);
+		}
+
 		GameContext.game_map[this.xCoord][this.yCoord] = this;
 		this.model.Name = this.id;
 
