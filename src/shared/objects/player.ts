@@ -174,7 +174,6 @@ export class GamePlayer {
 	public activateAbility(ability: (plr: GamePlayer) => void, isFree: boolean) {
 		if (!isFree) {
 			performReactions(WhatHappened.PLAYER_ACTIVATED_ABILITY, this);
-			this.actions--;
 		}
 		ability(this);
 		this.update();

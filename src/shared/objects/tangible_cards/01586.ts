@@ -1,4 +1,7 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
+import { GamePlayer } from "../player";
+import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { giveChoice } from "shared/giveChoice";
 import { CardType, Faction } from "shared/card_database_types";
 
 export class _01586 extends AssetCard {
@@ -28,6 +31,35 @@ export class _01586 extends AssetCard {
 	traits = "Item. Weapon. Melee.";
 	flavor = ``;
 	subname = "";
+
+	ability(plr: GamePlayer) {
+		const enemy = plr.selectedObject as EnemyCard;
+
+		giveChoice(plr, "Attack with Knife:", [
+			{
+				text: "+1 combat",
+				outcome: () => {
+					plr.fight({
+						enemy: enemy,
+						skill: "skill_combat",
+						bonusStat: 1,
+					});
+				},
+			},
+			{
+				text: "Discard Knife: +2 combat, +1 damage",
+				outcome: () => {
+					plr.discard(this.id);
+					plr.fight({
+						enemy: enemy,
+						skill: "skill_combat",
+						bonusStat: 2,
+						bonusDmg: 1,
+					});
+				},
+			},
+		]);
+	}
 }
 
 export default {
