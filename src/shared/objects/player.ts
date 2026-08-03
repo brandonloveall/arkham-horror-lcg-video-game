@@ -171,7 +171,6 @@ export class GamePlayer {
 	}
 
 	public activateAbility(ability: (plr: GamePlayer) => void) {
-		performReactions(WhatHappened.PLAYER_ACTIVATED_ABILITY, this);
 		ability(this);
 		this.update();
 	}
