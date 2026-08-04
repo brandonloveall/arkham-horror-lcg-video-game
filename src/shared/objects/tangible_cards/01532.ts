@@ -46,7 +46,6 @@ export class _01532 extends AssetCard {
 							text: t.name,
 							outcome: () => {
 								plr.hand.push(plr.deck.pullSpecific(t) as PlayerCard);
-								plr.update();
 							},
 						};
 					}),

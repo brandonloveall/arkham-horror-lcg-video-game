@@ -82,6 +82,14 @@ export class GamePlayer {
 		this.owner = owner;
 		this.deck = deck;
 		this.investigator = investigator;
+
+		task.spawn(() => {
+			// eslint-disable-next-line no-constant-condition
+			while (true) {
+				task.wait(0.1);
+				UpdatePlayerUI_Pub(this);
+			}
+		});
 	}
 
 	public getAllEquipment() {
@@ -123,7 +131,6 @@ export class GamePlayer {
 			this.hand.push(card);
 		}
 		this.actions--;
-		this.update();
 	}
 
 	public takeResource() {
@@ -133,7 +140,6 @@ export class GamePlayer {
 		performReactions(WhatHappened.PLAYER_TOOK_RESOURCE, this);
 		this.resources += 1;
 		this.actions--;
-		this.update();
 	}
 
 	public play(card: CostingCard) {
@@ -167,12 +173,10 @@ export class GamePlayer {
 
 		// if successful, pay cost and remove from hand
 		this.hand.remove(this.hand.indexOf(card));
-		this.update();
 	}
 
 	public activateAbility(ability: (plr: GamePlayer) => void) {
 		ability(this);
-		this.update();
 	}
 
 	public move(location: LocationCard) {
@@ -182,7 +186,6 @@ export class GamePlayer {
 		performReactions(WhatHappened.PLAYER_MOVED, this, location);
 		this.location = location;
 		this.actions--;
-		this.update();
 		this.investigator.move(location);
 		PlaySound_Pub("Move");
 	}
@@ -212,7 +215,6 @@ export class GamePlayer {
 			location.discoverClue(this, 1);
 		}
 		this.actions--;
-		this.update();
 	}
 
 	public fight(fightObj: { enemy: EnemyCard; skill: string; bonusStat?: number; bonusDmg?: number }) {
@@ -227,7 +229,6 @@ export class GamePlayer {
 			enemy.takeDamage(1 + bonusDmg);
 		}
 		this.actions--;
-		this.update();
 	}
 
 	public engage(enemy: EnemyCard) {
@@ -238,7 +239,6 @@ export class GamePlayer {
 		enemy.engagedWith = this;
 		this.threat_area.push(enemy);
 		this.actions--;
-		this.update();
 	}
 
 	public evade(enemy: EnemyCard) {
@@ -252,18 +252,12 @@ export class GamePlayer {
 			this.threat_area.remove(this.threat_area.indexOf(enemy));
 		}
 		this.actions--;
-		this.update();
 	}
 
 	public attemptAdvance() {
 		if (GameContext.act!.clues !== 0 && payClues()) {
 			GameContext.act!.advance();
 		}
-		this.update();
-	}
-
-	public update() {
-		UpdatePlayerUI_Pub(this);
 	}
 
 	public discard(id: string) {
@@ -280,7 +274,6 @@ export class GamePlayer {
 				return;
 			}
 		}
-		this.update();
 	}
 
 	public takeDamage(damage: number, horror: number) {
@@ -289,12 +282,10 @@ export class GamePlayer {
 		if (this.damage >= this.investigator.health || this.horror >= this.investigator.sanity) {
 			print("oops u died"); /** temporary **/
 		}
-		this.update();
 	}
 
 	public heal(health: number, sanity: number) {
 		this.damage = math.clamp(this.damage - health, 0, this.investigator.health);
 		this.horror = math.clamp(this.horror - sanity, 0, this.investigator.sanity);
-		this.update();
 	}
 }

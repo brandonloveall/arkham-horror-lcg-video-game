@@ -4,12 +4,6 @@ import { GamePlayer } from "shared/objects/player";
 import { ResolveObj } from "shared/skillcheck";
 import { CardType } from "shared/card_database_types";
 
-interface Coord {
-	x: number;
-	y: number;
-	card: string;
-}
-
 export abstract class ScenarioCard extends Card {
 	abstract resolve(token: IconToken, puller: GamePlayer, resolveObj: ResolveObj): number;
 

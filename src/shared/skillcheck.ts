@@ -55,7 +55,6 @@ export function skillCheck(skillCheckObj: {
 		for (const card of cards[plr.owner.Name]) {
 			total += card.getSkill(using);
 			plr.discard(card.id);
-			plr.update();
 		}
 	}
 

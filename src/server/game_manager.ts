@@ -36,7 +36,6 @@ export function start(startingScenario: new () => ScenarioCard, chaosTokens: (nu
 
 	GameContext.scenario_card.setup();
 	GameContext.encounter_deck!.shuffle();
-
 	for (const player of GameContext.players) {
 		player.deck.shuffle();
 		player.resources = 5;
@@ -61,7 +60,6 @@ function investigatorPhase() {
 		endedTurn = false;
 		GameContext.player_with_turn = plr;
 		plr.actions = 3;
-		plr.update();
 		do {
 			task.wait();
 		} while (!endedTurn);

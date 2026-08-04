@@ -47,11 +47,13 @@ export abstract class LocationCard extends StoryCard {
 
 		this.model.PivotTo(new CFrame(new Vector3(this.xCoord * 32 - 80, -16, this.yCoord * 32 - 80)));
 
-		for (const part of this.model.GetChildren() as Part[]) {
-			TweenService.Create(part, new TweenInfo(2.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {
+		TweenService.Create(
+			this.model.PrimaryPart!,
+			new TweenInfo(2.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out),
+			{
 				Position: new Vector3(this.xCoord * 32 - 80, 0, this.yCoord * 32 - 80),
-			}).Play();
-		}
+			},
+		).Play();
 
 		PlaySound_Pub("LocationBubbles");
 
