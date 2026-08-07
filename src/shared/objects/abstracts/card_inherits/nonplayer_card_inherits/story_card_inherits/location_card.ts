@@ -28,6 +28,8 @@ export abstract class LocationCard extends StoryCard {
 	revealed = false;
 	attachments: Card[] = [];
 
+	arrows: UnionOperation[] = [];
+
 	discoverClue(who: GamePlayer, amount: number) {
 		if (this.clues >= amount) {
 			this.clues -= amount;
@@ -105,6 +107,8 @@ export abstract class LocationCard extends StoryCard {
 							new Vector3(0, 0, 1),
 						);
 						biArrow.Parent = Workspace;
+						this.arrows.push(biArrow);
+						location.arrows.push(biArrow);
 					} else {
 						const singleArrow = ReplicatedStorage.WaitForChild("Models")
 							.WaitForChild("oneway")
@@ -119,6 +123,8 @@ export abstract class LocationCard extends StoryCard {
 							new Vector3(0, 0, 1),
 						).mul(CFrame.fromEulerAngles(math.rad(90), 0, 0));
 						singleArrow.Parent = Workspace;
+						this.arrows.push(singleArrow);
+						location.arrows.push(singleArrow);
 					}
 				}
 			}
@@ -126,12 +132,16 @@ export abstract class LocationCard extends StoryCard {
 
 		return this;
 	}
-
+	// remove location from registry and map, destroy model and all arrows
+	// the arrows are pushed to the other model so both can remove em
 	remove() {
 		CardRegistry.remove(this);
 		if (GameContext.game_map[this.xCoord][this.yCoord] === this) {
 			GameContext.game_map[this.xCoord][this.yCoord] = undefined;
 		}
 		this.model.Destroy();
+		for (const arrow of this.arrows) {
+			arrow.Destroy();
+		}
 	}
 }
