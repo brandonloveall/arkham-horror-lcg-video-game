@@ -56,24 +56,25 @@ export abstract class LocationCard extends StoryCard {
 		).Play();
 
 		PlaySound_Pub("LocationBubbles");
+		task.spawn(() => {
+			for (let i = 0; i < 50; i++) {
+				task.spawn(() => {
+					const x = math.random(this.xCoord * 32 - 88, this.xCoord * 32 - 88 + 16);
+					const y = math.random(this.yCoord * 32 - 88, this.yCoord * 32 - 88 + 16);
 
-		for (let i = 0; i < 50; i++) {
-			task.spawn(() => {
-				const x = math.random(this.xCoord * 32 - 88, this.xCoord * 32 - 88 + 16);
-				const y = math.random(this.yCoord * 32 - 88, this.yCoord * 32 - 88 + 16);
-
-				const bub = bubble.Clone();
-				bub.Position = new Vector3(x, -3, y);
-				bub.Parent = Workspace;
-				TweenService.Create(bub, new TweenInfo(1.5, Enum.EasingStyle.Linear), {
-					Position: new Vector3(x, 16, y),
-					Transparency: 1,
-				}).Play();
-				task.wait(1.5);
-				bub.Destroy();
-			});
-			task.wait(2.5 / 50);
-		}
+					const bub = bubble.Clone();
+					bub.Position = new Vector3(x, -3, y);
+					bub.Parent = Workspace;
+					TweenService.Create(bub, new TweenInfo(1.5, Enum.EasingStyle.Linear), {
+						Position: new Vector3(x, 16, y),
+						Transparency: 1,
+					}).Play();
+					task.wait(1.5);
+					bub.Destroy();
+				});
+				task.wait(2.5 / 50);
+			}
+		});
 
 		GameContext.game_map[this.xCoord][this.yCoord] = this;
 		this.model.Name = this.id;
@@ -85,13 +86,22 @@ export abstract class LocationCard extends StoryCard {
 						const biArrow = ReplicatedStorage.WaitForChild("Models")
 							.WaitForChild("twoway")
 							.Clone() as UnionOperation;
-						biArrow.Position = this.model
-							.GetPivot()
-							.Position.add(location.model.GetPivot().Position)
+						biArrow.Position = new Vector3(
+							this.model.GetPivot().Position.X,
+							0,
+							this.model.GetPivot().Position.Z,
+						)
+							.add(
+								new Vector3(
+									location.model.GetPivot().Position.X,
+									0,
+									location.model.GetPivot().Position.Z,
+								),
+							)
 							.div(2);
 						biArrow.CFrame = CFrame.lookAt(
 							biArrow.CFrame.Position,
-							location.model.GetPivot().Position,
+							new Vector3(location.model.GetPivot().Position.X, 0, location.model.GetPivot().Position.Z),
 							new Vector3(0, 0, 1),
 						);
 						biArrow.Parent = Workspace;
