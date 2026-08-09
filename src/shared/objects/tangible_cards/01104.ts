@@ -101,6 +101,7 @@ export class _01104 extends ScenarioCard {
 		]);
 
 		new _01111().place([5, 5]).reveal();
+
 		for (const plr of GameContext.players) {
 			plr.location = GameContext.game_map[5][5]!;
 			plr.investigator.place(GameContext.game_map[5][5]!);
