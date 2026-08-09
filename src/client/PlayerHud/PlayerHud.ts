@@ -27,27 +27,25 @@ const CluesHud = PlayerHud.WaitForChild("Clues").WaitForChild("Clues") as TextLa
 const Hand = PlayerHud.WaitForChild("Hand") as Frame;
 const DeckSize = PlayerHud.WaitForChild("Deck").WaitForChild("amount") as TextLabel;
 
-const Stats = InvestigatorMenu.WaitForChild("Frame").WaitForChild("miscAndStats").WaitForChild("stats") as TextLabel;
-const Agility = Stats.WaitForChild("Agility").WaitForChild("TextLabel") as TextLabel;
-const Combat = Stats.WaitForChild("Combat").WaitForChild("TextLabel") as TextLabel;
-const Willpower = Stats.WaitForChild("Willpower").WaitForChild("TextLabel") as TextLabel;
-const Intellect = Stats.WaitForChild("Intellect").WaitForChild("TextLabel") as TextLabel;
+const Stats = InvestigatorMenu.WaitForChild("Frame").WaitForChild("Canvas").WaitForChild("miscAndStats") as Frame;
 
-const Slots = InvestigatorMenu.WaitForChild("Frame").WaitForChild("slots");
-const Hand1 = Slots.WaitForChild("Hand1");
-const Hand2 = Slots.WaitForChild("Hand2");
-const Arcane1 = Slots.WaitForChild("Arcane1");
-const Arcane2 = Slots.WaitForChild("Arcane2");
-const Body = Slots.WaitForChild("Body");
-const Ally = Slots.WaitForChild("Ally");
-const Accessory = Slots.WaitForChild("Accessory");
+const Agility = Stats.WaitForChild("Agility").WaitForChild("Icon").WaitForChild("TextLabel") as TextLabel;
+const Combat = Stats.WaitForChild("Combat").WaitForChild("Icon").WaitForChild("TextLabel") as TextLabel;
+const Willpower = Stats.WaitForChild("Willpower").WaitForChild("Icon").WaitForChild("TextLabel") as TextLabel;
+const Intellect = Stats.WaitForChild("Intellect").WaitForChild("Icon").WaitForChild("TextLabel") as TextLabel;
 
-const HealthHud = Stats.Parent!.WaitForChild("healthAndSanity")
-	.WaitForChild("Health")
-	.WaitForChild("TextLabel") as TextLabel;
-const SanityHud = Stats.Parent!.WaitForChild("healthAndSanity")
-	.WaitForChild("Sanity")
-	.WaitForChild("TextLabel") as TextLabel;
+const Slots = InvestigatorMenu.WaitForChild("Frame").WaitForChild("Canvas").WaitForChild("slots");
+
+const Hand1 = Slots.WaitForChild("Hand1").WaitForChild("Icon");
+const Hand2 = Slots.WaitForChild("Hand2").WaitForChild("Icon");
+const Arcane1 = Slots.WaitForChild("Arcane1").WaitForChild("Icon");
+const Arcane2 = Slots.WaitForChild("Arcane2").WaitForChild("Icon");
+const Body = Slots.WaitForChild("Body").WaitForChild("Icon");
+const Ally = Slots.WaitForChild("Ally").WaitForChild("Icon");
+const Accessory = Slots.WaitForChild("Accessory").WaitForChild("Icon");
+
+const HealthHud = Stats.WaitForChild("Health").WaitForChild("Icon").WaitForChild("TextLabel") as TextLabel;
+const SanityHud = Stats.WaitForChild("Sanity").WaitForChild("Icon").WaitForChild("TextLabel") as TextLabel;
 
 const ActionList = PlayerHud.WaitForChild("ActionButtons");
 
@@ -61,9 +59,8 @@ const EndTurn = ActionList.WaitForChild("EndTurn") as TextButton;
 const AdvanceAct = ActionList.WaitForChild("AdvanceAct") as TextButton;
 
 const MenuOpenButton = PlayerHud.WaitForChild("Assets").WaitForChild("Folder").WaitForChild("Dropdown") as TextButton;
-const MenuCloseButton = InvestigatorMenu.WaitForChild("Frame")
-	.WaitForChild("Folder")
-	.WaitForChild("TextButton") as TextButton;
+const MenuCloseButton = InvestigatorMenu.WaitForChild("Frame").WaitForChild("Canvas")
+	.WaitForChild("CloseButton") as TextButton;
 
 const CardTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("CardTemplate") as Frame;
 const AssetTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("AssetTemplate") as TextButton;

@@ -114,8 +114,8 @@ const MainMenu = PLRGUI.WaitForChild("MainMenu") as ScreenGui;
 const menu = MainMenu.WaitForChild("menu").WaitForChild("menu") as Frame;
 
 const campaigns = MainMenu.WaitForChild("campaigns") as Frame;
-const left = campaigns.WaitForChild("left") as TextButton;
-const right = campaigns.WaitForChild("right") as TextButton;
+const left = campaigns.WaitForChild("SwitchButtons").WaitForChild("left") as TextButton;
+const right = campaigns.WaitForChild("SwitchButtons").WaitForChild("right") as TextButton;
 
 const openCampaigns = menu.WaitForChild("Choose") as TextButton;
 
@@ -127,14 +127,14 @@ function buildCampaign(campaignObj: Campaign) {
 	currentCampaignFrame.Destroy();
 	const template = PLRGUI.WaitForChild("GuiElements").WaitForChild("campaign").Clone() as Frame;
 
-	const icon = template.WaitForChild("icon") as ImageLabel;
+	const icon = template.WaitForChild("selected").WaitForChild("Background").WaitForChild("Main") as ImageLabel;
 	const difficulties = template.WaitForChild("difficulties") as Frame;
 	icon.Image = campaignObj.icon;
 
-	const easy = difficulties.FindFirstChild("easy") as TextButton;
-	const standard = difficulties.FindFirstChild("standard") as TextButton;
-	const hard = difficulties.FindFirstChild("hard") as TextButton;
-	const expert = difficulties.FindFirstChild("expert") as TextButton;
+	const easy = difficulties.FindFirstChild("easy") as ImageButton;
+	const standard = difficulties.FindFirstChild("standard") as ImageButton;
+	const hard = difficulties.FindFirstChild("hard") as ImageButton;
+	const expert = difficulties.FindFirstChild("expert") as ImageButton;
 
 	// 1 easy 2 standard 3 hard 4 expert
 	easy.MouseButton1Click.Connect(() => {
