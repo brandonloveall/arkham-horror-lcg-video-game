@@ -136,7 +136,6 @@ function buildCampaign(campaignObj: Campaign) {
 	const hard = difficulties.FindFirstChild("hard") as ImageButton;
 	const expert = difficulties.FindFirstChild("expert") as ImageButton;
 
-	// 1 easy 2 standard 3 hard 4 expert
 	easy.MouseButton1Click.Connect(() => {
 		StartCampaign_Pub(campaignObj.identifier, campaignObj.difficulties.easy);
 		MainMenu.Enabled = false;

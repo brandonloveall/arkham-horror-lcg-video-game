@@ -59,7 +59,8 @@ const EndTurn = ActionList.WaitForChild("EndTurn") as TextButton;
 const AdvanceAct = ActionList.WaitForChild("AdvanceAct") as TextButton;
 
 const MenuOpenButton = PlayerHud.WaitForChild("Assets").WaitForChild("Folder").WaitForChild("Dropdown") as TextButton;
-const MenuCloseButton = InvestigatorMenu.WaitForChild("Frame").WaitForChild("Canvas")
+const MenuCloseButton = InvestigatorMenu.WaitForChild("Frame")
+	.WaitForChild("Canvas")
 	.WaitForChild("CloseButton") as TextButton;
 
 const CardTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("CardTemplate") as Frame;
