@@ -14,6 +14,8 @@ export abstract class LocationCard extends StoryCard {
 	xCoord = 0;
 	yCoord = 0;
 	type_name = CardType.Location;
+	unrevealed_model?: Model;
+	light!: Part;
 
 	protected static readonly Symbol = {
 		RedSquare: 1,
@@ -44,18 +46,22 @@ export abstract class LocationCard extends StoryCard {
 		this.xCoord = coords[0];
 		this.yCoord = coords[1];
 		this.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model;
+
 		this.model.Parent = Workspace;
 		this.model.AddTag("LOCATION");
 
 		this.model.PivotTo(new CFrame(new Vector3(this.xCoord * 32 - 80, -16, this.yCoord * 32 - 80)));
 
-		TweenService.Create(
-			this.model.PrimaryPart!,
-			new TweenInfo(2.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out),
-			{
-				Position: new Vector3(this.xCoord * 32 - 80, 0, this.yCoord * 32 - 80),
-			},
-		).Play();
+		const tweenFrame = new Instance("CFrameValue");
+		tweenFrame.Value = this.model.GetPivot();
+
+		TweenService.Create(tweenFrame, new TweenInfo(2.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {
+			Value: new CFrame(new Vector3(this.xCoord * 32 - 80, 0, this.yCoord * 32 - 80)),
+		}).Play();
+
+		tweenFrame.GetPropertyChangedSignal("Value").Connect(() => {
+			this.model.PivotTo(tweenFrame.Value);
+		});
 
 		PlaySound_Pub("LocationBubbles");
 		task.spawn(() => {
@@ -143,5 +149,23 @@ export abstract class LocationCard extends StoryCard {
 		for (const arrow of this.arrows) {
 			arrow.Destroy();
 		}
+	}
+
+	reveal() {
+		// add modelflip section once that dude adds the flipped model
+
+		this.light = ReplicatedStorage.WaitForChild("Models")
+			.WaitForChild("reuse")
+			.WaitForChild("toplight")
+			.Clone() as Part;
+		this.light.Position = new Vector3(this.model.PrimaryPart?.Position.X, 37, this.model.PrimaryPart?.Position.Z);
+		task.spawn(() => {
+			(this.light.WaitForChild("SpotLight") as SpotLight).Enabled = true;
+			task.wait(0.1);
+			(this.light.WaitForChild("SpotLight") as SpotLight).Enabled = false;
+			task.wait(0.1);
+			(this.light.WaitForChild("SpotLight") as SpotLight).Enabled = true;
+		});
+		this.light.Parent = Workspace;
 	}
 }
