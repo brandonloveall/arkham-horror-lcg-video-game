@@ -187,6 +187,9 @@ export class GamePlayer {
 		this.location = location;
 		this.actions--;
 		this.investigator.move(location);
+		if (!location.revealed) {
+			location.reveal();
+		}
 		PlaySound_Pub("Move");
 	}
 

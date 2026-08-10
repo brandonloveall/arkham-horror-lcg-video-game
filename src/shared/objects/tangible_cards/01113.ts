@@ -29,6 +29,8 @@ export class _01113 extends LocationCard {
 
 	symbol = LocationCard.Symbol.BlueTriangle;
 	connects_to = [LocationCard.Symbol.RedSquare];
+
+	unrevealed_model_name = "01112_un";
 }
 
 export default {

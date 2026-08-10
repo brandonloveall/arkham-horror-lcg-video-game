@@ -14,7 +14,7 @@ export abstract class LocationCard extends StoryCard {
 	xCoord = 0;
 	yCoord = 0;
 	type_name = CardType.Location;
-	unrevealed_model?: Model;
+	unrevealed_model_name?: string;
 	light!: Part;
 
 	protected static readonly Symbol = {
@@ -45,7 +45,10 @@ export abstract class LocationCard extends StoryCard {
 
 		this.xCoord = coords[0];
 		this.yCoord = coords[1];
-		this.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model;
+		this.model =
+			this.unrevealed_model_name !== undefined
+				? (ReplicatedStorage.WaitForChild("Models").WaitForChild(this.unrevealed_model_name).Clone() as Model)
+				: (ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model);
 
 		this.model.Parent = Workspace;
 		this.model.AddTag("LOCATION");
@@ -149,23 +152,73 @@ export abstract class LocationCard extends StoryCard {
 		for (const arrow of this.arrows) {
 			arrow.Destroy();
 		}
+		this.light.Destroy();
 	}
 
 	reveal() {
-		// add modelflip section once that dude adds the flipped model
+		this.revealed = true;
 
-		this.light = ReplicatedStorage.WaitForChild("Models")
-			.WaitForChild("reuse")
-			.WaitForChild("toplight")
-			.Clone() as Part;
-		this.light.Position = new Vector3(this.model.PrimaryPart?.Position.X, 37, this.model.PrimaryPart?.Position.Z);
+		if (this.unrevealed_model_name !== undefined) {
+			const newModel = ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model;
+			newModel.PivotTo(
+				new CFrame(this.model.GetPivot().Position).mul(CFrame.fromEulerAngles(math.rad(180), 0, 0)),
+			);
+			newModel.Parent = Workspace;
+
+			task.spawn(() => {
+				const unrevealedFrame = new Instance("CFrameValue");
+				unrevealedFrame.Value = this.model.GetPivot();
+				const unrevealedGoal = unrevealedFrame.Value.mul(CFrame.fromEulerAngles(math.rad(180), 0, 0));
+
+				TweenService.Create(
+					unrevealedFrame,
+					new TweenInfo(1.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+					{
+						Value: unrevealedGoal,
+				}).Play();
+
+				unrevealedFrame.GetPropertyChangedSignal("Value").Connect(() => {
+					this.model.PivotTo(unrevealedFrame.Value);
+				});
+				task.wait(1.5);
+				this.model.Destroy();
+				this.model = newModel;
+			});
+
+			////////////////////
+
+			const revealedFrame = new Instance("CFrameValue");
+			revealedFrame.Value = this.model.GetPivot().mul(CFrame.fromEulerAngles(math.rad(179), 0, 0));
+			const revealedGoal = this.model.GetPivot();
+
+			TweenService.Create(revealedFrame, new TweenInfo(1.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+				Value: revealedGoal,
+			}).Play();
+
+			revealedFrame.GetPropertyChangedSignal("Value").Connect(() => {
+				newModel.PivotTo(revealedFrame.Value);
+			});
+		}
+
 		task.spawn(() => {
-			(this.light.WaitForChild("SpotLight") as SpotLight).Enabled = true;
-			task.wait(0.1);
-			(this.light.WaitForChild("SpotLight") as SpotLight).Enabled = false;
-			task.wait(0.1);
-			(this.light.WaitForChild("SpotLight") as SpotLight).Enabled = true;
+			task.wait(1.75);
+			this.light = ReplicatedStorage.WaitForChild("Models")
+				.WaitForChild("reuse")
+				.WaitForChild("toplight")
+				.Clone() as Part;
+			this.light.Position = new Vector3(
+				this.model.PrimaryPart?.Position.X,
+				37,
+				this.model.PrimaryPart?.Position.Z,
+			);
+			task.spawn(() => {
+				(this.light.WaitForChild("SpotLight") as SpotLight).Enabled = true;
+				task.wait(0.1);
+				(this.light.WaitForChild("SpotLight") as SpotLight).Enabled = false;
+				task.wait(0.1);
+				(this.light.WaitForChild("SpotLight") as SpotLight).Enabled = true;
+			});
+			this.light.Parent = Workspace;
 		});
-		this.light.Parent = Workspace;
 	}
 }
