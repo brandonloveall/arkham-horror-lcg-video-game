@@ -1,3 +1,5 @@
+import "./preloader";
+
 import "./PlayerHud/PlayerHud";
 import "./CardSelection/CardSelection";
 import "./PayClues/PayClues";
