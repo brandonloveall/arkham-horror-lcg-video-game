@@ -20,7 +20,14 @@ export abstract class Investigator extends PlayerCard implements Damageable {
 		this.model = ReplicatedStorage.WaitForChild("Models").WaitForChild(this.code).Clone() as Model;
 		this.model.Parent = Workspace;
 		this.model.AddTag("INVESTIGATOR");
-		this.model.PivotTo(new CFrame(location.model.WorldPivot.Position.add(new Vector3(0, 16, 0))));
+
+		const randomOnLocation = new CFrame(
+			math.random(location.model.WorldPivot.Position.X - 8, location.model.WorldPivot.Position.X + 8),
+			16,
+			math.random(location.model.WorldPivot.Position.Z - 8, location.model.WorldPivot.Position.Z + 8),
+		);
+
+		this.model.PivotTo(randomOnLocation);
 		this.model.Name = this.id;
 
 		return this;
