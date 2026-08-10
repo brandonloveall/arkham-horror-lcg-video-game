@@ -1,5 +1,6 @@
 import { Players, TweenService } from "@rbxts/services";
 import { CardType, Faction } from "shared/card_database_types";
+import { getSkill } from "shared/getSkill";
 import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card";
 import {
 	ActivateAbility_Pub,
@@ -119,7 +120,7 @@ UpdatePlayerUI_Sub((payload) => {
 				"rbxassetid://18623020407",
 			];
 			for (let i = 0; i < skills.size(); i++) {
-				for (let _ = 0; _ < (costingCard[skills[i] as keyof CostingCard] as number); _++) {
+				for (let _ = 0; _ < getSkill(costingCard, skills[i]); _++) {
 					const Icon = PlayerGui.WaitForChild("GuiElements").WaitForChild("skill").Clone() as ImageLabel;
 					Icon.Parent = Skills;
 					Icon.Image = icons[i];

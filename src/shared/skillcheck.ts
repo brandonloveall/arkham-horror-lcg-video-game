@@ -5,6 +5,7 @@ import { GameContext, WhatHappened } from "./game_context";
 import { SkillCheckAnimation_Pub } from "./remotes/SkillCheckAnimation/Interface";
 import { performReactions } from "./performReactions";
 import { IconToken } from "./objects/chaos_bag";
+import { getSkill } from "./getSkill";
 
 let cards: Record<string, PlayerCard[]> = {};
 let submittedCount = 0;
@@ -39,9 +40,9 @@ export function skillCheck(skillCheckObj: {
 		Server_ChooseCards_Pub(
 			plr,
 			plr.hand.filter((e) => {
-				return e.getSkill(using) !== 0;
+				return getSkill(e, using) !== 0;
 			}),
-			`Skill Check by ${initiator.owner.Name}: ${initiator.investigator.getSkill(using)} against ${against} using ${using}.`,
+			`Skill Check by ${initiator.owner.Name}: ${getSkill(initiator.investigator, using)} against ${against} using ${using}.`,
 			plr === initiator ? undefined : 1,
 		);
 	}
@@ -53,7 +54,7 @@ export function skillCheck(skillCheckObj: {
 	let total = 0;
 	for (const plr of GameContext.players) {
 		for (const card of cards[plr.owner.Name]) {
-			total += card.getSkill(using);
+			total += getSkill(card, using);
 			plr.discard(card.id);
 		}
 	}
@@ -75,9 +76,9 @@ export function skillCheck(skillCheckObj: {
 		}
 	}
 
-	const final = total + initiator.investigator.getSkill(using) + finalToken + bonus;
+	const final = total + getSkill(initiator.investigator, using) + finalToken + bonus;
 
-	SkillCheckAnimation_Pub(initiator.investigator.getSkill(using), total, pulledToken, finalToken);
+	SkillCheckAnimation_Pub(getSkill(initiator.investigator, using), total, pulledToken, finalToken);
 
 	GameContext.lock = false;
 	performReactions(WhatHappened.SKILL_CHECK_ENDED, initiator);
