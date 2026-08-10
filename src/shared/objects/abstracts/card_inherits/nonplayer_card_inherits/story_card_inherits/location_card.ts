@@ -214,6 +214,7 @@ export abstract class LocationCard extends StoryCard {
 				this.model.PrimaryPart?.Position.Z,
 			);
 			task.spawn(() => {
+				PlaySound_Pub("RevealLightFlicker");
 				(this.light.WaitForChild("SpotLight") as SpotLight).Enabled = true;
 				task.wait(0.1);
 				(this.light.WaitForChild("SpotLight") as SpotLight).Enabled = false;
