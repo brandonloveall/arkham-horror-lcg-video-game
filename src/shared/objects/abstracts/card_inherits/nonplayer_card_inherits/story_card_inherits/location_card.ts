@@ -201,7 +201,9 @@ export abstract class LocationCard extends StoryCard {
 		}
 
 		task.spawn(() => {
-			task.wait(1.75);
+			if (this.unrevealed_model_name !== undefined) {
+				task.wait(1.75);
+			}
 			this.light = ReplicatedStorage.WaitForChild("Models")
 				.WaitForChild("reuse")
 				.WaitForChild("toplight")
