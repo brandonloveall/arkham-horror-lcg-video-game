@@ -30,6 +30,8 @@ While Lita Chantler is not controlled by a player, she gains: "➡️: <b>Parley
 
 	symbol = LocationCard.Symbol.GreenDiamond;
 	connects_to = [LocationCard.Symbol.RedSquare];
+
+	unrevealed_model_name = "01112_un";
 }
 
 export default {

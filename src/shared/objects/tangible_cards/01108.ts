@@ -48,7 +48,7 @@ You jump through the doorway, landing on your feet on soft dirt. The door to the
 
 		GameContext.game_map[5][5]!.remove();
 
-		new _01112().place([5, 5]);
+		new _01112().place([5, 5]).reveal();
 		new _01113().place([5, 4]);
 		new _01114().place([5, 6]);
 		new _01115().place([6, 5]);
