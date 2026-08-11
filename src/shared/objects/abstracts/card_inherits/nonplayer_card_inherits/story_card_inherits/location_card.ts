@@ -175,7 +175,8 @@ export abstract class LocationCard extends StoryCard {
 					new TweenInfo(1.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
 					{
 						Value: unrevealedGoal,
-				}).Play();
+					},
+				).Play();
 
 				unrevealedFrame.GetPropertyChangedSignal("Value").Connect(() => {
 					this.model.PivotTo(unrevealedFrame.Value);
