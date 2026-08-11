@@ -183,7 +183,7 @@ export class GamePlayer {
 		if (this.location === location || !this.location.connects_to.includes(location.symbol) || this.actions === 0) {
 			return;
 		}
-		performReactions(WhatHappened.PLAYER_MOVED, this, location);
+		performReactions(WhatHappened.PLAYER_MOVED, this, this.location, location);
 		this.location = location;
 		this.actions--;
 		this.investigator.move(location);

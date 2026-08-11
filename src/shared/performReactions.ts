@@ -13,7 +13,6 @@ export function performReactions(whatHappened: WhatHappened, plr: GamePlayer, ..
 		if (card.inPlay && card.reactions && card.reactions[whatHappened]) {
 			if (!card.reactions[whatHappened].optional) {
 				card.reactions[whatHappened].reaction(plr, ...args);
-				task.wait(3);
 			} // 3 seconds is the flat amount of time for ANY non-optional reaction for players to play reaction cards
 			else {
 				if (!card.reactions![whatHappened]!.canUseReaction!(plr, ...args)) {
