@@ -7,6 +7,7 @@ import { Card } from "shared/objects/abstracts/card";
 import { Investigator } from "shared/objects/abstracts/card_inherits/player_card_inherits/investigator";
 import { _01501 } from "shared/objects/tangible_cards/01501";
 import { _01506 } from "shared/objects/tangible_cards/01506";
+import { SetDecks_Sub } from "shared/remotes/SetDecks/Interface";
 
 GetDecks_Bind((plr: Player) => {
 	const data = DataStoreService.GetDataStore(tostring(plr.UserId), "player_data");
@@ -72,3 +73,9 @@ export function getPlrsSelectedDeck(plr: Player): [(new () => Card)[], new () =>
 	}
 	return [[_01506], _01501]; // only exists to guarantee to the compiler something will be returned. one deck will always have the isSelected() attribute
 }
+
+SetDecks_Sub((plr, decks) => {
+	const data = DataStoreService.GetDataStore(tostring(plr.UserId), "player_data");
+
+	data.SetAsync("decks", decks);
+});
