@@ -39,7 +39,6 @@ export class _01517 extends AssetCard {
 	reactions: reactions = {
 		[WhatHappened.SKILL_CHECK_START]: {
 			reaction: () => {
-				this.usable = true;
 				this.added_willpower = 0;
 				this.added_combat = 0;
 			},
@@ -48,7 +47,6 @@ export class _01517 extends AssetCard {
 		[WhatHappened.SKILL_CHECK_ENDED]: {
 			reaction: (_initiator: unknown) => {
 				const initiator = _initiator as GamePlayer;
-				this.usable = false;
 				initiator.investigator.skill_willpower -= this.added_willpower;
 				initiator.investigator.skill_combat -= this.added_combat;
 			},

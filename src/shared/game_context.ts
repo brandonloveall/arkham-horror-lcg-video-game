@@ -29,6 +29,8 @@ export enum WhatHappened {
 
 	ROUND_ENDED,
 	ASSET_DAMAGED,
+
+	CARD_DISCARDED,
 }
 
 export enum PlayerWithTurn {
