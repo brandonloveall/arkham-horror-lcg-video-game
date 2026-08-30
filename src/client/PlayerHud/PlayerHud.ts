@@ -63,10 +63,10 @@ const MenuCloseButton = InvestigatorMenu.WaitForChild("Frame")
 	.WaitForChild("Canvas")
 	.WaitForChild("CloseButton") as TextButton;
 
-const AssetTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("AssetTemplate") as TextButton;
-
 let currentHandCards: Frame[] = [];
-let currentAssets: TextButton[] = [];
+let currentAssets: Frame[] = [];
+
+let cardHovered = false;
 
 UpdatePlayerUI_Sub((payload) => {
 	HealthHud.Text = `${payload.health - payload.damage}`;
@@ -114,6 +114,25 @@ UpdatePlayerUI_Sub((payload) => {
 			Position: new UDim2(0, 0, 0, 0),
 		}).Play();
 
+		CardButton.MouseMoved.Connect(() => {
+			if (cardHovered) {
+				return;
+			}
+			cardHovered = true;
+			holder.ZIndex = 2;
+			TweenService.Create(NewCard, new TweenInfo(0.2, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+				Size: new UDim2(0, 375, 0, 375),
+			}).Play();
+		});
+
+		CardButton.MouseLeave.Connect(() => {
+			cardHovered = false;
+			holder.ZIndex = 1;
+			TweenService.Create(NewCard, new TweenInfo(0.2, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+				Size: new UDim2(0, 200, 0, 200),
+			}).Play();
+		});
+
 		currentHandCards.push(holder);
 	}
 
@@ -139,8 +158,16 @@ UpdatePlayerUI_Sub((payload) => {
 			continue;
 		}
 
-		const NewAsset = AssetTemplate.Clone();
-		NewAsset.Text = asset.name;
+		const NewAsset = CardGuiMaker.createCardGui(asset);
+		NewAsset.AnchorPoint = new Vector2(0.5, 0.5);
+		NewAsset.Size = new UDim2(0, 150, 0, 150);
+		NewAsset.Position = new UDim2(0.5, 0, 0.5, 0);
+
+		const CardButton = new Instance("TextButton");
+		CardButton.Parent = NewAsset;
+		CardButton.Transparency = 1;
+		CardButton.Size = new UDim2(1, 0, 1, 0);
+
 		NewAsset.Parent = (() => {
 			switch (asset.slot) {
 				case "Hand":
@@ -155,7 +182,7 @@ UpdatePlayerUI_Sub((payload) => {
 					return Accessory;
 			}
 		})();
-		NewAsset.MouseButton1Click.Connect(() => ActivateAbility_Pub(asset.id));
+		CardButton.MouseButton1Click.Connect(() => ActivateAbility_Pub(asset.id));
 		NewAsset.Name = asset.id;
 		currentAssets.push(NewAsset);
 	}
