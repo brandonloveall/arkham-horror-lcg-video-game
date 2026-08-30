@@ -1,4 +1,4 @@
-import "./preloader";
+//import "./preloader";
 
 import "./PlayerHud/PlayerHud";
 import "./CardSelection/CardSelection";

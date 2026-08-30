@@ -1,7 +1,6 @@
 import { Players, TweenService } from "@rbxts/services";
-import { CardType, Faction } from "shared/card_database_types";
-import { getSkill } from "shared/getSkill";
-import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card";
+import { CardType } from "shared/card_database_types";
+import CardGuiMaker from "client/cardGuiMaker";
 import {
 	ActivateAbility_Pub,
 	AdvanceAct_Pub,
@@ -64,7 +63,6 @@ const MenuCloseButton = InvestigatorMenu.WaitForChild("Frame")
 	.WaitForChild("Canvas")
 	.WaitForChild("CloseButton") as TextButton;
 
-const CardTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("CardTemplate") as Frame;
 const AssetTemplate = PlayerGui.WaitForChild("GuiElements").WaitForChild("AssetTemplate") as TextButton;
 
 let currentHandCards: Frame[] = [];
@@ -92,63 +90,25 @@ UpdatePlayerUI_Sub((payload) => {
 		if (currentHandCards.find((e) => e.Name === card.id)) {
 			continue;
 		}
-		const NewCard = CardTemplate.Clone();
+		const NewCard = CardGuiMaker.createCardGui(card);
 
-		const CardButton = NewCard.WaitForChild("TextButton") as TextButton;
-		const Name = NewCard.WaitForChild("title") as TextLabel;
-		const Cost = NewCard.WaitForChild("cost") as TextLabel;
-		const Description = NewCard.WaitForChild("description") as TextLabel;
-		const Skills = NewCard.WaitForChild("SkillIcons") as Frame;
+		const CardButton = new Instance("TextButton");
+		CardButton.Parent = NewCard;
+		CardButton.Transparency = 1;
+		CardButton.Size = new UDim2(1, 0, 1, 0);
 
-		Name.Text = card.name;
-		Description.Text = card.text;
-		if ([CardType.Asset, CardType.Event, CardType.Skill].includes(card.type_name)) {
-			const costingCard = card as CostingCard;
-			if (card.type_name === CardType.Skill) {
-				Cost.Destroy();
-				Name.Size = new UDim2(1, 0, 0.1, 0);
-				Name.Position = new UDim2(0, 0, 0, 0);
-			} else {
-				Cost.Text = tostring(costingCard.cost);
-			}
-			const skills = ["skill_agility", "skill_willpower", "skill_intellect", "skill_combat", "skill_wildcard"];
-			const icons = [
-				"rbxassetid://18623015454",
-				"rbxassetid://18615903524",
-				"rbxassetid://18615764098",
-				"rbxassetid://18622919447",
-				"rbxassetid://18623020407",
-			];
-			for (let i = 0; i < skills.size(); i++) {
-				for (let _ = 0; _ < getSkill(costingCard, skills[i]); _++) {
-					const Icon = PlayerGui.WaitForChild("GuiElements").WaitForChild("skill").Clone() as ImageLabel;
-					Icon.Parent = Skills;
-					Icon.Image = icons[i];
-				}
-			}
-			if ([CardType.Asset, CardType.Event].includes(card.type_name)) {
-				CardButton.MouseButton1Click.Connect(() => PlayCard_Pub(card.id));
-			}
+		if ([CardType.Asset, CardType.Event].includes(card.type_name)) {
+			CardButton.MouseButton1Click.Connect(() => PlayCard_Pub(card.id));
 		}
-
-		const colors = {
-			[Faction.Neutral]: new Color3(0.83, 0.79, 0.71),
-			[Faction.Seeker]: new Color3(0.69, 0.52, 0.15),
-			[Faction.Survivor]: new Color3(0.61, 0.05, 0.05),
-			[Faction.Mystic]: new Color3(0.38, 0.22, 0.53),
-			[Faction.Guardian]: new Color3(0.09, 0.15, 0.46),
-			[Faction.Rogue]: new Color3(0.05, 0.35, 0.06),
-		};
-
-		Name.BackgroundColor3 = colors[card.faction_name as keyof typeof colors];
 
 		const holder = new Instance("Frame");
 		holder.Size = new UDim2(0, 147, 0, 0);
 		holder.Parent = Hand;
 		holder.Name = card.id;
 
-		NewCard.Position = new UDim2(0, 0, 0, 232);
+		NewCard.Position = new UDim2(0, 0, 0, 200);
 		NewCard.Parent = holder;
+		NewCard.Name = "card";
 
 		TweenService.Create(NewCard, new TweenInfo(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
 			Position: new UDim2(0, 0, 0, 0),
@@ -161,7 +121,7 @@ UpdatePlayerUI_Sub((payload) => {
 		if (!payload.hand.find((e) => e.id === card.Name)) {
 			task.spawn(() => {
 				TweenService.Create(
-					card.WaitForChild("CardTemplate") as Frame,
+					card.WaitForChild("card") as Frame,
 					new TweenInfo(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
 					{
 						Position: new UDim2(0, 0, 0, 232),
