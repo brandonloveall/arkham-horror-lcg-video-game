@@ -24,7 +24,7 @@ export class _01538 extends EventCard {
 	permanent = false;
 	double_sided = false;
 	text = `Attach to your location.
-Non-[[Elite]] enemies cannot move into attached location.
+Non-Elite enemies cannot move into attached location.
 <b>Forced</b> - When an investigator leaves attached location: Discard Barricade.`;
 	traits = "Insight. Tactic.";
 	flavor = ``;

@@ -22,8 +22,8 @@ export class _01107 extends AgendaCard {
 	is_unique = false;
 	permanent = false;
 	double_sided = true;
-	text = `<b>Forced</b> - At the end of the enemy phase: Each unengaged [[Ghoul]] enemy moves 1 location towards the Parlor.
-<b>Forced</b> - At the end of the round: Place 1 doom on this agenda for each [[Ghoul]] enemy in the Hallway or Parlor.`;
+	text = `<b>Forced</b> - At the end of the enemy phase: Each unengaged Ghoul enemy moves 1 location towards the Parlor.
+<b>Forced</b> - At the end of the round: Place 1 doom on this agenda for each Ghoul enemy in the Hallway or Parlor.`;
 	traits = "";
 	flavor = `You hear a crazed howl outside, and suddenly all the creatures turn their attention to that sound. They rush to escape the house, breaking down doors and clawing at everything in their way.`;
 	subname = "";

@@ -35,7 +35,7 @@ export class _01104 extends ScenarioCard {
 	permanent = false;
 	double_sided = true;
 	text =
-		"Easy / Standard\n[skull] -X. X is the number of [[Ghoul]] enemies at your location.\n[cultist] -1. If you fail, take 1 horror.\n[tablet] -2. If there is a [[Ghoul]] enemy at your location, take 1 damage.\n";
+		"Easy / Standard\n[skull] -X. X is the number of Ghoul enemies at your location.\n[cultist] -1. If you fail, take 1 horror.\n[tablet] -2. If there is a Ghoul enemy at your location, take 1 damage.\n";
 	traits = "";
 	flavor = "";
 	subname = "";

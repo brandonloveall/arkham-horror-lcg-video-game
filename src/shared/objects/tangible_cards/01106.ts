@@ -5,7 +5,7 @@ export class _01106 extends AgendaCard {
 	doom = 7;
 	stage = 2;
 	back_name = "The Tunnels Below";
-	back_text = `Shuffle the encounter discard pile into the encounter deck. Discard cards from the top of the encounter deck until a [[Ghoul]] enemy is discarded. The lead investigator draws that enemy.`;
+	back_text = `Shuffle the encounter discard pile into the encounter deck. Discard cards from the top of the encounter deck until a Ghoul enemy is discarded. The lead investigator draws that enemy.`;
 	back_flavor = `A feral beast, roughly humanoid with a canine cast and hooves for feet, tears through the ground in front of you. Below the floor, you can see vast tunnels beneath your house. Fiendish howling echoes from deep within the underground caverns.`;
 	encounter_name = "The Gathering";
 	encounter_position = 3;
