@@ -30,7 +30,7 @@ TweenService.Create(img, new TweenInfo(1.5, Enum.EasingStyle.Linear), {
 }).Play();
 
 task.wait(1.5);
-text.Text = "This is a nonprofit fan game.<br/>All property belongs to<br/>FANTASY FLIGHT GAMES";
+text.Text = "This is a noncommercial fan game.<br/>All property belongs to<br/>FANTASY FLIGHT GAMES";
 img.Image = "rbxassetid://117562896448258";
 task.wait(0.5);
 
