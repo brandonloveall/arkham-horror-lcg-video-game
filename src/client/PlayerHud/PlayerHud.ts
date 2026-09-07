@@ -4,6 +4,7 @@ import CardGuiMaker from "client/cardGuiMaker";
 import {
 	ActivateAbility_Pub,
 	AdvanceAct_Pub,
+	AdvanceAct_Sub,
 	Draw_Pub,
 	EndTurn_Pub,
 	Engage_Pub,
@@ -55,6 +56,45 @@ const Evade = ActionList.WaitForChild("Evade") as TextButton;
 const Engage = ActionList.WaitForChild("Engage") as TextButton;
 const Investigate = ActionList.WaitForChild("Investigate") as TextButton;
 const Move = ActionList.WaitForChild("Move") as TextButton;
+
+const AAMenu = PlayerHud.WaitForChild("actagendamenu") as Frame;
+const OpenCloseActAgenda = AAMenu.WaitForChild("toggle") as ImageButton;
+const AdvanceAct = AAMenu.WaitForChild("act").WaitForChild("Advance") as TextButton;
+
+let AAOpen = false;
+let AADebounce = false;
+
+// the animation is temporary. when its done itll look like a book opening
+
+function openCloseBook() {
+	task.spawn(() => {
+		if (AADebounce) {
+			return;
+		}
+		AADebounce = true;
+		if (AAOpen) {
+			AAOpen = false;
+			TweenService.Create(AAMenu, new TweenInfo(0.5), { Position: new UDim2(0.25, 0, 1, 0) }).Play();
+			task.wait(0.5);
+			TweenService.Create(AAMenu, new TweenInfo(0.5), { Position: new UDim2(0.25, 0, 0, 0) }).Play();
+			task.wait(0.5);
+		} else {
+			AAOpen = true;
+			TweenService.Create(AAMenu, new TweenInfo(0.5), { Position: new UDim2(0.25, 0, 1, 0) }).Play();
+			task.wait(0.5);
+			TweenService.Create(AAMenu, new TweenInfo(0.5), { Position: new UDim2(0.5, 0, 1, 0) }).Play();
+			task.wait(0.5);
+		}
+		task.wait(1);
+		AADebounce = false;
+	});
+}
+
+OpenCloseActAgenda.MouseButton1Click.Connect(openCloseBook);
+AdvanceAct.MouseButton1Click.Connect(() => {
+	AdvanceAct_Pub();
+	openCloseBook();
+});
 
 const EndTurn = PlayerHud.WaitForChild("RightSide").WaitForChild("EndTurn") as TextButton;
 
@@ -114,12 +154,12 @@ UpdatePlayerUI_Sub((payload) => {
 		holder.Parent = Hand;
 		holder.Name = card.id;
 
-		NewCard.Position = new UDim2(0, 0, 0, 200);
+		NewCard.Position = new UDim2(0.5, 0, 0, 200);
 		NewCard.Parent = holder;
 		NewCard.Name = "card";
 
 		TweenService.Create(NewCard, new TweenInfo(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
-			Position: new UDim2(0, 0, 0, 0),
+			Position: new UDim2(0.5, 0, 1, 0),
 		}).Play();
 
 		CardButton.MouseMoved.Connect(() => {
@@ -151,7 +191,7 @@ UpdatePlayerUI_Sub((payload) => {
 					card.WaitForChild("card") as Frame,
 					new TweenInfo(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out),
 					{
-						Position: new UDim2(0, 0, 0, 232),
+						Position: new UDim2(0.5, 0, 0, 232),
 					},
 				).Play();
 				task.wait(0.7);
@@ -224,8 +264,6 @@ Investigate.MouseButton1Click.Connect(Investigate_Pub);
 Move.MouseButton1Click.Connect(() => {
 	Move_Pub();
 });
-
-//AdvanceAct.MouseButton1Click.Connect(AdvanceAct_Pub);
 
 EndTurn.MouseButton1Click.Connect(EndTurn_Pub);
 
