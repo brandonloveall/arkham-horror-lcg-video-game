@@ -12,9 +12,10 @@ GetDecks_Bind((plr: Player) => {
 	const data = DataStoreService.GetDataStore(tostring(plr.UserId), "player_data");
 	if (data.GetAsync("decks")[0] === undefined) {
 		const parsed = HttpService.JSONDecode(
-			HttpService.GetAsync(`https://arkhamdb.com/api/public/decklist/50513`), // starter roland banks i built
+			HttpService.GetAsync(`https://arkhamdb.com/api/public/decklist/50513`), // starter roland banks
 		) as DeckData;
 		parsed.isSelected = true;
+		parsed.investigator_code = "01501"; // 01101 and 01501 are identical but are separated due to different art
 
 		data.SetAsync("decks", [parsed]);
 	}
