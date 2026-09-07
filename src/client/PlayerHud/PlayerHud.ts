@@ -22,10 +22,10 @@ const PlayerHud = PlayerGui.WaitForChild("PlayerHud") as ScreenGui;
 const InvestigatorMenu = PlayerGui.WaitForChild("InvestigatorMenu") as ScreenGui;
 
 const ActionsHud = PlayerHud.WaitForChild("ActionDiamonds") as Frame;
-const ResourcesHud = PlayerHud.WaitForChild("Resources").WaitForChild("TextLabel") as TextLabel;
-const CluesHud = PlayerHud.WaitForChild("Clues").WaitForChild("Clues") as TextLabel;
+const ResourcesHud = PlayerHud.WaitForChild("LeftSide").WaitForChild("Resources").WaitForChild("Text") as TextLabel;
+const CluesHud = PlayerHud.WaitForChild("LeftSide").WaitForChild("Clues").WaitForChild("Text") as TextLabel;
 const Hand = PlayerHud.WaitForChild("Hand") as Frame;
-const DeckSize = PlayerHud.WaitForChild("Deck").WaitForChild("amount") as TextLabel;
+const DeckSize = PlayerHud.WaitForChild("RightSide").WaitForChild("Deck").WaitForChild("Text") as TextLabel;
 
 const Stats = InvestigatorMenu.WaitForChild("Frame").WaitForChild("Canvas").WaitForChild("miscAndStats") as Frame;
 
@@ -47,7 +47,7 @@ const Accessory = Slots.WaitForChild("Accessory").WaitForChild("Icon");
 const HealthHud = Stats.WaitForChild("Health").WaitForChild("Icon").WaitForChild("TextLabel") as TextLabel;
 const SanityHud = Stats.WaitForChild("Sanity").WaitForChild("Icon").WaitForChild("TextLabel") as TextLabel;
 
-const ActionList = PlayerHud.WaitForChild("ActionButtons");
+const ActionList = PlayerHud.WaitForChild("RightSide").WaitForChild("ActionButtons");
 
 const Fight = ActionList.WaitForChild("Fight") as TextButton;
 const GainResource = ActionList.WaitForChild("GainResource") as TextButton;
@@ -55,10 +55,10 @@ const Evade = ActionList.WaitForChild("Evade") as TextButton;
 const Engage = ActionList.WaitForChild("Engage") as TextButton;
 const Investigate = ActionList.WaitForChild("Investigate") as TextButton;
 const Move = ActionList.WaitForChild("Move") as TextButton;
-const EndTurn = ActionList.WaitForChild("EndTurn") as TextButton;
-const AdvanceAct = ActionList.WaitForChild("AdvanceAct") as TextButton;
 
-const MenuOpenButton = PlayerHud.WaitForChild("Assets").WaitForChild("Folder").WaitForChild("Dropdown") as TextButton;
+const EndTurn = PlayerHud.WaitForChild("RightSide").WaitForChild("EndTurn") as TextButton;
+
+const MenuOpenButton = PlayerHud.WaitForChild("LeftSide").WaitForChild("Assets") as TextButton;
 const MenuCloseButton = InvestigatorMenu.WaitForChild("Frame")
 	.WaitForChild("Canvas")
 	.WaitForChild("CloseButton") as TextButton;
@@ -81,10 +81,18 @@ UpdatePlayerUI_Sub((payload) => {
 	Willpower.Text = `${payload.willpower}`;
 
 	for (let i = 1; i <= payload.actions; i++) {
-		(ActionsHud.WaitForChild(i) as ImageLabel).ImageTransparency = 0;
+		TweenService.Create(
+			ActionsHud.WaitForChild("Diamonds").WaitForChild(i).WaitForChild("InnerDiamond") as ImageLabel,
+			new TweenInfo(0.2),
+			{ ImageTransparency: 0 },
+		).Play();
 	}
-	for (let i = payload.actions + 1; i <= ActionsHud.GetChildren().size() - 1; i++) {
-		(ActionsHud.WaitForChild(i) as ImageLabel).ImageTransparency = 0.7;
+	for (let i = payload.actions + 1; i <= 3; i++) {
+		TweenService.Create(
+			ActionsHud.WaitForChild("Diamonds").WaitForChild(i).WaitForChild("InnerDiamond") as ImageLabel,
+			new TweenInfo(0.2),
+			{ ImageTransparency: 1 },
+		).Play();
 	}
 	for (const card of payload.hand) {
 		if (currentHandCards.find((e) => e.Name === card.id)) {
@@ -217,7 +225,7 @@ Move.MouseButton1Click.Connect(() => {
 	Move_Pub();
 });
 
-AdvanceAct.MouseButton1Click.Connect(AdvanceAct_Pub);
+//AdvanceAct.MouseButton1Click.Connect(AdvanceAct_Pub);
 
 EndTurn.MouseButton1Click.Connect(EndTurn_Pub);
 
