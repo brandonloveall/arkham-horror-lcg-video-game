@@ -4,7 +4,6 @@ import CardGuiMaker from "client/cardGuiMaker";
 import {
 	ActivateAbility_Pub,
 	AdvanceAct_Pub,
-	AdvanceAct_Sub,
 	Draw_Pub,
 	EndTurn_Pub,
 	Engage_Pub,
