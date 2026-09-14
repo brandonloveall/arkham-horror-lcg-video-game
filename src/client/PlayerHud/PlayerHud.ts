@@ -59,6 +59,8 @@ const Move = ActionList.WaitForChild("Move") as TextButton;
 const AAMenu = PlayerHud.WaitForChild("actagendamenu") as Frame;
 const OpenCloseActAgenda = AAMenu.WaitForChild("toggle") as ImageButton;
 const AdvanceAct = AAMenu.WaitForChild("act").WaitForChild("Advance") as TextButton;
+const ActFrame = AAMenu.WaitForChild("act") as Frame;
+const AgendaFrame = AAMenu.WaitForChild("agenda") as Frame;
 
 let AAOpen = false;
 let AADebounce = false;
@@ -118,6 +120,22 @@ UpdatePlayerUI_Sub((payload) => {
 	Combat.Text = `${payload.combat}`;
 	Intellect.Text = `${payload.intellect}`;
 	Willpower.Text = `${payload.willpower}`;
+
+	if (payload.act !== undefined) {
+		(ActFrame.WaitForChild("clues") as TextLabel).Text = tostring(payload.act.clues);
+		(ActFrame.WaitForChild("flavorandtext") as TextLabel).Text =
+			tostring(payload.act.flavor) + "<br/>" + tostring(payload.act.text);
+		(ActFrame.WaitForChild("title") as TextLabel).Text = tostring(payload.act.name);
+		(ActFrame.WaitForChild("Advance") as TextLabel).Visible = payload.actAdvanceable;
+	}
+
+	if (payload.agenda !== undefined) {
+		(AgendaFrame.WaitForChild("title") as TextLabel).Text = tostring(payload.agenda.name);
+		(AgendaFrame.WaitForChild("doom") as TextLabel).Text =
+			tostring(payload.agenda.current_doom) + "/" + tostring(payload.agenda.doom);
+		(AgendaFrame.WaitForChild("flavorandtext") as TextLabel).Text =
+			tostring(payload.agenda.flavor) + "<br/>" + tostring(payload.agenda.text);
+	}
 
 	for (let i = 1; i <= payload.actions; i++) {
 		TweenService.Create(

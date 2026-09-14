@@ -1,4 +1,7 @@
 import { ReplicatedStorage } from "@rbxts/services";
+import { GameContext } from "shared/game_context";
+import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
+import { AgendaCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/agenda_card";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { GamePlayer } from "shared/objects/player";
@@ -23,6 +26,9 @@ interface UpdatePlayerUIPayload {
 	combat: number;
 	willpower: number;
 	intellect: number;
+	act: ActCard | undefined;
+	agenda: AgendaCard | undefined;
+	actAdvanceable: boolean;
 }
 
 export function UpdatePlayerUI_Pub(player: GamePlayer) {
@@ -42,6 +48,10 @@ export function UpdatePlayerUI_Pub(player: GamePlayer) {
 		combat: player.investigator.skill_combat,
 		intellect: player.investigator.skill_intellect,
 		willpower: player.investigator.skill_willpower,
+
+		act: GameContext.act,
+		agenda: GameContext.agenda,
+		actAdvanceable: false,
 	} satisfies UpdatePlayerUIPayload);
 }
 
