@@ -3,13 +3,12 @@ import { GamePlayer } from "../shared/objects/player";
 import { Deck } from "../shared/objects/deck";
 
 import { NonplayerCard } from "../shared/objects/abstracts/card_inherits/nonplayer_card";
-import { GameContext, WhatHappened } from "shared/game_context";
+import { GameContext } from "shared/game_context";
 import { CardRegistry } from "shared/card_registry";
 import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { discard } from "shared/discard";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
-import { performReactions } from "shared/performReactions";
 import { EndTurn_Sub } from "shared/remotes/Actions/Interface";
 import { ScenarioCard } from "shared/objects/abstracts/card_inherits/scenario_card";
 import { ChaosBag, IconToken } from "shared/objects/chaos_bag";
@@ -56,14 +55,12 @@ export function start(startingScenario: new () => ScenarioCard, chaosTokens: (nu
 
 function investigatorPhase() {
 	for (const plr of GameContext.players) {
-		performReactions(WhatHappened.PLAYER_TURN_BEGAN, plr);
 		endedTurn = false;
 		GameContext.player_with_turn = plr;
 		plr.actions = 3;
 		do {
 			task.wait();
 		} while (!endedTurn);
-		performReactions(WhatHappened.PLAYER_TURN_ENDED, plr);
 	}
 	task.spawn(enemyPhase);
 }

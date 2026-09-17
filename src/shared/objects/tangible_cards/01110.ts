@@ -1,8 +1,6 @@
 import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
-import { GameContext, WhatHappened } from "shared/game_context";
-import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { GameContext } from "shared/game_context";
 import { giveChoice } from "shared/giveChoice";
-import { reactions } from "../abstracts/card";
 import { CardType, Faction } from "shared/card_database_types";
 
 export class _01110 extends ActCard {
@@ -32,18 +30,6 @@ export class _01110 extends ActCard {
 	traits = "";
 	flavor = `A woman with a torch stands in your parlor, a glimmer of hatred in her eyes. "What have you done to my barrier?" she screams, furious. Before you can enter, a ghastly wail sounds behind you, and a creature wearing robes and a deer skull mask tears through the wall, advancing toward you.`;
 	subname = "";
-
-	reactions: reactions = {
-		[WhatHappened.ENEMY_DEFEATED]: {
-			reaction: (_enemy: unknown) => {
-				const enemy = _enemy as EnemyCard;
-				if (enemy.code === "01116") {
-					this.advance();
-				}
-			},
-			optional: false,
-		},
-	};
 
 	advance() {
 		giveChoice(GameContext.players[0], "Choose a resolution:", [

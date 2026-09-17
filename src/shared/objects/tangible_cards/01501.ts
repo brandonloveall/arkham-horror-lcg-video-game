@@ -1,7 +1,5 @@
 import { Investigator } from "shared/objects/abstracts/card_inherits/player_card_inherits/investigator";
 import { GamePlayer } from "../player";
-import { WhatHappened } from "shared/game_context";
-import { reactions } from "../abstracts/card";
 import { CardType, Faction } from "shared/card_database_types";
 
 export class _01501 extends Investigator {
@@ -57,18 +55,6 @@ export class _01501 extends Investigator {
 	traits = "Agency. Detective.";
 	flavor = 'Everything by the book: every "i" dotted, every "t" crossed. It had worked, until now.';
 	subname = "The Fed";
-
-	reactions: reactions = {
-		[WhatHappened.ENEMY_DEFEATED]: {
-			reaction: (_fighter: unknown) => {
-				const fighter = _fighter as GamePlayer;
-				if (fighter.investigator === this) {
-					fighter.location.discoverClue(fighter, 1);
-				}
-			},
-			optional: true,
-		},
-	};
 
 	resolveElderToken(initiator: GamePlayer) {
 		return initiator.location.clues;

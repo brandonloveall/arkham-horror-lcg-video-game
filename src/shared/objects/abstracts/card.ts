@@ -1,17 +1,6 @@
 import { HttpService } from "@rbxts/services";
 import { CardType, Faction } from "shared/card_database_types";
 import { CardRegistry } from "shared/card_registry";
-import { WhatHappened } from "shared/game_context";
-
-// TODO: make this a lot bigger to incorporate more reactions
-
-export interface reaction {
-	reaction: (...params: unknown[]) => void;
-	optional: boolean;
-	canUseReaction?: (...params: unknown[]) => boolean;
-}
-
-export type reactions = Partial<Record<WhatHappened, reaction>>;
 
 export abstract class Card {
 	id: string = HttpService.GenerateGUID(false);
@@ -36,7 +25,6 @@ export abstract class Card {
 
 	belongs_to: string = ""; // for signature cards. if its blank, its fair game
 
-	reactions?: reactions;
 	inPlay = false;
 
 	constructor() {

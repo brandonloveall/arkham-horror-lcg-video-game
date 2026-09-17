@@ -8,9 +8,8 @@ import { Investigator } from "./abstracts/card_inherits/player_card_inherits/inv
 import { Deck } from "./deck";
 import { skillCheck } from "../skillcheck";
 import { UpdatePlayerUI_Pub } from "shared/remotes/UpdatePlayerUI/Interface";
-import { GameContext, WhatHappened } from "shared/game_context";
+import { GameContext } from "shared/game_context";
 import { payClues } from "shared/payClues";
-import { performReactions } from "shared/performReactions";
 import { TreacheryCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
 
@@ -107,7 +106,6 @@ export class GamePlayer {
 		if (this.actions === 0) {
 			return;
 		}
-		performReactions(WhatHappened.PLAYER_DREW_CARD, this);
 		if (this.deck.isEmpty()) {
 			const temp = this.deck;
 			this.deck = this.discardDeck;
@@ -137,7 +135,6 @@ export class GamePlayer {
 		if (this.actions === 0) {
 			return;
 		}
-		performReactions(WhatHappened.PLAYER_TOOK_RESOURCE, this);
 		this.resources += 1;
 		this.actions--;
 	}
@@ -151,7 +148,6 @@ export class GamePlayer {
 			if (this.actions === 0 || this.resources < card.cost) {
 				return;
 			}
-			performReactions(WhatHappened.PLAYER_PLAYED_CARD, this, card);
 			this.actions--;
 		}
 		this.resources -= card.cost;
@@ -183,7 +179,6 @@ export class GamePlayer {
 		if (this.location === location || !this.location.connects_to.includes(location.symbol) || this.actions === 0) {
 			return;
 		}
-		performReactions(WhatHappened.PLAYER_MOVED, this, this.location, location);
 		this.location = location;
 		this.actions--;
 		this.investigator.move(location);
@@ -206,7 +201,6 @@ export class GamePlayer {
 		const { location, skill, bonusStat, shroudModifier } = investigateObj;
 
 		PlaySound_Pub("Investigate");
-		performReactions(WhatHappened.PLAYER_INVESTIGATED, this, location);
 		const finalShroud = location.shroud + (shroudModifier !== undefined ? shroudModifier : 0);
 		const [passed] = skillCheck({
 			initiator: this,
@@ -226,7 +220,6 @@ export class GamePlayer {
 		}
 		const { enemy, skill, bonusStat = 0, bonusDmg = 0 } = fightObj;
 
-		performReactions(WhatHappened.PLAYER_FOUGHT, this, enemy);
 		const [passed] = skillCheck({ initiator: this, against: enemy.enemy_fight, using: skill, bonus: bonusStat });
 		if (passed) {
 			enemy.takeDamage(1 + bonusDmg);
@@ -238,7 +231,6 @@ export class GamePlayer {
 		if (enemy.engagedWith === this || this.actions === 0) {
 			return;
 		}
-		performReactions(WhatHappened.PLAYER_ENGAGED_ENEMY, this, enemy);
 		enemy.engagedWith = this;
 		this.threat_area.push(enemy);
 		this.actions--;
@@ -248,7 +240,6 @@ export class GamePlayer {
 		if (this.actions === 0) {
 			return;
 		}
-		performReactions(WhatHappened.PLAYER_EVADED_ENEMY, this, enemy);
 		const [passed] = skillCheck({ initiator: this, against: enemy.enemy_evade, using: "skill_agility" });
 		if (passed) {
 			enemy.engagedWith = undefined;

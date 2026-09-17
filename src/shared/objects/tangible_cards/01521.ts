@@ -1,8 +1,5 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
-import { reactions } from "../abstracts/card";
-import { WhatHappened } from "shared/game_context";
 import { CardType, Faction } from "shared/card_database_types";
-import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 
 export class _01521 extends AssetCard {
 	slot = "Ally";
@@ -30,19 +27,6 @@ export class _01521 extends AssetCard {
 	traits = "Ally. Creature.";
 	flavor = `Fiercely loyal, these trained canines make for perfect companions.`;
 	subname = "";
-
-	reactions: reactions = {
-		[WhatHappened.ASSET_DAMAGED]: {
-			reaction: (_asset: unknown, _enemy: unknown) => {
-				const asset = _asset as AssetCard;
-				const enemy = _enemy as EnemyCard;
-				if (asset === this) {
-					enemy.takeDamage(1);
-				}
-			},
-			optional: true,
-		},
-	};
 }
 
 export default {

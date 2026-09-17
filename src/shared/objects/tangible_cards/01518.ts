@@ -1,9 +1,6 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { CardType, Faction } from "shared/card_database_types";
-import { WhatHappened } from "shared/game_context";
-import { reactions } from "../abstracts/card";
 import { GamePlayer } from "../player";
-import { PlayerCard } from "../abstracts/card_inherits/player_card";
 import { giveChoice } from "shared/giveChoice";
 import { CardRegistry } from "shared/card_registry";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
@@ -35,31 +32,6 @@ export class _01518 extends AssetCard {
 	traits = "Ally. Police.";
 	flavor = ``;
 	subname = "";
-
-	reactions: reactions = {
-		[WhatHappened.PLAYER_PLAYED_CARD]: {
-			reaction: (_plr: unknown, _card: unknown) => {
-				const plr = _plr as GamePlayer;
-				const card = _card as PlayerCard;
-
-				if (card === this) {
-					plr.investigator.skill_combat++;
-				}
-			},
-			optional: false,
-		},
-		[WhatHappened.CARD_DISCARDED]: {
-			reaction: (_plr: unknown, _card: unknown) => {
-				const plr = _plr as GamePlayer;
-				const card = _card as PlayerCard;
-
-				if (card === this) {
-					plr.investigator.skill_combat--;
-				}
-			},
-			optional: false,
-		},
-	};
 
 	ability(plr: GamePlayer) {
 		const enemiesAtLoc = CardRegistry.getAll().filter((e) => {

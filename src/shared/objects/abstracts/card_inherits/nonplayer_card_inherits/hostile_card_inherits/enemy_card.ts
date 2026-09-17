@@ -1,9 +1,8 @@
-import { reactions } from "shared/objects/abstracts/card";
 import { HostileCard } from "../hostile_card";
 import { GamePlayer } from "shared/objects/player";
 import { LocationCard } from "../story_card_inherits/location_card";
 import { ReplicatedStorage, Workspace } from "@rbxts/services";
-import { GameContext, WhatHappened } from "shared/game_context";
+import { GameContext } from "shared/game_context";
 // eslint-disable-next-line
 import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
 import { CardType } from "shared/card_database_types";
@@ -23,48 +22,6 @@ export abstract class EnemyCard extends HostileCard {
 	location!: LocationCard;
 	model!: Model;
 	type_name = CardType.Enemy;
-
-	reactions: reactions = {
-		[WhatHappened.PLAYER_MOVED]: {
-			reaction: (_plr: unknown, _oldLocation: unknown, _newLocation: unknown) => {
-				const plr = _plr as GamePlayer;
-				const newLocation = _newLocation as LocationCard;
-				this.attackOfOpportunity(plr);
-				if (this.inPlay) {
-					this.move(newLocation);
-				}
-			},
-			optional: false,
-		},
-		[WhatHappened.PLAYER_DREW_CARD]: {
-			reaction: (_plr: unknown) => {
-				const plr = _plr as GamePlayer;
-				this.attackOfOpportunity(plr);
-			},
-			optional: false,
-		},
-		[WhatHappened.PLAYER_TOOK_RESOURCE]: {
-			reaction: (_plr: unknown) => {
-				const plr = _plr as GamePlayer;
-				this.attackOfOpportunity(plr);
-			},
-			optional: false,
-		},
-		[WhatHappened.PLAYER_INVESTIGATED]: {
-			reaction: (_plr: unknown, _location: unknown) => {
-				const plr = _plr as GamePlayer;
-				this.attackOfOpportunity(plr);
-			},
-			optional: false,
-		},
-		[WhatHappened.PLAYER_PLAYED_CARD]: {
-			reaction: (_plr: unknown) => {
-				const plr = _plr as GamePlayer;
-				this.attackOfOpportunity(plr);
-			},
-			optional: false,
-		},
-	};
 
 	place(location: LocationCard) {
 		this.inPlay = true;

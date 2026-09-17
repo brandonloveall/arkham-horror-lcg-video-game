@@ -34,15 +34,6 @@ You get +1 📖 while investigating.`;
 	canPlayFast(plr: GamePlayer) {
 		return true;
 	}
-
-	// reactions: reactions = {
-	//     [WhatHappened.PLAYER_INVESTIGATED]: {
-	//         reaction: (investigateObj: InvestigateObj) => {
-	//             if(investigateObj.plr.name === getOwner(this)) { investigateObj.skill_bonus++; }
-	//         },
-	//         optional: false
-	//     }
-	// }
 }
 
 export default {

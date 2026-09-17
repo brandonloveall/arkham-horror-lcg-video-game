@@ -1,9 +1,8 @@
 import { PlayerCard } from "./objects/abstracts/card_inherits/player_card";
 import { GamePlayer } from "./objects/player";
 import { Server_ChooseCards_Sub, Server_ChooseCards_Pub } from "./remotes/ChooseCards/Interface";
-import { GameContext, WhatHappened } from "./game_context";
+import { GameContext } from "./game_context";
 import { SkillCheckAnimation_Pub } from "./remotes/SkillCheckAnimation/Interface";
-import { performReactions } from "./performReactions";
 import { IconToken } from "./objects/chaos_bag";
 import { getSkill } from "./getSkill";
 
@@ -32,7 +31,6 @@ export function skillCheck(skillCheckObj: {
 
 	const { initiator, against, using, bonus = 0 } = skillCheckObj;
 
-	performReactions(WhatHappened.SKILL_CHECK_START, initiator);
 	cards = {};
 	submittedCount = 0;
 
@@ -81,7 +79,6 @@ export function skillCheck(skillCheckObj: {
 	SkillCheckAnimation_Pub(getSkill(initiator.investigator, using), total, pulledToken, finalToken);
 
 	GameContext.lock = false;
-	performReactions(WhatHappened.SKILL_CHECK_ENDED, initiator);
 
 	const passed = final >= against;
 

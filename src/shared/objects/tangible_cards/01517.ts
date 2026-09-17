@@ -1,7 +1,5 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { GamePlayer } from "../player";
-import { WhatHappened } from "shared/game_context";
-import { reactions } from "shared/objects/abstracts/card";
 import { giveChoice } from "shared/giveChoice";
 import { CardType, Faction } from "shared/card_database_types";
 
@@ -35,24 +33,6 @@ export class _01517 extends AssetCard {
 
 	added_willpower = 0;
 	added_combat = 0;
-
-	reactions: reactions = {
-		[WhatHappened.SKILL_CHECK_START]: {
-			reaction: () => {
-				this.added_willpower = 0;
-				this.added_combat = 0;
-			},
-			optional: false,
-		},
-		[WhatHappened.SKILL_CHECK_ENDED]: {
-			reaction: (_initiator: unknown) => {
-				const initiator = _initiator as GamePlayer;
-				initiator.investigator.skill_willpower -= this.added_willpower;
-				initiator.investigator.skill_combat -= this.added_combat;
-			},
-			optional: false,
-		},
-	};
 
 	ability(plr: GamePlayer) {
 		if (plr.resources < 1) {
