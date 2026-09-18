@@ -33,11 +33,6 @@ Discover 1 clue at your location.`;
 	flavor = `Just as I suspected!`;
 	subname = "";
 
-	fast = true;
-	canPlayFast(plr: GamePlayer) {
-		return GameContext.most_recent_happening.happening === WhatHappened.ENEMY_DEFEATED && getOwner(this) === plr;
-	}
-
 	onPlay(plr: GamePlayer): void {
 		plr.location.discoverClue(plr, 1);
 	}

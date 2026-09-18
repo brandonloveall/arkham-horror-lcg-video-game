@@ -5,6 +5,7 @@ import { Actions, Timing } from "./actions";
 import { GameContext } from "shared/game_context";
 import { chooseCards } from "shared/choose_cards";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
+import { discard } from "./discard";
 
 interface SkillCheckParams {
 	initiator: GamePlayer;
@@ -45,6 +46,12 @@ export function skillTest(params: SkillCheckParams): [success: boolean, byHowMuc
 	const result = GameContext.scenario_card!.resolve(token, params.initiator);
 	const total = params.initiator.investigator.skills[params.using] + result + bonus;
 	const successful = total >= params.against;
+
+	for (const [_, plrsCards] of pairs(committedCards)) {
+		for (const card of plrsCards) {
+			discard(card);
+		}
+	}
 
 	return [successful, total];
 }

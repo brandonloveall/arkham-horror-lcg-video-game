@@ -30,7 +30,7 @@ export function start(startingScenario: new () => ScenarioCard, chaosTokens: (nu
 
 	for (const plr of Players.GetPlayers()) {
 		const [deck, investigator] = getPlrsSelectedDeck(Players.GetPlayers()[0])!;
-		GameContext.players.push(new GamePlayer(plr, new Deck(deck), new investigator()));
+		GameContext.players.push(new GamePlayer(plr, new Deck(deck, plr.Name), new investigator()));
 	}
 
 	GameContext.scenario_card.setup();

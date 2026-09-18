@@ -3,9 +3,13 @@ import { Card } from "./abstracts/card";
 export class Deck {
 	cards: Card[] = [];
 
-	constructor(cards: (new () => Card)[]) {
-		for (const card of cards) {
-			this.cards.push(new card());
+	constructor(cards: (new () => Card)[], ownerName?: string) {
+		for (const Card of cards) {
+			const card = new Card();
+			if (ownerName !== undefined) {
+				card.owner_username = ownerName;
+			}
+			this.cards.push(card);
 		}
 	}
 

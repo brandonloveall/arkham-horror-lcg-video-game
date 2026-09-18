@@ -23,7 +23,7 @@ export abstract class Card {
 	abstract flavor: string;
 	abstract subname: string;
 
-	belongs_to: string = ""; // for signature cards. if its blank, its fair game
+	owner_username?: string;
 
 	inPlay = false;
 
