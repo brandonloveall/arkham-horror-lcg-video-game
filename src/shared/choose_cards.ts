@@ -3,11 +3,11 @@ import { PlayerCard } from "./objects/abstracts/card_inherits/player_card";
 import { GamePlayer } from "./objects/player";
 import { Server_ChooseCards_Sub, Server_ChooseCards_Pub } from "./remotes/ChooseCards/Interface";
 
-let cards: Record<string, PlayerCard[]>;
+let cards: PlayerCard[] = [];
 let submittedCount = 0;
 
 Server_ChooseCards_Sub((plr, selectedCards) => {
-	cards[plr.Name] = selectedCards as PlayerCard[];
+	cards = [...cards, ...(selectedCards as PlayerCard[])];
 	submittedCount++;
 });
 
@@ -17,8 +17,8 @@ interface AllowedPlayerCards {
 	chooseCap: number;
 }
 
-export function chooseCards(params: AllowedPlayerCards[], message: string): Record<string, PlayerCard[]> {
-	cards = {};
+export function chooseCards(params: AllowedPlayerCards[], message: string): PlayerCard[] {
+	cards = [];
 	submittedCount = 0;
 
 	for (const { player, allowedCards, chooseCap } of params) {

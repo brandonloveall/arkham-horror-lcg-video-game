@@ -36,10 +36,9 @@ export function skillTest(params: SkillCheckParams): [success: boolean, byHowMuc
 	);
 
 	let bonus = 0;
-	for (const [_, plrsCards] of pairs(committedCards)) {
-		for (const card of plrsCards) {
-			bonus += (card as PlayerCard).skills[params.using];
-		}
+	for (const card of committedCards) {
+		bonus += (card as PlayerCard).skills[params.using];
+		bonus += (card as PlayerCard).skills[Skill.Wildcard];
 	}
 
 	const token = GameContext.chaos_bag!.pull();
@@ -47,10 +46,8 @@ export function skillTest(params: SkillCheckParams): [success: boolean, byHowMuc
 	const total = params.initiator.investigator.skills[params.using] + result + bonus;
 	const successful = total >= params.against;
 
-	for (const [_, plrsCards] of pairs(committedCards)) {
-		for (const card of plrsCards) {
-			discard(card);
-		}
+	for (const card of committedCards) {
+		discard(card);
 	}
 
 	return [successful, total];
