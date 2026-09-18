@@ -1,3 +1,4 @@
+import { Skill } from "shared/card_database_types";
 import { EnemyCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { LocationCard } from "./abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
 import { PlayerCard } from "./abstracts/card_inherits/player_card";
@@ -6,12 +7,15 @@ import { AssetCard } from "./abstracts/card_inherits/player_card_inherits/costin
 import { EventCard } from "./abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 import { Investigator } from "./abstracts/card_inherits/player_card_inherits/investigator";
 import { Deck } from "./deck";
-import { skillCheck } from "../skillcheck";
+import { skillTest } from "shared/actions/skilltest";
 import { UpdatePlayerUI_Pub } from "shared/remotes/UpdatePlayerUI/Interface";
 import { GameContext } from "shared/game_context";
 import { payClues } from "shared/payClues";
 import { TreacheryCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
+import { fight } from "shared/actions/fight";
+import { CardRegistry } from "shared/card_registry";
+import { giveChoice } from "shared/giveChoice";
 
 class EquipmentSlot {
 	private items: AssetCard[] = [];
@@ -194,58 +198,56 @@ export class GamePlayer {
 		bonusStat?: number;
 		shroudModifier?: number;
 	}) {
-		if (this.actions === 0) {
-			return;
-		}
+		// if (this.actions === 0) {
+		// 	return;
+		// }
 
-		const { location, skill, bonusStat, shroudModifier } = investigateObj;
+		// const { location, skill, bonusStat, shroudModifier } = investigateObj;
 
-		PlaySound_Pub("Investigate");
-		const finalShroud = location.shroud + (shroudModifier !== undefined ? shroudModifier : 0);
-		const [passed] = skillCheck({
-			initiator: this,
-			against: math.clamp(finalShroud, 0, math.huge),
-			using: skill,
-			bonus: bonusStat,
-		});
-		if (passed) {
-			location.discoverClue(this, 1);
-		}
-		this.actions--;
+		// PlaySound_Pub("Investigate");
+		// const finalShroud = location.shroud + (shroudModifier !== undefined ? shroudModifier : 0);
+		// const [passed] = skillTest({
+		// 	initiator: this,
+		// 	against: math.clamp(finalShroud, 0, math.huge),
+		// 	using: skill,
+		// 	bonus: bonusStat,
+		// });
+		// if (passed) {
+		// 	location.discoverClue(this, 1);
+		// }
+		// this.actions--;
 	}
 
-	public fight(fightObj: { enemy: EnemyCard; skill: string; bonusStat?: number; bonusDmg?: number }) {
-		if (this.actions === 0) {
-			return;
-		}
-		const { enemy, skill, bonusStat = 0, bonusDmg = 0 } = fightObj;
-
-		const [passed] = skillCheck({ initiator: this, against: enemy.enemy_fight, using: skill, bonus: bonusStat });
-		if (passed) {
-			enemy.takeDamage(1 + bonusDmg);
-		}
-		this.actions--;
+	public fight() {
+		fight({
+			initiator: this,
+			using: Skill.Combat,
+			free: false,
+			targets: CardRegistry.getAll().filter(
+				(e) => e instanceof EnemyCard && e.location === this.location,
+			) as EnemyCard[],
+		});
 	}
 
 	public engage(enemy: EnemyCard) {
-		if (enemy.engagedWith === this || this.actions === 0) {
-			return;
-		}
-		enemy.engagedWith = this;
-		this.threat_area.push(enemy);
-		this.actions--;
+		// if (enemy.engagedWith === this || this.actions === 0) {
+		// 	return;
+		// }
+		// enemy.engagedWith = this;
+		// this.threat_area.push(enemy);
+		// this.actions--;
 	}
 
 	public evade(enemy: EnemyCard) {
-		if (this.actions === 0) {
-			return;
-		}
-		const [passed] = skillCheck({ initiator: this, against: enemy.enemy_evade, using: "skill_agility" });
-		if (passed) {
-			enemy.engagedWith = undefined;
-			this.threat_area.remove(this.threat_area.indexOf(enemy));
-		}
-		this.actions--;
+		// if (this.actions === 0) {
+		// 	return;
+		// }
+		// const [passed] = skillCheck({ initiator: this, against: enemy.enemy_evade, using: "skill_agility" });
+		// if (passed) {
+		// 	enemy.engagedWith = undefined;
+		// 	this.threat_area.remove(this.threat_area.indexOf(enemy));
+		// }
+		// this.actions--;
 	}
 
 	public attemptAdvance() {

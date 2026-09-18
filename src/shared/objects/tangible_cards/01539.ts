@@ -1,12 +1,14 @@
 import { SkillCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/skill_card";
-import { CardType, Faction } from "shared/card_database_types";
+import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01539 extends SkillCard {
-	skill_agility = 0;
-	skill_combat = 0;
-	skill_intellect = 1;
-	skill_willpower = 0;
-	skill_wildcard = 0;
+	skills = {
+		[Skill.Agility]: 0,
+		[Skill.Combat]: 0,
+		[Skill.Intellect]: 1,
+		[Skill.Willpower]: 0,
+		[Skill.Wildcard]: 0,
+	};
 	xp = 0;
 	deck_limit = 2;
 	code = "01539";

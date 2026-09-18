@@ -1,5 +1,5 @@
 import { Players, TweenService } from "@rbxts/services";
-import { CardType } from "shared/card_database_types";
+import { CardType, Skill } from "shared/card_database_types";
 import CardGuiMaker from "client/cardGuiMaker";
 import {
 	ActivateAbility_Pub,
@@ -116,10 +116,10 @@ UpdatePlayerUI_Sub((payload) => {
 	CluesHud.Text = `${payload.clues}`;
 	DeckSize.Text = `${payload.deckSize}`;
 
-	Agility.Text = `${payload.agility}`;
-	Combat.Text = `${payload.combat}`;
-	Intellect.Text = `${payload.intellect}`;
-	Willpower.Text = `${payload.willpower}`;
+	Agility.Text = `${payload.skills[Skill.Agility]}`;
+	Combat.Text = `${payload.skills[Skill.Combat]}`;
+	Intellect.Text = `${payload.skills[Skill.Intellect]}`;
+	Willpower.Text = `${payload.skills[Skill.Willpower]}`;
 
 	if (payload.act !== undefined) {
 		(ActFrame.WaitForChild("clues") as TextLabel).Text = tostring(payload.act.clues);

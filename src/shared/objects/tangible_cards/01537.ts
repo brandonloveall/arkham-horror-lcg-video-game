@@ -1,15 +1,17 @@
 import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 import { GamePlayer } from "../player";
 import { GameContext } from "shared/game_context";
-import { CardType, Faction } from "shared/card_database_types";
+import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01537 extends EventCard {
 	cost = 2;
-	skill_agility = 0;
-	skill_combat = 0;
-	skill_intellect = 2;
-	skill_willpower = 0;
-	skill_wildcard = 0;
+	skills = {
+		[Skill.Agility]: 0,
+		[Skill.Combat]: 0,
+		[Skill.Intellect]: 2,
+		[Skill.Willpower]: 0,
+		[Skill.Wildcard]: 0,
+	};
 	xp = 0;
 	deck_limit = 2;
 	code = "01537";

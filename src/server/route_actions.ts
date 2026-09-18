@@ -64,23 +64,7 @@ Evade_Sub((plr) => {
 });
 
 Fight_Sub((plr) => {
-	const plrObj = getPlrObj(plr);
-	const enemies = CardRegistry.getAll().filter((e) => e instanceof EnemyCard && e.location === plrObj.location);
-
-	giveChoice(
-		plrObj,
-		"Fight:",
-		enemies.map((e) => {
-			return {
-				text: e.name,
-				outcome: () =>
-					plrObj.fight({
-						enemy: e as EnemyCard,
-						skill: "skill_combat",
-					}),
-			};
-		}),
-	);
+	getPlrObj(plr).fight();
 });
 
 GainResource_Sub((plr) => {

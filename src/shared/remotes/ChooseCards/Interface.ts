@@ -8,11 +8,22 @@ const ChooseCards = ReplicatedStorage.WaitForChild("TS")
 	.WaitForChild("ChooseCards")
 	.WaitForChild("ChooseCards") as RemoteEvent;
 
-export function Server_ChooseCards_Pub(who: GamePlayer, what: Card[], message: string, amount?: number) {
+export function Server_ChooseCards_Pub(
+	who: GamePlayer,
+	what: Card[],
+	message: string,
+	amount: { amount: number; maximum?: boolean; mustGive?: boolean },
+) {
 	ChooseCards.FireClient(who.owner, what, message, amount);
 }
 
-export function Client_ChooseCards_Sub(callback: (what: Card[], message: string, amount?: number) => void) {
+export function Client_ChooseCards_Sub(
+	callback: (
+		what: Card[],
+		message: string,
+		amount: { amount: number; maximum?: boolean; mustGive?: boolean },
+	) => void,
+) {
 	ChooseCards.OnClientEvent.Connect(callback);
 }
 

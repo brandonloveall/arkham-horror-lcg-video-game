@@ -1,10 +1,7 @@
+import { Skill } from "shared/card_database_types";
 import { Card } from "../card";
 
 export abstract class PlayerCard extends Card {
-	abstract skill_agility: number;
-	abstract skill_combat: number;
-	abstract skill_intellect: number;
-	abstract skill_willpower: number;
-	abstract skill_wildcard: number;
+	abstract skills: Record<Skill, number>;
 	abstract xp: number;
 }

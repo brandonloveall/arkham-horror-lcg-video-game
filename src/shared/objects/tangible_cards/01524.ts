@@ -5,15 +5,17 @@ import { CardRegistry } from "shared/card_registry";
 import { LocationCard } from "../abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { GameContext } from "shared/game_context";
-import { CardType, Faction } from "shared/card_database_types";
+import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01524 extends EventCard {
 	cost = 5;
-	skill_agility = 0;
-	skill_combat = 0;
-	skill_intellect = 0;
-	skill_willpower = 1;
-	skill_wildcard = 0;
+	skills = {
+		[Skill.Agility]: 0,
+		[Skill.Combat]: 0,
+		[Skill.Intellect]: 0,
+		[Skill.Willpower]: 1,
+		[Skill.Wildcard]: 0,
+	};
 	xp = 0;
 	deck_limit = 2;
 	code = "01524";

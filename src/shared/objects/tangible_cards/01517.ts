@@ -1,16 +1,18 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { GamePlayer } from "../player";
 import { giveChoice } from "shared/giveChoice";
-import { CardType, Faction } from "shared/card_database_types";
+import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01517 extends AssetCard {
 	slot = "";
 	cost = 2;
-	skill_agility = 0;
-	skill_combat = 1;
-	skill_intellect = 0;
-	skill_willpower = 1;
-	skill_wildcard = 0;
+	skills = {
+		[Skill.Agility]: 0,
+		[Skill.Combat]: 1,
+		[Skill.Intellect]: 0,
+		[Skill.Willpower]: 1,
+		[Skill.Wildcard]: 0,
+	};
 	xp = 0;
 	deck_limit = 2;
 	code = "01517";
@@ -43,7 +45,7 @@ export class _01517 extends AssetCard {
 				text: "+1 willpower",
 				outcome: () => {
 					plr.resources--;
-					plr.investigator.skill_willpower++;
+					plr.investigator.skills[Skill.Willpower]++;
 					this.added_willpower++;
 				},
 			},
@@ -51,7 +53,7 @@ export class _01517 extends AssetCard {
 				text: "+1 combat",
 				outcome: () => {
 					plr.resources--;
-					plr.investigator.skill_combat++;
+					plr.investigator.skills[Skill.Combat]++;
 				},
 			},
 		]);

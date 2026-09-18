@@ -1,8 +1,8 @@
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { GamePlayer } from "../player";
-import { skillCheck } from "shared/skillcheck";
+import { skillTest } from "shared/actions/skilltest";
 import { discard } from "shared/discard";
-import { CardType, Faction } from "shared/card_database_types";
+import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01167 extends TreacheryCard {
 	encounter_name = "Chilling Cold";
@@ -25,7 +25,7 @@ export class _01167 extends TreacheryCard {
 	subname = "";
 
 	resolve(plrWhoDrew: GamePlayer): void {
-		const [passed] = skillCheck({ initiator: plrWhoDrew, against: 4, using: "skill_willpower" });
+		const [passed] = skillTest({ initiator: plrWhoDrew, against: 4, using: Skill.Willpower });
 		if (!passed) {
 			if (plrWhoDrew.getAllEquipment().size() !== 0) {
 				discard(plrWhoDrew, plrWhoDrew.getAllEquipment(), 1);

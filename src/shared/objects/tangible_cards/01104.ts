@@ -3,7 +3,6 @@ import { ScenarioCard } from "../abstracts/card_inherits/scenario_card";
 import { IconToken } from "../chaos_bag";
 import { GamePlayer } from "../player";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
-import { ResolveObj } from "shared/skillcheck";
 import { GameContext } from "shared/game_context";
 import { _01108 } from "./01108";
 import { _01105 } from "./01105";
@@ -45,28 +44,7 @@ export class _01104 extends ScenarioCard {
 	 * curl https://arkhamdb.com/api/public/cards/<expansion>?encounter=1 | jq '.[] | range(.quantity) as $i | select((.encounter_name == <encounter names>) and (.type_code == "enemy" or .type_code == "treachery") and .name != <excluded cards>) .code'
 	 */
 
-	resolve(token: IconToken, puller: GamePlayer, resolveObj: ResolveObj) {
-		if (token === IconToken.skull) {
-			let total = 0;
-			for (const card of CardRegistry.getAll()) {
-				if (
-					card instanceof EnemyCard &&
-					card.traits.find("Ghoul")[0] !== undefined &&
-					card.location === puller.location
-				) {
-					total--;
-				}
-			}
-			return total;
-		}
-		if (token === IconToken.cultist) {
-			resolveObj.onFail.push(() => puller.takeDamage(0, 1));
-			return -1;
-		}
-		if (token === IconToken.tablet) {
-			resolveObj.onFail.push(() => puller.takeDamage(1, 0));
-			return -2;
-		}
+	resolve(token: IconToken, puller: GamePlayer) {
 		return 0; // should never hit
 	}
 

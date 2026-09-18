@@ -23,6 +23,14 @@ export enum CardType {
 	Skill,
 }
 
+export enum Skill {
+	Agility,
+	Willpower,
+	Combat,
+	Intellect,
+	Wildcard,
+}
+
 export interface CardData {
 	code: string;
 	faction_name: Faction;

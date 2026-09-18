@@ -1,5 +1,5 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
-import { CardType, Faction } from "shared/card_database_types";
+import { CardType, Faction, Skill } from "shared/card_database_types";
 import { GamePlayer } from "../player";
 import { giveChoice } from "shared/giveChoice";
 import { CardRegistry } from "shared/card_registry";
@@ -8,11 +8,13 @@ import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/ho
 export class _01518 extends AssetCard {
 	slot = "Ally";
 	cost = 4;
-	skill_agility = 0;
-	skill_combat = 1;
-	skill_intellect = 0;
-	skill_willpower = 0;
-	skill_wildcard = 0;
+	skills = {
+		[Skill.Agility]: 0,
+		[Skill.Combat]: 1,
+		[Skill.Intellect]: 0,
+		[Skill.Willpower]: 0,
+		[Skill.Wildcard]: 0,
+	};
 	xp = 0;
 	deck_limit = 2;
 	code = "01518";

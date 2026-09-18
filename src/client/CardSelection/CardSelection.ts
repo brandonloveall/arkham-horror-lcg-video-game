@@ -13,44 +13,50 @@ const Template = PlayerGui.WaitForChild("GuiElements").WaitForChild("SelectableC
 const Message = Frame.WaitForChild("Message") as TextLabel;
 
 let chosen_cards: Card[] = [];
-let _amount: number | undefined;
+let _amount: { amount: number; maximum?: boolean; mustGive?: boolean };
 
 ConfirmButton.MouseButton1Click.Connect(() => {
-	if (_amount !== undefined && chosen_cards.size() !== _amount) {
+	if (_amount.mustGive !== undefined && chosen_cards.size() !== _amount.amount) {
 		return;
 	}
 	Client_ChooseCards_Pub(chosen_cards);
 	CardPickingUI.Enabled = false;
 });
 
-Client_ChooseCards_Sub((what: Card[], message: string, amount?: number) => {
-	CardPickingUI.Enabled = true;
-	Message.Text = message;
-	chosen_cards = [];
-	_amount = amount;
+Client_ChooseCards_Sub(
+	(what: Card[], message: string, amount: { amount: number; maximum?: boolean; mustGive?: boolean }) => {
+		CardPickingUI.Enabled = true;
+		Message.Text = message;
+		chosen_cards = [];
+		_amount = amount;
 
-	for (const card of Box.GetChildren()) {
-		if (card.IsA("TextButton")) {
-			card.Destroy();
+		for (const card of Box.GetChildren()) {
+			if (card.IsA("TextButton")) {
+				card.Destroy();
+			}
 		}
-	}
 
-	for (const card of what) {
-		const GuiCard = Template.Clone();
-		GuiCard.Parent = Box;
-		GuiCard.Text = card.name;
-		GuiCard.MouseButton1Click.Connect(() => {
-			if (_amount !== undefined && chosen_cards.size() === _amount && !chosen_cards.includes(card)) {
-				return;
-			}
+		for (const card of what) {
+			const GuiCard = Template.Clone();
+			GuiCard.Parent = Box;
+			GuiCard.Text = card.name;
+			GuiCard.MouseButton1Click.Connect(() => {
+				if (
+					_amount.maximum !== undefined &&
+					chosen_cards.size() === _amount.amount &&
+					!chosen_cards.includes(card)
+				) {
+					return;
+				}
 
-			if (!chosen_cards.includes(card)) {
-				chosen_cards.push(card);
-				GuiCard.BackgroundColor3 = new Color3(0, 255, 0);
-			} else {
-				chosen_cards.remove(chosen_cards.indexOf(card));
-				GuiCard.BackgroundColor3 = new Color3(255, 0, 0);
-			}
-		});
-	}
-});
+				if (!chosen_cards.includes(card)) {
+					chosen_cards.push(card);
+					GuiCard.BackgroundColor3 = new Color3(0, 255, 0);
+				} else {
+					chosen_cards.remove(chosen_cards.indexOf(card));
+					GuiCard.BackgroundColor3 = new Color3(255, 0, 0);
+				}
+			});
+		}
+	},
+);

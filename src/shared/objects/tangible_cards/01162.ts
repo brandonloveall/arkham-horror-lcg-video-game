@@ -1,7 +1,7 @@
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { GamePlayer } from "../player";
-import { skillCheck } from "shared/skillcheck";
-import { CardType, Faction } from "shared/card_database_types";
+import { skillTest } from "shared/actions/skilltest";
+import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01162 extends TreacheryCard {
 	encounter_name = "Ghouls";
@@ -24,7 +24,7 @@ export class _01162 extends TreacheryCard {
 	subname = "";
 
 	resolve(plrWhoDrew: GamePlayer): void {
-		const [passed, byHowMuch] = skillCheck({ initiator: plrWhoDrew, against: 3, using: "skill_agility" });
+		const [passed, byHowMuch] = skillTest({ initiator: plrWhoDrew, against: 3, using: Skill.Agility });
 		if (!passed) {
 			plrWhoDrew.takeDamage(math.abs(byHowMuch), 0);
 		}

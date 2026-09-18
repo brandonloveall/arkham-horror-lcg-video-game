@@ -10,9 +10,9 @@ import { CardType } from "shared/card_database_types";
 export abstract class EnemyCard extends HostileCard {
 	abstract health: number;
 	sanity = undefined;
-	abstract enemy_damage: number;
-	abstract enemy_horror: number;
-	abstract enemy_fight: number;
+	abstract damage: number;
+	abstract horror: number;
+	abstract fight: number;
 	abstract enemy_evade: number;
 	abstract victory: number;
 
@@ -49,7 +49,7 @@ export abstract class EnemyCard extends HostileCard {
 	}
 
 	attack(plr: GamePlayer) {
-		plr.takeDamage(this.enemy_damage, this.enemy_horror);
+		plr.takeDamage(this.damage, this.horror);
 		PlaySound_Pub("Enemy_Attack");
 	}
 

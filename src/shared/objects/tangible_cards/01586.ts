@@ -2,16 +2,20 @@ import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_in
 import { GamePlayer } from "../player";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { giveChoice } from "shared/giveChoice";
-import { CardType, Faction } from "shared/card_database_types";
+import { CardType, Faction, Skill } from "shared/card_database_types";
+import { fight } from "shared/actions/fight";
+import { standardTargets } from "shared/actions/helpers";
 
 export class _01586 extends AssetCard {
 	slot = "Hand";
 	cost = 1;
-	skill_agility = 0;
-	skill_combat = 1;
-	skill_intellect = 0;
-	skill_willpower = 0;
-	skill_wildcard = 0;
+	skills = {
+		[Skill.Agility]: 0,
+		[Skill.Combat]: 1,
+		[Skill.Intellect]: 0,
+		[Skill.Willpower]: 0,
+		[Skill.Wildcard]: 0,
+	};
 	xp = 0;
 	deck_limit = 2;
 	code = "01586";
@@ -33,32 +37,7 @@ export class _01586 extends AssetCard {
 	subname = "";
 
 	ability(plr: GamePlayer) {
-		const enemy = plr.selectedObject as EnemyCard;
-
-		giveChoice(plr, "Attack with Knife:", [
-			{
-				text: "+1 combat",
-				outcome: () => {
-					plr.fight({
-						enemy: enemy,
-						skill: "skill_combat",
-						bonusStat: 1,
-					});
-				},
-			},
-			{
-				text: "Discard Knife: +2 combat, +1 damage",
-				outcome: () => {
-					plr.discard(this.id);
-					plr.fight({
-						enemy: enemy,
-						skill: "skill_combat",
-						bonusStat: 2,
-						bonusDmg: 1,
-					});
-				},
-			},
-		]);
+		
 	}
 }
 

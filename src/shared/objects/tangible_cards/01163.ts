@@ -1,7 +1,7 @@
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { GamePlayer } from "../player";
-import { skillCheck } from "shared/skillcheck";
-import { CardType, Faction } from "shared/card_database_types";
+import { skillTest } from "shared/actions/skilltest";
+import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01163 extends TreacheryCard {
 	encounter_name = "Striking Fear";
@@ -24,7 +24,7 @@ export class _01163 extends TreacheryCard {
 	subname = "";
 
 	resolve(plrWhoDrew: GamePlayer): void {
-		const [passed, byHowMuch] = skillCheck({ initiator: plrWhoDrew, against: 3, using: "skill_willpower" });
+		const [passed, byHowMuch] = skillTest({ initiator: plrWhoDrew, against: 3, using: Skill.Willpower });
 		if (!passed) {
 			plrWhoDrew.takeDamage(0, math.abs(byHowMuch));
 		}

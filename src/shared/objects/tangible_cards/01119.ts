@@ -4,9 +4,9 @@ import { CardType, Faction } from "shared/card_database_types";
 
 export class _01119 extends EnemyCard {
 	health = 4;
-	enemy_damage = 2;
-	enemy_horror = 1;
-	enemy_fight = 3;
+	damage = 2;
+	horror = 1;
+	fight = 3;
 	enemy_evade = 4;
 	victory = 1;
 	engagedWith: GamePlayer | undefined;

@@ -1,3 +1,4 @@
+import { Skill } from "shared/card_database_types";
 import { ReplicatedStorage } from "@rbxts/services";
 import { GameContext } from "shared/game_context";
 import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
@@ -22,10 +23,7 @@ interface UpdatePlayerUIPayload {
 	clues: number;
 	assets: AssetCard[];
 	deckSize: number;
-	agility: number;
-	combat: number;
-	willpower: number;
-	intellect: number;
+	skills: Record<Skill, number>;
 	act: ActCard | undefined;
 	agenda: AgendaCard | undefined;
 	actAdvanceable: boolean;
@@ -44,10 +42,7 @@ export function UpdatePlayerUI_Pub(player: GamePlayer) {
 		assets: player.getAllEquipment(),
 		deckSize: player.deck.size(),
 
-		agility: player.investigator.skill_agility,
-		combat: player.investigator.skill_combat,
-		intellect: player.investigator.skill_intellect,
-		willpower: player.investigator.skill_willpower,
+		skills: player.investigator.skills,
 
 		act: GameContext.act,
 		agenda: GameContext.agenda,

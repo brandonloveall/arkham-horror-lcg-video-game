@@ -1,14 +1,16 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
-import { CardType, Faction } from "shared/card_database_types";
+import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01117 extends AssetCard {
 	slot = "Ally";
 	cost = 0;
-	skill_agility = 0;
-	skill_combat = 0;
-	skill_intellect = 0;
-	skill_willpower = 0;
-	skill_wildcard = 0;
+	skills = {
+		[Skill.Agility]: 0,
+		[Skill.Combat]: 0,
+		[Skill.Intellect]: 0,
+		[Skill.Willpower]: 0,
+		[Skill.Wildcard]: 0,
+	};
 	xp = 0;
 	deck_limit = 1;
 	code = "01117";

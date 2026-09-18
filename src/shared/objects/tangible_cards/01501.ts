@@ -1,6 +1,6 @@
 import { Investigator } from "shared/objects/abstracts/card_inherits/player_card_inherits/investigator";
 import { GamePlayer } from "../player";
-import { CardType, Faction } from "shared/card_database_types";
+import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01501 extends Investigator {
 	health = 9;
@@ -31,11 +31,13 @@ export class _01501 extends Investigator {
 			},
 		},
 	];
-	skill_agility = 2;
-	skill_combat = 4;
-	skill_intellect = 3;
-	skill_willpower = 3;
-	skill_wildcard = 0;
+	skills = {
+		[Skill.Agility]: 2,
+		[Skill.Combat]: 4,
+		[Skill.Intellect]: 3,
+		[Skill.Willpower]: 3,
+		[Skill.Wildcard]: 0,
+	};
 	xp = 0;
 	deck_limit = 1;
 	code = "01501";

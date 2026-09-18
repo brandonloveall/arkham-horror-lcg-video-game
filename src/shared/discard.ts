@@ -15,7 +15,7 @@ Server_ChooseCards_Sub((plr: Player, cards: Card[]) => {
 export function discard(who: GamePlayer, whats: PlayerCard[], amount: number) {
 	GameContext.lock = true;
 	finished = false;
-	Server_ChooseCards_Pub(who, whats, `Discard ${amount} cards`, amount);
+	Server_ChooseCards_Pub(who, whats, `Discard ${amount} cards`, { amount, mustGive: true });
 	do {
 		task.wait();
 	} while (!finished);

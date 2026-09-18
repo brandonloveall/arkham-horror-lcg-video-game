@@ -2,16 +2,18 @@ import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_in
 import { GamePlayer } from "../player";
 import { CardRegistry } from "shared/card_registry";
 import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
-import { CardType, Faction } from "shared/card_database_types";
+import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01520 extends AssetCard {
 	slot = "Hand";
 	cost = 3;
-	skill_agility = 0;
-	skill_combat = 1;
-	skill_intellect = 0;
-	skill_willpower = 0;
-	skill_wildcard = 0;
+	skills = {
+		[Skill.Agility]: 0,
+		[Skill.Combat]: 1,
+		[Skill.Intellect]: 0,
+		[Skill.Willpower]: 0,
+		[Skill.Wildcard]: 0,
+	};
 	xp = 0;
 	deck_limit = 2;
 	code = "01520";
@@ -32,26 +34,7 @@ export class _01520 extends AssetCard {
 	subname = "";
 
 	ability(plr: GamePlayer) {
-		let engagedWith = 0;
-		let isEngagedWithTarget = false;
 
-		for (const card of CardRegistry.getAll()) {
-			if (card instanceof EnemyCard) {
-				if (card.engagedWith === plr) {
-					engagedWith++;
-					if (card === plr.selectedObject) {
-						isEngagedWithTarget = true;
-					}
-				}
-			}
-		}
-
-		plr.fight({
-			enemy: plr.selectedObject as EnemyCard,
-			skill: "skill_combat",
-			bonusStat: 1,
-			bonusDmg: engagedWith === 1 && isEngagedWithTarget ? 1 : 0,
-		});
 	}
 }
 
