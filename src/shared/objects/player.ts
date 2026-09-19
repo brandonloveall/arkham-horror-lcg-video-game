@@ -7,15 +7,14 @@ import { AssetCard } from "./abstracts/card_inherits/player_card_inherits/costin
 import { EventCard } from "./abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
 import { Investigator } from "./abstracts/card_inherits/player_card_inherits/investigator";
 import { Deck } from "./deck";
-import { skillTest } from "shared/actions/skilltest";
 import { UpdatePlayerUI_Pub } from "shared/remotes/UpdatePlayerUI/Interface";
 import { GameContext } from "shared/game_context";
 import { payClues } from "shared/payClues";
 import { TreacheryCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
 import { fight } from "shared/actions/fight";
-import { CardRegistry } from "shared/card_registry";
-import { giveChoice } from "shared/giveChoice";
+import { evade } from "shared/actions/evade";
+import { standardEvadeTargets, standardFightTargets } from "shared/actions/helpers";
 
 class EquipmentSlot {
 	private items: AssetCard[] = [];
@@ -201,9 +200,7 @@ export class GamePlayer {
 		// if (this.actions === 0) {
 		// 	return;
 		// }
-
 		// const { location, skill, bonusStat, shroudModifier } = investigateObj;
-
 		// PlaySound_Pub("Investigate");
 		// const finalShroud = location.shroud + (shroudModifier !== undefined ? shroudModifier : 0);
 		// const [passed] = skillTest({
@@ -223,9 +220,7 @@ export class GamePlayer {
 			initiator: this,
 			using: Skill.Combat,
 			free: false,
-			targets: CardRegistry.getAll().filter(
-				(e) => e instanceof EnemyCard && e.location === this.location,
-			) as EnemyCard[],
+			targets: standardFightTargets(this),
 		});
 	}
 
@@ -238,16 +233,8 @@ export class GamePlayer {
 		// this.actions--;
 	}
 
-	public evade(enemy: EnemyCard) {
-		// if (this.actions === 0) {
-		// 	return;
-		// }
-		// const [passed] = skillCheck({ initiator: this, against: enemy.enemy_evade, using: "skill_agility" });
-		// if (passed) {
-		// 	enemy.engagedWith = undefined;
-		// 	this.threat_area.remove(this.threat_area.indexOf(enemy));
-		// }
-		// this.actions--;
+	public evade() {
+		evade({ targets: standardEvadeTargets(this), initiator: this, using: Skill.Agility, free: false });
 	}
 
 	public attemptAdvance() {

@@ -48,19 +48,7 @@ Engage_Sub((plr) => {
 });
 
 Evade_Sub((plr) => {
-	const plrObj = getPlrObj(plr);
-	const enemies = CardRegistry.getAll().filter((e) => e instanceof EnemyCard && e.engagedWith === plrObj);
-
-	giveChoice(
-		plrObj,
-		"Evade:",
-		enemies.map((e) => {
-			return {
-				text: e.name,
-				outcome: () => plrObj.evade(e as EnemyCard),
-			};
-		}),
-	);
+	getPlrObj(plr).evade();
 });
 
 Fight_Sub((plr) => {
