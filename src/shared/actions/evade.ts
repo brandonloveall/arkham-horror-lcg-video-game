@@ -3,15 +3,15 @@ import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card
 import { GamePlayer } from "shared/objects/player";
 import { react } from "./react";
 import { skillTest } from "./skilltest";
-import { Actions, Timing } from "./actions";
+import { Actions, Timing } from "./action_types";
 import { giveChoice } from "shared/giveChoice";
 
 interface Params {
-	initiator: GamePlayer;
-	targets: EnemyCard[];
-	using: Skill;
-	bonusSkill?: number;
-	free: boolean;
+    initiator: GamePlayer;
+    targets: EnemyCard[];
+    using: Skill;
+    bonusSkill?: number;
+    free: boolean;
 }
 
 /**
@@ -24,42 +24,42 @@ interface Params {
  * end
  */
 export function evade(params: Params) {
-	// if (cantDo()) {
-	// 	return;
-	// }
+    // if (cantDo()) {
+    // 	return;
+    // }
 
-	// payActionCost();
-	let target!: EnemyCard;
-	giveChoice(
-		params.initiator,
-		"Choose a target to evade",
-		params.targets.map((e) => {
-			return {
-				text: `${e.name}`,
-				outcome: () => {
-					target = e;
-				},
-			};
-		}),
-	);
+    // payActionCost();
+    let target!: EnemyCard;
+    giveChoice(
+        params.initiator,
+        "Choose a target to evade",
+        params.targets.map((e) => {
+            return {
+                text: `${e.name}`,
+                outcome: () => {
+                    target = e;
+                },
+            };
+        }),
+    );
 
-	react(Timing.WHEN, Actions.EVADE);
+    react(Timing.WHEN, Actions.EVADE);
 
-	// if (cantDo()) {
-	// 	return;
-	// }
+    // if (cantDo()) {
+    // 	return;
+    // }
 
-	const [success] = skillTest({
-		initiator: params.initiator,
-		using: params.using,
-		against: target.evade,
-		bonusSkill: params.bonusSkill,
-	});
+    const [success] = skillTest({
+        initiator: params.initiator,
+        using: params.using,
+        against: target.evade,
+        bonusSkill: params.bonusSkill,
+    });
 
-	if (success) {
-		target.engagedWith = undefined;
-		params.initiator.threat_area.remove(params.initiator.threat_area.indexOf(target));
-	}
+    if (success) {
+        target.engagedWith = undefined;
+        params.initiator.threat_area.remove(params.initiator.threat_area.indexOf(target));
+    }
 
-	react(Timing.AFTER, Actions.EVADE);
+    react(Timing.AFTER, Actions.EVADE);
 }
