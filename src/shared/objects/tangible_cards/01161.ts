@@ -7,7 +7,7 @@ export class _01161 extends EnemyCard {
 	damage = 1;
 	horror = 1;
 	fight = 3;
-	enemy_evade = 3;
+	evade = 3;
 	victory = 0;
 	engagedWith: GamePlayer | undefined;
 	encounter_name = "Ghouls";

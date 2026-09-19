@@ -7,7 +7,7 @@ export class _01116 extends EnemyCard {
 	damage = 2;
 	horror = 2;
 	fight = 4;
-	enemy_evade = 4;
+	evade = 4;
 	victory = 2;
 	engagedWith: GamePlayer | undefined;
 	encounter_name = "The Gathering";
