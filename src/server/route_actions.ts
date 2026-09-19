@@ -60,11 +60,7 @@ GainResource_Sub((plr) => {
 });
 
 Investigate_Sub((plr) => {
-	const plrObj = getPlrObj(plr);
-	plrObj.investigate({
-		location: plrObj.location,
-		skill: "skill_intellect",
-	});
+	getPlrObj(plr).investigate();
 });
 
 Move_Sub((plr) => {
