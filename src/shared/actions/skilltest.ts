@@ -1,7 +1,7 @@
 import { Skill } from "shared/card_database_types";
 import { GamePlayer } from "shared/objects/player";
 import { react } from "./react";
-import { Actions, Timing } from "./actions";
+import { Actions, Timing } from "./action_types";
 import { GameContext } from "shared/game_context";
 import { chooseCards } from "shared/choose_cards";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
