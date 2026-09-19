@@ -1,10 +1,6 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { GamePlayer } from "../player";
-import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
-import { giveChoice } from "shared/giveChoice";
 import { CardType, Faction, Skill } from "shared/card_database_types";
-import { fight } from "shared/actions/fight";
-import { standardTargets } from "shared/actions/helpers";
 
 export class _01586 extends AssetCard {
 	slot = "Hand";
