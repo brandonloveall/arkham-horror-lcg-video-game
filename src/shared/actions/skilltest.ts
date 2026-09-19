@@ -7,14 +7,14 @@ import { chooseCards } from "shared/choose_cards";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 import { discard } from "./discard";
 
-interface SkillCheckParams {
+interface Params {
 	initiator: GamePlayer;
 	using: Skill;
 	bonusSkill?: number;
 	against: number;
 }
 
-export function skillTest(params: SkillCheckParams): [success: boolean, byHowMuch: number] {
+export function skillTest(params: Params): [success: boolean, byHowMuch: number] {
 	react(Timing.WHEN, Actions.SKILLTEST);
 	// if (cantDo()) {
 	// 	return;

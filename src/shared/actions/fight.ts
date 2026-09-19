@@ -59,7 +59,6 @@ export function fight(params: Params) {
 	const totalDmg = 1 + (params.bonusDamage === undefined ? 0 : params.bonusDamage);
 
 	if (success) {
-		print("u did it");
 		dealDamageToEnemy({ to: target, damage: totalDmg });
 	}
 
