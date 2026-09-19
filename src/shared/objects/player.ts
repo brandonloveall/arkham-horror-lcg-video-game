@@ -15,6 +15,7 @@ import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
 import { fight } from "shared/actions/fight";
 import { evade } from "shared/actions/evade";
 import { standardEvadeTargets, standardFightTargets } from "shared/actions/helpers";
+import { investigate } from "shared/actions/investigate";
 
 class EquipmentSlot {
 	private items: AssetCard[] = [];
@@ -191,28 +192,8 @@ export class GamePlayer {
 		PlaySound_Pub("Move");
 	}
 
-	public investigate(investigateObj: {
-		location: LocationCard;
-		skill: string;
-		bonusStat?: number;
-		shroudModifier?: number;
-	}) {
-		// if (this.actions === 0) {
-		// 	return;
-		// }
-		// const { location, skill, bonusStat, shroudModifier } = investigateObj;
-		// PlaySound_Pub("Investigate");
-		// const finalShroud = location.shroud + (shroudModifier !== undefined ? shroudModifier : 0);
-		// const [passed] = skillTest({
-		// 	initiator: this,
-		// 	against: math.clamp(finalShroud, 0, math.huge),
-		// 	using: skill,
-		// 	bonus: bonusStat,
-		// });
-		// if (passed) {
-		// 	location.discoverClue(this, 1);
-		// }
-		// this.actions--;
+	public investigate() {
+		investigate({ initiator: this, location: this.location, using: Skill.Intellect });
 	}
 
 	public fight() {
