@@ -7,7 +7,7 @@ export class _01602 extends EnemyCard {
 	damage = 1;
 	horror = 0;
 	fight = 2;
-	enemy_evade = 3;
+	evade = 3;
 	victory = 0;
 	engagedWith: GamePlayer | undefined;
 	encounter_name = "";

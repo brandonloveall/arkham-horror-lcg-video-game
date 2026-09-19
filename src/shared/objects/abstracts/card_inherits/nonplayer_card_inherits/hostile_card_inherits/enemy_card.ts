@@ -13,7 +13,7 @@ export abstract class EnemyCard extends HostileCard {
 	abstract damage: number;
 	abstract horror: number;
 	abstract fight: number;
-	abstract enemy_evade: number;
+	abstract evade: number;
 	abstract victory: number;
 
 	abstract engagedWith: GamePlayer | undefined;
