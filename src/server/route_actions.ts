@@ -25,9 +25,7 @@ function getPlrObj(plr: Player) {
 }
 
 Draw_Sub((plr) => {
-	const plrObj = getPlrObj(plr);
-
-	plrObj.draw();
+	getPlrObj(plr).draw();
 });
 
 Engage_Sub((plr) => {
