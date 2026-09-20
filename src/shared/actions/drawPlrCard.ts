@@ -24,7 +24,7 @@ export function drawPlrCard(params: Params) {
 	// }
 
 	const card = params.drawer.deck.pull();
-	for (let i = 0; i < amount; i++) {
+	for (let i = 0; i < params.amount; i++) {
 		if (card instanceof PlayerCard) {
 			params.drawer.hand.push(card);
 		} else if (card instanceof EnemyCard) {
