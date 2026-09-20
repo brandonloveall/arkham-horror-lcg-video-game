@@ -87,8 +87,6 @@ export class GamePlayer {
 
 	threat_area: (EnemyCard | TreacheryCard)[] = [];
 
-	selectedObject!: LocationCard | EnemyCard;
-
 	constructor(owner: Player, deck: Deck, investigator: Investigator) {
 		this.owner = owner;
 		this.deck = deck;
