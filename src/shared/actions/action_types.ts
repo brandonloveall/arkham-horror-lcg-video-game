@@ -4,7 +4,7 @@ export enum Actions {
 	MOVE,
 	EVADE,
 	PARLEY,
-	TAKE_RESOURCE,
+	GAIN_RESOURCE,
 	INVESTIGATE,
 	ENGAGE,
 
