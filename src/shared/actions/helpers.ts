@@ -9,3 +9,9 @@ export function standardFightTargets(plr: GamePlayer) {
 export function standardEvadeTargets(plr: GamePlayer) {
 	return CardRegistry.getAll().filter((e) => e instanceof EnemyCard && e.engagedWith === plr) as EnemyCard[];
 }
+
+export function standardEngageTargets(plr: GamePlayer) {
+	return CardRegistry.getAll().filter(
+		(e) => e instanceof EnemyCard && e.engagedWith !== plr && e.location === plr.location,
+	) as EnemyCard[];
+}

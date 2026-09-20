@@ -6,6 +6,7 @@ export enum Actions {
 	PARLEY,
 	TAKE_RESOURCE,
 	INVESTIGATE,
+	ENGAGE,
 
 	DISCOVER_CLUE,
 

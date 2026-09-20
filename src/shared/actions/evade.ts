@@ -58,7 +58,7 @@ export function evade(params: Params) {
 
 	if (success) {
 		target.engagedWith = undefined;
-		params.initiator.threat_area.remove(params.initiator.threat_area.indexOf(target));
+		target.is_ready = false;
 	}
 
 	react(Timing.AFTER, Actions.EVADE);

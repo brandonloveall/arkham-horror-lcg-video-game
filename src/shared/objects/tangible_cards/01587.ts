@@ -35,15 +35,7 @@ export class _01587 extends AssetCard {
 	uses = 3;
 
 	ability(plr: GamePlayer) {
-		if (this.uses === 0) {
-			return;
-		}
-		this.uses--;
-		plr.investigate({
-			location: plr.location,
-			skill: "skill_intellect",
-			shroudModifier: -2,
-		});
+
 	}
 }
 
