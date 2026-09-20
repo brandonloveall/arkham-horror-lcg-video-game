@@ -18,7 +18,7 @@ import { standardEngageTargets, standardEvadeTargets, standardFightTargets } fro
 import { investigate } from "shared/actions/investigate";
 import { engage } from "shared/actions/engage";
 import { drawPlrCard } from "shared/actions/drawPlrCard";
-import { gainResource } from "shared/actions/takeResource";
+import { gainResource } from "shared/actions/gainResource";
 
 class EquipmentSlot {
 	private items: AssetCard[] = [];
