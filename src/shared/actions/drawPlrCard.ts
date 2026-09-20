@@ -24,14 +24,15 @@ export function drawPlrCard(params: Params) {
 	// }
 
 	const card = params.drawer.deck.pull();
-
-	if (card instanceof PlayerCard) {
-		params.drawer.hand.push(card);
-	} else if (card instanceof EnemyCard) {
-		card.place(params.drawer.location);
-		card.engagedWith = params.drawer;
-	} else if (card instanceof TreacheryCard) {
-		card.resolve(params.drawer);
+	for (let i = 0; i < amount; i++) {
+		if (card instanceof PlayerCard) {
+			params.drawer.hand.push(card);
+		} else if (card instanceof EnemyCard) {
+			card.place(params.drawer.location);
+			card.engagedWith = params.drawer;
+		} else if (card instanceof TreacheryCard) {
+			card.resolve(params.drawer);
+		}
 	}
 
 	react(Timing.AFTER, Actions.DRAW);
