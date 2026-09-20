@@ -41,7 +41,7 @@ Fight_Sub((plr) => {
 });
 
 GainResource_Sub((plr) => {
-	getPlrObj(plr).takeResource();
+	getPlrObj(plr).gainResource();
 });
 
 Investigate_Sub((plr) => {

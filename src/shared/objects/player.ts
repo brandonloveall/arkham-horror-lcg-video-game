@@ -18,6 +18,7 @@ import { standardEngageTargets, standardEvadeTargets, standardFightTargets } fro
 import { investigate } from "shared/actions/investigate";
 import { engage } from "shared/actions/engage";
 import { drawPlrCard } from "shared/actions/drawPlrCard";
+import { gainResource } from "shared/actions/takeResource";
 
 class EquipmentSlot {
 	private items: AssetCard[] = [];
@@ -112,12 +113,8 @@ export class GamePlayer {
 		drawPlrCard({ drawer: this, amount: 1 });
 	}
 
-	public takeResource() {
-		if (this.actions === 0) {
-			return;
-		}
-		this.resources += 1;
-		this.actions--;
+	public gainResource() {
+		gainResource({ initiator: this, amount: 1 });
 	}
 
 	public play(card: CostingCard) {
