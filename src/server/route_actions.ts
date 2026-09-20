@@ -1,7 +1,6 @@
 import { CardRegistry } from "shared/card_registry";
 import { GameContext } from "shared/game_context";
 import { giveChoice } from "shared/giveChoice";
-import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { LocationCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
 import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card";
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
@@ -32,19 +31,7 @@ Draw_Sub((plr) => {
 });
 
 Engage_Sub((plr) => {
-	const plrObj = getPlrObj(plr);
-	const enemies = CardRegistry.getAll().filter((e) => e instanceof EnemyCard && plrObj.location === e.location);
-
-	giveChoice(
-		plrObj,
-		"Engage:",
-		enemies.map((e) => {
-			return {
-				text: e.name,
-				outcome: () => getPlrObj(plr).engage(e as EnemyCard),
-			};
-		}),
-	);
+	getPlrObj(plr).engage();
 });
 
 Evade_Sub((plr) => {

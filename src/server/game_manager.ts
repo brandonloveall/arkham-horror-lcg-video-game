@@ -92,7 +92,6 @@ function upkeepPhase() {
 			card.place(plr.location);
 			card.engagedWith = plr;
 			card.is_ready = true;
-			plr.threat_area.push(card);
 		} else if (card instanceof TreacheryCard) {
 			card.resolve(plr);
 		} else {
@@ -111,7 +110,6 @@ function upkeepPhase() {
 					// TODO: if its a hunter with prey, only go to that one
 					if (plr.location === card.location) {
 						card.engagedWith = plr;
-						plr.threat_area.push(card);
 						break;
 					}
 				}
@@ -138,7 +136,6 @@ function mythosPhase() {
 			drawnCard.place(plr.location);
 			drawnCard.engagedWith = plr;
 			drawnCard.is_ready = true;
-			plr.threat_area.push(drawnCard);
 		} else if (drawnCard instanceof TreacheryCard) {
 			drawnCard.resolve(plr);
 		}

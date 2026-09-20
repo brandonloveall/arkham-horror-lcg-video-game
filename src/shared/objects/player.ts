@@ -14,8 +14,9 @@ import { TreacheryCard } from "./abstracts/card_inherits/nonplayer_card_inherits
 import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
 import { fight } from "shared/actions/fight";
 import { evade } from "shared/actions/evade";
-import { standardEvadeTargets, standardFightTargets } from "shared/actions/helpers";
+import { standardEngageTargets, standardEvadeTargets, standardFightTargets } from "shared/actions/helpers";
 import { investigate } from "shared/actions/investigate";
+import { engage } from "shared/actions/engage";
 
 class EquipmentSlot {
 	private items: AssetCard[] = [];
@@ -124,7 +125,6 @@ export class GamePlayer {
 			card.is_ready = true;
 			card.engagedWith = this;
 			card.inPlay = true;
-			this.threat_area.push(card);
 		}
 		if (card instanceof TreacheryCard) {
 			card.resolve(this);
@@ -205,13 +205,8 @@ export class GamePlayer {
 		});
 	}
 
-	public engage(enemy: EnemyCard) {
-		// if (enemy.engagedWith === this || this.actions === 0) {
-		// 	return;
-		// }
-		// enemy.engagedWith = this;
-		// this.threat_area.push(enemy);
-		// this.actions--;
+	public engage() {
+		engage({ initiator: this, targets: standardEngageTargets(this) });
 	}
 
 	public evade() {
