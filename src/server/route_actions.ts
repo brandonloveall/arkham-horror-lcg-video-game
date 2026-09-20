@@ -1,7 +1,5 @@
 import { CardRegistry } from "shared/card_registry";
 import { GameContext } from "shared/game_context";
-import { giveChoice } from "shared/giveChoice";
-import { LocationCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
 import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card";
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { GamePlayer } from "shared/objects/player";
@@ -49,21 +47,7 @@ Investigate_Sub((plr) => {
 });
 
 Move_Sub((plr) => {
-	const plrObj = getPlrObj(plr);
-	const locations = CardRegistry.getAll().filter(
-		(l) => l instanceof LocationCard && plrObj.location.connects_to.includes(l.symbol),
-	);
-
-	giveChoice(
-		plrObj,
-		"Move to:",
-		locations.map((l) => {
-			return {
-				text: l.name,
-				outcome: () => plrObj.move(l as LocationCard),
-			};
-		}),
-	);
+	getPlrObj(plr).move();
 });
 
 PlayCard_Sub((plr: Player, card_id: unknown) => {
