@@ -11,14 +11,19 @@ import { UpdatePlayerUI_Pub } from "shared/remotes/UpdatePlayerUI/Interface";
 import { GameContext } from "shared/game_context";
 import { payClues } from "shared/payClues";
 import { TreacheryCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
-import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
 import { fight } from "shared/actions/fight";
 import { evade } from "shared/actions/evade";
-import { standardEngageTargets, standardEvadeTargets, standardFightTargets } from "shared/actions/helpers";
+import {
+	standardEngageTargets,
+	standardEvadeTargets,
+	standardFightTargets,
+	standardMoveTargets,
+} from "shared/actions/helpers";
 import { investigate } from "shared/actions/investigate";
 import { engage } from "shared/actions/engage";
 import { drawPlrCard } from "shared/actions/drawPlrCard";
 import { gainResource } from "shared/actions/gainResource";
+import { move } from "shared/actions/move";
 
 class EquipmentSlot {
 	private items: AssetCard[] = [];
@@ -153,17 +158,8 @@ export class GamePlayer {
 		ability(this);
 	}
 
-	public move(location: LocationCard) {
-		if (this.location === location || !this.location.connects_to.includes(location.symbol) || this.actions === 0) {
-			return;
-		}
-		this.location = location;
-		this.actions--;
-		this.investigator.move(location);
-		if (!location.revealed) {
-			location.reveal();
-		}
-		PlaySound_Pub("Move");
+	public move() {
+		move({ initiator: this, locations: standardMoveTargets(this) });
 	}
 
 	public investigate() {
