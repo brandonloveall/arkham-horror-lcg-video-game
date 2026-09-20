@@ -17,6 +17,7 @@ import { evade } from "shared/actions/evade";
 import { standardEngageTargets, standardEvadeTargets, standardFightTargets } from "shared/actions/helpers";
 import { investigate } from "shared/actions/investigate";
 import { engage } from "shared/actions/engage";
+import { drawPlrCard } from "shared/actions/drawPlrCard";
 
 class EquipmentSlot {
 	private items: AssetCard[] = [];
@@ -108,31 +109,7 @@ export class GamePlayer {
 	}
 
 	public draw() {
-		if (this.actions === 0) {
-			return;
-		}
-		if (this.deck.isEmpty()) {
-			const temp = this.deck;
-			this.deck = this.discardDeck;
-			this.discardDeck = temp;
-			this.horror++;
-			this.deck.shuffle();
-		}
-
-		const card = this.deck.pull();
-		if (card instanceof EnemyCard) {
-			card.place(this.location);
-			card.is_ready = true;
-			card.engagedWith = this;
-			card.inPlay = true;
-		}
-		if (card instanceof TreacheryCard) {
-			card.resolve(this);
-		}
-		if (card instanceof AssetCard || card instanceof EventCard) {
-			this.hand.push(card);
-		}
-		this.actions--;
+		drawPlrCard({ drawer: this, amount: 1 });
 	}
 
 	public takeResource() {
