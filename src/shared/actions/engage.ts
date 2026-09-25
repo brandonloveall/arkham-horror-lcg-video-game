@@ -3,18 +3,22 @@ import { GamePlayer } from "shared/objects/player";
 import { Actions, Timing } from "./action_types";
 import { react } from "./react";
 import { giveChoice } from "shared/giveChoice";
+import { canPayCost, Cost, payCost } from "./payCost";
+import { canDo } from "./canDo";
 
-interface Params {
+export interface Params {
 	initiator: GamePlayer;
 	targets: EnemyCard[];
+
+	cost: Cost;
 }
 
 export function engage(params: Params) {
-	// if (cantDo()) {
-	// 	return;
-	// }
+	if (!canDo(params.initiator) || !canPayCost(params.initiator, params.cost)) {
+		return;
+	}
+	payCost(params.initiator, params.cost);
 
-	// payActionCost();
 	let target!: EnemyCard;
 	giveChoice(
 		params.initiator,
@@ -31,9 +35,9 @@ export function engage(params: Params) {
 
 	react(Timing.WHEN, Actions.ENGAGE);
 
-	// if (cantDo()) {
-	// 	return;
-	// }
+	if (!canDo(params.initiator)) {
+		return;
+	}
 
 	target.engagedWith = params.initiator;
 

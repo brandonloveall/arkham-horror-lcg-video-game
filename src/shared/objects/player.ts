@@ -113,11 +113,11 @@ export class GamePlayer {
 	}
 
 	public draw() {
-		drawPlrCard({ drawer: this, amount: 1 });
+		drawPlrCard({ drawer: this, amount: 1, cost: { actions: 1 } });
 	}
 
 	public gainResource() {
-		gainResource({ initiator: this, amount: 1 });
+		gainResource({ initiator: this, amount: 1, cost: { actions: 1 } });
 	}
 
 	public play(card: CostingCard) {
@@ -157,11 +157,11 @@ export class GamePlayer {
 	}
 
 	public move() {
-		move({ initiator: this, locations: standardMoveTargets(this) });
+		move({ initiator: this, locations: standardMoveTargets(this), cost: { actions: 1 } });
 	}
 
 	public investigate() {
-		investigate({ initiator: this, location: this.location, using: Skill.Intellect });
+		investigate({ initiator: this, location: this.location, using: Skill.Intellect, cost: { actions: 1 } });
 	}
 
 	public fight() {
@@ -170,15 +170,26 @@ export class GamePlayer {
 			using: Skill.Combat,
 			free: false,
 			targets: standardFightTargets(this),
+			cost: {
+				actions: 1,
+			},
 		});
 	}
 
 	public engage() {
-		engage({ initiator: this, targets: standardEngageTargets(this) });
+		engage({ initiator: this, targets: standardEngageTargets(this), cost: { actions: 1 } });
 	}
 
 	public evade() {
-		evade({ targets: standardEvadeTargets(this), initiator: this, using: Skill.Agility, free: false });
+		evade({
+			targets: standardEvadeTargets(this),
+			initiator: this,
+			using: Skill.Agility,
+			free: false,
+			cost: {
+				actions: 1,
+			},
+		});
 	}
 
 	public attemptAdvance() {

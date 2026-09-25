@@ -6,14 +6,18 @@ import { skillTest } from "./skilltest";
 import { react } from "./react";
 import { giveChoice } from "shared/giveChoice";
 import { dealDamageToEnemy } from "./dealDamageToEnemy";
+import { canPayCost, Cost, payCost } from "./payCost";
+import { canDo } from "./canDo";
 
-interface Params {
+export interface Params {
 	targets: EnemyCard[];
 	initiator: GamePlayer;
 	using: Skill;
 	free: boolean;
 	bonusSkill?: number;
 	bonusDamage?: number;
+
+	cost: Cost;
 }
 /**
  * check if possible
@@ -25,11 +29,11 @@ interface Params {
  * end
  */
 export function fight(params: Params) {
-	// if (cantDo()) {
-	// 	return;
-	// }
+	if (!canDo(params.initiator) || !canPayCost(params.initiator, params.cost)) {
+		return;
+	}
+	payCost(params.initiator, params.cost);
 
-	// payActionCost();
 	let target!: EnemyCard;
 	giveChoice(
 		params.initiator,
@@ -46,9 +50,9 @@ export function fight(params: Params) {
 
 	react(Timing.WHEN, Actions.FIGHT);
 
-	// if (cantDo()) {
-	// 	return;
-	// }
+	if (!canDo(params.initiator)) {
+		return;
+	}
 
 	const [success] = skillTest({
 		initiator: params.initiator,

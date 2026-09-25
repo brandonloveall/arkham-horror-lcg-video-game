@@ -3,25 +3,28 @@ import { GamePlayer } from "shared/objects/player";
 import { react } from "./react";
 import { Actions, Timing } from "./action_types";
 import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
+import { canPayCost, Cost, payCost } from "./payCost";
+import { canDo } from "./canDo";
 
-interface Params {
+export interface Params {
 	discoverer: GamePlayer;
 	location: LocationCard;
 	amount: number;
+
+	cost: Cost;
 }
 
 export function discoverClue(params: Params) {
-	// if (cantDo()) {
-	// 	return;
-	// }
-
-	// payActionCost();
+	if (!canDo(params.discoverer) || !canPayCost(params.discoverer, params.cost)) {
+		return;
+	}
+	payCost(params.discoverer, params.cost);
 
 	react(Timing.WHEN, Actions.DISCOVER_CLUE);
 
-	// if (cantDo()) {
-	// 	return;
-	// }
+	if (!canDo(params.discoverer)) {
+		return;
+	}
 
 	if (params.location.clues > 0) {
 		if (params.location.clues >= params.amount) {
