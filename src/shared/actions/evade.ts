@@ -5,13 +5,17 @@ import { react } from "./react";
 import { skillTest } from "./skilltest";
 import { Actions, Timing } from "./action_types";
 import { giveChoice } from "shared/giveChoice";
+import { canPayCost, Cost, payCost } from "./payCost";
+import { canDo } from "./canDo";
 
-interface Params {
+export interface Params {
 	initiator: GamePlayer;
 	targets: EnemyCard[];
 	using: Skill;
 	bonusSkill?: number;
 	free: boolean;
+
+	cost: Cost;
 }
 
 /**
@@ -24,11 +28,11 @@ interface Params {
  * end
  */
 export function evade(params: Params) {
-	// if (cantDo()) {
-	// 	return;
-	// }
+	if (!canDo(params.initiator) || !canPayCost(params.initiator, params.cost)) {
+		return;
+	}
+	payCost(params.initiator, params.cost);
 
-	// payActionCost();
 	let target!: EnemyCard;
 	giveChoice(
 		params.initiator,
@@ -45,9 +49,9 @@ export function evade(params: Params) {
 
 	react(Timing.WHEN, Actions.EVADE);
 
-	// if (cantDo()) {
-	// 	return;
-	// }
+	if (!canDo(params.initiator)) {
+		return;
+	}
 
 	const [success] = skillTest({
 		initiator: params.initiator,

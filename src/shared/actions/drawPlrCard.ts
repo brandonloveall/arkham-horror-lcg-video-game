@@ -4,24 +4,27 @@ import { react } from "./react";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
+import { canPayCost, Cost, payCost } from "./payCost";
+import { canDo } from "./canDo";
 
-interface Params {
+export interface Params {
 	drawer: GamePlayer;
 	amount: number;
+
+	cost: Cost;
 }
 
 export function drawPlrCard(params: Params) {
-	// if (cantDo()) {
-	// 	return;
-	// }
-
-	// payActionCost();
+	if (!canDo(params.drawer) || !canPayCost(params.drawer, params.cost)) {
+		return;
+	}
+	payCost(params.drawer, params.cost);
 
 	react(Timing.WHEN, Actions.DRAW);
 
-	// if (cantDo()) {
-	// 	return;
-	// }
+	if (!canDo(params.drawer)) {
+		return;
+	}
 
 	const card = params.drawer.deck.pull();
 	for (let i = 0; i < params.amount; i++) {
