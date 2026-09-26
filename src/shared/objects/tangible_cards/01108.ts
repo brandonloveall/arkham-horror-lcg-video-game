@@ -39,27 +39,37 @@ You jump through the doorway, landing on your feet on soft dirt. The door to the
 	flavor = `As you leap to investigate, the door to your study vanishes before your eyes, leaving behind only solid wall. You're trapped inside your study until you can find another way out.`;
 	subname = "";
 
-	advance() {
-		for (const enemy of CardRegistry.getAll()) {
-			if (enemy instanceof EnemyCard && enemy.location instanceof _01111) {
-				enemy.takeDamage(999);
+	advancement = {
+		advance: () => {
+			for (const enemy of CardRegistry.getAll()) {
+				if (enemy instanceof EnemyCard && enemy.location instanceof _01111) {
+					enemy.takeDamage(999);
+				}
 			}
-		}
 
-		GameContext.game_map[5][5]!.remove();
+			GameContext.game_map[5][5]!.remove();
 
-		new _01112().place([5, 5]).reveal();
-		new _01113().place([5, 4]);
-		new _01114().place([5, 6]);
-		new _01115().place([6, 5]);
+			new _01112().place([5, 5]).reveal();
+			new _01113().place([5, 4]);
+			new _01114().place([5, 6]);
+			new _01115().place([6, 5]);
 
-		for (const plr of GameContext.players) {
-			plr.location = GameContext.game_map[5][5]!;
-			plr.investigator.move(GameContext.game_map[5][5]!);
-		}
+			for (const plr of GameContext.players) {
+				plr.location = GameContext.game_map[5][5]!;
+				plr.investigator.move(GameContext.game_map[5][5]!);
+			}
 
-		GameContext.act = new _01109();
-	}
+			GameContext.act = new _01109();
+		},
+		optional: true,
+		canAdvance: () => {
+			let total = 0;
+			for (const plr of GameContext.players) {
+				total += plr.clues;
+			}
+			return total >= this.clues;
+		},
+	};
 }
 
 export default {

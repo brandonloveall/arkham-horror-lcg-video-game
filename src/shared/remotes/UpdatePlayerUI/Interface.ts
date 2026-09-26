@@ -46,7 +46,7 @@ export function UpdatePlayerUI_Pub(player: GamePlayer) {
 
 		act: GameContext.act,
 		agenda: GameContext.agenda,
-		actAdvanceable: false,
+		actAdvanceable: GameContext.act!.advancement.canAdvance(),
 	} satisfies UpdatePlayerUIPayload);
 }
 

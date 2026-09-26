@@ -5,12 +5,16 @@ export interface ActRestriction {
 	canDirectlySpend: boolean;
 }
 
+interface Advancement {
+	advance: () => void;
+	canAdvance: () => boolean;
+	optional: boolean;
+}
+
 export abstract class ActCard extends StoryCard {
 	abstract clues: number;
 
-	abstract advance(): void;
+	abstract advancement: Advancement;
 
-	restriction?: ActRestriction;
-
-	type_name = CardType.Act
+	type_name = CardType.Act;
 }
