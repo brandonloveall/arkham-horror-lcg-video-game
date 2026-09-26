@@ -156,6 +156,9 @@ export abstract class LocationCard extends StoryCard {
 	}
 
 	reveal() {
+		if (this.revealed) {
+			return;
+		}
 		this.revealed = true;
 
 		if (this.unrevealed_model_name !== undefined) {

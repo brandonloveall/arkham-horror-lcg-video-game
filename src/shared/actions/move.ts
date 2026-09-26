@@ -41,6 +41,10 @@ export function move(params: Params) {
 	}
 	params.initiator.investigator.move(location);
 	params.initiator.location = location;
+	if (!params.initiator.location.revealed) {
+		params.initiator.location.reveal();
+	}
+	params.initiator.location.reveal();
 	PlaySound_Pub("Move");
 
 	react(Timing.AFTER, Actions.MOVE);

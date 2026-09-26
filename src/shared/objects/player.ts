@@ -9,7 +9,6 @@ import { Investigator } from "./abstracts/card_inherits/player_card_inherits/inv
 import { Deck } from "./deck";
 import { UpdatePlayerUI_Pub } from "shared/remotes/UpdatePlayerUI/Interface";
 import { GameContext } from "shared/game_context";
-import { payClues } from "shared/payClues";
 import { TreacheryCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
 import { fight } from "shared/actions/fight";
 import { evade } from "shared/actions/evade";
@@ -193,8 +192,8 @@ export class GamePlayer {
 	}
 
 	public attemptAdvance() {
-		if (GameContext.act!.clues !== 0 && payClues()) {
-			GameContext.act!.advance();
+		if (GameContext.act!.advancement.canAdvance()) {
+			GameContext.act!.advancement.advance();
 		}
 	}
 

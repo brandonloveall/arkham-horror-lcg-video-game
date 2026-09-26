@@ -2,6 +2,7 @@ import { GameContext } from "shared/game_context";
 import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
 import { _01110 } from "./01110";
 import { CardType, Faction } from "shared/card_database_types";
+import { _01112 } from "./01112";
 
 export class _01109 extends ActCard {
 	clues = 3;
@@ -30,13 +31,21 @@ Spawn the set-aside Ghoul Priest in the Hallway.`;
 	flavor = `A glowing barrier blocks the path to your parlor. As you move toward it, intense heat forces you to back away. Picking up a handful of dirt, you toss it as the barrier and watch in horror as the dirt incinerates. Perhaps there's something in the cellar or attic that can help.`;
 	subname = "";
 
-	restrictions = {
-		canDirectlySpend: false,
+	advancement = {
+		advance: () => {
+			GameContext.act = new _01110();
+		},
+		optional: true,
+		canAdvance: () => {
+			let total = 0;
+			for (const plr of GameContext.players) {
+				if (plr.location instanceof _01112) {
+					total += plr.clues;
+				}
+			}
+			return total >= this.clues;
+		},
 	};
-
-	advance() {
-		GameContext.act = new _01110();
-	}
 }
 
 export default {

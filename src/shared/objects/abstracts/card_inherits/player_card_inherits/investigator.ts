@@ -39,8 +39,7 @@ export abstract class Investigator extends PlayerCard implements Damageable {
 			16,
 			math.random(location.model.WorldPivot.Position.Z - 8, location.model.WorldPivot.Position.Z + 8),
 		);
-
-		this.model.PivotTo(randomOnLocation);
+		(this.model.WaitForChild("Humanoid") as Humanoid).MoveTo(randomOnLocation.Position);
 	}
 
 	abstract resolveElderToken(initiator: GamePlayer): number;

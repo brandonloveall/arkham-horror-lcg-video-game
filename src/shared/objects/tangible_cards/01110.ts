@@ -31,22 +31,28 @@ export class _01110 extends ActCard {
 	flavor = `A woman with a torch stands in your parlor, a glimmer of hatred in her eyes. "What have you done to my barrier?" she screams, furious. Before you can enter, a ghastly wail sounds behind you, and a creature wearing robes and a deer skull mask tears through the wall, advancing toward you.`;
 	subname = "";
 
-	advance() {
-		giveChoice(GameContext.players[0], "Choose a resolution:", [
-			{
-				text: "It was never much of a home. Burn it down!",
-				outcome: () => {
-					GameContext.resolutions[1]!();
+	advancement = {
+		advance: () => {
+			giveChoice(GameContext.players[0], "Choose a resolution:", [
+				{
+					text: "It was never much of a home. Burn it down!",
+					outcome: () => {
+						GameContext.resolutions[1]!();
+					},
 				},
-			},
-			{
-				text: "This hell-pit is my home! No way we are burning it!",
-				outcome: () => {
-					GameContext.resolutions[2]!();
+				{
+					text: "This hell-pit is my home! No way we are burning it!",
+					outcome: () => {
+						GameContext.resolutions[2]!();
+					},
 				},
-			},
-		]);
-	}
+			]);
+		},
+		optional: false,
+		canAdvance: () => {
+			return false;
+		}, //TODO: make non-optionals a reaction
+	};
 }
 
 export default {
