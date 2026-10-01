@@ -20,8 +20,13 @@ export class ChaosBag {
 	public add(token: number | IconToken) {
 		this.tokens.push(token);
 	}
+
+	public getWhatsInside() {
+		return [...this.tokens]; // clone for immutability
+	}
 }
 
+// due to limitations of enums, the first two values (0 and 1) are excluded since number tokens range from -8 to +1
 export enum IconToken {
 	_,
 	__,

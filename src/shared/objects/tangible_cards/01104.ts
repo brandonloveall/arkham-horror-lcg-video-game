@@ -1,8 +1,6 @@
-import { CardRegistry } from "shared/card_registry";
 import { ScenarioCard } from "../abstracts/card_inherits/scenario_card";
 import { IconToken } from "../chaos_bag";
 import { GamePlayer } from "../player";
-import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { GameContext } from "shared/game_context";
 import { _01108 } from "./01108";
 import { _01105 } from "./01105";
@@ -44,8 +42,12 @@ export class _01104 extends ScenarioCard {
 	 * curl https://arkhamdb.com/api/public/cards/<expansion>?encounter=1 | jq '.[] | range(.quantity) as $i | select((.encounter_name == <encounter names>) and (.type_code == "enemy" or .type_code == "treachery") and .name != <excluded cards>) .code'
 	 */
 
-	resolve(token: IconToken, puller: GamePlayer) {
-		return 0; // should never hit
+	resolve(token: IconToken | number, puller: GamePlayer) {
+		if (token < 1) {
+			return token;
+		} else {
+			return 0; // todo: implement
+		}
 	}
 
 	setup() {
