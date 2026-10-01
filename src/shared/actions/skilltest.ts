@@ -6,6 +6,12 @@ import { GameContext } from "shared/game_context";
 import { chooseCards } from "shared/choose_cards";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 import { discard } from "./discard";
+import {
+	DisplaySkillTestResult_Pub,
+	RevealToken_Pub,
+	ShowCommittedCards_Pub,
+} from "shared/remotes/SkillCheckAnimation/Interface";
+import { IconToken } from "shared/objects/chaos_bag";
 
 interface Params {
 	initiator: GamePlayer;
@@ -16,9 +22,6 @@ interface Params {
 
 export function skillTest(params: Params): [success: boolean, byHowMuch: number] {
 	react(Timing.WHEN, Actions.SKILLTEST);
-	// if (cantDo()) {
-	// 	return;
-	// }
 
 	const committedCards = chooseCards(
 		GameContext.players
@@ -35,16 +38,36 @@ export function skillTest(params: Params): [success: boolean, byHowMuch: number]
 		`Skill check initiated by ${params.initiator.owner.Name}`,
 	);
 
+	// ShowCommittedCards_Pub(committedCards);
+	// task.wait(1.5);
+
+	const token = GameContext.chaos_bag!.pull();
+
+	RevealToken_Pub(GameContext.chaos_bag!.getWhatsInside(), token);
+	task.wait(4.5);
+
 	let bonus = 0;
 	for (const card of committedCards) {
 		bonus += (card as PlayerCard).skills[params.using];
 		bonus += (card as PlayerCard).skills[Skill.Wildcard];
 	}
 
-	const token = GameContext.chaos_bag!.pull();
-	const result = GameContext.scenario_card!.resolve(token, params.initiator);
-	const total = params.initiator.investigator.skills[params.using] + result + bonus;
-	const successful = total >= params.against;
+	const total =
+		token === IconToken.auto_fail
+			? 0
+			: params.initiator.investigator.skills[params.using] +
+				GameContext.scenario_card!.resolve(token, params.initiator) +
+				bonus;
+	const successful = token === IconToken.auto_fail ? false : total >= params.against;
+
+	DisplaySkillTestResult_Pub(
+		params.using,
+		params.initiator.investigator.skills[params.using],
+		bonus,
+		token,
+		successful,
+	);
+	task.wait(1.5);
 
 	for (const card of committedCards) {
 		discard(card);
