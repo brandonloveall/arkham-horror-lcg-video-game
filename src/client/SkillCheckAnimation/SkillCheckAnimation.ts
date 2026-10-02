@@ -1,4 +1,4 @@
-import { Players, TweenService } from "@rbxts/services";
+import { Players, SoundService, TweenService } from "@rbxts/services";
 import { RevealToken_Sub } from "shared/remotes/SkillCheckAnimation/Interface";
 const STAGUI = Players.LocalPlayer.WaitForChild("PlayerGui").WaitForChild("SkillCheckAnimation");
 
@@ -71,6 +71,7 @@ RevealToken_Sub((allTokens, token) => {
 		if (rounded !== closestVal) {
 			closestVal = rounded;
 			tokenImg.Image = "rbxassetid://" + tokenToImg[allTokens[math.random(0, allTokens.size() - 1)] + 8];
+			(SoundService.WaitForChild("TokenFlash") as Sound).Play();
 		}
 	});
 
@@ -78,6 +79,7 @@ RevealToken_Sub((allTokens, token) => {
 
 	/// FLASH THE TOKEN HERE
 	tokenImg.Image = "rbxassetid://" + tokenToImg[token + 8]; // shift by 8 cause its either exact number val or icontoken
+	(SoundService.WaitForChild("TokenRevealed") as Sound).Play();
 	///
 
 	TweenService.Create(portal, new TweenInfo(1.5, Enum.EasingStyle.Linear), {
