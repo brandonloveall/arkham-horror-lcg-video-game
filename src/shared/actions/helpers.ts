@@ -4,7 +4,9 @@ import { LocationCard } from "shared/objects/abstracts/card_inherits/nonplayer_c
 import { GamePlayer } from "shared/objects/player";
 
 export function standardFightTargets(plr: GamePlayer) {
-	return CardRegistry.getAll().filter((e) => e instanceof EnemyCard && e.location === plr.location) as EnemyCard[];
+	return CardRegistry.getAll().filter(
+		(e) => e instanceof EnemyCard && e.location === plr.location && e.inPlay,
+	) as EnemyCard[];
 }
 
 export function standardEvadeTargets(plr: GamePlayer) {
@@ -13,7 +15,7 @@ export function standardEvadeTargets(plr: GamePlayer) {
 
 export function standardEngageTargets(plr: GamePlayer) {
 	return CardRegistry.getAll().filter(
-		(e) => e instanceof EnemyCard && e.engagedWith !== plr && e.location === plr.location,
+		(e) => e instanceof EnemyCard && e.engagedWith !== plr && e.location === plr.location && e.inPlay,
 	) as EnemyCard[];
 }
 
