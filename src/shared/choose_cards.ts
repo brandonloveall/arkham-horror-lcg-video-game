@@ -27,7 +27,7 @@ export function chooseCards(params: AllowedPlayerCards[], message: string): Play
 
 	do {
 		task.wait();
-	} while (submittedCount !== GameContext.players.size());
+	} while (submittedCount !== params.size());
 
 	return cards;
 }

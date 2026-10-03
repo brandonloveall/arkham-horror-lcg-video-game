@@ -19,9 +19,11 @@ export abstract class EnemyCard extends HostileCard {
 	abstract engagedWith: GamePlayer | undefined;
 
 	is_ready = false;
-	location!: LocationCard;
+	location: LocationCard | undefined;
 	model!: Model;
 	type_name = CardType.Enemy;
+
+	damageTaken = 0;
 
 	place(location: LocationCard) {
 		this.inPlay = true;
@@ -54,8 +56,8 @@ export abstract class EnemyCard extends HostileCard {
 	}
 
 	takeDamage(damage: number) {
-		this.health -= damage;
-		if (this.health <= 0) {
+		this.damageTaken += damage;
+		if (this.damageTaken >= this.health) {
 			this.model.Destroy();
 			if (this.engagedWith !== undefined) {
 				this.engagedWith.threat_area.remove(this.engagedWith.threat_area.indexOf(this));
@@ -63,6 +65,9 @@ export abstract class EnemyCard extends HostileCard {
 			}
 			GameContext.encounter_discard.addCard(this);
 			this.inPlay = false;
+			this.location = undefined;
+			this.damageTaken = 0;
+			this.is_ready = false;
 			PlaySound_Pub("Enemy_Defeated");
 		} else {
 			PlaySound_Pub("Enemy_Hurt");
