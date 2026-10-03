@@ -13,6 +13,7 @@ import { EndTurn_Sub } from "shared/remotes/Actions/Interface";
 import { ScenarioCard } from "shared/objects/abstracts/card_inherits/scenario_card";
 import { ChaosBag, IconToken } from "shared/objects/chaos_bag";
 import { getPlrsSelectedDeck } from "./deck_handler";
+import { DisplayCard_Pub } from "shared/remotes/DisplayCard/Interface";
 
 let endedTurn = false;
 EndTurn_Sub((plr) => {
@@ -137,6 +138,7 @@ function mythosPhase() {
 			drawnCard.engagedWith = plr;
 			drawnCard.is_ready = true;
 		} else if (drawnCard instanceof TreacheryCard) {
+			DisplayCard_Pub(plr, drawnCard, true);
 			drawnCard.resolve(plr);
 		}
 	}
