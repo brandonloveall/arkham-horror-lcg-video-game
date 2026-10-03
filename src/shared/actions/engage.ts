@@ -14,6 +14,10 @@ export interface Params {
 }
 
 export function engage(params: Params) {
+	if (params.targets.size() === 0) {
+		return;
+	}
+
 	if (!canDo(params.initiator) || !canPayCost(params.initiator, params.cost)) {
 		return;
 	}

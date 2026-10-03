@@ -28,6 +28,10 @@ export interface Params {
  * end
  */
 export function evade(params: Params) {
+	if (params.targets.size() === 0) {
+		return;
+	}
+
 	if (!canDo(params.initiator) || !canPayCost(params.initiator, params.cost)) {
 		return;
 	}
