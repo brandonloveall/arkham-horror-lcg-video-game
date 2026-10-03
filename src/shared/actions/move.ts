@@ -15,10 +15,13 @@ export interface Params {
 }
 
 export function move(params: Params) {
+	if (params.locations.size() === 0) {
+		return;
+	}
+
 	if (!canDo(params.initiator) || !canPayCost(params.initiator, params.cost)) {
 		return;
 	}
-	payCost(params.initiator, params.cost);
 
 	let location!: LocationCard;
 	giveChoice(
@@ -33,6 +36,8 @@ export function move(params: Params) {
 			};
 		}),
 	);
+
+	payCost(params.initiator, params.cost);
 
 	react(Timing.WHEN, Actions.FIGHT);
 
