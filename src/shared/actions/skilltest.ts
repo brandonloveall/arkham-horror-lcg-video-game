@@ -6,11 +6,7 @@ import { GameContext } from "shared/game_context";
 import { chooseCards } from "shared/choose_cards";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 import { discard } from "./discard";
-import {
-	DisplaySkillTestResult_Pub,
-	RevealToken_Pub,
-	ShowCommittedCards_Pub,
-} from "shared/remotes/SkillCheckAnimation/Interface";
+import { DisplaySkillTestResult_Pub, RevealToken_Pub } from "shared/remotes/SkillCheckAnimation/Interface";
 import { IconToken } from "shared/objects/chaos_bag";
 
 interface Params {
