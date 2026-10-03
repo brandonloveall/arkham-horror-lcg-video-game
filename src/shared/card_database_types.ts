@@ -24,11 +24,11 @@ export enum CardType {
 }
 
 export enum Skill {
-	Agility,
-	Willpower,
-	Combat,
-	Intellect,
-	Wildcard,
+	Agility = "AGILITY",
+	Willpower = "WILLPOWER",
+	Combat = "COMBAT",
+	Intellect = "INTELLECT",
+	Wildcard = "WILDCARD",
 }
 
 export interface CardData {

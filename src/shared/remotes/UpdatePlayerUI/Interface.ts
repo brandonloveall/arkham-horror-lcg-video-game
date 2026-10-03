@@ -1,6 +1,6 @@
 import { Skill } from "shared/card_database_types";
 import { ReplicatedStorage } from "@rbxts/services";
-import { GameContext } from "shared/game_context";
+import { GameContext, PlayerWithTurn } from "shared/game_context";
 import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
 import { AgendaCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/agenda_card";
 import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
