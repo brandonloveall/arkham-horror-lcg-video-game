@@ -10,3 +10,4 @@ import "./camera";
 import "./MainMenu/ChooseCampaign";
 import "./MainMenu/ManageDecks";
 import "./MainMenu/Animation";
+import "./DisplayCard/DisplayCard";

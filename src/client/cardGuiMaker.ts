@@ -41,7 +41,7 @@ const typeToImg: Partial<Record<Faction, Partial<Record<CardType, string>>>> = {
 };
 
 class CardGuiMaker {
-	static createCardGui(card: AssetCard | EventCard | SkillCard) {
+	static createCardGui(card: AssetCard | EventCard | SkillCard | EnemyCard | TreacheryCard, backingShown?: boolean) {
 		let template!: Frame;
 		if (card.type_name === CardType.Asset) {
 			template = assetTemplate.Clone();
@@ -54,20 +54,6 @@ class CardGuiMaker {
 		if (card.type_name === CardType.Skill) {
 			template = skillTemplate.Clone();
 		}
-
-		(template.WaitForChild("title") as TextLabel).Text = card.name;
-		(template.WaitForChild("description") as TextLabel).Text = card.text;
-		(template.WaitForChild("attributes") as TextLabel).Text = card.traits;
-
-		(template.WaitForChild("Background") as ImageLabel).Image =
-			"rbxassetid://" + tostring(typeToImg[card.faction_name]![card.type_name]!);
-
-		return template;
-	}
-
-	static createNonPlrCardGui(card: EnemyCard | TreacheryCard, backingShown?: boolean) {
-		let template!: Frame;
-
 		if (card.type_name === CardType.Treachery) {
 			template = treacheryTemplate.Clone();
 		}
@@ -76,7 +62,11 @@ class CardGuiMaker {
 		(template.WaitForChild("description") as TextLabel).Text = card.text;
 		(template.WaitForChild("attributes") as TextLabel).Text = card.traits;
 
+		(template.WaitForChild("Background") as ImageLabel).Image =
+			"rbxassetid://" + tostring(typeToImg[card.faction_name]![card.type_name]!);
+
 		(template.WaitForChild("backing") as ImageLabel).Visible = !!backingShown;
+		return template;
 	}
 }
 
