@@ -1,5 +1,5 @@
 import { Players, TweenService } from "@rbxts/services";
-import { CardType, Skill } from "shared/card_database_types";
+import { CardType, Skill, Slot } from "shared/card_database_types";
 import CardGuiMaker from "client/cardGuiMaker";
 import {
 	ActivateAbility_Pub,
@@ -235,15 +235,15 @@ UpdatePlayerUI_Sub((payload) => {
 
 		NewAsset.Parent = (() => {
 			switch (asset.slot) {
-				case "Hand":
+				case Slot.Hand:
 					return Hand1.GetChildren().size() > 0 ? Hand2 : Hand1;
-				case "Arcane":
+				case Slot.Arcane:
 					return Arcane1.GetChildren().size() > 0 ? Arcane2 : Arcane1;
-				case "Ally":
+				case Slot.Ally:
 					return Ally;
-				case "Body":
+				case Slot.Body:
 					return Body;
-				case "Accessory":
+				case Slot.Accessory:
 					return Accessory;
 			}
 		})();

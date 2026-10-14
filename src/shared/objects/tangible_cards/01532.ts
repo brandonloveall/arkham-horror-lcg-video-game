@@ -1,8 +1,8 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
-import { CardType, Faction, Skill } from "shared/card_database_types";
+import { CardType, Faction, Skill, Slot } from "shared/card_database_types";
 
 export class _01532 extends AssetCard {
-	slot = "Ally";
+	slot = Slot.Ally;
 	cost = 2;
 	skills = {
 		[Skill.Agility]: 1,

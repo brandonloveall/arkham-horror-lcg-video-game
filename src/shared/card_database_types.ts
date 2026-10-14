@@ -31,6 +31,17 @@ export enum Skill {
 	Wildcard = "WILDCARD",
 }
 
+export enum Slot {
+	Hand = "HAND",
+	Hand2 = "2HAND",
+	Arcane = "ARCANE",
+	Arcane2 = "ARCANE2",
+	Ally = "ALLY",
+	Accessory = "ACCESSORY",
+	Body = "BODY",
+	None = "NONE",
+}
+
 export interface CardData {
 	code: string;
 	faction_name: Faction;

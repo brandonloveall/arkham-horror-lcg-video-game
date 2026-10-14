@@ -1,9 +1,9 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
 import { GamePlayer } from "../player";
-import { CardType, Faction, Skill } from "shared/card_database_types";
+import { CardType, Faction, Skill, Slot } from "shared/card_database_types";
 
 export class _01586 extends AssetCard {
-	slot = "Hand";
+	slot = Slot.Hand;
 	cost = 1;
 	skills = {
 		[Skill.Agility]: 0,

@@ -1,4 +1,4 @@
-import { Skill } from "shared/card_database_types";
+import { Skill, Slot } from "shared/card_database_types";
 import { EnemyCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
 import { LocationCard } from "./abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
 import { PlayerCard } from "./abstracts/card_inherits/player_card";
@@ -47,10 +47,10 @@ class EquipmentSlot {
 	}
 
 	public remove(card: AssetCard) {
-		if (card.slot === "") {
+		if (card.slot === Slot.None) {
 			return;
 		}
-		this.current_total -= ["Hand x2", "Arcane x2"].includes(this.items.remove(this.items.indexOf(card))!.slot)
+		this.current_total -= [Slot.Hand2, Slot.Arcane2].includes(this.items.remove(this.items.indexOf(card))!.slot)
 			? 2
 			: 1;
 	}
@@ -64,15 +64,15 @@ export class GamePlayer {
 	deck: Deck;
 	investigator: Investigator;
 	hand: PlayerCard[] = [];
-	equipped: Record<string, EquipmentSlot> = {
-		Hand: this._hand,
-		["Hand x2"]: this._hand,
-		Arcane: this._arcane,
-		["Arcane x2"]: this._arcane,
-		Body: new EquipmentSlot(1),
-		Ally: new EquipmentSlot(1),
-		Accessory: new EquipmentSlot(1),
-		[""]: new EquipmentSlot(0), // the limit doesnt matter here since None takes up 0 slot space by default
+	equipped: Record<Slot, EquipmentSlot> = {
+		[Slot.Hand]: this._hand,
+		[Slot.Hand2]: this._hand,
+		[Slot.Arcane]: this._arcane,
+		[Slot.Arcane2]: this._arcane,
+		[Slot.Body]: new EquipmentSlot(1),
+		[Slot.Ally]: new EquipmentSlot(1),
+		[Slot.Accessory]: new EquipmentSlot(1),
+		[Slot.None]: new EquipmentSlot(0), // the limit doesnt matter here since None takes up 0 slot space by default
 	};
 	discardDeck = new Deck([]);
 
@@ -102,12 +102,12 @@ export class GamePlayer {
 
 	public getAllEquipment() {
 		return [
-			...this.equipped["Hand"].get(),
-			...this.equipped["Arcane"].get(),
-			...this.equipped[""].get(),
-			...this.equipped["Body"].get(),
-			...this.equipped["Accessory"].get(),
-			...this.equipped["Ally"].get(),
+			...this.equipped[Slot.Hand].get(),
+			...this.equipped[Slot.Arcane].get(),
+			...this.equipped[Slot.None].get(),
+			...this.equipped[Slot.Body].get(),
+			...this.equipped[Slot.Accessory].get(),
+			...this.equipped[Slot.Ally].get(),
 		];
 	}
 
@@ -140,7 +140,7 @@ export class GamePlayer {
 			if (
 				!this.equipped[card.slot].insert(
 					card,
-					slot === "Hand x2" || slot === "Arcane x2" ? 2 : slot !== "" ? 1 : 0,
+					slot === Slot.Hand2 || slot === Slot.Arcane2 ? 2 : slot !== Slot.None ? 1 : 0,
 				)
 			) {
 				return;
