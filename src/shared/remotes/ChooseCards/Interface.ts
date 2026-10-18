@@ -1,6 +1,6 @@
 import { ReplicatedStorage } from "@rbxts/services";
+import { PlayerCard } from "shared/card_database_types";
 import { Card } from "shared/objects/abstracts/card";
-import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 import { GamePlayer } from "shared/objects/player";
 
 const ChooseCards = ReplicatedStorage.WaitForChild("TS")

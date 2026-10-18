@@ -1,4 +1,4 @@
-import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
+import { ActCard } from "shared/objects/abstracts/card_inherits/act_card";
 import { GameContext } from "shared/game_context";
 import { giveChoice } from "shared/giveChoice";
 import { CardType, Faction } from "shared/card_database_types";

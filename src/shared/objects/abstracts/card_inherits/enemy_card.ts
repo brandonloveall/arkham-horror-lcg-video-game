@@ -1,13 +1,16 @@
-import { HostileCard } from "../hostile_card";
+import { Card } from "../card";
 import { GamePlayer } from "shared/objects/player";
-import { LocationCard } from "../story_card_inherits/location_card";
+import { LocationCard } from "./location_card";
 import { ReplicatedStorage, Workspace } from "@rbxts/services";
 import { GameContext } from "shared/game_context";
 // eslint-disable-next-line
 import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
 import { CardType } from "shared/card_database_types";
 
-export abstract class EnemyCard extends HostileCard {
+export abstract class EnemyCard extends Card {
+	abstract encounter_name: string;
+	abstract encounter_position: number;
+
 	abstract health: number;
 	sanity = undefined;
 	abstract damage: number;

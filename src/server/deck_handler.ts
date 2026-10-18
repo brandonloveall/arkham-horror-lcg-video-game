@@ -3,7 +3,7 @@ import { DataStoreService } from "@rbxts/services";
 import { HttpService } from "@rbxts/services";
 import { getConstructorFromId } from "shared/card_database";
 import { Card } from "shared/objects/abstracts/card";
-import { Investigator } from "shared/objects/abstracts/card_inherits/player_card_inherits/investigator";
+import { Investigator } from "shared/objects/abstracts/card_inherits/investigator";
 import { _01501 } from "shared/objects/tangible_cards/01501";
 import { _01506 } from "shared/objects/tangible_cards/01506";
 import { SetDecks_Sub } from "shared/remotes/SetDecks/Interface";

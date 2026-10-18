@@ -1,6 +1,6 @@
 import { CardRegistry } from "shared/card_registry";
-import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
-import { LocationCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
+import { EnemyCard } from "shared/objects/abstracts/card_inherits/enemy_card";
+import { LocationCard } from "shared/objects/abstracts/card_inherits/location_card";
 import { GamePlayer } from "shared/objects/player";
 
 export function standardFightTargets(plr: GamePlayer) {

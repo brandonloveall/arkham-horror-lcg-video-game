@@ -1,15 +1,13 @@
-import { Skill, Slot } from "shared/card_database_types";
-import { EnemyCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
-import { LocationCard } from "./abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
-import { PlayerCard } from "./abstracts/card_inherits/player_card";
-import { CostingCard } from "./abstracts/card_inherits/player_card_inherits/costing_card";
-import { AssetCard } from "./abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
-import { EventCard } from "./abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
-import { Investigator } from "./abstracts/card_inherits/player_card_inherits/investigator";
+import { PlayableCard, PlayerCard, Skill, Slot } from "shared/card_database_types";
+import { EnemyCard } from "./abstracts/card_inherits/enemy_card";
+import { LocationCard } from "./abstracts/card_inherits/location_card";
+import { AssetCard } from "./abstracts/card_inherits/asset_card";
+import { EventCard } from "./abstracts/card_inherits/event_card";
+import { Investigator } from "./abstracts/card_inherits/investigator";
 import { Deck } from "./deck";
 import { UpdatePlayerUI_Pub } from "shared/remotes/UpdatePlayerUI/Interface";
 import { GameContext } from "shared/game_context";
-import { TreacheryCard } from "./abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
+import { TreacheryCard } from "./abstracts/card_inherits/treachery_card";
 import { fight } from "shared/actions/fight";
 import { evade } from "shared/actions/evade";
 import {
@@ -119,7 +117,7 @@ export class GamePlayer {
 		gainResource({ initiator: this, amount: 1, cost: { actions: 1 } });
 	}
 
-	public play(card: CostingCard) {
+	public play(card: PlayableCard) {
 		if (card.fast) {
 			if (!card.canPlayFast(this)) {
 				return;

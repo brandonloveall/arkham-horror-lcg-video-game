@@ -1,12 +1,12 @@
 import { GameContext } from "shared/game_context";
-import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
+import { ActCard } from "shared/objects/abstracts/card_inherits/act_card";
 import { _01109 } from "./01109";
 import { CardRegistry } from "shared/card_registry";
 import { _01112 } from "./01112";
 import { _01113 } from "./01113";
 import { _01114 } from "./01114";
 import { _01115 } from "./01115";
-import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { EnemyCard } from "../abstracts/card_inherits/enemy_card";
 import { _01111 } from "./01111";
 import { CardType, Faction } from "shared/card_database_types";
 

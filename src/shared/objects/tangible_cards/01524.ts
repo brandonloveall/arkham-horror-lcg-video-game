@@ -1,9 +1,9 @@
 import { giveChoice } from "shared/giveChoice";
-import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
+import { EventCard } from "shared/objects/abstracts/card_inherits/event_card";
 import { GamePlayer } from "../player";
 import { CardRegistry } from "shared/card_registry";
-import { LocationCard } from "../abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
-import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { LocationCard } from "../abstracts/card_inherits/location_card";
+import { EnemyCard } from "../abstracts/card_inherits/enemy_card";
 import { GameContext } from "shared/game_context";
 import { CardType, Faction, Skill } from "shared/card_database_types";
 

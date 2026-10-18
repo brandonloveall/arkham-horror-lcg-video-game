@@ -2,18 +2,17 @@ import { Players } from "@rbxts/services";
 import { GamePlayer } from "../shared/objects/player";
 import { Deck } from "../shared/objects/deck";
 
-import { NonplayerCard } from "../shared/objects/abstracts/card_inherits/nonplayer_card";
 import { GameContext } from "shared/game_context";
 import { CardRegistry } from "shared/card_registry";
-import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
-import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
+import { EnemyCard } from "shared/objects/abstracts/card_inherits/enemy_card";
+import { TreacheryCard } from "shared/objects/abstracts/card_inherits/treachery_card";
 import { discard } from "shared/discard";
-import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
 import { EndTurn_Sub } from "shared/remotes/Actions/Interface";
 import { ScenarioCard } from "shared/objects/abstracts/card_inherits/scenario_card";
 import { ChaosBag, IconToken } from "shared/objects/chaos_bag";
 import { getPlrsSelectedDeck } from "./deck_handler";
 import { DisplayCard_Pub } from "shared/remotes/DisplayCard/Interface";
+import { PlayerCard } from "shared/card_database_types";
 
 let endedTurn = false;
 EndTurn_Sub((plr) => {
@@ -41,7 +40,7 @@ export function start(startingScenario: new () => ScenarioCard, chaosTokens: (nu
 		player.resources = 5;
 		for (let i = 0; i < 5; i++) {
 			const card = player.deck.pull()!;
-			if (card instanceof NonplayerCard) {
+			if (card instanceof TreacheryCard || card instanceof EnemyCard) {
 				player.deck.addCard(card);
 				i--;
 			} else {

@@ -1,4 +1,4 @@
-import { AgendaCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/agenda_card";
+import { AgendaCard } from "shared/objects/abstracts/card_inherits/agenda_card";
 import { CardType, Faction } from "shared/card_database_types";
 
 export class _01105 extends AgendaCard {

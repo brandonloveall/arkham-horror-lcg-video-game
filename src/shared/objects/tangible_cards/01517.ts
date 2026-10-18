@@ -1,4 +1,4 @@
-import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
+import { AssetCard } from "shared/objects/abstracts/card_inherits/asset_card";
 import { GamePlayer } from "../player";
 import { giveChoice } from "shared/giveChoice";
 import { CardType, Faction, Skill, Slot } from "shared/card_database_types";

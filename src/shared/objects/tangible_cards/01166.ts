@@ -1,4 +1,4 @@
-import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
+import { TreacheryCard } from "shared/objects/abstracts/card_inherits/treachery_card";
 import { GamePlayer } from "../player";
 import { GameContext } from "shared/game_context";
 import { CardType, Faction } from "shared/card_database_types";

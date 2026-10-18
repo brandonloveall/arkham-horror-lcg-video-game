@@ -1,6 +1,5 @@
 import { ReplicatedStorage } from "@rbxts/services";
-import { Skill } from "shared/card_database_types";
-import { PlayerCard } from "shared/objects/abstracts/card_inherits/player_card";
+import { PlayerCard, Skill } from "shared/card_database_types";
 import { IconToken } from "shared/objects/chaos_bag";
 
 const ShowCommittedCards = ReplicatedStorage.WaitForChild("TS")

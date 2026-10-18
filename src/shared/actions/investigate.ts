@@ -1,5 +1,5 @@
 import { Skill } from "shared/card_database_types";
-import { LocationCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
+import { LocationCard } from "shared/objects/abstracts/card_inherits/location_card";
 import { GamePlayer } from "shared/objects/player";
 import { react } from "./react";
 import { Actions, Timing } from "./action_types";

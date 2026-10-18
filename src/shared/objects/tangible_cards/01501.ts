@@ -1,4 +1,4 @@
-import { Investigator } from "shared/objects/abstracts/card_inherits/player_card_inherits/investigator";
+import { Investigator } from "shared/objects/abstracts/card_inherits/investigator";
 import { GamePlayer } from "../player";
 import { CardType, Faction, Skill } from "shared/card_database_types";
 

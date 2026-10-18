@@ -1,4 +1,4 @@
-import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
+import { TreacheryCard } from "shared/objects/abstracts/card_inherits/treachery_card";
 import { GamePlayer } from "../player";
 import { skillTest } from "shared/actions/skilltest";
 import { discard } from "shared/discard";

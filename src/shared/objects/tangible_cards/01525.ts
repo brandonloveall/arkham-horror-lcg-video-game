@@ -1,4 +1,4 @@
-import { SkillCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/skill_card";
+import { SkillCard } from "shared/objects/abstracts/card_inherits/skill_card";
 import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01525 extends SkillCard {

@@ -1,7 +1,6 @@
 import { CardRegistry } from "shared/card_registry";
 import { GameContext } from "shared/game_context";
-import { CostingCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card";
-import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
+import { AssetCard } from "shared/objects/abstracts/card_inherits/asset_card";
 import { GamePlayer } from "shared/objects/player";
 import {
 	ActivateAbility_Sub,
@@ -15,6 +14,7 @@ import {
 	Move_Sub,
 	PlayCard_Sub,
 } from "shared/remotes/Actions/Interface";
+import { PlayableCard } from "shared/card_database_types";
 
 function getPlrObj(plr: Player) {
 	return GameContext.players.find((e) => {
@@ -51,7 +51,7 @@ Move_Sub((plr) => {
 });
 
 PlayCard_Sub((plr: Player, card_id: unknown) => {
-	getPlrObj(plr).play(CardRegistry.get(card_id as string) as CostingCard);
+	getPlrObj(plr).play(CardRegistry.get(card_id as string) as PlayableCard);
 });
 
 ActivateAbility_Sub((plr, card_id) => {

@@ -1,6 +1,6 @@
+import { PlayerCard } from "./card_database_types";
 import { GameContext } from "./game_context";
 import { Card } from "./objects/abstracts/card";
-import { PlayerCard } from "./objects/abstracts/card_inherits/player_card";
 import { GamePlayer } from "./objects/player";
 import { Server_ChooseCards_Pub, Server_ChooseCards_Sub } from "./remotes/ChooseCards/Interface";
 

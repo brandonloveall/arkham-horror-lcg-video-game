@@ -1,10 +1,10 @@
 import { Players } from "@rbxts/services";
 import { CardType, Faction } from "shared/card_database_types";
-import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
-import { TreacheryCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/treachery_card";
-import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
-import { EventCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/event_card";
-import { SkillCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/skill_card";
+import { EnemyCard } from "shared/objects/abstracts/card_inherits/enemy_card";
+import { TreacheryCard } from "shared/objects/abstracts/card_inherits/treachery_card";
+import { AssetCard } from "shared/objects/abstracts/card_inherits/asset_card";
+import { EventCard } from "shared/objects/abstracts/card_inherits/event_card";
+import { SkillCard } from "shared/objects/abstracts/card_inherits/skill_card";
 
 const templates = Players.LocalPlayer.WaitForChild("PlayerGui")
 	.WaitForChild("GuiElements")

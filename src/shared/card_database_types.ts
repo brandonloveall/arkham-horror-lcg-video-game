@@ -1,4 +1,7 @@
 import { Card } from "./objects/abstracts/card";
+import { AssetCard } from "./objects/abstracts/card_inherits/asset_card";
+import { EventCard } from "./objects/abstracts/card_inherits/event_card";
+import { SkillCard } from "./objects/abstracts/card_inherits/skill_card";
 
 export enum Faction {
 	Mythos,
@@ -48,3 +51,7 @@ export interface CardData {
 	type_name: CardType;
 	constructor: new () => Card;
 }
+
+export type PlayableCard = AssetCard | EventCard;
+
+export type PlayerCard = AssetCard | EventCard | SkillCard;

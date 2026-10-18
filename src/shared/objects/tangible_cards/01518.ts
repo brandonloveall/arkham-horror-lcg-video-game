@@ -1,9 +1,9 @@
-import { AssetCard } from "shared/objects/abstracts/card_inherits/player_card_inherits/costing_card_inherits/asset_card";
+import { AssetCard } from "shared/objects/abstracts/card_inherits/asset_card";
 import { CardType, Faction, Skill, Slot } from "shared/card_database_types";
 import { GamePlayer } from "../player";
 import { giveChoice } from "shared/giveChoice";
 import { CardRegistry } from "shared/card_registry";
-import { EnemyCard } from "../abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { EnemyCard } from "../abstracts/card_inherits/enemy_card";
 
 export class _01518 extends AssetCard {
 	slot = Slot.Ally;

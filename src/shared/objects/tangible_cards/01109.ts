@@ -1,5 +1,5 @@
 import { GameContext } from "shared/game_context";
-import { ActCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
+import { ActCard } from "shared/objects/abstracts/card_inherits/act_card";
 import { _01110 } from "./01110";
 import { CardType, Faction } from "shared/card_database_types";
 import { _01112 } from "./01112";

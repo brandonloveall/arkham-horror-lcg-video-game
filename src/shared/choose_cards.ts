@@ -1,4 +1,4 @@
-import { PlayerCard } from "./objects/abstracts/card_inherits/player_card";
+import { PlayerCard } from "./card_database_types";
 import { GamePlayer } from "./objects/player";
 import { Server_ChooseCards_Sub, Server_ChooseCards_Pub } from "./remotes/ChooseCards/Interface";
 

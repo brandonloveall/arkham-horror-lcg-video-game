@@ -1,5 +1,5 @@
 import { Skill } from "shared/card_database_types";
-import { EnemyCard } from "shared/objects/abstracts/card_inherits/nonplayer_card_inherits/hostile_card_inherits/enemy_card";
+import { EnemyCard } from "shared/objects/abstracts/card_inherits/enemy_card";
 import { GamePlayer } from "shared/objects/player";
 import { react } from "./react";
 import { skillTest } from "./skilltest";

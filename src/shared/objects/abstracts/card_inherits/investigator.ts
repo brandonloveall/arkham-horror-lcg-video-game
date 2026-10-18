@@ -1,11 +1,14 @@
 import { Damageable } from "shared/objects/abstracts/damageable";
-import { PlayerCard } from "../player_card";
-import { LocationCard } from "../nonplayer_card_inherits/story_card_inherits/location_card";
+import { Card } from "../card";
+import { LocationCard } from "./location_card";
 import { ReplicatedStorage, Workspace } from "@rbxts/services";
 import { GamePlayer } from "shared/objects/player";
-import { CardType } from "shared/card_database_types";
+import { CardType, Skill } from "shared/card_database_types";
 
-export abstract class Investigator extends PlayerCard implements Damageable {
+export abstract class Investigator extends Card implements Damageable {
+	abstract skills: Record<Skill, number>;
+	abstract xp: number;
+
 	abstract health: number;
 	abstract sanity: number;
 

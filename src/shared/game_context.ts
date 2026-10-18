@@ -1,6 +1,6 @@
-import { ActCard } from "./objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/act_card";
-import { AgendaCard } from "./objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/agenda_card";
-import { LocationCard } from "./objects/abstracts/card_inherits/nonplayer_card_inherits/story_card_inherits/location_card";
+import { ActCard } from "./objects/abstracts/card_inherits/act_card";
+import { AgendaCard } from "./objects/abstracts/card_inherits/agenda_card";
+import { LocationCard } from "./objects/abstracts/card_inherits/location_card";
 import { ScenarioCard } from "./objects/abstracts/card_inherits/scenario_card";
 import { ChaosBag } from "./objects/chaos_bag";
 import { Deck } from "./objects/deck";
