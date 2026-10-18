@@ -17,18 +17,15 @@ export class _01530 extends AssetCard {
 	code = "01530";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Seeker;
-	position = 30;
 	exceptional = false;
 	myriad = false;
 	name = "Magnifying Glass";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `Fast.
 You get +1 📖 while investigating.`;
-	traits = "Item. Tool.";
+	traits = ["Item", "Tool"];
 	flavor = `A lens into a world unseen can reveal things you wish it hadn't.`;
 	subname = "";
 

@@ -16,17 +16,14 @@ export class _01588 extends EventCard {
 	code = "01588";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Neutral;
-	position = 88;
 	exceptional = false;
 	myriad = false;
 	name = "Emergency Cache";
 	quantity = 10;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `Gain 3 resources.`;
-	traits = "Supply.";
+	traits = ["Supply"];
 	flavor = `You can never be too prepared.`;
 	subname = "";
 

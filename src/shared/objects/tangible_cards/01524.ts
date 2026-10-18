@@ -21,17 +21,14 @@ export class _01524 extends EventCard {
 	code = "01524";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Guardian;
-	position = 24;
 	exceptional = false;
 	myriad = false;
 	name = "Dynamite Blast";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `Choose either your location or a connecting location. Deal 3 damage to each enemy and to each investigator at the chosen location.`;
-	traits = "Tactic.";
+	traits = ["Tactic"];
 	flavor = ``;
 	subname = "";
 

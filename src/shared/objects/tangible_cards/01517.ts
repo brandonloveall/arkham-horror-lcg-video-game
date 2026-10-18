@@ -18,18 +18,15 @@ export class _01517 extends AssetCard {
 	code = "01517";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Guardian;
-	position = 17;
 	exceptional = false;
 	myriad = false;
 	name = "Physical Training";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `🗲 Spend 1 resource: You get +1 🗣️ for this skill test.
 🗲 Spend 1 resource: You get +1 👊 for this skill test.`;
-	traits = "Talent.";
+	traits = ["Talent"];
 	flavor = ``;
 	subname = "";
 

@@ -12,6 +12,10 @@ Server_PayClues_Sub((plr, paid) => {
 export function payClues() {
 	GameContext.lock = true;
 	const required = GameContext.act!.clues;
+	// if its a non-clue advancement act
+	if (required === undefined) {
+		return;
+	}
 
 	payments = {};
 	finished = 0;

@@ -13,21 +13,15 @@ Put the set-aside Lita Chantler into play in the Parlor.
 Spawn the set-aside Ghoul Priest in the Hallway.`;
 	back_flavor = `Using the barrel from the attic, you carry ice and snow from the cellar and hurl it at the barrier. The barrier sparks and shudders as it consumes the ice, then hisses and fades out of existence.`;
 	encounter_name = "The Gathering";
-	encounter_position = 6;
 	code = "01109";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 109;
-	exceptional = false;
-	myriad = false;
 	name = "The Barrier";
 	quantity = 1;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = true;
 	text = `<b>Objective</b> - When the round ends, investigators in the hallway may, as a group, spend the requisite number of clues to advance.`;
-	traits = "";
+	traits = [];
 	flavor = `A glowing barrier blocks the path to your parlor. As you move toward it, intense heat forces you to back away. Picking up a handful of dirt, you toss it as the barrier and watch in horror as the dirt incinerates. Perhaps there's something in the cellar or attic that can help.`;
 	subname = "";
 

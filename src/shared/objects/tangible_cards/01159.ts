@@ -11,21 +11,16 @@ export class _01159 extends EnemyCard {
 	victory = 0;
 	engagedWith: GamePlayer | undefined;
 	encounter_name = "Rats";
-	encounter_position = 1;
 	code = "01159";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 159;
-	exceptional = false;
-	myriad = false;
 	name = "Swarm of Rats";
 	quantity = 3;
 	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `Hunter.`;
-	traits = "Creature.";
+	traits = ["Creature"];
 	flavor = `A horde of cruel rats skitters forth in an undulating wave of claws, teeth, and mottled fur.`;
 	subname = "";
 }

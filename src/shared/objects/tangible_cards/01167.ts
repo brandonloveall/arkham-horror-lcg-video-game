@@ -6,21 +6,15 @@ import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01167 extends TreacheryCard {
 	encounter_name = "Chilling Cold";
-	encounter_position = 1;
 	code = "01167";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 167;
-	exceptional = false;
-	myriad = false;
 	name = "Crypt Chill";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `<b>Revelation</b> - Test 🗣️ (4). If you fail, choose and discard 1 asset you control (if you cannot, take 2 damage instead).`;
-	traits = "Hazard.";
+	traits = ["Hazard"];
 	flavor = `The supernatural cold threatens to freeze your soul.`;
 	subname = "";
 

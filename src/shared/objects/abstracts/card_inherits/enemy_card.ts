@@ -9,10 +9,9 @@ import { CardType } from "shared/card_database_types";
 
 export abstract class EnemyCard extends Card {
 	abstract encounter_name: string;
-	abstract encounter_position: number;
+	abstract health_per_investigator: boolean;
 
 	abstract health: number;
-	sanity = undefined;
 	abstract damage: number;
 	abstract horror: number;
 	abstract fight: number;

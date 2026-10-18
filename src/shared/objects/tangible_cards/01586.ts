@@ -17,18 +17,15 @@ export class _01586 extends AssetCard {
 	code = "01586";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Neutral;
-	position = 86;
 	exceptional = false;
 	myriad = false;
 	name = "Knife";
 	quantity = 10;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `➡️: <b>Fight.</b> You get +1 👊 for this attack.
 ➡️ Discard Knife: <b>Fight.</b> You get +2 👊 for this attack. This attack deals +1 damage.`;
-	traits = "Item. Weapon. Melee.";
+	traits = ["Item", "Weapon", "Melee"];
 	flavor = ``;
 	subname = "";
 

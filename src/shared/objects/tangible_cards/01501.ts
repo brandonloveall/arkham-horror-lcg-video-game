@@ -43,18 +43,13 @@ export class _01501 extends Investigator {
 	code = "01501";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Guardian;
-	position = 1;
-	exceptional = false;
-	myriad = false;
 	name = "Roland Banks";
 	quantity = 1;
-	health_per_investigator = false;
 	is_unique = true;
 	permanent = false;
-	double_sided = true;
 	text =
 		"🔄 After you defeat an enemy: Discover 1 clue at your location. (Limit once per round.)\n[elder_sign] effect: +1 for each clue on your location.";
-	traits = "Agency. Detective.";
+	traits = ["Agency", "Detective"];
 	flavor = 'Everything by the book: every "i" dotted, every "t" crossed. It had worked, until now.';
 	subname = "The Fed";
 

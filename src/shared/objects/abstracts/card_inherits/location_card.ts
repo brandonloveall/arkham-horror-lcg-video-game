@@ -8,7 +8,6 @@ import { CardType } from "shared/card_database_types";
 
 export abstract class LocationCard extends Card {
 	abstract encounter_name: string;
-	abstract encounter_position: number;
 
 	abstract stage: number;
 	abstract back_name: string;

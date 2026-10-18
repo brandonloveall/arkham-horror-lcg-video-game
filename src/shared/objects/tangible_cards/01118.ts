@@ -11,21 +11,16 @@ export class _01118 extends EnemyCard {
 	victory = 1;
 	engagedWith: GamePlayer | undefined;
 	encounter_name = "The Gathering";
-	encounter_position = 15;
 	code = "01118";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 118;
-	exceptional = false;
-	myriad = false;
 	name = "Flesh-Eater";
 	quantity = 1;
 	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `<b>Spawn</b> - Attic.`;
-	traits = "Humanoid. Monster. Ghoul.";
+	traits = ["Humanoid", "Monster", "Ghoul"];
 	flavor = `A monstrous creature feeds from the rotting carcass in the attic.`;
 	subname = "";
 }

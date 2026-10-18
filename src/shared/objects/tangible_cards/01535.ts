@@ -16,17 +16,14 @@ export class _01535 extends AssetCard {
 	code = "01535";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Seeker;
-	position = 35;
 	exceptional = false;
 	myriad = false;
 	name = "Medical Texts";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `➡️ Choose an investigator at your location and test 📖 (2). If you succeed, heal 1 damage from that investigator. If you fail, deal 1 damage to that investigator.`;
-	traits = "Item. Tome.";
+	traits = ["Item", "Tome"];
 	flavor = ``;
 	subname = "";
 }

@@ -18,19 +18,16 @@ export class _01506 extends AssetCard {
 	code = "01506";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Neutral;
-	position = 6;
 	exceptional = false;
 	myriad = false;
 	name = "Roland's .38 Special";
 	quantity = 1;
-	health_per_investigator = false;
 	is_unique = true;
 	permanent = false;
-	double_sided = false;
 	text = `Roland Banks deck only.
 Uses (4 ammo).
 ➡️ Spend 1 ammo: <b>Fight.</b> You get +1 👊 for this attack (if there are 1 or more clues on your location, you get +3 👊, instead). This attack deals +1 damage.`;
-	traits = "Item. Weapon. Firearm.";
+	traits = ["Item", "Weapon", "Firearm"];
 	flavor = ``;
 	subname = "";
 	belongs_to = "01501";

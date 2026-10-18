@@ -26,6 +26,7 @@ export enum CardType {
 	Skill,
 }
 
+// Slot and Skill require string indexing due to a number indexing bug when sent to client
 export enum Skill {
 	Agility = "AGILITY",
 	Willpower = "WILLPOWER",

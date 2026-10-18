@@ -5,21 +5,15 @@ import { CardType, Faction } from "shared/card_database_types";
 
 export class _01166 extends TreacheryCard {
 	encounter_name = "Ancient Evils";
-	encounter_position = 1;
 	code = "01166";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 166;
-	exceptional = false;
-	myriad = false;
 	name = "Ancient Evils";
 	quantity = 3;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `<b>Revelation</b> - Place 1 doom on the current agenda. This effect can cause the current agenda to advance.`;
-	traits = "Omen.";
+	traits = ["Omen"];
 	flavor = `Dark forces stir against you. If you do not act quickly, a sinister plot will be fulfilled.`;
 	subname = "";
 

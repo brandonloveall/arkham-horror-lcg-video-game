@@ -4,7 +4,6 @@ import { CardType } from "shared/card_database_types";
 
 export abstract class TreacheryCard extends Card {
 	abstract encounter_name: string;
-	abstract encounter_position: number;
 
 	abstract resolve(plrWhoDrew: GamePlayer): void;
 

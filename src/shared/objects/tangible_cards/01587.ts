@@ -17,18 +17,15 @@ export class _01587 extends AssetCard {
 	code = "01587";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Neutral;
-	position = 87;
 	exceptional = false;
 	myriad = false;
 	name = "Flashlight";
 	quantity = 10;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `Uses (3 supplies).
 ➡️ Spend 1 supply: <b>Investigate.</b> Your location gets -2 shroud for this investigation.`;
-	traits = "Item. Tool.";
+	traits = ["Item", "Tool"];
 	flavor = ``;
 	subname = "";
 

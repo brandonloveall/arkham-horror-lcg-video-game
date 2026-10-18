@@ -20,18 +20,15 @@ export class _01518 extends AssetCard {
 	code = "01518";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Guardian;
-	position = 18;
 	exceptional = false;
 	myriad = false;
 	name = "Beat Cop";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `You get +1 👊.
 🗲 Discard Beat Cop: Deal 1 damage to an enemy at your location.`;
-	traits = "Ally. Police.";
+	traits = ["Ally", "Police"];
 	flavor = ``;
 	subname = "";
 

@@ -16,17 +16,14 @@ export class _01521 extends AssetCard {
 	code = "01521";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Guardian;
-	position = 21;
 	exceptional = false;
 	myriad = false;
 	name = "Guard Dog";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `🔄 When an enemy attack deals damage to Guard Dog: Deal 1 damage to the attacking enemy.`;
-	traits = "Ally. Creature.";
+	traits = ["Ally", "Creature"];
 	flavor = `Fiercely loyal, these trained canines make for perfect companions.`;
 	subname = "";
 }

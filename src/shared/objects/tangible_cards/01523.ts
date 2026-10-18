@@ -17,18 +17,15 @@ export class _01523 extends EventCard {
 	code = "01523";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Guardian;
-	position = 23;
 	exceptional = false;
 	myriad = false;
 	name = "Dodge";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `Fast. Play when an enemy attacks an investigator at your location.
 Cancel that attack.`;
-	traits = "Tactic.";
+	traits = ["Tactic"];
 	flavor = ``;
 	subname = "";
 

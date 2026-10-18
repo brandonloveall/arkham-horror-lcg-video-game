@@ -5,21 +5,15 @@ import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01162 extends TreacheryCard {
 	encounter_name = "Ghouls";
-	encounter_position = 5;
 	code = "01162";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 162;
-	exceptional = false;
-	myriad = false;
 	name = "Grasping Hands";
 	quantity = 3;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `<b>Revelation</b> - Test 👟 (3). For each point you fail by, take 1 damage.`;
-	traits = "Hazard.";
+	traits = ["Hazard"];
 	flavor = `Decaying hands rise up from below and grasp and claw at your ankles.`;
 	subname = "";
 

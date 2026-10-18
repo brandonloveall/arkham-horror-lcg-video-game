@@ -17,18 +17,15 @@ export class _01536 extends EventCard {
 	code = "01536";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Seeker;
-	position = 36;
 	exceptional = false;
 	myriad = false;
 	name = "Mind over Matter";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `Fast. Play only during your turn.
 Until the end of the round, you may use your 📖 in place of your 👊 and 👟.`;
-	traits = "Insight.";
+	traits = ["Insight"];
 	flavor = ``;
 	subname = "";
 

@@ -9,21 +9,15 @@ export class _01112 extends LocationCard {
 	back_text = ``;
 	back_flavor = `A moment of panic and disorientation strikes as you land upon the floor of the hallway. The world spins, as if turned on its head.`;
 	encounter_name = "The Gathering";
-	encounter_position = 9;
 	code = "01112";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 112;
-	exceptional = false;
-	myriad = false;
 	name = "Hallway";
 	quantity = 1;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = true;
 	text = ``;
-	traits = "";
+	traits = [];
 	flavor = `The walls of your house are splattered with mud, and your hardwood floor is gone, replaced with a dirt path.`;
 	subname = "";
 

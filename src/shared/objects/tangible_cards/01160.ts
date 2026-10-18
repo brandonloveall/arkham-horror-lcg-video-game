@@ -11,21 +11,16 @@ export class _01160 extends EnemyCard {
 	victory = 0;
 	engagedWith: GamePlayer | undefined;
 	encounter_name = "Ghouls";
-	encounter_position = 1;
 	code = "01160";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 160;
-	exceptional = false;
-	myriad = false;
 	name = "Ghoul Minion";
 	quantity = 3;
 	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = ``;
-	traits = "Humanoid. Monster. Ghoul.";
+	traits = ["Humanoid", "Monster", "Ghoul"];
 	flavor = `It was a colossal and nameless blasphemy with glaring red eyes, and it held in bony claws a thing that had been a man, gnawing at the head as a child nibbles at a stick of candy. <cite>H. P. Lovecraft, "Pickman's Model"</cite>`;
 	subname = "";
 }

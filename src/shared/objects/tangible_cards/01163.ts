@@ -5,21 +5,15 @@ import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01163 extends TreacheryCard {
 	encounter_name = "Striking Fear";
-	encounter_position = 1;
 	code = "01163";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 163;
-	exceptional = false;
-	myriad = false;
 	name = "Rotting Remains";
 	quantity = 3;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `<b>Revelation</b> - Test 🗣️ (3). For each point you fail by, take 1 horror.`;
-	traits = "Terror.";
+	traits = ["Terror"];
 	flavor = `A sickening display of gore causes you to retch. You're glad this wasn't you.`;
 	subname = "";
 

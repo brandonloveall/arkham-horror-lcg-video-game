@@ -19,18 +19,15 @@ export class _01519 extends AssetCard {
 	code = "01519";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Guardian;
-	position = 19;
 	exceptional = false;
 	myriad = false;
 	name = "First Aid";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `Uses (3 supplies). If First Aid has no supplies, discard it.
 ➡️ Spend 1 supply: Heal 1 damage or horror from an investigator at your location.`;
-	traits = "Talent. Science.";
+	traits = ["Talent", "Science"];
 	flavor = ``;
 	subname = "";
 

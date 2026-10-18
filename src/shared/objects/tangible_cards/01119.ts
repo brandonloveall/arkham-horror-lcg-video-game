@@ -11,21 +11,16 @@ export class _01119 extends EnemyCard {
 	victory = 1;
 	engagedWith: GamePlayer | undefined;
 	encounter_name = "The Gathering";
-	encounter_position = 16;
 	code = "01119";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 119;
-	exceptional = false;
-	myriad = false;
 	name = "Icy Ghoul";
 	quantity = 1;
 	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `<b>Spawn</b> - Cellar.`;
-	traits = "Humanoid. Monster. Ghoul.";
+	traits = ["Humanoid", "Monster", "Ghoul"];
 	flavor = `Inside the tunnels beneath the house, a massive beast tears its way out of the ice. It is covered in a think layer of frost, its breath visible in the bitter cold.`;
 	subname = "";
 }

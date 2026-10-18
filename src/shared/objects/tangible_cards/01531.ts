@@ -16,17 +16,14 @@ export class _01531 extends AssetCard {
 	code = "01531";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Seeker;
-	position = 31;
 	exceptional = false;
 	myriad = false;
 	name = "Old Book of Lore";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `➡️ Exhaust Old Book of Lore: Choose an investigator at your location. That investigator searches the top 3 cards of his or her deck for a card, draws it, and shuffles the remaining cards into his or her deck.`;
-	traits = "Item. Tome.";
+	traits = ["Item", "Tome"];
 	flavor = ``;
 	subname = "";
 }

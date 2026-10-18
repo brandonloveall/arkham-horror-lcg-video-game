@@ -9,17 +9,12 @@ export abstract class Card {
 	abstract pack_name: string;
 	abstract type_name: CardType;
 	abstract faction_name: Faction;
-	abstract position: number;
-	abstract exceptional: boolean;
-	abstract myriad: boolean;
 	abstract name: string;
 	abstract quantity: number;
-	abstract health_per_investigator: boolean;
 	abstract is_unique: boolean;
 	abstract permanent: boolean;
-	abstract double_sided: boolean;
 	abstract text: string;
-	abstract traits: string;
+	abstract traits: string[];
 	abstract flavor: string;
 	abstract subname: string;
 

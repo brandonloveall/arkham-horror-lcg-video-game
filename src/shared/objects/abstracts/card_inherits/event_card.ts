@@ -8,6 +8,8 @@ export abstract class EventCard extends Card {
 	abstract skills: Record<Skill, number>;
 	abstract xp: number;
 	abstract cost: number;
+	abstract exceptional: boolean;
+	abstract myriad: boolean;
 	fast = false;
 
 	canPlayFast(plr: GamePlayer) {

@@ -4,23 +4,17 @@ import { CardType, Faction } from "shared/card_database_types";
 
 export class _01168 extends TreacheryCard {
 	encounter_name = "Chilling Cold";
-	encounter_position = 3;
 	code = "01168";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 168;
-	exceptional = false;
-	myriad = false;
 	name = "Obscuring Fog";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `<b>Revelation</b> - Attach to your location. Limit 1 per location.
 Attached location gets +2 shroud.
 <b>Forced</b> - After attached location is successfully investigated: Discard Obscuring Fog.`;
-	traits = "Hazard.";
+	traits = ["Hazard"];
 	flavor = ``;
 	subname = "";
 

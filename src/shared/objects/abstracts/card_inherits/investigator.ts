@@ -6,7 +6,6 @@ import { CardType, Skill } from "shared/card_database_types";
 
 export abstract class Investigator extends Card {
 	abstract skills: Record<Skill, number>;
-	abstract xp: number;
 
 	abstract health: number;
 	abstract sanity: number;

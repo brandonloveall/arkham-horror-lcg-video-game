@@ -14,17 +14,14 @@ export class _01525 extends SkillCard {
 	code = "01525";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Guardian;
-	position = 25;
 	exceptional = false;
 	myriad = false;
 	name = "Vicious Blow";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `If this skill test is successful during an attack, that attack deals +1 damage.`;
-	traits = "Practiced.";
+	traits = ["Practiced"];
 	flavor = `With a sickening smack, he struck the abomination over and over... until at last, it stopped moving.`;
 	subname = "";
 }

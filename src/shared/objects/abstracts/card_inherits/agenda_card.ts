@@ -3,7 +3,6 @@ import { Card } from "../card";
 
 export abstract class AgendaCard extends Card {
 	abstract encounter_name: string;
-	abstract encounter_position: number;
 
 	abstract stage: number;
 	abstract back_name: string;

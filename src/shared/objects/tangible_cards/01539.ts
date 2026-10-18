@@ -14,17 +14,14 @@ export class _01539 extends SkillCard {
 	code = "01539";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Seeker;
-	position = 39;
 	exceptional = false;
 	myriad = false;
 	name = "Deduction";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `If this skill test is successful while investigating a location, discover 1 additional clue at that location.`;
-	traits = "Practiced.";
+	traits = ["Practiced"];
 	flavor = `I knew I had seen this symbol before. I must warn the others before it is too late!`;
 	subname = "";
 }

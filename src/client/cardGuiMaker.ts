@@ -60,7 +60,7 @@ class CardGuiMaker {
 
 		(template.WaitForChild("title") as TextLabel).Text = card.name;
 		(template.WaitForChild("description") as TextLabel).Text = card.text;
-		(template.WaitForChild("attributes") as TextLabel).Text = card.traits;
+		(template.WaitForChild("attributes") as TextLabel).Text = card.traits.map((trait) => trait + ".").join(" ");
 
 		(template.WaitForChild("Background") as ImageLabel).Image =
 			"rbxassetid://" + tostring(typeToImg[card.faction_name]![card.type_name]!);

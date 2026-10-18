@@ -11,21 +11,16 @@ export class _01161 extends EnemyCard {
 	victory = 0;
 	engagedWith: GamePlayer | undefined;
 	encounter_name = "Ghouls";
-	encounter_position = 4;
 	code = "01161";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 161;
-	exceptional = false;
-	myriad = false;
 	name = "Ravenous Ghoul";
 	quantity = 1;
 	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `<b>Prey</b> - Lowest remaining health.`;
-	traits = "Humanoid. Monster. Ghoul.";
+	traits = ["Humanoid", "Monster", "Ghoul"];
 	flavor = `The sight of the thing raised the question: Do we eat to live, or do we live to eat?`;
 	subname = "";
 }

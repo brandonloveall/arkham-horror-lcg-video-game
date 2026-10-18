@@ -17,18 +17,15 @@ export class _01537 extends EventCard {
 	code = "01537";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Seeker;
-	position = 37;
 	exceptional = false;
 	myriad = false;
 	name = "Working a Hunch";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `Fast. Play only during your turn.
 Discover 1 clue at your location.`;
-	traits = "Insight.";
+	traits = ["Insight"];
 	flavor = ``;
 	subname = "";
 

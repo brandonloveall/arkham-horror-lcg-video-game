@@ -16,19 +16,16 @@ export class _01538 extends EventCard {
 	code = "01538";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Seeker;
-	position = 38;
 	exceptional = false;
 	myriad = false;
 	name = "Barricade";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `Attach to your location.
 Non-Elite enemies cannot move into attached location.
 <b>Forced</b> - When an investigator leaves attached location: Discard Barricade.`;
-	traits = "Insight. Tactic.";
+	traits = ["Insight", "Tactic"];
 	flavor = ``;
 	subname = "";
 

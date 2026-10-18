@@ -14,18 +14,15 @@ export class _01592 extends SkillCard {
 	code = "01592";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Neutral;
-	position = 92;
 	exceptional = false;
 	myriad = false;
 	name = "Manual Dexterity";
 	quantity = 4;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `Max 1 committed per skill test.
 If this test is successful, draw 1 card.`;
-	traits = "Innate.";
+	traits = ["Innate"];
 	flavor = `Too easy.`;
 	subname = "";
 }

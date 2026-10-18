@@ -18,18 +18,15 @@ export class _01522 extends EventCard {
 	code = "01522";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Guardian;
-	position = 22;
 	exceptional = false;
 	myriad = false;
 	name = "Evidence!";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `Fast. Play after you defeat an enemy.
 Discover 1 clue at your location.`;
-	traits = "Insight.";
+	traits = ["Insight"];
 	flavor = `Just as I suspected!`;
 	subname = "";
 

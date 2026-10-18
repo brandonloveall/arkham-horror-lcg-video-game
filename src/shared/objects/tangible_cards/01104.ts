@@ -22,18 +22,13 @@ export class _01104 extends ScenarioCard {
 	code = "01104";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 104;
-	exceptional = false;
-	myriad = false;
 	name = "The Gathering";
 	quantity = 1;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = true;
 	text =
 		"Easy / Standard\n[skull] -X. X is the number of Ghoul enemies at your location.\n[cultist] -1. If you fail, take 1 horror.\n[tablet] -2. If there is a Ghoul enemy at your location, take 1 damage.\n";
-	traits = "";
+	traits = [];
 	flavor = "";
 	subname = "";
 

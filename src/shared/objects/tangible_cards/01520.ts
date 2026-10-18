@@ -19,17 +19,14 @@ export class _01520 extends AssetCard {
 	code = "01520";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Guardian;
-	position = 20;
 	exceptional = false;
 	myriad = false;
 	name = "Machete";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `➡️: <b>Fight.</b> You get +1 👊 for this attack. If the attacked enemy is the only enemy engaged with you, this attack deals +1 damage.`;
-	traits = "Item. Weapon. Melee.";
+	traits = ["Item", "Weapon", "Melee"];
 	flavor = `Cuts through vines, underbrush, and tentacles equally well.`;
 	subname = "";
 

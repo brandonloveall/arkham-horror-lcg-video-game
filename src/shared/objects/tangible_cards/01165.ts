@@ -4,23 +4,17 @@ import { CardType, Faction } from "shared/card_database_types";
 
 export class _01165 extends TreacheryCard {
 	encounter_name = "Striking Fear";
-	encounter_position = 6;
 	code = "01165";
 	pack_name = "Core Set";
 	faction_name = Faction.Mythos;
-	position = 165;
-	exceptional = false;
-	myriad = false;
 	name = "Dissonant Voices";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `<b>Revelation</b> - Put Dissonant Voices into play in your threat area.
 You cannot play assets or events.
 <b>Forced</b> - At the end of the round: Discard Dissonant Voices.`;
-	traits = "Terror.";
+	traits = ["Terror"];
 	flavor = ``;
 	subname = "";
 

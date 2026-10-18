@@ -16,17 +16,14 @@ export class _01532 extends AssetCard {
 	code = "01532";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Seeker;
-	position = 32;
 	exceptional = false;
 	myriad = false;
 	name = "Research Librarian";
 	quantity = 2;
-	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `🔄 After Research Librarian enters play: Search your deck for a Tome asset and add it to your hand. Shuffle your deck.`;
-	traits = "Ally. Miskatonic.";
+	traits = ["Ally", "Miskatonic"];
 	flavor = `"There have been problems at the Orne Library, as we both know, given poor Armitage's condition, and the other, unrelated... incident of a few years ago..."`;
 	subname = "";
 }

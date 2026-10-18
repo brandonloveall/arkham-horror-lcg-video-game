@@ -11,23 +11,18 @@ export class _01602 extends EnemyCard {
 	victory = 0;
 	engagedWith: GamePlayer | undefined;
 	encounter_name = "";
-	encounter_position = 0;
 	code = "01602";
 	pack_name = "Revised Core Set";
 	faction_name = Faction.Neutral;
-	position = 102;
-	exceptional = false;
-	myriad = false;
 	name = "Silver Twilight Acolyte";
 	quantity = 1;
 	health_per_investigator = false;
 	is_unique = false;
 	permanent = false;
-	double_sided = false;
 	text = `<b>Prey</b> - Bearer only.
 Hunter.
 <b>Forced</b> - After Silver Twilight Acolyte attacks: Place 1 doom on the current agenda.`;
-	traits = "Humanoid. Cultist. Silver Twilight.";
+	traits = ["Humanoid", "Cultist", "Silver Twilight"];
 	flavor = `You'll never forget the day you learned the true secret of the Silver Twilight Lodge's inner circle. The truth is too terrible for the Lodge to let you live.`;
 	subname = "";
 }
