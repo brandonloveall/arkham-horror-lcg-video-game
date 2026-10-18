@@ -1,5 +1,4 @@
 import { CardType } from "shared/card_database_types";
-import { DoubleSided } from "shared/objects/abstracts/double_sided";
 import { Card } from "../card";
 
 export interface ActRestriction {
@@ -12,7 +11,7 @@ interface Advancement {
 	optional: boolean;
 }
 
-export abstract class ActCard extends Card implements DoubleSided {
+export abstract class ActCard extends Card {
 	abstract encounter_name: string;
 	abstract encounter_position: number;
 

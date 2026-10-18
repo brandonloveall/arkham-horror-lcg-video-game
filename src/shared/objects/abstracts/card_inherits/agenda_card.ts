@@ -1,8 +1,7 @@
 import { CardType } from "shared/card_database_types";
-import { DoubleSided } from "shared/objects/abstracts/double_sided";
 import { Card } from "../card";
 
-export abstract class AgendaCard extends Card implements DoubleSided {
+export abstract class AgendaCard extends Card {
 	abstract encounter_name: string;
 	abstract encounter_position: number;
 

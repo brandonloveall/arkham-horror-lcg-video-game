@@ -1,5 +1,4 @@
 import { ReplicatedStorage, TweenService, Workspace } from "@rbxts/services";
-import { DoubleSided } from "shared/objects/abstracts/double_sided";
 import { GameContext } from "shared/game_context";
 import { Card } from "shared/objects/abstracts/card";
 import { GamePlayer } from "shared/objects/player";
@@ -7,7 +6,7 @@ import { CardRegistry } from "shared/card_registry";
 import { PlaySound_Pub } from "shared/remotes/PlaySound/Interface";
 import { CardType } from "shared/card_database_types";
 
-export abstract class LocationCard extends Card implements DoubleSided {
+export abstract class LocationCard extends Card {
 	abstract encounter_name: string;
 	abstract encounter_position: number;
 
