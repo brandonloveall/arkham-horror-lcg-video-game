@@ -1,7 +1,5 @@
-import { GameContext, WhatHappened } from "shared/game_context";
 import { EventCard } from "shared/objects/abstracts/card_inherits/event_card";
 import { GamePlayer } from "../player";
-import { getOwner } from "shared/findOwner";
 import { CardType, Faction, Skill } from "shared/card_database_types";
 
 export class _01522 extends EventCard {

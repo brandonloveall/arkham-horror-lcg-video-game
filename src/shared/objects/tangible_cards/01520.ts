@@ -1,7 +1,5 @@
 import { AssetCard } from "shared/objects/abstracts/card_inherits/asset_card";
 import { GamePlayer } from "../player";
-import { CardRegistry } from "shared/card_registry";
-import { EnemyCard } from "../abstracts/card_inherits/enemy_card";
 import { CardType, Faction, Skill, Slot } from "shared/card_database_types";
 
 export class _01520 extends AssetCard {
